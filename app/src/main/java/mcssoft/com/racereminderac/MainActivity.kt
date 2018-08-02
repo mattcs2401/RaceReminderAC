@@ -43,6 +43,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    override fun onBackPressed() {
+        // TBA - pop backstack.
+//        if () {
+//
+//        } else {
+//            // Otherwise defer to system default behavior.
+//            super.onBackPressed()
+//        }
+    }
+
     // Kotlin trickery.
     // https://medium.com/thoughts-overflow/how-to-add-a-fragment-in-kotlin-way-73203c5a450b
     private fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
