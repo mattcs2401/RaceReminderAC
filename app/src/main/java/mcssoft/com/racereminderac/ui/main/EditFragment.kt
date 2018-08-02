@@ -8,18 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import mcssoft.com.racereminderac.R
 
-class MainFragment : Fragment() {
+class EditFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
-
+        fun newInstance() = EditFragment()
     }
 
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        return inflater.inflate(R.layout.edit_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
