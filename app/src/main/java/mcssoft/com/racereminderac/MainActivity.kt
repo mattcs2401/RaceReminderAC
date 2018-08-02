@@ -31,12 +31,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.id_fab -> {
+                fab?.hide()
 //                editFragment = EditFragment.newInstance()
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.container, EditFragment.newInstance())
 //                        .addToBackStack(null)
                         .commit()
-                fab?.hide()
 //                replaceFragment(R.id.container, editFragment as EditFragment)
             }
             else -> {}
@@ -44,13 +44,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onBackPressed() {
-        // TBA - pop backstack.
-//        if () {
-//
-//        } else {
-//            // Otherwise defer to system default behavior.
-//            super.onBackPressed()
-//        }
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+
+        } else {
+            // Otherwise defer to system default behavior.
+            super.onBackPressed()
+        }
     }
 
     // Kotlin trickery.
