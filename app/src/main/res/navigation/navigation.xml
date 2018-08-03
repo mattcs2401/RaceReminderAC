@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_navigation"
+    app:startDestination="@id/id_main_fragment">
+
+    <fragment
+        android:id="@+id/id_main_fragment"
+        android:name="mcssoft.com.racereminderac.ui.main.MainFragment"
+        android:label="Home"
+        tools:layout="@layout/main_fragment">
+
+        <action
+            android:id="@+id/mainFragment_to_editFragment"
+            app:destination="@id/id_edit_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/id_edit_fragment"
+        android:name="mcssoft.com.racereminderac.ui.main.EditFragment"
+        android:label="EditFragment"
+        tools:layout="@layout/edit_fragment"/>
+</navigation>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/id_edit_fragment"
+          android:icon="@android:drawable/ic_input_add"
+          android:title=""/>
+</menu>
+<!--
+Note:
+The IDs of the menu items should correspond to the IDs of the destinations in the navigation graph.
+This is how you bind destinations to menu items.
+-->
