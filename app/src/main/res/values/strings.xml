@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">RaceReminderAC</string>
+
+    <string name="city_code">City Code</string>
+    <string name="race_no">Race No</string>
+    <string name="race_sel">Race Sel</string>
+    <string name="race_time">Race Time</string>
+    <string name="race_code">Race Code</string>
+    <string name="save">Save</string>
+
 </resources>

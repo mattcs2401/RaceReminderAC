@@ -8,14 +8,160 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.EditFragment">
 
+    <!--<TextView-->
+        <!--android:id="@+id/message"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Edit Fragment"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
     <TextView
-        android:id="@+id/message"
+        android:text="@string/city_code"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRaceCity"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginStart="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etCityCode"
+        android:textColor="#000000"
+        android:typeface="normal" />
+
+    <EditText
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etCityCode"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginStart="40dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintLeft_toRightOf="@+id/tvRaceCity"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:text="@string/race_code"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRaceCode"
+        android:layout_marginStart="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etRaceCode"
+        android:textColor="#000000"
+        android:typeface="normal"/>
+
+    <EditText
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etRaceCode"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/etCityCode"
+        app:layout_constraintLeft_toLeftOf="@+id/etCityCode"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:typeface="normal"/>
+
+    <TextView
+        android:text="@string/race_no"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRaceNo"
+        android:layout_marginStart="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etRaceNum"
+        android:textColor="#000000"
+        android:typeface="normal"/>
+
+    <EditText
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etRaceNum"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/etRaceCode"
+        app:layout_constraintLeft_toLeftOf="@+id/etRaceCode"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:inputType="number"
+        android:imeOptions="actionDone"
+        android:maxLength="2"/>
+
+    <TextView
+        android:text="@string/race_sel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRaceSel"
+        android:layout_marginStart="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etRaceSel"
+        android:textColor="#000000"
+        android:typeface="normal"/>
+
+    <EditText
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etRaceSel"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:gravity="center_vertical|center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/etRaceNum"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="@+id/etRaceNum"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:inputType="number"
+        android:imeOptions="actionDone"
+        android:maxLength="2"/>
+
+
+    <TextView
+        android:text="@string/race_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRaceTime"
+        android:layout_marginStart="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etRaceTime"
+        android:textColor="#000000"
+        android:typeface="normal"/>
+
+    <EditText
+        android:id="@+id/etRaceTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="16dp"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:typeface="normal"
+        app:layout_constraintLeft_toLeftOf="@+id/etRaceSel"
+        app:layout_constraintTop_toBottomOf="@+id/etRaceSel" />
+
+    <Button
+        android:text="@string/save"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSave"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        app:layout_constraintRight_toRightOf="@+id/etRaceTime"
+        android:typeface="normal"
+        app:layout_constraintLeft_toLeftOf="@+id/tvRaceTime"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/etRaceTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
