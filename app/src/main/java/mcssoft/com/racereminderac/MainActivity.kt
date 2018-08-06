@@ -13,19 +13,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
 
         val navController = findNavController(R.id.id_nav_host_fragment)
-        val fabAdd: FloatingActionButton = findViewById<FloatingActionButton>(R.id.id_fab)
-        Navigation.setViewNavController(fabAdd, navController)
+        val fab = findViewById<FloatingActionButton>(R.id.id_fab)
+        Navigation.setViewNavController(fab, navController)
 
-        fabAdd.setOnClickListener {
+        fab.setOnClickListener {
             navController.navigate(R.id.id_edit_fragment)
         }
     }
 
+//    private fun setupBottomNavMenu(navController: NavController) {
+//        findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.let { bottomNavView ->
+//            NavigationUI.setupWithNavController(bottomNavView, navController)
+//        }
+//    }
+
 }
-/*
-val navController = findNavController(R.id.navHostFragment)
-Navigation.setViewNavController(fabAdd, navController)
-fabAdd.setOnClickListener {
-navController.navigate(R.id.addSymbolFragment)
-}
-*/
