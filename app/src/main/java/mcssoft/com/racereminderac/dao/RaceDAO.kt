@@ -1,7 +1,11 @@
-package mcssoft.com.racereminder.dao
+package mcssoft.com.racereminderac.dao
 
 import androidx.lifecycle.LiveData
-import mcssoft.com.racereminder.entity.Race
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import mcssoft.com.racereminderac.entity.Race
 
 @Dao
 internal interface RaceDAO {

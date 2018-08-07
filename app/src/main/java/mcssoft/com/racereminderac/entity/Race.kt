@@ -1,4 +1,8 @@
-package mcssoft.com.racereminder.entity
+package mcssoft.com.racereminderac.entity
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "race_details")

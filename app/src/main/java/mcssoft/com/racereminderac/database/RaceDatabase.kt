@@ -8,8 +8,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 
-import mcssoft.com.racereminder.entity.Race
+import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.background.InitWorker
+import mcssoft.com.racereminderac.dao.RaceDAO
 
 @Database(entities = arrayOf(Race::class), version = 1, exportSchema = false)
 abstract class RaceDatabase : RoomDatabase() {

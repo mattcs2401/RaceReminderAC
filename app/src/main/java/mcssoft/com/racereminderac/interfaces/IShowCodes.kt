@@ -1,4 +1,4 @@
-package mcssoft.com.racereminder.interfaces
+package mcssoft.com.racereminderac.interfaces
 
 import android.view.View
 

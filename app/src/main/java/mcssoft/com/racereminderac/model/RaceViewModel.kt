@@ -1,10 +1,10 @@
-package mcssoft.com.racereminder.model
+package mcssoft.com.racereminderac.model
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import mcssoft.com.racereminder.entity.Race
-import mcssoft.com.racereminder.repository.RaceRepository
+import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.repository.RaceRepository
 
 class RaceViewModel(application: Application) : AndroidViewModel(application) {
 

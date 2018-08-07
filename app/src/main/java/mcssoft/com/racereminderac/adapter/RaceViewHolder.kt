@@ -1,4 +1,4 @@
-package mcssoft.com.racereminder.adapter
+package mcssoft.com.racereminderac.adapter
 
 import android.view.View
 import android.widget.TextView
