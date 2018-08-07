@@ -36,4 +36,13 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:$navVer"
     implementation "android.arch.navigation:navigation-runtime-ktx:$navVer"
     implementation "android.arch.navigation:navigation-ui:$navVer"
+
+    implementation "android.arch.persistence.room:runtime:$roomVer"
+    kapt "android.arch.persistence.room:compiler:$roomVer"
+
+    implementation "android.arch.work:work-runtime-ktx:$workVer"
+
+    implementation "com.jakewharton:butterknife:$butterknifeVer"
+    kapt "com.jakewharton:butterknife-compiler:$butterknifeVer"
+
 }

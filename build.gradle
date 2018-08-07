@@ -4,6 +4,9 @@ buildscript {
     ext {
         kotlinVer = '1.2.60'
         navVer = '1.0.0-alpha04'
+        butterknifeVer = "8.8.1"
+        roomVer = "1.1.1"
+        workVer = "1.0.0-alpha05"
     }
 
     repositories {
