@@ -75,9 +75,9 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
     fun swapData(lRaces : List<Race>) {
         this.lRaces = lRaces
         if (lRaces.size < 1) {
-            setEmptyView(true)
+            isEmptyView = true
         } else {
-            setEmptyView(false)
+            isEmptyView = false
         }
         notifyDataSetChanged()
     }
@@ -91,11 +91,6 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
         return if (lPos > -1) {
             lRaces.get(lPos)
         } else null
-    }
-
-
-    fun setEmptyView(isEmptyView : Boolean) {
-        this.isEmptyView = isEmptyView
     }
 
     private var viewType : Int = 0

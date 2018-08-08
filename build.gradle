@@ -7,9 +7,6 @@ buildscript {
         butterknifeVer = "8.8.1"
         roomVer = "1.1.1"
         workVer = "1.0.0-alpha06"
-        sptLibVer = '28.0.0'
-        constraintVer = "1.1.2"
-        lifecycleVer = "1.1.1"
     }
 
     repositories {

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mcssoft.com.racereminderac.R
+import mcssoft.com.racereminderac.model.RaceViewModel
 
 class EditFragment : Fragment() {
 
@@ -16,7 +17,7 @@ class EditFragment : Fragment() {
         fun newInstance() = EditFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: RaceViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -32,7 +33,7 @@ class EditFragment : Fragment() {
         // Hide the FAB.
         (activity?.findViewById<FloatingActionButton>(R.id.id_fab) as FloatingActionButton).hide()
 
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(RaceViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
