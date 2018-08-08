@@ -26,6 +26,13 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
 
     private lateinit var icListener: IClick.ItemClick
 
+//    var tvCityCode: TextView? = null
+//    var tvRaceCode: TextView? = null
+//    var tvRaceNo: TextView? = null
+//    var tvRaceSel: TextView? = null
+//    var tvRaceTime: TextView? = null
+//    var tvRaceDay: TextView? = null
+
     @BindView(R.id.id_tv_city_code)  lateinit var tvCityCode: TextView
     @BindView(R.id.id_tv_race_code)  lateinit var tvRaceCode: TextView
     @BindView(R.id.id_tv_race_no)  lateinit var tvRaceNo: TextView

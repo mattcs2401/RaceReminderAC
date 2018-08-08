@@ -2,9 +2,9 @@ package mcssoft.com.racereminderac.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindString
 import butterknife.ButterKnife
 import mcssoft.com.racereminderac.R
@@ -31,7 +31,7 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
         when (viewType) {
             EMPTY_VIEW -> {
                 view = inflater.inflate(R.layout.row_empty, parent, false)
-                raceViewHolder = RaceViewHolder(view, this.nothingToShow)
+                raceViewHolder = RaceViewHolder(view, "Nothing to show.")//this.nothingToShow)
             }
             MEETING_VIEW -> {
                 view = inflater.inflate(R.layout.row_race, parent, false)
@@ -45,12 +45,12 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
         if (!isEmptyView) {
             val race = lRaces.get(position)
 
-            holder.tvCityCode.text = race.cityCode
-            holder.tvRaceCode.text = race.raceCode
-            holder.tvRaceNo.text = race.raceNum
-            holder.tvRaceSel.text = race.raceSel
-            holder.tvRaceTime.text = race.raceTime
-//            holder.tvRaceDay.text = race.raceDay
+            holder.tvCityCode?.text = race.cityCode
+            holder.tvRaceCode?.text = race.raceCode
+            holder.tvRaceNo?.text = race.raceNum
+            holder.tvRaceSel?.text = race.raceSel
+            holder.tvRaceTime?.text = race.raceTime
+            //holder.tvRaceDay?.text = race.raceDay
         }
     }
 
