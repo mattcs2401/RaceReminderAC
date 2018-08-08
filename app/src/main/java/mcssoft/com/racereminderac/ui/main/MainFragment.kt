@@ -25,10 +25,10 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (activity?.findViewById<Toolbar>(R.id.id_toolbar) as Toolbar).title = "Race Reminder"
+        activity?.findViewById<Toolbar>(R.id.id_toolbar)?.title = "Race Reminder"
 
         // If FAB was previously hidden by a New or Edit etc, then show again.
-        var fab = (activity?.findViewById<FloatingActionButton>(R.id.id_fab) as FloatingActionButton)
+        val fab = activity?.findViewById(R.id.id_fab) as FloatingActionButton
         if(fab.isOrWillBeHidden) {
             fab.show()
         }
