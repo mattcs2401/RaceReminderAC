@@ -24,46 +24,24 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVer"
-//
-//    implementation 'com.android.support:design:28.0.0'
-//    implementation 'com.android.support:recyclerview-v7:28.0.0'
-//    implementation 'com.android.support:appcompat-v7:28.0.0'
-//
-//    //implementation 'androidx.annotation:annotation:1.0.0-rc01'
-//    //implementation 'androidx.appcompat:appcompat:1.0.0-rc01'
-//    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
-//    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-rc01'
-//    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0-rc01'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVer"
+
+    implementation 'androidx.annotation:annotation:1.0.0-rc01'
+    implementation 'androidx.appcompat:appcompat:1.0.0-rc01'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-rc01'
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0-rc01'
 
     implementation "android.arch.navigation:navigation-fragment-ktx:$navVer"
     implementation "android.arch.navigation:navigation-runtime-ktx:$navVer"
     implementation "android.arch.navigation:navigation-ui:$navVer"
 
-//    implementation "android.arch.persistence.room:runtime:$roomVer"
-//    kapt "android.arch.persistence.room:compiler:$roomVer"
-//
-//    implementation "android.arch.work:work-runtime-ktx:$workVer"
-//
-//    implementation "com.jakewharton:butterknife:$butterknifeVer"
-//    kapt "com.jakewharton:butterknife-compiler:$butterknifeVer"
-
-    implementation "com.android.support:appcompat-v7:$sptLibVer"
-    implementation "com.android.support:cardview-v7:$sptLibVer"
-    implementation "com.android.support.constraint:constraint-layout:$constraintVer"
-    implementation "com.android.support:design:$sptLibVer"
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVer"
-
     implementation "android.arch.persistence.room:runtime:$roomVer"
     kapt "android.arch.persistence.room:compiler:$roomVer"
-
-    implementation "android.arch.lifecycle:runtime:$lifecycleVer"
-    implementation "android.arch.lifecycle:extensions:$lifecycleVer"
-    kapt "android.arch.lifecycle:compiler:$lifecycleVer"
 
     implementation "android.arch.work:work-runtime-ktx:$workVer"
 
     implementation "com.jakewharton:butterknife:$butterknifeVer"
     kapt "com.jakewharton:butterknife-compiler:$butterknifeVer"
+
 }

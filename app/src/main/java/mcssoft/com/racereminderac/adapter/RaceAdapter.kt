@@ -2,9 +2,9 @@ package mcssoft.com.racereminderac.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindString
 import butterknife.ButterKnife
 import mcssoft.com.racereminderac.R
@@ -19,7 +19,7 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
     init {
         this.context = context
         lRaces = ArrayList<Race>(0)
-        ButterKnife.bind(this, View(context))
+        //ButterKnife.bind(this, View(context))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
@@ -107,5 +107,5 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
     private val EMPTY_VIEW = 0
     private val MEETING_VIEW = 1
 
-    @BindString(R.string.nothing_to_show) lateinit var nothingToShow: String
+    //@BindString(R.string.nothing_to_show) lateinit var nothingToShow: String
 }

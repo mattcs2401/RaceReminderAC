@@ -23,7 +23,7 @@ class RaceRepository(application: Application) {
             val request: OneTimeWorkRequest = OneTimeWorkRequest.Builder(InsertWorker::class.java)
                     .setInputData(data)
                     .build()
-            val workMgr : WorkManager = WorkManager.getInstance()!!
+            val workMgr : WorkManager = WorkManager.getInstance()
             return workMgr.enqueue(request)
         } catch(e: Exception) {
             Log.d("RaceRepository","fun insert: " + e.message)
