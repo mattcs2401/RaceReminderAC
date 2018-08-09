@@ -21,7 +21,7 @@ import mcssoft.com.racereminderac.model.RaceViewModel
 class MainFragment : Fragment(), IClick.ItemClick {
 
     companion object {
-        fun newInstance() = MainFragment()
+        //fun newInstance() = MainFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

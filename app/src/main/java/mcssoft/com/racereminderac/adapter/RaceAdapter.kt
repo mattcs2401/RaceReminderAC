@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindString
-import butterknife.ButterKnife
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
@@ -19,7 +17,6 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
     init {
         this.context = context
         lRaces = ArrayList<Race>(0)
-        //ButterKnife.bind(this, View(context))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
@@ -31,7 +28,7 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
         when (viewType) {
             EMPTY_VIEW -> {
                 view = inflater.inflate(R.layout.row_empty, parent, false)
-                raceViewHolder = RaceViewHolder(view, "Nothing to show.")//this.nothingToShow)
+                raceViewHolder = RaceViewHolder(view, "Nothing to show.")
             }
             MEETING_VIEW -> {
                 view = inflater.inflate(R.layout.row_race, parent, false)
@@ -101,6 +98,4 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
 
     private val EMPTY_VIEW = 0
     private val MEETING_VIEW = 1
-
-    //@BindString(R.string.nothing_to_show) lateinit var nothingToShow: String
 }

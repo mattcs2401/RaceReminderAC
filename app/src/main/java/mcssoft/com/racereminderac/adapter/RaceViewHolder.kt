@@ -3,8 +3,6 @@ package mcssoft.com.racereminderac.adapter
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
-import butterknife.ButterKnife
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IClick
 
@@ -17,7 +15,13 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
     constructor(view: View, message: String, icListener: IClick.ItemClick) : this(view, message) {
         this.icListener = icListener
         view.setOnClickListener(this)
-        //ButterKnife.bind(this, view)
+
+        tvCityCode = view.findViewById(R.id.id_tv_city_code)
+        tvRaceCode = view.findViewById(R.id.id_tv_race_code)
+        tvRaceNo = view.findViewById(R.id.id_tv_race_no)
+        tvRaceSel = view.findViewById(R.id.id_tv_race_sel)
+        tvRaceTime = view.findViewById(R.id.id_tv_race_time)
+        //tvRaceDay = view.findViewById(R.id.id_tv_race_day)
     }
 
     override fun onClick(view : View?) {
@@ -31,12 +35,5 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
     var tvRaceNo: TextView? = null
     var tvRaceSel: TextView? = null
     var tvRaceTime: TextView? = null
-    var tvRaceDay: TextView? = null
-
-//    @BindView(R.id.id_tv_city_code)  lateinit var tvCityCode: TextView
-//    @BindView(R.id.id_tv_race_code)  lateinit var tvRaceCode: TextView
-//    @BindView(R.id.id_tv_race_no)  lateinit var tvRaceNo: TextView
-//    @BindView(R.id.id_tv_race_sel)  lateinit var tvRaceSel: TextView
-//    @BindView(R.id.id_tv_race_time)  lateinit var tvRaceTime: TextView
-//    @BindView(R.id.id_tv_race_day)  lateinit var tvRaceDay: TextView
+    //var tvRaceDay: TextView? = null
 }
