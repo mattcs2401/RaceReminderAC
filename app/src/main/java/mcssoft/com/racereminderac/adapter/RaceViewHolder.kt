@@ -24,7 +24,7 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
         //tvRaceDay = view.findViewById(R.id.id_tv_race_day)
     }
 
-    override fun onClick(view : View?) {
+    override fun onClick(view : View) {
         icListener.onItemClick(view, adapterPosition)
     }
 

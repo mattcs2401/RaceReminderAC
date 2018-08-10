@@ -82,13 +82,9 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
     /**
      * Return the Meeting object at the adapter position.
      * @param lPos The adapter position (0 based).
-     * @return The Meeting object, or NULL.
+     * @return The Race object.
      */
-    fun getMeeting(lPos : Int) : Race? {
-        return if (lPos > -1) {
-            lRaces.get(lPos)
-        } else null
-    }
+    fun getRace(lPos : Int) : Race = lRaces.get(lPos)
 
     private var viewType : Int = 0
     private var isEmptyView : Boolean = false

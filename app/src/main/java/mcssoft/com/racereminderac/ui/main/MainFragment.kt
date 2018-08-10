@@ -1,6 +1,5 @@
 package mcssoft.com.racereminderac.ui.main
 
-import android.app.Application
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,10 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.interfaces.IClick
+import mcssoft.com.racereminderac.interfaces.IRaceSelect
 import mcssoft.com.racereminderac.model.RaceViewModel
 
 class MainFragment : Fragment(), IClick.ItemClick {
@@ -50,18 +49,17 @@ class MainFragment : Fragment(), IClick.ItemClick {
         }
 
         // Set the view model.
-        raceViewModel = ViewModelProviders.of(this.activity!!).get(RaceViewModel::class.java)
+        raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
-        raceViewModel!!.getAllRaces().observe(this, Observer { races ->
+        raceViewModel?.getAllRaces()?.observe(this, Observer { races ->
             raceAdapter.swapData(races)
         })
 
     }
 
-    override fun onItemClick(view: View, lPos: Int) {
-        // TODO - callback to the Activity to launch an Edit ??
-        Snackbar.make(view, "TODO, launch an Edit", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+    override fun onItemClick(lPos: Int) {
+        // callback to the Activity with the selected Race object
+        (activity as IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos))
     }
 
     private lateinit var rootView: View

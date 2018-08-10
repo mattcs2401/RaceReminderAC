@@ -14,10 +14,8 @@ import mcssoft.com.racereminderac.model.RaceViewModel
 class EditFragment : Fragment() {
 
     companion object {
-        fun newInstance() = EditFragment()
+        //fun newInstance() = EditFragment()
     }
-
-    private lateinit var viewModel: RaceViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -28,13 +26,15 @@ class EditFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         // TODO - this will depend on what the fragment is used for, e.g. New, Edit etc
-        (activity?.findViewById<Toolbar>(R.id.id_toolbar) as Toolbar).title = "New Race"
+        (activity?.findViewById(R.id.id_toolbar) as Toolbar).title = "New Race"
 
         // Hide the FAB.
-        (activity?.findViewById<FloatingActionButton>(R.id.id_fab) as FloatingActionButton).hide()
+        (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
 
         viewModel = ViewModelProviders.of(this).get(RaceViewModel::class.java)
         // TODO: Use the ViewModel
     }
+
+    private lateinit var viewModel: RaceViewModel
 
 }

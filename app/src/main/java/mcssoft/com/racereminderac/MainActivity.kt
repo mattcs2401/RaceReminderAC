@@ -8,9 +8,10 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.main_activity.*
+import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.interfaces.IRaceSelect
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, IRaceSelect {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +26,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 navController?.navigate(R.id.id_edit_fragment)
             }
         }
+    }
 
+    override fun onRaceSelect(race: Race?) {
+        val bp = ""
     }
 
     //    private fun setupBottomNavMenu(navController: NavController) {
