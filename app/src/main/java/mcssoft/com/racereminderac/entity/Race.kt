@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
 @Entity(tableName = "race_details")
 data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
                 @ColumnInfo(name = "RaceCode") var raceCode: String,
