@@ -25,7 +25,9 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
     }
 
     override fun onClick(view : View) {
-        icListener.onItemClick(view, adapterPosition)
+        // We don't care about the view, it's just a means to hook into the onclick functionality.
+        icListener.onItemClick(adapterPosition)
+
     }
 
     private lateinit var icListener: IClick.ItemClick

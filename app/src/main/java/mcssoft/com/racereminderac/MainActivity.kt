@@ -29,7 +29,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRaceSelect {
     }
 
     override fun onRaceSelect(race: Race?) {
-        val bp = ""
+        var bundle = Bundle()
+        bundle.putParcelable(getString(R.string.key_edit_existing), race)
+        navController?.navigate(R.id.id_edit_fragment, bundle)
     }
 
     //    private fun setupBottomNavMenu(navController: NavController) {

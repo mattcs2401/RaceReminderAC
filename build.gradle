@@ -3,7 +3,7 @@
 buildscript {
     ext {
         kotlinVer = '1.2.60'
-        navVer = '1.0.0-alpha04'
+        navVer = '1.0.0-alpha05'
         roomVer = "1.1.1"
         workVer = "1.0.0-alpha06"
     }
@@ -32,3 +32,4 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+

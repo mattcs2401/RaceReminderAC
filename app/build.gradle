@@ -41,4 +41,5 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$roomVer"
 
     implementation "android.arch.work:work-runtime-ktx:$workVer"
+
 }

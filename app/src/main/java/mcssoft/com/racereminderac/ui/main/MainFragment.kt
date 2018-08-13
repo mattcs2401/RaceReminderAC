@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.interfaces.IClick
@@ -60,6 +61,8 @@ class MainFragment : Fragment(), IClick.ItemClick {
     override fun onItemClick(lPos: Int) {
         // callback to the Activity with the selected Race object
         (activity as IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos))
+//        Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
     }
 
     private lateinit var rootView: View

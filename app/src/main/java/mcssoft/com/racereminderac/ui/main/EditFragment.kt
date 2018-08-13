@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mcssoft.com.racereminderac.R
+import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceViewModel
 
 class EditFragment : Fragment() {
@@ -33,6 +34,8 @@ class EditFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(RaceViewModel::class.java)
         // TODO: Use the ViewModel
+
+        var race = arguments?.getParcelable<Race>(getString(R.string.key_edit_existing))
     }
 
     private lateinit var viewModel: RaceViewModel
