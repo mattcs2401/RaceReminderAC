@@ -33,8 +33,7 @@
         android:typeface="normal"
         app:layout_constraintLeft_toRightOf="@+id/tvRaceCity"
         android:layout_marginTop="32dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:text="@string/race_code"
@@ -60,8 +59,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/etCityCode"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:typeface="normal"
-        android:importantForAutofill="no" />
+        android:typeface="normal" />
 
     <TextView
         android:text="@string/race_no"
@@ -89,8 +87,7 @@
         android:typeface="normal"
         android:inputType="number"
         android:imeOptions="actionDone"
-        android:maxLength="2"
-        android:importantForAutofill="no" />
+        android:maxLength="2" />
 
     <TextView
         android:text="@string/race_sel"
@@ -118,9 +115,7 @@
         android:typeface="normal"
         android:inputType="number"
         android:imeOptions="actionDone"
-        android:maxLength="2"
-        android:importantForAutofill="no" />
-
+        android:maxLength="2" />
 
     <TextView
         android:text="@string/race_time"
@@ -144,14 +139,13 @@
         android:textStyle="bold"
         android:typeface="normal"
         app:layout_constraintLeft_toLeftOf="@+id/etRaceSel"
-        app:layout_constraintTop_toBottomOf="@+id/etRaceSel"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/etRaceSel" />
 
     <Button
         android:text="@string/save"
         android:layout_width="196dp"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSave"
+        android:id="@+id/id_btn_save"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         app:layout_constraintRight_toRightOf="@+id/etRaceTime"
         android:typeface="normal"

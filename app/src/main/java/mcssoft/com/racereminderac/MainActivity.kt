@@ -23,18 +23,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRaceSelect {
     override fun onClick(view: View) {
         when(view.id) {
             R.id.id_fab -> {
-                navController?.navigate(R.id.id_edit_fragment)
+                val bundle = Bundle()
+                bundle.putString(getString(R.string.key_edit_type), getString(R.string.edit_type_new))
+                navController?.navigate(R.id.id_edit_fragment, bundle)
             }
         }
     }
 
+    // From interface IRaceSelect.
     override fun onRaceSelect(race: Race?) {
-        var bundle = Bundle()
+        val bundle = Bundle()
+        bundle.putString(getString(R.string.key_edit_type), getString(R.string.edit_type_existing))
         bundle.putParcelable(getString(R.string.key_edit_existing), race)
         navController?.navigate(R.id.id_edit_fragment, bundle)
     }
 
-    //    private fun setupBottomNavMenu(navController: NavController) {
+//    private fun setupBottomNavMenu(navController: NavController) {
 //        findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.let { bottomNavView ->
 //            NavigationUI.setupWithNavController(bottomNavView, navController)
 //        }
