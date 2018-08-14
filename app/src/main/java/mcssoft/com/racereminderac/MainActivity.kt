@@ -23,19 +23,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRaceSelect {
     override fun onClick(view: View) {
         when(view.id) {
             R.id.id_fab -> {
-                val bundle = Bundle()
+                bundle = Bundle()
                 bundle.putString(getString(R.string.key_edit_type), getString(R.string.edit_type_new))
-                navController?.navigate(R.id.id_edit_fragment, bundle)
+                navController.navigate(R.id.id_edit_fragment, bundle)
             }
         }
     }
 
     // From interface IRaceSelect.
-    override fun onRaceSelect(race: Race?) {
-        val bundle = Bundle()
+    override fun onRaceSelect(race: Race) {
+        bundle = Bundle()
         bundle.putString(getString(R.string.key_edit_type), getString(R.string.edit_type_existing))
         bundle.putParcelable(getString(R.string.key_edit_existing), race)
-        navController?.navigate(R.id.id_edit_fragment, bundle)
+        navController.navigate(R.id.id_edit_fragment, bundle)
     }
 
 //    private fun setupBottomNavMenu(navController: NavController) {
@@ -51,13 +51,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRaceSelect {
 
         // FAB
         fab = findViewById<FloatingActionButton>(R.id.id_fab)
-        fab?.setOnClickListener(this)
+        fab.setOnClickListener(this)
 
         // Navigation.
         navController = findNavController(R.id.id_nav_host_fragment)
-        Navigation.setViewNavController(fab!!, navController)
+        Navigation.setViewNavController(fab, navController)
     }
 
-    private var fab: FloatingActionButton? = null
-    private var navController: NavController? = null
+    private lateinit var bundle: Bundle
+    private lateinit var fab: FloatingActionButton
+    private lateinit var navController: NavController
 }

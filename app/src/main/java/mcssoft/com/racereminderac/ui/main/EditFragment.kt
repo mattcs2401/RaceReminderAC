@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -11,11 +12,12 @@ import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.edit_fragment.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceViewModel
 
-class EditFragment : Fragment(), View.OnClickListener {
+class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
 
     companion object {
         //fun newInstance() = EditFragment()
@@ -52,17 +54,35 @@ class EditFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when(view.id) {
             R.id.id_btn_save -> {
-                // TBA
-                Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+                if(checkValues()) {
+                    Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show()
+                }
             }
         }
     }
 
-    private fun initialise() {
-        // TODO - this will depend on what the fragment is used for, e.g. New, Edit etc
-        (activity?.findViewById(R.id.id_toolbar) as Toolbar).title = "New Race"
+    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
+            when (view.id) {
+//                R.id.etCityCode -> (activity as IShowCodes)
+//                        .onShowCodes(R.integer.city_codes_dialog_id, view)
+//                R.id.etRaceCode -> (activity as IShowCodes)
+//                        .onShowCodes(R.integer.race_codes_dialog_id, view)
+//                R.id.etRaceTime -> showTimePicker()
+            }
+            return true
+        }
+        return false
+    }
+
+    private fun checkValues(): Boolean {
+        // TBA - basic check on values entered.
+        return true
+    }
+
+    private fun initialise() {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
 
@@ -70,7 +90,6 @@ class EditFragment : Fragment(), View.OnClickListener {
 
         viewModel = ViewModelProviders.of(this).get(RaceViewModel::class.java)
         // TODO: Use the ViewModel
-
     }
 
     private fun populateFromArgs(race: Race?) {
@@ -82,6 +101,11 @@ class EditFragment : Fragment(), View.OnClickListener {
     }
 
     private lateinit var rootView: View
+    private lateinit var etCityCode : EditText
+    private lateinit var etRaceCode : EditText
+    private lateinit var etRaceNum : EditText
+    private lateinit var etRaceSel : EditText
+    private lateinit var etRaceTime : EditText
     private lateinit var btnSave: Button
     private lateinit var viewModel: RaceViewModel
 
