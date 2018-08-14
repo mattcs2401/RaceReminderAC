@@ -88,16 +88,22 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
 
         (rootView.findViewById<Button>(R.id.id_btn_save)).setOnClickListener(this)
 
+        etCityCode = rootView.findViewById(R.id.etCityCode)
+        etRaceCode = rootView.findViewById(R.id.etRaceCode)
+        etRaceNum = rootView.findViewById(R.id.etRaceNum)
+        etRaceSel = rootView.findViewById(R.id.etRaceSel)
+        etRaceTime = rootView.findViewById(R.id.etRaceTime)
+
         viewModel = ViewModelProviders.of(this).get(RaceViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
     private fun populateFromArgs(race: Race?) {
-        (rootView.findViewById<EditText>(R.id.etCityCode)).setText(race?.cityCode)
-        (rootView.findViewById<EditText>(R.id.etRaceCode)).setText(race?.raceCode)
-        (rootView.findViewById<EditText>(R.id.etRaceNum)).setText(race?.raceNum)
-        (rootView.findViewById<EditText>(R.id.etRaceSel)).setText(race?.raceSel)
-        (rootView.findViewById<EditText>(R.id.etRaceTime)).setText(race?.raceTime)
+        etCityCode.setText(race?.cityCode)
+        etRaceCode.setText(race?.raceCode)
+        etRaceNum.setText(race?.raceNum)
+        etRaceSel.setText(race?.raceSel)
+        etRaceTime.setText(race?.raceTime)
     }
 
     private lateinit var rootView: View
