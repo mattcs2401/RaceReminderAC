@@ -39,12 +39,14 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
             var editType = arguments?.getString(getString(R.string.key_edit_type))
             when(editType) {
                 "edit_type_existing" -> {
-                    (activity?.findViewById(R.id.id_toolbar) as Toolbar).title = "Edit Race"
+                    toolBar.title = "Edit Race"
+                    //(activity?.findViewById(R.id.id_toolbar) as Toolbar).title = "Edit Race"
                     var race = arguments?.getParcelable<Race>(getString(R.string.key_edit_existing))
                     populateFromArgs(race)
                 }
                 "edit_type_new" -> {
-                    (activity?.findViewById(R.id.id_toolbar) as Toolbar).title = "New Race"
+                    toolBar.title = "New Race"
+                    //(activity?.findViewById(R.id.id_toolbar) as Toolbar).title = "New Race"
 
                 }
             }
@@ -85,9 +87,11 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private fun initialise() {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
-
+        // get root view.
         (rootView.findViewById<Button>(R.id.id_btn_save)).setOnClickListener(this)
-
+        // get toolbar
+        toolBar = rootView.findViewById(R.id.id_toolbar)
+        // get race related views.
         etCityCode = rootView.findViewById(R.id.etCityCode)
         etRaceCode = rootView.findViewById(R.id.etRaceCode)
         etRaceNum = rootView.findViewById(R.id.etRaceNum)
@@ -107,12 +111,15 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     }
 
     private lateinit var rootView: View
+    private lateinit var toolBar: Toolbar
+
     private lateinit var etCityCode : EditText
     private lateinit var etRaceCode : EditText
     private lateinit var etRaceNum : EditText
     private lateinit var etRaceSel : EditText
     private lateinit var etRaceTime : EditText
     private lateinit var btnSave: Button
+
     private lateinit var viewModel: RaceViewModel
 
 }

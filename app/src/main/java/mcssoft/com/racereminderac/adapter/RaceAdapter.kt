@@ -42,11 +42,11 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
         if (!isEmptyView) {
             val race = lRaces.get(position)
 
-            holder.tvCityCode?.text = race.cityCode
-            holder.tvRaceCode?.text = race.raceCode
-            holder.tvRaceNo?.text = race.raceNum
-            holder.tvRaceSel?.text = race.raceSel
-            holder.tvRaceTime?.text = race.raceTime
+            holder.tvCityCode.text = race.cityCode
+            holder.tvRaceCode.text = race.raceCode
+            holder.tvRaceNo.text = race.raceNum
+            holder.tvRaceSel.text = race.raceSel
+            holder.tvRaceTime.text = race.raceTime
             //holder.tvRaceDay?.text = race.raceDay
         }
     }
