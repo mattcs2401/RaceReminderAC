@@ -87,11 +87,11 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private fun initialise() {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
-        // get root view.
+        // Set the Save button listener.
         (rootView.findViewById<Button>(R.id.id_btn_save)).setOnClickListener(this)
-        // get toolbar
-        toolBar = rootView.findViewById(R.id.id_toolbar)
-        // get race related views.
+        // Get the toolbar.
+        toolBar = activity?.findViewById(R.id.id_toolbar) as Toolbar
+        // Get the Race related views.
         etCityCode = rootView.findViewById(R.id.etCityCode)
         etRaceCode = rootView.findViewById(R.id.etRaceCode)
         etRaceNum = rootView.findViewById(R.id.etRaceNum)
