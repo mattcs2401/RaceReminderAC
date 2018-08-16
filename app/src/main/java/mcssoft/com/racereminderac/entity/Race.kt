@@ -32,6 +32,9 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
         return array
     }
 
+    //constructor() : this()
+
+
     //<editor-fold defaultstate="collapsed" desc="Region: Parcelable">
     // https://proandroiddev.com/parcelable-in-kotlin-here-comes-parcelize-b998d5a5fcac
     // Note: This done mainly so we can put a Race or List<Race> into a Bundle.
@@ -49,7 +52,6 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
         parcel.writeString(raceSel)
         parcel.writeString(raceTime)
     }
-
 
     companion object CREATOR: Parcelable.Creator<Race> {
         override fun createFromParcel(parcel: Parcel): Race {

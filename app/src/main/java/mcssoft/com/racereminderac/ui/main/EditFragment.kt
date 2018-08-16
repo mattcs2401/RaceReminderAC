@@ -98,8 +98,12 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         etRaceSel = rootView.findViewById(R.id.etRaceSel)
         etRaceTime = rootView.findViewById(R.id.etRaceTime)
 
-        viewModel = ViewModelProviders.of(this).get(RaceViewModel::class.java)
+        raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    private fun collateValues() {
+        var race = Race()
     }
 
     private fun populateFromArgs(race: Race?) {
@@ -120,6 +124,6 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private lateinit var etRaceTime : EditText
     private lateinit var btnSave: Button
 
-    private lateinit var viewModel: RaceViewModel
+    private lateinit var raceViewModel: RaceViewModel
 
 }
