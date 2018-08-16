@@ -52,7 +52,7 @@ class MainFragment : Fragment(), IClick.ItemClick {
         // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
-        raceViewModel?.getAllRaces()?.observe(this, Observer { races ->
+        raceViewModel?.getAllRaces()?.observe(activity!!, Observer { races ->
             raceAdapter.swapData(races)
         })
 

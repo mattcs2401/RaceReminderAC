@@ -103,7 +103,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     }
 
     private fun collateValues() {
-        var race = Race()
+        ///var race = Race()
     }
 
     private fun populateFromArgs(race: Race?) {
