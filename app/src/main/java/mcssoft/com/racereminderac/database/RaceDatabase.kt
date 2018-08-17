@@ -26,7 +26,7 @@ abstract class RaceDatabase : RoomDatabase() {
                 synchronized(RaceDatabase::class) {
                     instance = Room.databaseBuilder(context.getApplicationContext(),
                             RaceDatabase::class.java, "Races.db")
-                            .addCallback(callback)
+//                            .addCallback(callback)
                             .build()
                 }
             }

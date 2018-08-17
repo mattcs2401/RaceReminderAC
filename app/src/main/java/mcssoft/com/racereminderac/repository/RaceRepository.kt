@@ -8,6 +8,7 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.background.InsertWorker
+import mcssoft.com.racereminderac.background.UpdateWorker
 import mcssoft.com.racereminderac.dao.RaceDAO
 import mcssoft.com.racereminderac.database.RaceDatabase
 
@@ -27,6 +28,21 @@ class RaceRepository(application: Application) {
             return workMgr.enqueue(request)
         } catch(e: Exception) {
             Log.d("RaceRepository","fun insert: " + e.message)
+        } finally {
+
+        }
+    }
+
+    fun update(race: Race) {
+        try {
+            val data : Data = Data.Builder().putStringArray("key", race.toArray()).build()
+            val request: OneTimeWorkRequest = OneTimeWorkRequest.Builder(UpdateWorker::class.java)
+                    .setInputData(data)
+                    .build()
+            val workMgr : WorkManager = WorkManager.getInstance()
+            return workMgr.enqueue(request)
+        } catch(e: Exception) {
+            Log.d("RaceRepository","fun update: " + e.message)
         } finally {
 
         }

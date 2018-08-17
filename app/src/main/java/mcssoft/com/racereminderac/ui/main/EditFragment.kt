@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.edit_fragment.*
@@ -36,18 +38,17 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
 
         // Get the argumnets (if exist).
         if(arguments != null) {
-            var editType = arguments?.getString(getString(R.string.key_edit_type))
+            editType = arguments?.getString(getString(R.string.key_edit_type))
             when(editType) {
                 "edit_type_existing" -> {
                     toolBar.title = "Edit Race"
-                    //(activity?.findViewById(R.id.id_toolbar) as Toolbar).title = "Edit Race"
+                    btnSave.setText("Update")
                     var race = arguments?.getParcelable<Race>(getString(R.string.key_edit_existing))
                     populateFromArgs(race)
                 }
                 "edit_type_new" -> {
                     toolBar.title = "New Race"
-                    //(activity?.findViewById(R.id.id_toolbar) as Toolbar).title = "New Race"
-
+                    btnSave.setText("Save")
                 }
             }
         }
@@ -57,6 +58,17 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         when(view.id) {
             R.id.id_btn_save -> {
                 if(checkValues()) {
+                    var race = collateValues()
+                    when(editType) {
+                        "edit_type_existing" -> {
+                            raceViewModel.update(race)
+                        }
+                        "edit_type_new" -> {
+                            raceViewModel.insert(race)
+                        }
+                    }
+                    (activity?.findNavController(R.id.id_nav_host_fragment))?.navigate(R.id.id_main_fragment)
+
                     Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show()
                 }
@@ -87,8 +99,9 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private fun initialise() {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
-        // Set the Save button listener.
-        (rootView.findViewById<Button>(R.id.id_btn_save)).setOnClickListener(this)
+        // Set the Save button and listener.
+        btnSave = rootView.findViewById<Button>(R.id.id_btn_save)
+        btnSave.setOnClickListener(this)
         // Get the toolbar.
         toolBar = activity?.findViewById(R.id.id_toolbar) as Toolbar
         // Get the Race related views.
@@ -102,8 +115,13 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         // TODO: Use the ViewModel
     }
 
-    private fun collateValues() {
-        ///var race = Race()
+    private fun collateValues(): Race {
+        return Race(
+                etCityCode.text.toString(),
+                etRaceCode.text.toString(),
+                etRaceNum.text.toString(),
+                etRaceSel.text.toString(),
+                etRaceTime.text.toString())
     }
 
     private fun populateFromArgs(race: Race?) {
@@ -125,5 +143,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private lateinit var btnSave: Button
 
     private lateinit var raceViewModel: RaceViewModel
+
+    private var editType: String? = null
 
 }

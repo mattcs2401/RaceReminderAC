@@ -20,4 +20,6 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
     fun getAllRaces() = raceRepository.getAllRaces()
 
     fun insert(race: Race) = raceRepository.insert(race)
+
+    fun update(race: Race) = raceRepository.update(race)
 }
