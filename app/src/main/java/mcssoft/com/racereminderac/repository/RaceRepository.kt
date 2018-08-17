@@ -29,7 +29,7 @@ class RaceRepository(application: Application) {
         } catch(e: Exception) {
             Log.d("RaceRepository","fun insert: " + e.message)
         } finally {
-
+            // TBA
         }
     }
 
@@ -44,7 +44,7 @@ class RaceRepository(application: Application) {
         } catch(e: Exception) {
             Log.d("RaceRepository","fun update: " + e.message)
         } finally {
-
+            // TBA
         }
     }
 
