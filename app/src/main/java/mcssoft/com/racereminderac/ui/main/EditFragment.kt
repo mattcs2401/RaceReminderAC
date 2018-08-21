@@ -10,11 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.edit_fragment.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceViewModel

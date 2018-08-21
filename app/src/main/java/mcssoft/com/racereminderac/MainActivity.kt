@@ -6,7 +6,7 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.navigation.Navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IRaceSelect
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRaceSelect {
         fab.setOnClickListener(this)
 
         // Navigation.
-        navController = findNavController(R.id.id_nav_host_fragment)
+        navController = findNavController(this, R.id.id_nav_host_fragment)
         Navigation.setViewNavController(fab, navController)
     }
 

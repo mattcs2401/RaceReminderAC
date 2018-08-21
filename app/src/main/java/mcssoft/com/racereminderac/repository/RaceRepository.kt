@@ -49,3 +49,17 @@ class RaceRepository(application: Application) {
     }
 
 }
+/*
+    private DataRepository(final AppDatabase database) {
+        mDatabase = database;
+        mObservableProducts = new MediatorLiveData<>();
+
+        mObservableProducts.addSource(mDatabase.productDao().loadAllProducts(),
+                productEntities -> {
+                    if (mDatabase.getDatabaseCreated().getValue() != null) {
+                        mObservableProducts.postValue(productEntities);
+                    }
+                });
+    }
+
+ */

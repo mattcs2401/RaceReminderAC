@@ -2,10 +2,10 @@
 
 buildscript {
     ext {
-        kotlinVer = '1.2.60'
+        kotlinVer = '1.2.61'
         navVer = '1.0.0-alpha05'
         roomVer = "1.1.1"
-        workVer = "1.0.0-alpha06"
+        workVer = "1.0.0-alpha07"
     }
 
     repositories {
@@ -13,7 +13,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0-alpha05'
+        classpath 'com.android.tools.build:gradle:3.3.0-alpha06'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVer"
         //classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$navVer"
 
