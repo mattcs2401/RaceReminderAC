@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceViewModel
@@ -40,7 +40,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                 "edit_type_existing" -> {
                     toolBar.title = "Edit Race"
                     btnSave.setText("Update")
-                    var race = arguments?.getParcelable<Race>(getString(R.string.key_edit_existing))
+                    val race = arguments?.getParcelable<Race>(getString(R.string.key_edit_existing))
                     populateFromArgs(race)
                 }
                 "edit_type_new" -> {
@@ -64,10 +64,10 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                             raceViewModel.insert(race)
                         }
                     }
-                    (activity?.findNavController(R.id.id_nav_host_fragment))?.navigate(R.id.id_main_fragment)
-
-                    Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show()
+                    Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+                              .navigate(R.id.id_main_fragment)
+//                    Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                            .setAction("Action", null).show()
                 }
             }
         }
