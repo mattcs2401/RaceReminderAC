@@ -6,6 +6,7 @@ buildscript {
         navVer = '1.0.0-alpha05'
         roomVer = "1.1.1"
         workVer = "1.0.0-alpha07"
+        butterVer = "8.8.1"
     }
 
     repositories {

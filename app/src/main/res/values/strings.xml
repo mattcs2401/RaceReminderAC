@@ -6,7 +6,11 @@
     <string name="race_sel">Race Sel</string>
     <string name="race_time">Race Time</string>
     <string name="race_code">Race Code</string>
+
     <string name="save">Save</string>
+    <string name="update">Update</string>
+    <string name="edit_race">Edit Race</string>
+    <string name="new_race">New Race</string>
 
     <!-- Message when no data. -->
     <string name="nothing_to_show">Nothing to show.</string>
