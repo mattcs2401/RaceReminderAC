@@ -2,7 +2,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 28
@@ -41,9 +40,5 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$roomVer"
 
     implementation "android.arch.work:work-runtime-ktx:$workVer"
-
-    // mainly just used to bind string resources.
-    implementation "com.jakewharton:butterknife:$butterVer"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butterVer"
 
 }

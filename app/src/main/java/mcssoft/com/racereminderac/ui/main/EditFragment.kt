@@ -11,10 +11,6 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.Navigation
-import butterknife.BindString
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
@@ -29,7 +25,6 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         rootView = inflater.inflate(R.layout.edit_fragment, container, false)
-        //unbinder = ButterKnife.bind(rootView)
         return rootView
     }
 
@@ -55,11 +50,6 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
             }
         }
     }
-
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        unbinder.unbind()
-//    }
 
     override fun onClick(view: View) {
         when(view.id) {
@@ -153,12 +143,4 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
 
     private var editType: String? = null
 
-    // this doesn't work.
-    //private lateinit var unbinder: Unbinder
-    //@BindString(R.string.save) lateinit var save: String
-    //@BindString(R.string.update) lateinit var update: String
-    //@BindString(R.string.edit_race) lateinit var edit_race: String
-    //@BindString(R.string.new_race) lateinit var new_race: String
-    //@BindString(R.string.edit_type_existing) lateinit var edit_type_existing: String
-    //@BindString(R.string.edit_type_new) lateinit var edit_type_new: String
 }
