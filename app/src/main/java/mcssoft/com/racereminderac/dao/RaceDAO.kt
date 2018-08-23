@@ -1,6 +1,7 @@
 package mcssoft.com.racereminderac.dao
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import mcssoft.com.racereminderac.entity.Race
 
@@ -12,6 +13,9 @@ internal interface RaceDAO {
 
     @Update
     fun updateRace(race: Race)
+
+    @Query("select * from race_details where _id=:id")
+    fun getRace(id: Long): LiveData<Race>
 
     @Query("select * from race_details")
     fun getAllRaces(): LiveData<MutableList<Race>>

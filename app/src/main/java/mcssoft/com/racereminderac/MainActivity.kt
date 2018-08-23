@@ -31,10 +31,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRaceSelect {
     }
 
     // From interface IRaceSelect.
-    override fun onRaceSelect(race: Race) {
+    override fun onRaceSelect(id: Long ) { //race: Race) {
         bundle = Bundle()
         bundle.putString(getString(R.string.key_edit_type), getString(R.string.edit_type_existing))
-        bundle.putParcelable(getString(R.string.key_edit_existing), race)
+//        bundle.putParcelable(getString(R.string.key_edit_existing), race)
+        bundle.putLong(getString(R.string.key_edit_existing), id)
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
 

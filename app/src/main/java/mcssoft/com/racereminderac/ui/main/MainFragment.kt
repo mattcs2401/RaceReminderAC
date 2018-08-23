@@ -7,15 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.IRaceSelect
+import mcssoft.com.racereminderac.model.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 
 class MainFragment : Fragment(), IClick.ItemClick {
@@ -52,23 +51,26 @@ class MainFragment : Fragment(), IClick.ItemClick {
         // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
-        raceViewModel?.getAllRaces()?.observe(activity!!, Observer { races ->
-            raceAdapter.swapData(races)
-        })
+//        raceViewModel?.getAllRaces()?.observe(activity!!, Observer { races ->
+//            raceAdapter.swapData(races)
+//        })
+
+        raceViewModel.getAllRaces().observe(activity!!, RaceListObserver(raceAdapter)) //raceObserver)
 
     }
 
     override fun onItemClick(lPos: Int) {
         // callback to the Activity with the selected Race object
-        (activity as IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos))
+        val race = raceAdapter.getRace(lPos)
+        (activity as IRaceSelect).onRaceSelect(race.id) //raceAdapter.getRace(lPos))
 //        Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
     }
 
     private lateinit var rootView: View
     private lateinit var raceAdapter: RaceAdapter
-    private var raceViewModel: RaceViewModel? = null
+    private lateinit var raceViewModel: RaceViewModel
     private lateinit var recyclerView: RecyclerView
-
+//    private lateinit var raceObserver: RaceListObserver
 }
 

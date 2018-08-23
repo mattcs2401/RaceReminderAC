@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 
 class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
@@ -40,8 +42,9 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                 "edit_type_existing" -> {
                     toolBar.title = "Edit Race"
                     btnSave.text = "Update"
-                    val race = arguments?.getParcelable<Race>(getString(R.string.key_edit_existing))
-                    populateFromArgs(race)
+//                    val race = arguments?.getParcelable<Race>(getString(R.string.key_edit_existing))
+                    val id = arguments?.getLong(getString(R.string.key_edit_existing))
+                    populateFromArgs(id!!) //race)
                 }
                 "edit_type_new" -> {
                     toolBar.title = "New Race"
@@ -109,7 +112,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         etRaceTime = rootView.findViewById(R.id.etRaceTime)
 
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
-        // TODO: Use the ViewModel
+
     }
 
     private fun collateValues(): Race {
@@ -121,12 +124,15 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                 etRaceTime.text.toString())
     }
 
-    private fun populateFromArgs(race: Race?) {
-        etCityCode.setText(race?.cityCode)
-        etRaceCode.setText(race?.raceCode)
-        etRaceNum.setText(race?.raceNum)
-        etRaceSel.setText(race?.raceSel)
-        etRaceTime.setText(race?.raceTime)
+    private fun populateFromArgs(id: Long) {
+//        raceViewModel.getRace(id).observe(activity!!, RaceObserver(raceViewModel.getRace(id))) <<-- this works
+        raceViewModel.getRace(id).observe(activity!!, Observer { race ->
+            etCityCode.setText(race?.cityCode)
+            etRaceCode.setText(race?.raceCode)
+            etRaceNum.setText(race?.raceNum)
+            etRaceSel.setText(race?.raceSel)
+            etRaceTime.setText(race?.raceTime)
+        })
     }
 
     private lateinit var rootView: View
