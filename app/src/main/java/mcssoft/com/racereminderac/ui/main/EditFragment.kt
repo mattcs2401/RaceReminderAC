@@ -125,7 +125,9 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     }
 
     private fun populateFromArgs(id: Long) {
-//        raceViewModel.getRace(id).observe(activity!!, RaceObserver(raceViewModel.getRace(id))) <<-- this works
+        // this works but can't be used to update UI.
+        //raceViewModel.getRace(id).observe(activity!!, RaceObserver(raceViewModel.getRace(id)))
+
         raceViewModel.getRace(id).observe(activity!!, Observer { race ->
             etCityCode.setText(race?.cityCode)
             etRaceCode.setText(race?.raceCode)

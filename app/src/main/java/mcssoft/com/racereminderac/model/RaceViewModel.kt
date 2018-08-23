@@ -25,4 +25,6 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
     fun insert(race: Race) = raceRepository.insert(race)
 
     fun update(race: Race) = raceRepository.update(race)
+
+//    fun postValue(race: Race) = update(race)
 }
