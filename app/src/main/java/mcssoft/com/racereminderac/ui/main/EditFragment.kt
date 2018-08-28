@@ -42,9 +42,8 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                 "edit_type_existing" -> {
                     toolBar.title = "Edit Race"
                     btnSave.text = "Update"
-//                    val race = arguments?.getParcelable<Race>(getString(R.string.key_edit_existing))
                     val id = arguments?.getLong(getString(R.string.key_edit_existing))
-                    populateFromArgs(id!!) //race)
+                    populateFromArgs(id!!)
                 }
                 "edit_type_new" -> {
                     toolBar.title = "New Race"
@@ -61,7 +60,10 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                     var race = collateValues()
                     when(editType) {
                         "edit_type_existing" -> {
-                            raceViewModel.update(race)
+//                            val id = arguments?.getLong(getString(R.string.key_edit_existing))
+//                            raceViewModel.getRace(id!!).observe(activity!!, Observer { race ->
+                                raceViewModel.update(race)
+//                            })
                         }
                         "edit_type_new" -> {
                             raceViewModel.insert(race)
@@ -128,6 +130,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         // this works but can't be used to update UI.
         //raceViewModel.getRace(id).observe(activity!!, RaceObserver(raceViewModel.getRace(id)))
 
+        // TBA - for now.
         raceViewModel.getRace(id).observe(activity!!, Observer { race ->
             etCityCode.setText(race?.cityCode)
             etRaceCode.setText(race?.raceCode)

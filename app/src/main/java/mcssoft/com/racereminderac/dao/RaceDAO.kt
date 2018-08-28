@@ -9,9 +9,9 @@ import mcssoft.com.racereminderac.entity.Race
 internal interface RaceDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRace(race: Race)
+    fun insertRace(race: Race): Long
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.IGNORE)
     fun updateRace(race: Race)
 
     @Query("select * from race_details where _id=:id")
