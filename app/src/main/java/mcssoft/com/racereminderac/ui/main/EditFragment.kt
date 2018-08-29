@@ -111,6 +111,8 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         etRaceTime = rootView.findViewById(R.id.etRaceTime)
 
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
+        val id = arguments?.getLong(getString(R.string.key_edit_existing))
+        raceViewModel.getRace(id!!).observe(activity!!, RaceObserver(raceViewModel.getRace(id), rootView))
 
     }
 
@@ -125,16 +127,17 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
 
     private fun populateFromArgs(id: Long) {
         // this works but can't be used to update UI.
-        //raceViewModel.getRace(id).observe(activity!!, RaceObserver(raceViewModel.getRace(id)))
+//        raceViewModel.getRace(id).observe(activity!!, RaceObserver(raceViewModel.getRace(id), rootView))
 
         // TBA - for now.
-        raceViewModel.getRace(id).observe(activity!!, Observer { race ->
-            etCityCode.setText(race?.cityCode)
-            etRaceCode.setText(race?.raceCode)
-            etRaceNum.setText(race?.raceNum)
-            etRaceSel.setText(race?.raceSel)
-            etRaceTime.setText(race?.raceTime)
-        })
+//        raceViewModel.getRa
+// ce(id).observe(activity!!, Observer<Race> { race ->
+//            etCityCode.setText(race?.cityCode)
+//            etRaceCode.setText(race?.raceCode)
+//            etRaceNum.setText(race?.raceNum)
+//            etRaceSel.setText(race?.raceSel)
+//            etRaceTime.setText(race?.raceTime)
+//        })
     }
 
     private lateinit var rootView: View

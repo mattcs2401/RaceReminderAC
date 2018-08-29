@@ -13,8 +13,7 @@ class InitWorker : Worker() {
 
         raceDao = RaceDatabase.getInstance(applicationContext)?.raceDao()
 
-        if(raceDao != null) {
-            raceDao?.deleteAll()
+        if(raceDao?.getCountRaces()!! < 1) {
             // dummy data
             val race = Race("B", "R", "1", "2", "13:35")
             raceDao?.insertRace(race)
@@ -22,6 +21,6 @@ class InitWorker : Worker() {
             return Result.SUCCESS
         }
 
-        return Result.FAILURE
+    return Result.FAILURE
     }
 }

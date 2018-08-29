@@ -1,13 +1,25 @@
 package mcssoft.com.racereminderac.model
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.edit_fragment.view.*
 import mcssoft.com.racereminderac.entity.Race
 
-class RaceObserver(race: LiveData<Race>) : Observer<Race> {
+class RaceObserver(race: LiveData<Race>, view: View) : Observer<Race> {
 
-    override fun onChanged(race: Race?) {
+    var rootView: View
 
-        val bp = ""
+    init {
+        this.rootView = view
     }
+
+    override fun onChanged(race: Race) {
+        rootView.etCityCode.setText(race.cityCode)
+        rootView.etRaceCode.setText(race.raceCode)
+        rootView.etRaceNum.setText(race.raceNum)
+        rootView.etRaceSel.setText(race.raceSel)
+        rootView.etRaceTime.setText(race.raceTime)
+    }
+
 }

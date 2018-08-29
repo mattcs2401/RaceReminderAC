@@ -15,6 +15,9 @@ internal interface RaceDAO {
     @Update(onConflict = OnConflictStrategy.IGNORE)
     fun updateRace(race: Race)
 
+    @Query("select count(*) from race_details")
+    fun getCountRaces(): Long
+
     @Query("select * from race_details where _id=:id")
     fun getRace(id: Long): LiveData<Race>
 
