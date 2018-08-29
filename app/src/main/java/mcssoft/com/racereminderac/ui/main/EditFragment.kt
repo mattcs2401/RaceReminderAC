@@ -60,10 +60,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                     var race = collateValues()
                     when(editType) {
                         "edit_type_existing" -> {
-//                            val id = arguments?.getLong(getString(R.string.key_edit_existing))
-//                            raceViewModel.getRace(id!!).observe(activity!!, Observer { race ->
-                                raceViewModel.update(race)
-//                            })
+                            raceViewModel.update(race)
                         }
                         "edit_type_new" -> {
                             raceViewModel.insert(race)

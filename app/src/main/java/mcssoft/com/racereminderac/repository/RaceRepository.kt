@@ -3,6 +3,7 @@ package mcssoft.com.racereminderac.repository
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
@@ -22,8 +23,6 @@ class RaceRepository(application: Application) {
         raceDao = RaceDatabase.getInstance(application)!!.raceDao()
         allRaces = raceDao.getAllRaces()
     }
-
-//    internal fun getRace(id: Long): Race = raceDao.getRace(id)
 
     internal fun getAllRaces(): LiveData<MutableList<Race>> = allRaces
 

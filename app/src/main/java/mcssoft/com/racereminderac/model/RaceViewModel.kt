@@ -24,7 +24,11 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insert(race: Race) = raceRepository.insert(race)
 
-    fun update(race: Race) = raceRepository.update(race)
+    fun update(race: Race): LiveData<Race> {
+        raceRepository.update(race)
+        val r = getRace(race.id)//.value
+        return getRace(race.id)
+    } //= raceRepository.update(race)
 
 //    fun postValue(race: Race) = update(race)
 }

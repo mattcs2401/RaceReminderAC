@@ -7,15 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
+import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.IRaceSelect
 import mcssoft.com.racereminderac.model.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
+import androidx.annotation.NonNull
+
+
 
 class MainFragment : Fragment(), IClick.ItemClick {
 
@@ -51,11 +56,11 @@ class MainFragment : Fragment(), IClick.ItemClick {
         // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
-//        raceViewModel?.getAllRaces()?.observe(activity!!, Observer { races ->
-//            raceAdapter.swapData(races)
-//        })
+        raceViewModel.getAllRaces().observe(activity!!, Observer<List<Race>> { races ->
+            raceAdapter.swapData(races)
+        })
 
-        raceViewModel.getAllRaces().observe(activity!!, RaceListObserver(raceAdapter)) //raceObserver)
+//        raceViewModel.getAllRaces().observe(activity!!, RaceListObserver(raceAdapter)) //raceObserver)
 
     }
 
