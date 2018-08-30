@@ -42,8 +42,8 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                 "edit_type_existing" -> {
                     toolBar.title = "Edit Race"
                     btnSave.text = "Update"
-                    val id = arguments?.getLong(getString(R.string.key_edit_existing))
-                    populateFromArgs(id!!)
+//                    val id = arguments?.getLong(getString(R.string.key_edit_existing))
+//                    populateFromArgs(id!!)
                 }
                 "edit_type_new" -> {
                     toolBar.title = "New Race"

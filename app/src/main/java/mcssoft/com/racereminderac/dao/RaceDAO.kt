@@ -18,7 +18,7 @@ internal interface RaceDAO {
     @Query("select count(*) from race_details")
     fun getCountRaces(): Long
 
-    @Query("select * from race_details where _id=:id")
+    @Query("select * from race_details where _id = :id")
     fun getRace(id: Long): LiveData<Race>
 
     @Query("select * from race_details")

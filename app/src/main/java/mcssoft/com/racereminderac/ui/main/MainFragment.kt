@@ -67,7 +67,7 @@ class MainFragment : Fragment(), IClick.ItemClick {
     override fun onItemClick(lPos: Int) {
         // callback to the Activity with the selected Race object
         val race = raceAdapter.getRace(lPos)
-        (activity as IRaceSelect).onRaceSelect(race.id) //raceAdapter.getRace(lPos))
+        (activity as IRaceSelect).onRaceSelect(race.id!!) //raceAdapter.getRace(lPos))
 //        Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
     }
