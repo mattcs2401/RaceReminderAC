@@ -14,7 +14,7 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
                 @ColumnInfo(name = "RaceTime") var raceTime: String) {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "_id") var id: Long? = null //= 0
+    @ColumnInfo(name = "_id") var id: Long? = null
 
     @ColumnInfo(name = "ArchvRace") var archvRace: String = "N"
 
