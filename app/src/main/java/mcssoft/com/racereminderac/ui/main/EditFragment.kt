@@ -111,18 +111,20 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         etRaceTime = rootView.findViewById(R.id.etRaceTime)
 
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
-        val id = arguments?.getLong(getString(R.string.key_edit_existing))
-        raceViewModel.getRace(id!!).observe(activity!!, RaceObserver(raceViewModel.getRace(id), rootView))
+        raceId = arguments?.getLong(getString(R.string.key_edit_existing))
+        raceViewModel.getRace(raceId!!).observe(activity!!, RaceObserver(raceViewModel.getRace(raceId!!), rootView))
 
     }
 
     private fun collateValues(): Race {
-        return Race(
+        val race = Race(
                 etCityCode.text.toString(),
                 etRaceCode.text.toString(),
                 etRaceNum.text.toString(),
                 etRaceSel.text.toString(),
                 etRaceTime.text.toString())
+        race.id = raceId
+        return race
     }
 
     private fun populateFromArgs(id: Long) {
@@ -143,6 +145,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private lateinit var rootView: View
     private lateinit var toolBar: Toolbar
 
+    private var raceId: Long? = null
     private lateinit var etCityCode : EditText
     private lateinit var etRaceCode : EditText
     private lateinit var etRaceNum : EditText
