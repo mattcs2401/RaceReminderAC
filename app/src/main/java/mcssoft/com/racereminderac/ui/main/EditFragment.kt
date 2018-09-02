@@ -68,10 +68,16 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                     }
                     Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
                               .navigate(R.id.id_main_fragment)
-//                    Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                            .setAction("Action", null).show()
                 }
             }
+//            R.id.etCityCode -> {
+//                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+//                        .navigate(R.id.id_city_codes)
+//            }
+//            R.id.etRaceCode -> {
+//                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+//                        .navigate(R.id.id_race_codes)
+//            }
         }
     }
 
@@ -81,6 +87,10 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
             when (view.id) {
 //                R.id.etCityCode -> (activity as IShowCodes)
 //                        .onShowCodes(R.integer.city_codes_dialog_id, view)
+                R.id.etRaceCode -> {
+                    Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+                            .navigate(R.id.id_race_codes)
+                }
 //                R.id.etRaceCode -> (activity as IShowCodes)
 //                        .onShowCodes(R.integer.race_codes_dialog_id, view)
 //                R.id.etRaceTime -> showTimePicker()
@@ -105,7 +115,9 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         toolBar = activity?.findViewById(R.id.id_toolbar) as Toolbar
         // Get the Race related views.
         etCityCode = rootView.findViewById(R.id.etCityCode)
+        etCityCode.setOnClickListener(this)
         etRaceCode = rootView.findViewById(R.id.etRaceCode)
+        etRaceCode.setOnClickListener(this)
         etRaceNum = rootView.findViewById(R.id.etRaceNum)
         etRaceSel = rootView.findViewById(R.id.etRaceSel)
         etRaceTime = rootView.findViewById(R.id.etRaceTime)

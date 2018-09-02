@@ -19,5 +19,13 @@
         android:id="@+id/id_edit_fragment"
         android:name="mcssoft.com.racereminderac.ui.main.EditFragment"
         android:label="EditFragment"
-        tools:layout="@layout/edit_fragment"/>
+        tools:layout="@layout/edit_fragment">
+        <action
+            android:id="@+id/action_id_edit_fragment_to_dialogRaceCodes"
+            app:destination="@id/id_race_codes" />
+    </fragment>
+    <fragment
+        android:id="@+id/id_race_codes"
+        android:name="mcssoft.com.racereminderac.ui.main.DialogRaceCodes"
+        android:label="DialogRaceCodes" />
 </navigation>
