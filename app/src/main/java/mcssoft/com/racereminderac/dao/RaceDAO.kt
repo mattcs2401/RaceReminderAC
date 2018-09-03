@@ -21,9 +21,6 @@ internal interface RaceDAO {
     @Query("select * from race_details where _id = :id")
     fun getRaceLD(id: Long): LiveData<Race>
 
-    @Query("select * from race_details where _id = :id")
-    fun getRace(id: Long): Race
-
     @Query("select * from race_details")
     fun getAllRaces(): LiveData<MutableList<Race>>
 

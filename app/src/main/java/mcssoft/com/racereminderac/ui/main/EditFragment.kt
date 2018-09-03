@@ -1,5 +1,6 @@
 package mcssoft.com.racereminderac.ui.main
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.InputType
@@ -11,12 +12,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
-import mcssoft.com.racereminderac.interfaces.IShowCodes
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 
@@ -41,11 +40,11 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         if(arguments != null) {
             editType = arguments!!.getString(getString(R.string.key_edit_type))
             if(editType != null && arguments!!.size() == 2) {
-                processForEditType(editType!!)
+                setForEditType(editType!!)
             } else {
                 dialogVal = arguments!!.getString("letter_key")
                 dialogType = arguments!!.getString("dialog_key")
-                processForDialogType(dialogVal!!, dialogType!!)
+                setForDialogType(dialogVal!!, dialogType!!)
             }
         }
     }
@@ -54,13 +53,15 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         when(view.id) {
             R.id.id_btn_save -> {
                 if(checkValues()) {
-                    var race = collateValues()
+//                    var race = collateValues()
                     when(editType) {
                         "edit_type_existing" -> {
-                            raceViewModel.update(race)
+//                            raceViewModel.update(race)
+                            raceViewModel.update(raceCache)
                         }
                         "edit_type_new" -> {
-                            raceViewModel.insert(race)
+//                            raceViewModel.insert(race)
+                            raceViewModel.insert(raceCache)
                         }
                     }
                     Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
@@ -70,6 +71,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
@@ -88,11 +90,17 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         return false
     }
 
+    /**
+     * Simple check that all values are entered.
+     */
     private fun checkValues(): Boolean {
-        // TBA - basic check on values entered.
+        // TBA
         return true
     }
 
+    /**
+     * Setup UI and view model.
+     */
     private fun initialise() {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
@@ -118,6 +126,9 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
 
     }
 
+    /**
+     * get the UI values into a Race object ready for Update or Insert.
+     */
     private fun collateValues(): Race {
         val race = Race(
                 etCityCode.text.toString(),
@@ -129,13 +140,14 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         return race
     }
 
-    private fun processForEditType(editType: String) {
+    /**
+     * Update UI elements depending on whether editing an existing Race, or it's a new Race.
+     */
+    private fun setForEditType(editType: String) {
         when(editType) {
             "edit_type_existing" -> {
                 toolBar.title = "Edit Race"
                 btnSave.text = "Update"
-//                    val id = arguments?.getLong(getString(R.string.key_edit_existing))
-//                    populateFromArgs(id!!)
             }
             "edit_type_new" -> {
                 toolBar.title = "New Race"
@@ -144,8 +156,12 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         }
     }
 
-    private fun processForDialogType(dialogVal: String, dialogType: String) {
-        var race = raceViewModel.getRace(raceId!!)
+    /**
+     * Update UI and cache for CityCodes or RaceCodes UI elements.
+     */
+    private fun setForDialogType(dialogVal: String, dialogType: String) {
+        // TODO update cache.
+        var race = raceViewModel.getRaceLD(raceId!!).getValue()
         when(dialogType) {
             "city_codes" -> {
                 etCityCode.setText(dialogVal)
@@ -158,19 +174,8 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         }
     }
 
-    private fun populateFromArgs(id: Long) {
-        // this works but can't be used to update UI.
-//        raceViewModel.getRaceLD(id).observe(activity!!, RaceObserver(raceViewModel.getRaceLD(id), rootView))
-
-        // TBA - for now.
-//        raceViewModel.getRa
-// ce(id).observe(activity!!, Observer<Race> { race ->
-//            etCityCode.setText(race?.cityCode)
-//            etRaceCode.setText(race?.raceCode)
-//            etRaceNum.setText(race?.raceNum)
-//            etRaceSel.setText(race?.raceSel)
-//            etRaceTime.setText(race?.raceTime)
-//        })
+    private fun setCache() {
+        raceCache = collateValues()
     }
 
     private lateinit var rootView: View
@@ -189,5 +194,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private var editType: String? = null
     private var dialogVal: String? = null
     private var dialogType: String? = null
+
+    private lateinit var raceCache: Race
 
 }
