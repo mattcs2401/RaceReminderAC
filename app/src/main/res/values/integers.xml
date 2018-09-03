@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="city_codes_dialog_id">0</integer>
+    <integer name="race_codes_dialog_id">1</integer>
+</resources>

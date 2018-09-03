@@ -16,6 +16,7 @@ import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.interfaces.IShowCodes
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 
@@ -39,7 +40,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         // Get the argumnets (if exist).
         if(arguments != null) {
             editType = arguments!!.getString(getString(R.string.key_edit_type))
-            if(editType != null) {
+            if(editType != null && arguments!!.size() == 2) {
                 processForEditType(editType!!)
             } else {
                 dialogVal = arguments!!.getString("letter_key")
@@ -73,19 +74,14 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
             when (view.id) {
-//                R.id.etCityCode -> (activity as IShowCodes)
-//                        .onShowCodes(R.integer.city_codes_dialog_id, view)
+                R.id.etCityCode -> {
+                    Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+                            .navigate(R.id.id_city_codes, arguments)
+                }
                 R.id.etRaceCode -> {
                     Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
                             .navigate(R.id.id_race_codes)
                 }
-                R.id.etCityCode -> {
-                    Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
-                            .navigate(R.id.id_city_codes)
-                }
-//                R.id.etRaceCode -> (activity as IShowCodes)
-//                        .onShowCodes(R.integer.race_codes_dialog_id, view)
-//                R.id.etRaceTime -> showTimePicker()
             }
             return true
         }
@@ -151,11 +147,14 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private fun processForDialogType(dialogVal: String, dialogType: String) {
         var race = raceViewModel.getRace(raceId!!)
         when(dialogType) {
+            "city_codes" -> {
+                etCityCode.setText(dialogVal)
+                race?.cityCode = dialogVal
+            }
             "race_codes" -> {
                 etRaceCode.setText(dialogVal)
-                race.raceCode = dialogVal
+                race?.raceCode = dialogVal
             }
-            "city_codes" -> etCityCode.setText(dialogVal)
         }
     }
 

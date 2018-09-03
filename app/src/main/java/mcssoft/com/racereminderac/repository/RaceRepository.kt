@@ -29,6 +29,7 @@ class RaceRepository(application: Application) {
 
     internal fun getRace(id: Long): Race? {
         var getRaceAsync = GetRaceAsync(id, raceDao)
+        getRaceAsync.execute()
         val bp = ""
         return null
     }
@@ -65,7 +66,7 @@ class RaceRepository(application: Application) {
 
     private class GetRaceAsync(id: Long, raceDao: RaceDAO) : AsyncTask<Long, Void, Race>() {
         var id: Long = -1
-        lateinit var raceDao: RaceDAO
+        var raceDao: RaceDAO
         init {
             this.id = id
             this.raceDao = raceDao
@@ -77,7 +78,7 @@ class RaceRepository(application: Application) {
         }
 
         override fun onPostExecute(result: Race?) {
-            super.onPostExecute(result)
+            //super.onPostExecute(result)
             val bp = ""
         }
     }

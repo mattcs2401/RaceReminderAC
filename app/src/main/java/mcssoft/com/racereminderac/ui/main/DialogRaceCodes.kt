@@ -9,7 +9,9 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.edit_fragment.*
 import mcssoft.com.racereminderac.R
+import mcssoft.com.racereminderac.interfaces.IShowCodes
 
 class DialogRaceCodes : DialogFragment(), View.OnClickListener {
 
@@ -32,7 +34,6 @@ class DialogRaceCodes : DialogFragment(), View.OnClickListener {
             R.id.id_rc_btn_ok -> {
                 if(!btnLetter.equals("")) {
                     // call thru to the interface.
-//                    (activity as IShowCodes).onFinishCodes(R.integer.race_codes_dialog_id, btnLetter)
                     val bundle = Bundle()
                     bundle.putString("letter_key", btnLetter)
                     bundle.putString("dialog_key", "race_codes")

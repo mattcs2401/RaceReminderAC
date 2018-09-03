@@ -25,11 +25,9 @@ class DialogCityCodes : DialogFragment(), View.OnClickListener {
         when(id) {
             R.id.id_btn_cc_ok -> {
                 if(!btnLetter.equals("")) {
-                    // call thru to the interface.
-//                    (activity as IShowCodes).onFinishCodes(R.integer.city_codes_dialog_id, btnLetter)
-                    val bundle = Bundle()
-                    bundle.putString("letter_key", btnLetter)
-                    bundle.putString("dialog_key", "city_codes")
+                    val bundle = arguments
+                    bundle?.putString("letter_key", btnLetter)
+                    bundle?.putString("dialog_key", "city_codes")
                     Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
                             .navigate(R.id.id_edit_fragment, bundle)
                 } else {
