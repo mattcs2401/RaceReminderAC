@@ -2,6 +2,7 @@ package mcssoft.com.racereminderac.ui.main
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -37,18 +38,13 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
 
         // Get the argumnets (if exist).
         if(arguments != null) {
-            editType = arguments?.getString(getString(R.string.key_edit_type))
-            when(editType) {
-                "edit_type_existing" -> {
-                    toolBar.title = "Edit Race"
-                    btnSave.text = "Update"
-//                    val id = arguments?.getLong(getString(R.string.key_edit_existing))
-//                    populateFromArgs(id!!)
-                }
-                "edit_type_new" -> {
-                    toolBar.title = "New Race"
-                    btnSave.text = "Save"
-                }
+            editType = arguments!!.getString(getString(R.string.key_edit_type))
+            if(editType != null) {
+                processForEditType(editType!!)
+            } else {
+                dialogVal = arguments!!.getString("letter_key")
+                dialogType = arguments!!.getString("dialog_key")
+                processForDialogType(dialogVal!!, dialogType!!)
             }
         }
     }
@@ -70,14 +66,6 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                               .navigate(R.id.id_main_fragment)
                 }
             }
-//            R.id.etCityCode -> {
-//                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
-//                        .navigate(R.id.id_city_codes)
-//            }
-//            R.id.etRaceCode -> {
-//                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
-//                        .navigate(R.id.id_race_codes)
-//            }
         }
     }
 
@@ -90,6 +78,10 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                 R.id.etRaceCode -> {
                     Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
                             .navigate(R.id.id_race_codes)
+                }
+                R.id.etCityCode -> {
+                    Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+                            .navigate(R.id.id_city_codes)
                 }
 //                R.id.etRaceCode -> (activity as IShowCodes)
 //                        .onShowCodes(R.integer.race_codes_dialog_id, view)
@@ -115,16 +107,18 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         toolBar = activity?.findViewById(R.id.id_toolbar) as Toolbar
         // Get the Race related views.
         etCityCode = rootView.findViewById(R.id.etCityCode)
-        etCityCode.setOnClickListener(this)
+        etCityCode.setRawInputType(InputType.TYPE_NULL)
+        etCityCode.setOnTouchListener(this)
         etRaceCode = rootView.findViewById(R.id.etRaceCode)
-        etRaceCode.setOnClickListener(this)
+        etRaceCode.setRawInputType(InputType.TYPE_NULL)
+        etRaceCode.setOnTouchListener(this)
         etRaceNum = rootView.findViewById(R.id.etRaceNum)
         etRaceSel = rootView.findViewById(R.id.etRaceSel)
         etRaceTime = rootView.findViewById(R.id.etRaceTime)
 
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
         raceId = arguments?.getLong(getString(R.string.key_edit_existing))
-        raceViewModel.getRace(raceId!!).observe(activity!!, RaceObserver(raceViewModel.getRace(raceId!!), rootView))
+        raceViewModel.getRaceLD(raceId!!).observe(activity!!, RaceObserver(raceViewModel.getRaceLD(raceId!!), rootView))
 
     }
 
@@ -139,9 +133,35 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         return race
     }
 
+    private fun processForEditType(editType: String) {
+        when(editType) {
+            "edit_type_existing" -> {
+                toolBar.title = "Edit Race"
+                btnSave.text = "Update"
+//                    val id = arguments?.getLong(getString(R.string.key_edit_existing))
+//                    populateFromArgs(id!!)
+            }
+            "edit_type_new" -> {
+                toolBar.title = "New Race"
+                btnSave.text = "Save"
+            }
+        }
+    }
+
+    private fun processForDialogType(dialogVal: String, dialogType: String) {
+        var race = raceViewModel.getRace(raceId!!)
+        when(dialogType) {
+            "race_codes" -> {
+                etRaceCode.setText(dialogVal)
+                race.raceCode = dialogVal
+            }
+            "city_codes" -> etCityCode.setText(dialogVal)
+        }
+    }
+
     private fun populateFromArgs(id: Long) {
         // this works but can't be used to update UI.
-//        raceViewModel.getRace(id).observe(activity!!, RaceObserver(raceViewModel.getRace(id), rootView))
+//        raceViewModel.getRaceLD(id).observe(activity!!, RaceObserver(raceViewModel.getRaceLD(id), rootView))
 
         // TBA - for now.
 //        raceViewModel.getRa
@@ -168,5 +188,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private lateinit var raceViewModel: RaceViewModel
 
     private var editType: String? = null
+    private var dialogVal: String? = null
+    private var dialogType: String? = null
 
 }

@@ -18,7 +18,9 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
         allRaces = raceRepository.getAllRaces()
     }
 
-    fun getRace(id: Long): LiveData<Race> = raceRepository.getRace(id)
+    fun getRaceLD(id: Long): LiveData<Race> = raceRepository.getRaceLD(id)
+
+    fun getRace(id: Long): Race = raceRepository.getRace(id)!!
 
     fun getAllRaces(): LiveData<MutableList<Race>> = allRaces
 

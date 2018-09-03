@@ -19,7 +19,10 @@ internal interface RaceDAO {
     fun getCountRaces(): Long
 
     @Query("select * from race_details where _id = :id")
-    fun getRace(id: Long): LiveData<Race>
+    fun getRaceLD(id: Long): LiveData<Race>
+
+    @Query("select * from race_details where _id = :id")
+    fun getRace(id: Long): Race
 
     @Query("select * from race_details")
     fun getAllRaces(): LiveData<MutableList<Race>>

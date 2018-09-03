@@ -22,4 +22,8 @@
     <!-- Values. -->
     <string name="edit_type_new">edit_type_new</string>
     <string name="edit_type_existing">edit_type_existing</string>
+
+    <!-- Dialog. -->
+    <string name="race_codes_title">Select a Race Code</string>
+    <string name="city_codes_title">Select a City Code</string>
 </resources>

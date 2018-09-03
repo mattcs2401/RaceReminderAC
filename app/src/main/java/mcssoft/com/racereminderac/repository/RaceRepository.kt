@@ -1,10 +1,9 @@
 package mcssoft.com.racereminderac.repository
 
 import android.app.Application
+import android.os.AsyncTask
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
@@ -26,7 +25,13 @@ class RaceRepository(application: Application) {
 
     internal fun getAllRaces(): LiveData<MutableList<Race>> = allRaces
 
-    internal fun getRace(id: Long): LiveData<Race> = raceDao.getRace(id)
+    internal fun getRaceLD(id: Long): LiveData<Race> = raceDao.getRaceLD(id)
+
+    internal fun getRace(id: Long): Race? {
+        var getRaceAsync = GetRaceAsync(id, raceDao)
+        val bp = ""
+        return null
+    }
 
     internal fun insert(race: Race) {
         try {
@@ -58,4 +63,22 @@ class RaceRepository(application: Application) {
         }
     }
 
+    private class GetRaceAsync(id: Long, raceDao: RaceDAO) : AsyncTask<Long, Void, Race>() {
+        var id: Long = -1
+        lateinit var raceDao: RaceDAO
+        init {
+            this.id = id
+            this.raceDao = raceDao
+        }
+
+        override fun doInBackground(vararg params: Long?): Race {
+            var race = this.raceDao.getRace(id)
+            return race
+        }
+
+        override fun onPostExecute(result: Race?) {
+            super.onPostExecute(result)
+            val bp = ""
+        }
+    }
 }
