@@ -119,11 +119,10 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         etRaceNum = rootView.findViewById(R.id.etRaceNum)
         etRaceSel = rootView.findViewById(R.id.etRaceSel)
         etRaceTime = rootView.findViewById(R.id.etRaceTime)
-
+        // view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
         raceId = arguments?.getLong(getString(R.string.key_edit_existing))
         raceViewModel.getRaceLD(raceId!!).observe(activity!!, RaceObserver(raceViewModel.getRaceLD(raceId!!), rootView))
-
     }
 
     /**
