@@ -18,6 +18,7 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
+import mcssoft.com.racereminderac.utility.RaceKeyboard
 
 class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
 
@@ -104,6 +105,8 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private fun initialise() {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
+        // keyboard.
+        raceKbd = RaceKeyboard(activity!!, null, R.id.id_kbdView, null)
         // Set the Save button and listener.
         btnSave = rootView.findViewById<Button>(R.id.id_btn_save)
         btnSave.setOnClickListener(this)
@@ -195,5 +198,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private var dialogType: String? = null
 
     private lateinit var raceCache: Race
+
+    private lateinit var raceKbd: RaceKeyboard
 
 }

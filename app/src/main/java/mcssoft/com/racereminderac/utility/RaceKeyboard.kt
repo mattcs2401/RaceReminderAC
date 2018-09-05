@@ -14,25 +14,30 @@ import android.widget.Toast
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IFinishKeyboard
 
-class RaceKeyboard(activity: Activity, rootView: View, viewId: Int, layoutId: Int) : KeyboardView.OnKeyboardActionListener,
+class RaceKeyboard(activity: Activity, rootView: View?, viewId: Int, layoutId: Int?) : KeyboardView.OnKeyboardActionListener,
         View.OnFocusChangeListener,
         View.OnClickListener,
         View.OnTouchListener {
 
     private var activity: Activity? = null
-    private var kbView: KeyboardView? = null
-    private var rootView: View? = null
+    private var kbView: KeyboardView? = null     // id of <android.inputmethodservice.KeyboardView>.
+    private var rootView: View? = null           // TBA
+    private var layoutId: Int? = 0               // e.g. R.xml.layout
     private var compId: Int = 0                  // id of the component that has the keyboard.
 
     init {
+        /* This still needs work, especially when swapping keyboard layouts. */
+        this.layoutId = layoutId
         this.activity = activity
         this.rootView = rootView
         compId = R.integer.race_default
 
-        kbView = activity.findViewById<View>(viewId) as KeyboardView
-        kbView!!.setKeyboard(Keyboard(activity, layoutId))
-        kbView!!.setPreviewEnabled(false)
-        kbView!!.setOnKeyboardActionListener(this)
+        kbView = activity.findViewById<KeyboardView>(viewId)
+        if(layoutId != null) {
+            kbView?.setKeyboard(Keyboard(activity, layoutId))
+        }
+        kbView?.setPreviewEnabled(false)
+        kbView?.setOnKeyboardActionListener(this)
     }
 
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
@@ -75,6 +80,11 @@ class RaceKeyboard(activity: Activity, rootView: View, viewId: Int, layoutId: In
                 else -> editable?.insert(start, Character.toString(keyCode.toChar()))
             }//hide();
         }
+    }
+
+    fun setLayoutId(layoutId: Int) {
+        this.layoutId = layoutId
+        kbView!!.setKeyboard(Keyboard(activity, layoutId))
     }
 
     fun show(view: View?) {

@@ -18,14 +18,10 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation" />
 
-    <!-- TBA, will co-exist with FAB. -->
+    <!-- TBA, a BottomNavigationView here will co-exist with the FAB. -->
     <!--<com.google.android.material.bottomnavigation.BottomNavigationView-->
-        <!--android:id="@+id/id_bottom_nav_view"-->
         <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|center"-->
-        <!--app:menu="@menu/menu_bottom_nav" >-->
-    <!--</com.google.android.material.bottomnavigation.BottomNavigationView>-->
+        <!--android:layout_height="wrap_content" />-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/id_fab"
