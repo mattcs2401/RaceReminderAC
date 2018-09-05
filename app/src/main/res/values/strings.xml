@@ -26,4 +26,8 @@
     <!-- Dialog. -->
     <string name="race_codes_title">Select a Race Code</string>
     <string name="city_codes_title">Select a City Code</string>
+
+    <!-- Meeting keyboard. -->
+    <string name="lbl_value_required">A value is required.</string>  <!-- Toast -->
+
 </resources>
