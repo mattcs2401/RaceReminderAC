@@ -19,20 +19,5 @@
         android:id="@+id/id_edit_fragment"
         android:name="mcssoft.com.racereminderac.ui.main.EditFragment"
         android:label="EditFragment"
-        tools:layout="@layout/edit_fragment">
-        <action
-            android:id="@+id/action_id_edit_fragment_to_dialogRaceCodes"
-            app:destination="@id/id_race_codes" />
-        <action
-            android:id="@+id/action_id_edit_fragment_to_dialogCityCodes"
-            app:destination="@id/id_city_codes" />
-    </fragment>
-    <fragment
-        android:id="@+id/id_race_codes"
-        android:name="mcssoft.com.racereminderac.ui.main.DialogRaceCodes"
-        android:label="DialogRaceCodes" />
-    <fragment
-        android:id="@+id/id_city_codes"
-        android:name="mcssoft.com.racereminderac.ui.main.DialogCityCodes"
-        android:label="DialogCityCodes" />
+        tools:layout="@layout/edit_fragment"></fragment>
 </navigation>

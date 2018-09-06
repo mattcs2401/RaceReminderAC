@@ -1,12 +1,9 @@
 package mcssoft.com.racereminderac.ui.main
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -20,7 +17,7 @@ import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.utility.RaceKeyboard
 
-class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
+class EditFragment : Fragment(), View.OnClickListener {
 
     companion object {
         //fun newInstance() = EditFragment()
@@ -35,18 +32,12 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        initialise()
+        initialiseUI()
 
         // Get the argumnets (if exist).
         if(arguments != null) {
-            editType = arguments!!.getString(getString(R.string.key_edit_type))
-            if(editType != null && arguments!!.size() == 2) {
-                setForEditType(editType!!)
-            } else {
-                dialogVal = arguments!!.getString("letter_key")
-                dialogType = arguments!!.getString("dialog_key")
-                setForDialogType(dialogVal!!, dialogType!!)
-            }
+            editType = arguments?.getString(getString(R.string.key_edit_type))
+            setForEditType(editType!!)
         }
     }
 
@@ -54,15 +45,15 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         when(view.id) {
             R.id.id_btn_save -> {
                 if(checkValues()) {
-//                    var race = collateValues()
+                    var race = collateValues()
                     when(editType) {
                         "edit_type_existing" -> {
-//                            raceViewModel.update(race)
-                            raceViewModel.update(raceCache)
+                            raceViewModel.update(race)
+//                            raceViewModel.update(raceCache)
                         }
                         "edit_type_new" -> {
-//                            raceViewModel.insert(race)
-                            raceViewModel.insert(raceCache)
+                            raceViewModel.insert(race)
+//                            raceViewModel.insert(raceCache)
                         }
                     }
                     Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
@@ -70,25 +61,6 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                 }
             }
         }
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
-        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-
-            when (view.id) {
-                R.id.etCityCode -> {
-                    Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
-                            .navigate(R.id.id_city_codes, arguments)
-                }
-                R.id.etRaceCode -> {
-                    Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
-                            .navigate(R.id.id_race_codes)
-                }
-            }
-            return true
-        }
-        return false
     }
 
     /**
@@ -102,7 +74,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     /**
      * Setup UI and view model.
      */
-    private fun initialise() {
+    private fun initialiseUI() {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
         // keyboard.
@@ -114,14 +86,19 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         toolBar = activity?.findViewById(R.id.id_toolbar) as Toolbar
         // Get the Race related views.
         etCityCode = rootView.findViewById(R.id.etCityCode)
-        etCityCode.setRawInputType(InputType.TYPE_NULL)
-        etCityCode.setOnTouchListener(this)
+        raceKbd.register(rootView, R.id.etCityCode)
+
         etRaceCode = rootView.findViewById(R.id.etRaceCode)
-        etRaceCode.setRawInputType(InputType.TYPE_NULL)
-        etRaceCode.setOnTouchListener(this)
+        raceKbd.register(rootView, R.id.etRaceCode)
+
         etRaceNum = rootView.findViewById(R.id.etRaceNum)
+        raceKbd.register(rootView,R.id.etRaceNum)
+
         etRaceSel = rootView.findViewById(R.id.etRaceSel)
+        raceKbd.register(rootView,R.id.etRaceSel)
+
         etRaceTime = rootView.findViewById(R.id.etRaceTime)
+        raceKbd.register(rootView,R.id.etRaceTime)
         // view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
         raceId = arguments?.getLong(getString(R.string.key_edit_existing))
@@ -158,28 +135,6 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         }
     }
 
-    /**
-     * Update UI and cache for CityCodes or RaceCodes UI elements.
-     */
-    private fun setForDialogType(dialogVal: String, dialogType: String) {
-        // TODO update cache.
-        var race = raceViewModel.getRaceLD(raceId!!).getValue()
-        when(dialogType) {
-            "city_codes" -> {
-                etCityCode.setText(dialogVal)
-                race?.cityCode = dialogVal
-            }
-            "race_codes" -> {
-                etRaceCode.setText(dialogVal)
-                race?.raceCode = dialogVal
-            }
-        }
-    }
-
-    private fun setCache() {
-        raceCache = collateValues()
-    }
-
     private lateinit var rootView: View
     private lateinit var toolBar: Toolbar
 
@@ -194,8 +149,6 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private lateinit var raceViewModel: RaceViewModel
 
     private var editType: String? = null
-    private var dialogVal: String? = null
-    private var dialogType: String? = null
 
     private lateinit var raceCache: Race
 

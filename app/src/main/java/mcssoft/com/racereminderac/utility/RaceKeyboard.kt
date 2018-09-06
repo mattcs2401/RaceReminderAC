@@ -40,6 +40,16 @@ class RaceKeyboard(activity: Activity, rootView: View?, viewId: Int, layoutId: I
         kbView?.setOnKeyboardActionListener(this)
     }
 
+    fun register(view: View, resid: Int) {
+        //        Log.d(LOG_TAG, "register");
+
+        val editText = view.findViewById<View>(resid) as EditText
+        editText.onFocusChangeListener = this
+        editText.setOnClickListener(this)
+        editText.setOnTouchListener(this)
+        editText.inputType = editText.inputType or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+    }
+
     override fun onFocusChange(view: View?, hasFocus: Boolean) {
         if (hasFocus) {
             show(view)
@@ -136,7 +146,6 @@ class RaceKeyboard(activity: Activity, rootView: View?, viewId: Int, layoutId: I
             }
         }
     }
-    //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
 
     private fun delete(start: Int) {
         if (editable != null && start > 0) {
