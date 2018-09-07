@@ -12,7 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import mcssoft.com.racereminderac.R
-import mcssoft.com.racereminderac.interfaces.IFinishKeyboard
+import mcssoft.com.racereminderac.interfaces.IKeyboard
 
 class RaceKeyboard(activity: Activity, rootView: View?, viewId: Int, layoutId: Int?) : KeyboardView.OnKeyboardActionListener,
         View.OnFocusChangeListener,
@@ -66,7 +66,10 @@ class RaceKeyboard(activity: Activity, rootView: View?, viewId: Int, layoutId: I
         val editText = view as EditText
         val inType = editText.inputType         // backup the input type
         editText.inputType = InputType.TYPE_NULL   // disable standard keyboard
-        editText.onTouchEvent(event)                 // call native handler
+
+        //editText.onTouchEvent(event)                 // call native handler
+        setKeyboard(view)
+
         editText.inputType = inType                // restore input type
         editText.setSelection(editText.length())     // set 'cursor' to end.
 
@@ -92,7 +95,7 @@ class RaceKeyboard(activity: Activity, rootView: View?, viewId: Int, layoutId: I
         }
     }
 
-    fun setLayoutId(layoutId: Int) {
+    fun setLayout(layoutId: Int) {
         this.layoutId = layoutId
         kbView!!.setKeyboard(Keyboard(activity, layoutId))
     }
@@ -166,8 +169,8 @@ class RaceKeyboard(activity: Activity, rootView: View?, viewId: Int, layoutId: I
         } else {
             // Edit is valid.
             highLight(false)
-            val ifk = activity as IFinishKeyboard
-            ifk.onFinishKeyboard(compId, keyCode)
+//            val ifk = activity as IKeyboard
+//            ifk.onFinishKeyboard(compId, keyCode)
             hide()
         }
     }
@@ -186,6 +189,15 @@ class RaceKeyboard(activity: Activity, rootView: View?, viewId: Int, layoutId: I
         }
 
         editText?.setPadding(left!!, top!!, right!!, bottom!!)
+    }
+
+    private fun setKeyboard(view: View) {
+        when(view.id) {
+            R.id.etRaceNum -> {
+                setLayout(R.xml.num_sel_keyboard)
+                show(view)
+            }
+        }
     }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
