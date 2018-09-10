@@ -18,6 +18,7 @@
     <!-- Keys. -->
     <string name="key_edit_type">edit_type</string>
     <string name="key_edit_existing">edit_existing</string>
+    <string name="key_view_id">view_id</string>
 
     <!-- Values. -->
     <string name="edit_type_new">edit_type_new</string>

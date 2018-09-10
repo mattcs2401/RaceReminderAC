@@ -14,12 +14,10 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.keyboard_fragment.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
-import mcssoft.com.racereminderac.utility.RaceKeyboard
 
 class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
 
@@ -70,11 +68,11 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     override fun onTouch(view: View, event: MotionEvent): Boolean {
         // set the argumnents
         var args = Bundle()
-        args.putInt("key", view.id)
+        args.putInt("key_view_id", view.id)
         // set the fragment transaction
         val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
         // set the dialog.
-        val kbdDialog: DialogFragment = KeyBoardFragment()
+        val kbdDialog: DialogFragment = KeyboardFragment()
         kbdDialog.arguments = args
         // show
         kbdDialog.show(fragTrans, "keyboard_dialog")

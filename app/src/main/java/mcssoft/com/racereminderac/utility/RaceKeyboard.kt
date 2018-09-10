@@ -14,72 +14,34 @@ import android.widget.Toast
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IKeyboard
 
-class RaceKeyboard(activity: Activity, rootView: View?, viewId: Int, layoutId: Int?) : KeyboardView.OnKeyboardActionListener,
-        View.OnFocusChangeListener,
-        View.OnClickListener,
-        View.OnTouchListener {
+class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layoutId: Int?) :
+        KeyboardView.OnKeyboardActionListener {
 
     private var activity: Activity? = null
-    private var kbView: KeyboardView? = null     // id of <android.inputmethodservice.KeyboardView>.
-    private var rootView: View? = null           // TBA
+    private var kbdView: KeyboardView? = null     // id of <android.inputmethodservice.KeyboardView>.
+    private var viewId: Int = 0                  // id of the component that has the keyboard.
     private var layoutId: Int? = 0               // e.g. R.xml.layout
-    private var compId: Int = 0                  // id of the component that has the keyboard.
+    private var keyBoard: Keyboard? = null
 
     init {
         /* This still needs work, especially when swapping keyboard layouts. */
-        this.layoutId = layoutId
         this.activity = activity
-        this.rootView = rootView
-        compId = R.integer.race_default
+        this.kbdView = kbdView
+        this.viewId = viewId
+        this.layoutId = layoutId
 
-        kbView = activity.findViewById<KeyboardView>(viewId)
-        if(layoutId != null) {
-            kbView?.setKeyboard(Keyboard(activity, layoutId))
-        }
-        kbView?.setPreviewEnabled(false)
-        kbView?.setOnKeyboardActionListener(this)
-    }
+        keyBoard = Keyboard(activity, layoutId!!)
+        kbdView?.keyboard = keyBoard
 
-    fun register(view: View, resid: Int) {
-        //        Log.d(LOG_TAG, "register");
+        kbdView?.setPreviewEnabled(false)
+        kbdView?.setOnKeyboardActionListener(this)
 
-        val editText = view.findViewById<View>(resid) as EditText
-        editText.onFocusChangeListener = this
-        editText.setOnClickListener(this)
-        editText.setOnTouchListener(this)
-        editText.inputType = editText.inputType or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
-    }
-
-    override fun onFocusChange(view: View?, hasFocus: Boolean) {
-        if (hasFocus) {
-            show(view)
-        } else {
-            hide()
-        }
-    }
-
-    override fun onClick(view: View?) {
-        show(view)
-    }
-
-    override fun onTouch(view: View?, event: MotionEvent?): Boolean {
-        val editText = view as EditText
-        val inType = editText.inputType         // backup the input type
-        editText.inputType = InputType.TYPE_NULL   // disable standard keyboard
-
-        //editText.onTouchEvent(event)                 // call native handler
-        setKeyboard(view)
-
-        editText.inputType = inType                // restore input type
-        editText.setSelection(editText.length())     // set 'cursor' to end.
-
-        return true
     }
 
     override fun onKey(keyCode: Int, keyCodes: IntArray?) {
         val view = activity?.getWindow()?.currentFocus
 
-        if (view == null || view.javaClass != EditText::class.java) {
+        if (view == null) { // view.javaClass != EditText::class.java) {
             return
         } else {
             editText = view as EditText
@@ -97,37 +59,34 @@ class RaceKeyboard(activity: Activity, rootView: View?, viewId: Int, layoutId: I
 
     fun setLayout(layoutId: Int) {
         this.layoutId = layoutId
-        kbView!!.setKeyboard(Keyboard(activity, layoutId))
+        kbdView!!.keyboard = Keyboard(activity, layoutId)
     }
 
     fun show(view: View?) {
         //        Log.d(LOG_TAG, "show");
+        kbdView?.setVisibility(View.VISIBLE)
+        kbdView?.setEnabled(true)
+//        onKeyboard(true)
 
-        onKeyboard(true)
-
-        kbView?.setVisibility(View.VISIBLE)
-        kbView?.setEnabled(true)
-
-        if (view != null) {
-            (activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
-                    .hideSoftInputFromWindow(view.windowToken, 0)
-            val viewId = view.id
-            val et = view.findViewById<View>(viewId) as EditText
-            etSavedVal = et.text.toString()
-
-            when (viewId) {
-                R.id.etRaceNum -> compId = R.id.etRaceNum
-                R.id.etRaceSel -> compId = R.id.etRaceSel
-            }
-        }
+//        if (view != null) {
+//        (activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
+//            .hideSoftInputFromWindow(view?.windowToken, 0)
+//            val viewId = view.id
+//            val et = view.findViewById<View>(viewId) as EditText
+//            etSavedVal = et.text.toString()
+//
+//            when (viewId) {
+//                R.id.etRaceNum -> compId = R.id.etRaceNum
+//                R.id.etRaceSel -> compId = R.id.etRaceSel
+//            }
+//        }
+        val bp = ""
     }
 
     fun hide() {
         //        Log.d(LOG_TAG, "hide");
-
-        kbView?.setVisibility(View.GONE)
-        kbView?.setEnabled(false)
-
+        kbdView?.setVisibility(View.GONE)
+        kbdView?.setEnabled(false)
         onKeyboard(false)
     }
 
@@ -192,22 +151,23 @@ class RaceKeyboard(activity: Activity, rootView: View?, viewId: Int, layoutId: I
     }
 
     private fun setKeyboard(view: View) {
-        when(view.id) {
-            R.id.etRaceNum -> {
-                setLayout(R.xml.num_sel_keyboard)
-                show(view)
-            }
-        }
+//        when(view.id) {
+//            R.id.etRaceNum -> {
+//                setLayout(R.xml.num_sel_keyboard)
+//                show(view)
+//            }
+//        }
     }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
     //    private View view;            // the view of the component.
+
     private var editable: Editable? = null    // component's editor.
     private var editText: EditText? = null    // the component that currently has the keyboard.
     private var buttons: Array<Button>? = null    //
     private var etSavedVal: String? = null    // value of the component when keyboard first displays.
 
-    private val LOG_TAG = this.javaClass.canonicalName
+//    private val LOG_TAG = this.javaClass.canonicalName
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Not used ATT (but need to include).">

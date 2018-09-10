@@ -12,7 +12,6 @@
         android:fitsSystemWindows="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:gravity="center|bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
