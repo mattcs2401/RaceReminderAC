@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IKeyboard
 
@@ -30,12 +31,25 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
         this.viewId = viewId
         this.layoutId = layoutId
 
-        keyBoard = Keyboard(activity, layoutId!!)
-        kbdView?.keyboard = keyBoard
+        if(layoutId == null) {
+            /* Secondary constructor doesn't have 'layoutId' as a parameter but still calls through
+             primary. */
+            keyBoard = Keyboard(activity, R.xml.dummy_keyboard)
+        } else {
+            keyBoard = Keyboard(activity, layoutId)
+        }
 
+        kbdView?.keyboard = keyBoard
         kbdView?.setPreviewEnabled(false)
         kbdView?.setOnKeyboardActionListener(this)
 
+    }
+
+    // secondary constructor.
+    constructor(activity: Activity, kbdView: KeyboardView?, viewId: Int?) : this(activity, kbdView, viewId!!, null) {
+        this.activity = activity
+        this.kbdView = kbdView
+        this.viewId = viewId
     }
 
     override fun onKey(keyCode: Int, keyCodes: IntArray?) {
@@ -57,6 +71,11 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
         }
     }
 
+    /**
+     * Set the layout associated with the keyboard.
+     * @param layoutId The id of the xml layout, e.g. R.xml.layout_name.
+     * @Note Must be called if secondary constructor is being used.
+     **/
     fun setLayout(layoutId: Int) {
         this.layoutId = layoutId
         kbdView!!.keyboard = Keyboard(activity, layoutId)
@@ -150,27 +169,15 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
         editText?.setPadding(left!!, top!!, right!!, bottom!!)
     }
 
-    private fun setKeyboard(view: View) {
-//        when(view.id) {
-//            R.id.etRaceNum -> {
-//                setLayout(R.xml.num_sel_keyboard)
-//                show(view)
-//            }
-//        }
-    }
-
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
-    //    private View view;            // the view of the component.
-
     private var editable: Editable? = null    // component's editor.
     private var editText: EditText? = null    // the component that currently has the keyboard.
     private var buttons: Array<Button>? = null    //
     private var etSavedVal: String? = null    // value of the component when keyboard first displays.
-
 //    private val LOG_TAG = this.javaClass.canonicalName
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Not used ATT (but need to include).">
+    //<editor-fold defaultstate="collapsed" desc="Region: OnKeyboardActionListener.">
     override fun onPress(primaryCode: Int) {}
 
     override fun onRelease(primaryCode: Int) {}

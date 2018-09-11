@@ -19,23 +19,20 @@ class KeyboardFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         kbdView = view.findViewById<KeyboardView>(R.id.id_kbdView)
-        args = arguments
+
         val viewId = arguments?.getInt("key_view_id")
+        raceKbd = RaceKeyboard(activity!!, kbdView, viewId)
+
         when(viewId) {
-            R.id.etRaceNum -> {
-                raceKbd = RaceKeyboard(activity!!, kbdView, viewId, R.xml.num_sel_keyboard)
-                raceKbd.show(activity?.findViewById(viewId))
-            }
-//            R.id.etRaceSel -> {
-//                kbdView.keyboard = Keyboard(activity, R.xml.num_sel_keyboard)
-//            }
+            R.id.etCityCode -> raceKbd.setLayout(R.xml.city_codes_keyboard)
+            R.id.etRaceCode -> raceKbd.setLayout(R.xml.race_codes_keyboard)
+            R.id.etRaceNum -> raceKbd.setLayout(R.xml.num_sel_keyboard)
+            R.id.etRaceSel -> raceKbd.setLayout(R.xml.num_sel_keyboard)
         }
 
-        val bp = ""
+        raceKbd.show(activity?.findViewById<EditText>(viewId!!))
     }
 
-    private lateinit var rootView: View
     private lateinit var kbdView: KeyboardView
-    private var args: Bundle? = null
     private lateinit var raceKbd: RaceKeyboard
 }
