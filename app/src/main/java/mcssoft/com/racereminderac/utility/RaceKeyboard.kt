@@ -23,6 +23,7 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
     private var viewId: Int = 0                  // id of the component that has the keyboard.
     private var layoutId: Int? = 0               // e.g. R.xml.layout
     private var keyBoard: Keyboard? = null
+    private var etSavedVal: String? = null    // value of the component when keyboard first displays.
 
     init {
         /* This still needs work, especially when swapping keyboard layouts. */
@@ -42,7 +43,8 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
         kbdView?.keyboard = keyBoard
         kbdView?.setPreviewEnabled(false)
         kbdView?.setOnKeyboardActionListener(this)
-
+        etSavedVal = (activity.findViewById<EditText>(viewId)).text.toString()
+//        val bp = ""
     }
 
     // secondary constructor.
@@ -53,22 +55,24 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
     }
 
     override fun onKey(keyCode: Int, keyCodes: IntArray?) {
-        val view = activity?.getWindow()?.currentFocus
-
-        if (view == null) { // view.javaClass != EditText::class.java) {
-            return
-        } else {
-            editText = view as EditText
-            editable = editText!!.getText()
-            val start = editText!!.getSelectionStart()
-
-            when (keyCode) {
-                R.integer.keycode_delete -> delete(start)
-                R.integer.keycode_cancel -> done(keyCode, this.etSavedVal!!)
-                R.integer.keycode_done -> done(keyCode, "")
-                else -> editable?.insert(start, Character.toString(keyCode.toChar()))
-            }//hide();
-        }
+//        val view = activity?.getWindow()?.currentFocus
+//        val view = activity?.findViewById<EditText>(viewId)
+//
+//        if (view != null) { // view.javaClass != EditText::class.java) {
+//            editable = view.text
+//            etSavedVal = editable.toString()
+//            val start = view.selectionStart
+//
+//            when (keyCode) {
+//                R.integer.keycode_delete -> delete(start)
+//                R.integer.keycode_cancel -> done(keyCode, this.etSavedVal!!)
+//                R.integer.keycode_done -> done(keyCode, "")
+//                else -> editable?.insert(start, Character.toString(keyCode.toChar()))
+//            }
+//            //hide();
+//        } else {
+//            return
+//        }
     }
 
     /**
@@ -85,20 +89,10 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
         //        Log.d(LOG_TAG, "show");
         kbdView?.setVisibility(View.VISIBLE)
         kbdView?.setEnabled(true)
-//        onKeyboard(true)
 
-//        if (view != null) {
-//        (activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
-//            .hideSoftInputFromWindow(view?.windowToken, 0)
-//            val viewId = view.id
-//            val et = view.findViewById<View>(viewId) as EditText
-//            etSavedVal = et.text.toString()
-//
-//            when (viewId) {
-//                R.id.etRaceNum -> compId = R.id.etRaceNum
-//                R.id.etRaceSel -> compId = R.id.etRaceSel
-//            }
-//        }
+        (activity?.findViewById<EditText>(viewId))?.requestFocus()
+
+        onKeyboard(true)
         val bp = ""
     }
 
@@ -135,21 +129,23 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
     }
 
     private fun done(keyCode: Int, etSavedVal: String) {
-        if (keyCode == R.integer.keycode_cancel) {
-            // If CANCL, restore previous "entry" value.
-            editText?.setText(etSavedVal)
-            highLight(false)
-            hide()
-        } else if (editable?.length == 0) {
-            // If DONE but no value, then show toast and highlight.
-            Toast.makeText(activity?.getApplicationContext(), R.string.lbl_value_required, Toast.LENGTH_SHORT).show()
-            highLight(true)
-        } else {
-            // Edit is valid.
-            highLight(false)
-//            val ifk = activity as IKeyboard
-//            ifk.onFinishKeyboard(compId, keyCode)
-            hide()
+        when(keyCode) {
+            cancel -> {
+                // If CANCL, restore previous "entry" value.
+                editText?.setText(etSavedVal)
+                highLight(false)
+                hide()
+            }
+            done -> {
+                if (editable?.length == 0) {
+                    Toast.makeText(activity?.getApplicationContext(), R.string.lbl_value_required, Toast.LENGTH_SHORT).show()
+                    highLight(true)
+                } else {
+                    // assume valid
+                    highLight(false)
+                    hide()
+                }
+            }
         }
     }
 
@@ -173,12 +169,23 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
     private var editable: Editable? = null    // component's editor.
     private var editText: EditText? = null    // the component that currently has the keyboard.
     private var buttons: Array<Button>? = null    //
-    private var etSavedVal: String? = null    // value of the component when keyboard first displays.
+
+    private val cancel: Int = -3
+    private val done: Int = -4
 //    private val LOG_TAG = this.javaClass.canonicalName
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: OnKeyboardActionListener.">
-    override fun onPress(primaryCode: Int) {}
+    override fun onPress(keyCode: Int) {
+        /* Note: this is called before onKey(). */
+        when (keyCode) {
+            // Note: using R.integer.xxx didn't seem to work here.
+            cancel -> done(keyCode, this.etSavedVal!!)
+            done -> done(keyCode, "")
+        }
+
+        val bp = ""
+    }
 
     override fun onRelease(primaryCode: Int) {}
 

@@ -75,6 +75,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         val kbdDialog: DialogFragment = KeyboardFragment()
         kbdDialog.arguments = args
         // show
+        fragTrans.addToBackStack(null)
         kbdDialog.show(fragTrans, "keyboard_dialog")
 
         return true

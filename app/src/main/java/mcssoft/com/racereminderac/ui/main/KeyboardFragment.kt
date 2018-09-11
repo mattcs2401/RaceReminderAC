@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import mcssoft.com.racereminderac.R
@@ -18,6 +19,9 @@ class KeyboardFragment : DialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // this doesn't seem to do much
+        //getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         kbdView = view.findViewById<KeyboardView>(R.id.id_kbdView)
 
         val viewId = arguments?.getInt("key_view_id")
