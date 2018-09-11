@@ -16,10 +16,11 @@ import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.interfaces.IKeyboard
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 
-class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
+class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener, IKeyboard {
 
     companion object {
         //fun newInstance() = EditFragment()
@@ -72,13 +73,18 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
         // set the fragment transaction
         val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
         // set the dialog.
-        val kbdDialog: DialogFragment = KeyboardFragment()
+        kbdDialog = KeyboardFragment()
         kbdDialog.arguments = args
         // show
         fragTrans.addToBackStack(null)
+//        kbdDialog.showsDialog = false
         kbdDialog.show(fragTrans, "keyboard_dialog")
 
         return true
+    }
+
+    override fun onFinishKeyboard() {
+        kbdDialog.dismiss()
     }
 
     /**
@@ -174,6 +180,7 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     private var editType: String? = null
 
     private lateinit var raceCache: Race
+    private lateinit var kbdDialog: KeyboardFragment
 
 //    private lateinit var raceKbd: RaceKeyboard
 

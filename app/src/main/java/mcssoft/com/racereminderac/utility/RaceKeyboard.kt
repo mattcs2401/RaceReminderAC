@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IKeyboard
@@ -101,6 +102,7 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
         kbdView?.setVisibility(View.GONE)
         kbdView?.setEnabled(false)
         onKeyboard(false)
+        //(activity?.getFragmentManager()?.findFragmentById(R.id.id_edit_fragment) as IKeyboard).onFinishKeyboard()
     }
 
     /**
