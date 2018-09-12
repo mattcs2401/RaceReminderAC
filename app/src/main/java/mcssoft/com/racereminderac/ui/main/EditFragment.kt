@@ -20,7 +20,7 @@ import mcssoft.com.racereminderac.interfaces.IKeyboard
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 
-class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener, IKeyboard {
+class EditFragment : Fragment(), View.OnClickListener { //}, View.OnTouchListener { //}, IKeyboard {
 
     companion object {
         //fun newInstance() = EditFragment()
@@ -66,26 +66,26 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener, IKe
         }
     }
 
-    override fun onTouch(view: View, event: MotionEvent): Boolean {
+//    override fun onTouch(view: View, event: MotionEvent): Boolean {
         // set the argumnents
-        var args = Bundle()
-        args.putInt("key_view_id", view.id)
-        // set the fragment transaction
-        val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
-        // set the dialog.
-        kbdDialog = KeyboardFragment()
-        kbdDialog.arguments = args
-        // show
-        fragTrans.addToBackStack(null)
-//        kbdDialog.showsDialog = false
-        kbdDialog.show(fragTrans, "keyboard_dialog")
+//        var args = Bundle()
+//        args.putInt("key_view_id", view.id)
+//        // set the fragment transaction
+//        val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+//        // set the dialog.
+//        kbdDialog = KeyboardFragment()
+//        kbdDialog.arguments = args
+//        // show
+//        fragTrans.addToBackStack(null)
+////        kbdDialog.showsDialog = false
+//        kbdDialog.show(fragTrans, "keyboard_dialog")
 
-        return true
-    }
+//        return true
+//    }
 
-    override fun onFinishKeyboard() {
-        kbdDialog.dismiss()
-    }
+//    override fun onFinishKeyboard() {
+//        kbdDialog.dismiss()
+//    }
 
     /**
      * Simple check that all values are entered.
@@ -101,33 +101,30 @@ class EditFragment : Fragment(), View.OnClickListener, View.OnTouchListener, IKe
     private fun initialiseUI() {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
-        // keyboard.
-//        raceKbd = RaceKeyboard(activity!!, null, R.id.id_kbdView, null)
+
         // Set the Save button and listener.
         btnSave = rootView.findViewById<Button>(R.id.id_btn_save)
         btnSave.setOnClickListener(this)
+
         // Get the toolbar.
         toolBar = activity?.findViewById(R.id.id_toolbar) as Toolbar
+
         // Get the Race related views.
         etCityCode = rootView.findViewById(R.id.etCityCode)
-        etCityCode.setOnTouchListener(this)
-//        raceKbd.register(rootView, R.id.etCityCode)
+//        etCityCode.setOnTouchListener(this)
 
         etRaceCode = rootView.findViewById(R.id.etRaceCode)
-        etRaceCode.setOnTouchListener(this)
-//        raceKbd.register(rootView, R.id.etRaceCode)
+//        etRaceCode.setOnTouchListener(this)
 
         etRaceNum = rootView.findViewById(R.id.etRaceNum)
-        etRaceNum.setOnTouchListener(this)
-//        raceKbd.register(rootView,R.id.etRaceNum)
+//        etRaceNum.setOnTouchListener(this)
 
         etRaceSel = rootView.findViewById(R.id.etRaceSel)
-        etRaceSel.setOnTouchListener(this)
-//        raceKbd.register(rootView,R.id.etRaceSel)
+//        etRaceSel.setOnTouchListener(this)
 
         etRaceTime = rootView.findViewById(R.id.etRaceTime)
-        etRaceTime.setOnTouchListener(this)
-//        raceKbd.register(rootView,R.id.etRaceTime)
+//        etRaceTime.setOnTouchListener(this)
+
         // view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
         raceId = arguments?.getLong(getString(R.string.key_edit_existing))

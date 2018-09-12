@@ -11,12 +11,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IKeyboard
 
-class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layoutId: Int?) :
+class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, df: DialogFragment, layoutId: Int?) :
         KeyboardView.OnKeyboardActionListener {
 
     private var activity: Activity? = null
@@ -25,6 +26,7 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
     private var layoutId: Int? = 0               // e.g. R.xml.layout
     private var keyBoard: Keyboard? = null
     private var etSavedVal: String? = null    // value of the component when keyboard first displays.
+    private var df: DialogFragment? = null
 
     init {
         /* This still needs work, especially when swapping keyboard layouts. */
@@ -32,6 +34,7 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
         this.kbdView = kbdView
         this.viewId = viewId
         this.layoutId = layoutId
+        this.df = df
 
         if(layoutId == null) {
             /* Secondary constructor doesn't have 'layoutId' as a parameter but still calls through
@@ -49,31 +52,11 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
     }
 
     // secondary constructor.
-    constructor(activity: Activity, kbdView: KeyboardView?, viewId: Int?) : this(activity, kbdView, viewId!!, null) {
+    constructor(activity: Activity, kbdView: KeyboardView?, viewId: Int?, df: DialogFragment) : this(activity, kbdView, viewId!!, df, null) {
         this.activity = activity
         this.kbdView = kbdView
         this.viewId = viewId
-    }
-
-    override fun onKey(keyCode: Int, keyCodes: IntArray?) {
-//        val view = activity?.getWindow()?.currentFocus
-//        val view = activity?.findViewById<EditText>(viewId)
-//
-//        if (view != null) { // view.javaClass != EditText::class.java) {
-//            editable = view.text
-//            etSavedVal = editable.toString()
-//            val start = view.selectionStart
-//
-//            when (keyCode) {
-//                R.integer.keycode_delete -> delete(start)
-//                R.integer.keycode_cancel -> done(keyCode, this.etSavedVal!!)
-//                R.integer.keycode_done -> done(keyCode, "")
-//                else -> editable?.insert(start, Character.toString(keyCode.toChar()))
-//            }
-//            //hide();
-//        } else {
-//            return
-//        }
+        this.df = df
     }
 
     /**
@@ -187,6 +170,13 @@ class RaceKeyboard(activity: Activity, kbdView: KeyboardView?, viewId: Int, layo
         }
 
         val bp = ""
+    }
+
+    override fun onKey(keyCode: Int, keyCodes: IntArray?) {
+
+        val bp = ""
+        (df as IKeyboard).onFinishKeyboard()
+
     }
 
     override fun onRelease(primaryCode: Int) {}
