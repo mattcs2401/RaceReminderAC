@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        kotlinVer = '1.2.61'
+        kotlinVer = '1.2.70'
         navVer = '1.0.0-alpha05'
         roomVer = "1.1.1"
         workVer = "1.0.0-alpha08"

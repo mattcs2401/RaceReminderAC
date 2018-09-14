@@ -16,11 +16,10 @@ import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
-import mcssoft.com.racereminderac.interfaces.IKeyboard
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 
-class EditFragment : Fragment(), View.OnClickListener { //}, View.OnTouchListener { //}, IKeyboard {
+class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener { //}, IKeyboard {
 
     companion object {
         //fun newInstance() = EditFragment()
@@ -66,22 +65,27 @@ class EditFragment : Fragment(), View.OnClickListener { //}, View.OnTouchListene
         }
     }
 
-//    override fun onTouch(view: View, event: MotionEvent): Boolean {
-        // set the argumnents
-//        var args = Bundle()
-//        args.putInt("key_view_id", view.id)
-//        // set the fragment transaction
-//        val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
-//        // set the dialog.
-//        kbdDialog = KeyboardFragment()
-//        kbdDialog.arguments = args
-//        // show
-//        fragTrans.addToBackStack(null)
-////        kbdDialog.showsDialog = false
-//        kbdDialog.show(fragTrans, "keyboard_dialog")
-
-//        return true
-//    }
+    override fun onTouch(view: View, event: MotionEvent): Boolean {
+        if(event.action == MotionEvent.ACTION_DOWN) {
+            // set the fragment transaction
+            val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+            fragTrans.addToBackStack(null)
+            // set the dialog and show.
+            val id = view.id
+            when(view.id) {
+                R.id.etRaceCode -> {
+                    raceCodesDilaog = RaceCodesDialog()
+                    raceCodesDilaog.show(fragTrans, "race_codes_dialog")
+                }
+                R.id.etCityCode -> {
+                    cityCodesDialog = CityCodesDialog()
+                    cityCodesDialog.show(fragTrans, "city_codes_dialog")
+                }
+            }
+            return true
+        }
+        return false
+    }
 
 //    override fun onFinishKeyboard() {
 //        kbdDialog.dismiss()
@@ -111,10 +115,10 @@ class EditFragment : Fragment(), View.OnClickListener { //}, View.OnTouchListene
 
         // Get the Race related views.
         etCityCode = rootView.findViewById(R.id.etCityCode)
-//        etCityCode.setOnTouchListener(this)
+        etCityCode.setOnTouchListener(this)
 
         etRaceCode = rootView.findViewById(R.id.etRaceCode)
-//        etRaceCode.setOnTouchListener(this)
+        etRaceCode.setOnTouchListener(this)
 
         etRaceNum = rootView.findViewById(R.id.etRaceNum)
 //        etRaceNum.setOnTouchListener(this)
@@ -177,8 +181,9 @@ class EditFragment : Fragment(), View.OnClickListener { //}, View.OnTouchListene
     private var editType: String? = null
 
     private lateinit var raceCache: Race
-    private lateinit var kbdDialog: KeyboardFragment
 
+    private lateinit var cityCodesDialog: DialogFragment
+    private lateinit var raceCodesDilaog: DialogFragment
 //    private lateinit var raceKbd: RaceKeyboard
 
 }
