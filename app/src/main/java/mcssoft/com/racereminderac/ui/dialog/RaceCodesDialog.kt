@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.ui.main
+package mcssoft.com.racereminderac.ui.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog

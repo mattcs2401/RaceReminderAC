@@ -18,6 +18,8 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
+import mcssoft.com.racereminderac.ui.dialog.CityCodesDialog
+import mcssoft.com.racereminderac.ui.dialog.RaceCodesDialog
 
 class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener { //}, IKeyboard {
 
