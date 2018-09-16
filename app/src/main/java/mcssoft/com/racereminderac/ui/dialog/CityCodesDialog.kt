@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.ui.main
+package mcssoft.com.racereminderac.ui.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import android.content.DialogInterface
 import android.view.View
-import android.widget.Button
 import mcssoft.com.racereminderac.R
 
 
