@@ -10,7 +10,6 @@ import android.widget.Button
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.ICodes
 
-
 class CityCodesDialog : DialogFragment(), View.OnClickListener,  DialogInterface.OnClickListener {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -36,7 +35,7 @@ class CityCodesDialog : DialogFragment(), View.OnClickListener,  DialogInterface
         when(which) {
             OK -> {
                 if(viewVal != null) {
-                    (activity as ICodes).onFinishCityCodes(viewVal!!)
+                    (activity as ICodes.ICityCodes).onFinishCityCodes(viewVal!!)
                     this.dialog.cancel()
                 } else {
                     // TBA
