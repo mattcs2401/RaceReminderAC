@@ -22,32 +22,24 @@ class CityCodesDialog : DialogFragment(), View.OnClickListener,  DialogInterface
     }
 
     override fun onClick(view: View) {
-        viewVal = (view as Button).text.toString()
-//        when(view.id) {
-//            R.id.id_rc_btn_R -> { viewVal = (view as Button).text.toString() }
-//            R.id.id_rc_btn_T -> {}
-//            R.id.id_rc_btn_G -> {}
-//            R.id.id_rc_btn_S -> {}
-//        }
+        cityCode = (view as Button).text.toString()
     }
 
     override fun onClick(dialog: DialogInterface?, which: Int) {
         when(which) {
             OK -> {
-                if(viewVal != null) {
-                    (activity as ICodes.ICityCodes).onFinishCityCodes(viewVal!!)
+                if(!cityCode.isEmpty()) {
+                    (activity as ICodes.ICityCodes).onFinishCityCodes(cityCode)
                     this.dialog.cancel()
                 } else {
                     // TBA
                 }
-
             }
             CANCEL -> { this.dialog.cancel() }
         }
-        val bp = ""
     }
 
-    private var viewVal: String? = null
     private val OK: Int = -1
     private val CANCEL: Int = -2
+    private var cityCode: String = ""
 }

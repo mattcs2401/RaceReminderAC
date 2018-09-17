@@ -8,6 +8,7 @@ import android.content.DialogInterface
 import android.view.View
 import android.widget.Button
 import mcssoft.com.racereminderac.R
+import mcssoft.com.racereminderac.interfaces.ICodes
 
 
 class RaceCodesDialog : DialogFragment(), View.OnClickListener,  DialogInterface.OnClickListener {
@@ -22,23 +23,22 @@ class RaceCodesDialog : DialogFragment(), View.OnClickListener,  DialogInterface
     }
 
     override fun onClick(view: View) {
-        when(view.id) {
-            R.id.id_rc_btn_R -> { viewVal = (view as Button).text.toString() }
-            R.id.id_rc_btn_T -> {}
-            R.id.id_rc_btn_G -> {}
-            R.id.id_rc_btn_S -> {}
-        }
+        raceCode = (view as Button).text.toString()
     }
 
     override fun onClick(dialog: DialogInterface?, which: Int) {
         when(which) {
-            OK -> { /* OK button */}
+            OK -> {
+                if(!raceCode.isEmpty()) {
+                    (activity as ICodes.IRaceCodes).onFinishRaceCodes(raceCode)
+                    this.dialog.cancel()
+                }
+            }
             CANCEL -> { this.dialog.cancel() }
         }
-        val bp = ""
     }
 
-    private lateinit var viewVal: String
     private val OK: Int = -1
     private val CANCEL: Int = -2
+    private var raceCode: String = ""
 }
