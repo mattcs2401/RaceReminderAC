@@ -8,10 +8,11 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import mcssoft.com.racereminderac.entity.Race
-import mcssoft.com.racereminderac.interfaces.IRaceSelect
+import mcssoft.com.racereminderac.interfaces.ICodes
+import mcssoft.com.racereminderac.interfaces.IRace
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, IRaceSelect {
+class MainActivity : AppCompatActivity(), View.OnClickListener,
+        IRace.IRaceSelect, ICodes.ICityCodes, ICodes.IRaceCodes {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRaceSelect {
         }
     }
 
-    // From interface IRaceSelect.
+    // From interface IRace.
     override fun onRaceSelect(id: Long ) { //race: Race) {
         bundle = Bundle()
         bundle.putString(getString(R.string.key_edit_type), getString(R.string.edit_type_existing))
@@ -44,6 +45,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRaceSelect {
 //            NavigationUI.setupWithNavController(bottomNavView, navController)
 //        }
 //    }
+
+    override fun onFinishCityCodes(code: String) {
+
+        val bp = ""
+    }
+
+    override fun onFinishRaceCodes(code: String) {
+
+        val bp = ""
+    }
 
     private fun initialise() {
         // Toolbar.

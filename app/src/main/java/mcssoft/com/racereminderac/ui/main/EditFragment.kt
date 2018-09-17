@@ -2,11 +2,8 @@ package mcssoft.com.racereminderac.ui.main
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
@@ -21,7 +18,7 @@ import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.ui.dialog.CityCodesDialog
 import mcssoft.com.racereminderac.ui.dialog.RaceCodesDialog
 
-class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener { //}, IKeyboard {
+class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
     companion object {
         //fun newInstance() = EditFragment()
@@ -83,15 +80,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener { /
                     cityCodesDialog = CityCodesDialog()
                     cityCodesDialog.show(fragTrans, "city_codes_dialog")
                 }
+                R.id.etRaceNum -> { return false }
             }
             return true
         }
         return false
     }
-
-//    override fun onFinishKeyboard() {
-//        kbdDialog.dismiss()
-//    }
 
     /**
      * Simple check that all values are entered.
@@ -118,18 +112,23 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener { /
         // Get the Race related views.
         etCityCode = rootView.findViewById(R.id.etCityCode)
         etCityCode.setOnTouchListener(this)
+        etCityCode.showSoftInputOnFocus = false  // use dialog.
 
         etRaceCode = rootView.findViewById(R.id.etRaceCode)
         etRaceCode.setOnTouchListener(this)
+        etCityCode.showSoftInputOnFocus = false  // use dialog.
 
         etRaceNum = rootView.findViewById(R.id.etRaceNum)
-//        etRaceNum.setOnTouchListener(this)
+        etRaceNum.setOnTouchListener(this)
+//        etCityCode.showSoftInputOnFocus = false
 
         etRaceSel = rootView.findViewById(R.id.etRaceSel)
-//        etRaceSel.setOnTouchListener(this)
+        etRaceSel.setOnTouchListener(this)
+//        etCityCode.showSoftInputOnFocus = false
 
         etRaceTime = rootView.findViewById(R.id.etRaceTime)
-//        etRaceTime.setOnTouchListener(this)
+        etRaceTime.setOnTouchListener(this)
+//        etCityCode.showSoftInputOnFocus = false
 
         // view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
