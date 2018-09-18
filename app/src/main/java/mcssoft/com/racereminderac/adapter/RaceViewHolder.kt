@@ -12,7 +12,7 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
         if(message != "") (view.findViewById<View>(R.id.id_tv_empty) as TextView).text = message
     }
 
-    constructor(view: View, message: String, icListener: IClick.ItemClick) : this(view, message) {
+    constructor(view: View, message: String, icListener: IClick.ItemSelect) : this(view, message) {
         this.icListener = icListener
         view.setOnClickListener(this)
 
@@ -26,11 +26,11 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
 
     override fun onClick(view : View) {
         // We don't care about the view, it's just a means to hook into the onclick functionality.
-        icListener.onItemClick(adapterPosition)
+        icListener.onItemSelect(adapterPosition)
 
     }
 
-    private lateinit var icListener: IClick.ItemClick
+    private lateinit var icListener: IClick.ItemSelect
 
     lateinit var tvCityCode: TextView
     lateinit var tvRaceCode: TextView

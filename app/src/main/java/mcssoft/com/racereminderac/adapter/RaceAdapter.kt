@@ -65,7 +65,7 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
         } else MEETING_VIEW
     }
 
-    fun setClickListener(icListener : IClick.ItemClick) {
+    fun setClickListener(icListener : IClick.ItemSelect) {
         this.icListener = icListener
     }
 
@@ -89,7 +89,7 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
     private var viewType : Int = 0
     private var isEmptyView : Boolean = false
 
-    private lateinit var icListener : IClick.ItemClick
+    private lateinit var icListener : IClick.ItemSelect
     private lateinit var raceViewHolder : RaceViewHolder
 
     private val EMPTY_VIEW = 0

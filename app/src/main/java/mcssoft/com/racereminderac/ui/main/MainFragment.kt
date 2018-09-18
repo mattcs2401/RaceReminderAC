@@ -19,7 +19,7 @@ import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.model.RaceViewModel
 
 
-class MainFragment : Fragment(), IClick.ItemClick {
+class MainFragment : Fragment(), IClick.ItemSelect {
 
     companion object {
         //fun newInstance() = MainFragment()
@@ -61,10 +61,9 @@ class MainFragment : Fragment(), IClick.ItemClick {
 
     }
 
-    override fun onItemClick(lPos: Int) {
+    override fun onItemSelect(lPos: Int) {
         // callback to the Activity with the selected Race object
-        val race = raceAdapter.getRace(lPos)
-        (activity as IRace).onRaceSelect(race.id!!) //raceAdapter.getRace(lPos))
+        (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
 //        Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
     }
