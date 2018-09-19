@@ -15,7 +15,7 @@ class RaceCodesDialog : DialogFragment(), View.OnClickListener,  DialogInterface
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
-        builder.setTitle("Race Codes")
+        builder.setTitle("Race Codes") // <-- this can be a custom view if req.
                 .setView(R.layout.race_codes)
                 .setPositiveButton("OK", this)
                 .setNegativeButton("Cancel", this)
