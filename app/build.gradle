@@ -41,4 +41,6 @@ dependencies {
 
     implementation "android.arch.work:work-runtime-ktx:$workVer"
 
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
 }

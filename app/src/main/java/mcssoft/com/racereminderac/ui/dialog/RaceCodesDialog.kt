@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.Button
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.ICodes
+import mcssoft.com.racereminderac.utility.MessageEvent
+import org.greenrobot.eventbus.EventBus
 
 
 class RaceCodesDialog : DialogFragment(), View.OnClickListener,  DialogInterface.OnClickListener {
@@ -30,7 +32,8 @@ class RaceCodesDialog : DialogFragment(), View.OnClickListener,  DialogInterface
         when(which) {
             OK -> {
                 if(!raceCode.isEmpty()) {
-                    (activity as ICodes.IRaceCodes).onFinishRaceCodes(raceCode)
+                    //(activity as ICodes.IRaceCodes).onFinishRaceCodes(raceCode)
+                    EventBus.getDefault().post(MessageEvent(raceCode))
                     this.dialog.cancel()
                 }
             }

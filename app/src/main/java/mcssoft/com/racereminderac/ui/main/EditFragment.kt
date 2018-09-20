@@ -17,6 +17,12 @@ import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.ui.dialog.CityCodesDialog
 import mcssoft.com.racereminderac.ui.dialog.RaceCodesDialog
+import org.greenrobot.eventbus.EventBus
+import mcssoft.com.racereminderac.utility.MessageEvent
+import org.greenrobot.eventbus.ThreadMode
+import org.greenrobot.eventbus.Subscribe
+
+
 
 class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
@@ -40,6 +46,25 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             editType = arguments?.getString(getString(R.string.key_edit_type))
             setForEditType(editType!!)
         }
+    }
+
+//    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
+//        super.onCreateContextMenu(menu, v, menuInfo)
+//    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    fun onMessageEvent(event: MessageEvent) {
+        /* Do something */
     }
 
     override fun onClick(view: View) {
