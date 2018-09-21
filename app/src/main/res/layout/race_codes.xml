@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/id_race_codes"
@@ -8,36 +7,87 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center">
 
+    <TextView
+        android:id="@+id/id_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Race Codes"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="32dp" />
+
     <Button
         android:id="@+id/id_rc_btn_R"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:text="R"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/id_top_guideline" />
 
     <Button
         android:id="@+id/id_rc_btn_T"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="T"
-        app:layout_constraintStart_toEndOf="@+id/id_rc_btn_R" />
+        app:layout_constraintStart_toEndOf="@+id/id_rc_btn_R"
+        app:layout_constraintTop_toTopOf="@+id/id_top_guideline" />
 
     <Button
         android:id="@+id/id_rc_btn_G"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="G"
-        app:layout_constraintStart_toEndOf="@+id/id_rc_btn_T" />
+        app:layout_constraintStart_toEndOf="@+id/id_rc_btn_T"
+        app:layout_constraintTop_toTopOf="@+id/id_top_guideline" />
 
     <Button
         android:id="@+id/id_rc_btn_S"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="S"
-        app:layout_constraintStart_toEndOf="@+id/id_rc_btn_G" />
+        app:layout_constraintStart_toEndOf="@+id/id_rc_btn_G"
+        app:layout_constraintTop_toTopOf="@+id/id_top_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id-bottom_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="96dp" />
+
+    <Button
+        android:id="@+id/id_rc_btn_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="OK"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/id_rc_btn_cancel"
+        app:layout_constraintTop_toTopOf="@+id/id-bottom_guideline" />
+
+    <Button
+        android:id="@+id/id_rc_btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/id-bottom_guideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

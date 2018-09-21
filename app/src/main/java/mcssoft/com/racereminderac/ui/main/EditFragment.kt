@@ -2,6 +2,7 @@ package mcssoft.com.racereminderac.ui.main
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.preference.DialogPreference
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Button
@@ -64,6 +65,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(event: MessageEvent) {
+        var me = event.getMessage()
         /* Do something */
     }
 
