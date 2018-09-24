@@ -16,7 +16,6 @@ class RaceCodesDialog : DialogFragment(), View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.race_codes, container, false)
-//        return inflater.inflate(R.layout.race_codes2, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
