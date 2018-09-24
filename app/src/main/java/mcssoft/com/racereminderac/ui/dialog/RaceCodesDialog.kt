@@ -35,7 +35,7 @@ class RaceCodesDialog : DialogFragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when(view.id) {
             R.id.id_rc_btn_ok -> {
-                EventBus.getDefault().post(MessageEvent(raceCode))
+                EventBus.getDefault().post(MessageEvent(raceCode, R.integer.race_codes_dialog_id))
                 this.dialog.cancel()
             }
             R.id.id_rc_btn_cancel -> {

@@ -65,8 +65,14 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(event: MessageEvent) {
-        var me = event.getMessage()
-        /* Do something */
+        when(event.getDialogIdent()) {
+            R.integer.race_codes_dialog_id -> {
+
+            }
+            R.integer.city_codes_dialog_id -> {
+
+            }
+        }
     }
 
     override fun onClick(view: View) {
