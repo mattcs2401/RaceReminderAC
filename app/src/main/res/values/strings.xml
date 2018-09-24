@@ -25,7 +25,13 @@
     <string name="edit_type_existing">edit_type_existing</string>
 
     <!-- Dialog. -->
-    <string name="race_codes_title">Select a Race Code</string>
+    <!-- Race Codes-->
+    <string name="rc_title">Select a Race Code</string>
+    <string name="rc_R">R</string>
+    <string name="rc_T">T</string>
+    <string name="rc_G">G</string>
+    <string name="rc_S">O</string>
+    <!-- City Codes -->
     <string name="city_codes_title">Select a City Code</string>
 
     <!-- Meeting keyboard. -->
