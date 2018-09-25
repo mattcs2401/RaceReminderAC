@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import mcssoft.com.racereminderac.R
-import mcssoft.com.racereminderac.utility.MessageEvent
+import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.EventBus
 
 
@@ -35,7 +35,7 @@ class RaceCodesDialog : DialogFragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when(view.id) {
             R.id.id_rc_btn_ok -> {
-                EventBus.getDefault().post(MessageEvent(raceCode, R.integer.race_codes_dialog_id))
+                EventBus.getDefault().post(EventMessage(raceCode, R.integer.race_codes_dialog_id))
                 this.dialog.cancel()
             }
             R.id.id_rc_btn_cancel -> {

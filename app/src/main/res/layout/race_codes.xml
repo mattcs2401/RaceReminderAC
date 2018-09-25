@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/id_top_guideline"
+        android:id="@+id/id_rc_top_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -38,7 +38,7 @@
         android:background="@drawable/btn_selector"
         android:text="@string/rc_R"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/id_top_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/id_rc_top_guideline" />
         <!--android:background="@drawable/btn_round"/>-->
 
     <Button
@@ -49,7 +49,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/rc_T"
         app:layout_constraintStart_toEndOf="@+id/id_rc_btn_R"
-        app:layout_constraintTop_toTopOf="@+id/id_top_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/id_rc_top_guideline" />
 
     <Button
         android:id="@+id/id_rc_btn_G"
@@ -59,7 +59,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/rc_G"
         app:layout_constraintStart_toEndOf="@+id/id_rc_btn_T"
-        app:layout_constraintTop_toTopOf="@+id/id_top_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/id_rc_top_guideline" />
 
     <Button
         android:id="@+id/id_rc_btn_S"
@@ -69,10 +69,10 @@
         android:layout_marginTop="16dp"
         android:text="@string/rc_S"
         app:layout_constraintStart_toEndOf="@+id/id_rc_btn_G"
-        app:layout_constraintTop_toTopOf="@+id/id_top_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/id_rc_top_guideline" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/id-bottom_guideline"
+        android:id="@+id/id_rc_bottom_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -90,7 +90,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/id_rc_btn_cancel"
-        app:layout_constraintTop_toTopOf="@+id/id-bottom_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/id_rc_bottom_guideline" />
 
     <Button
         android:id="@+id/id_rc_btn_cancel"
@@ -102,6 +102,6 @@
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/id-bottom_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/id_rc_bottom_guideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
