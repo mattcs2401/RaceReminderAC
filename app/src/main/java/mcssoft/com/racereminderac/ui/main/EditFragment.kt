@@ -2,7 +2,6 @@ package mcssoft.com.racereminderac.ui.main
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.preference.DialogPreference
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Button
@@ -19,7 +18,7 @@ import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.ui.dialog.CityCodesDialog
 import mcssoft.com.racereminderac.ui.dialog.RaceCodesDialog
 import org.greenrobot.eventbus.EventBus
-import mcssoft.com.racereminderac.utility.MessageEvent
+import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.ThreadMode
 import org.greenrobot.eventbus.Subscribe
 
@@ -64,12 +63,15 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(event: MessageEvent) {
-        when(event.getDialogIdent()) {
+    fun onMessageEvent(event: EventMessage) {
+        var bp = event.message
+        when(event.ident) {
             R.integer.race_codes_dialog_id -> {
+                var bp = ""
 
             }
             R.integer.city_codes_dialog_id -> {
+                var bp = ""
 
             }
         }
