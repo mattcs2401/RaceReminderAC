@@ -22,8 +22,6 @@ import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.ThreadMode
 import org.greenrobot.eventbus.Subscribe
 
-
-
 class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
 //    companion object { }
@@ -43,7 +41,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         super.onActivityCreated(savedInstanceState)
         // Get the argumnets (if exist).
         if(arguments != null) {
-            editType = arguments?.getString(getString(R.string.key_edit_type))
+            editType = arguments?.getInt(getString(R.string.key_edit_type))
             setForEditType(editType!!)
         }
     }
@@ -85,10 +83,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                 if(checkValues()) {
                     var race = collateValues()
                     when(editType) {
-                        "edit_type_existing" -> {
+                        resources.getInteger(R.integer.edit_race_existing) -> {
                             raceViewModel.update(race)
                         }
-                        "edit_type_new" -> {
+                        resources.getInteger(R.integer.edit_race_new) -> {
                             raceViewModel.insert(race)
                         }
                     }
@@ -180,15 +178,15 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     /**
      * Update UI elements depending on whether editing an existing Race, or it's a new Race.
      */
-    private fun setForEditType(editType: String) {
+    private fun setForEditType(editType: Int) {
         when(editType) {
-            "edit_type_existing" -> {
-                toolBar.title = "Edit Race"
-                btnSave.text = "Update"
+            resources.getInteger(R.integer.edit_race_existing) -> {
+                toolBar.title = getString(R.string.edit_race)
+                btnSave.text = getString(R.string.update)
             }
-            "edit_type_new" -> {
-                toolBar.title = "New Race"
-                btnSave.text = "Save"
+            resources.getInteger(R.integer.edit_race_new) -> {
+                toolBar.title = getString(R.string.new_race)
+                btnSave.text = getString(R.string.save)
             }
         }
     }
@@ -213,7 +211,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
     private lateinit var raceViewModel: RaceViewModel
 
-    private var editType: String? = null
+    private var editType: Int? = null
 
     private lateinit var cityCodesDialog: DialogFragment
     private lateinit var raceCodesDilaog: DialogFragment

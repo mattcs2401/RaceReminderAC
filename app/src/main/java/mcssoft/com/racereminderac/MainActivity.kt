@@ -8,11 +8,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import mcssoft.com.racereminderac.interfaces.ICodes
 import mcssoft.com.racereminderac.interfaces.IRace
 
-class MainActivity : AppCompatActivity(), View.OnClickListener,
-        IRace.IRaceSelect, ICodes.ICityCodes, ICodes.IRaceCodes {
+class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelect {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +23,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         when(view.id) {
             R.id.id_fab -> {
                 bundle = Bundle()
-                bundle.putString(getString(R.string.key_edit_type), getString(R.string.edit_type_new))
+                bundle.putInt(getString(R.string.key_edit_type), R.integer.edit_race_new)
                 navController.navigate(R.id.id_edit_fragment, bundle)
             }
         }
@@ -34,8 +32,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     // From interface IRace.
     override fun onRaceSelect(id: Long ) { //race: Race) {
         bundle = Bundle()
-        bundle.putString(getString(R.string.key_edit_type), getString(R.string.edit_type_existing))
-//        bundle.putParcelable(getString(R.string.key_edit_existing), race)
+        bundle.putInt(getString(R.string.key_edit_type), R.integer.edit_race_existing)
         bundle.putLong(getString(R.string.key_edit_existing), id)
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
@@ -45,14 +42,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 //            NavigationUI.setupWithNavController(bottomNavView, navController)
 //        }
 //    }
-
-    override fun onFinishCityCodes(code: String) {
-        val bp = ""
-    }
-
-    override fun onFinishRaceCodes(code: String) {
-        val bp = ""
-    }
 
     private fun initialise() {
         // Toolbar.

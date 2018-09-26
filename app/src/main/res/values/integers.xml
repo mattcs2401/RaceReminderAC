@@ -3,9 +3,6 @@
     <integer name="city_codes_dialog_id">0</integer>
     <integer name="race_codes_dialog_id">1</integer>
 
-    <integer name="race_default">-1</integer>
-    <integer name="keycode_cancel">-3</integer>
-    <integer name="keycode_done">-4</integer>
-    <integer name="keycode_delete">-5</integer>
-
+    <integer name="edit_race_new">0</integer>
+    <integer name="edit_race_existing">1</integer>
 </resources>
