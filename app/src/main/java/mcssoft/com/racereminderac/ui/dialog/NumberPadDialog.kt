@@ -21,7 +21,7 @@ class NumberPadDialog : DialogFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initialiseViews() //view)
+        initialiseViews()
     }
 
     override fun onClick(view: View) {
@@ -40,7 +40,7 @@ class NumberPadDialog : DialogFragment(), View.OnClickListener {
         }
     }
 
-    private fun initialiseViews() { //view: View) {
+    private fun initialiseViews() {
         id_btn_9.setOnClickListener(this)
         id_btn_8.setOnClickListener(this)
         id_btn_7.setOnClickListener(this)

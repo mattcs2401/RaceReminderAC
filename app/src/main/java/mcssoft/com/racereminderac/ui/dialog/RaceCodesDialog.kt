@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import kotlinx.android.synthetic.main.race_codes.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.EventBus
@@ -20,10 +21,11 @@ class RaceCodesDialog : DialogFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // set the listeners.
-        (view.findViewById<Button>(R.id.id_rc_btn_R)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_rc_btn_T)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_rc_btn_G)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_rc_btn_S)).setOnClickListener(this)
+        id_rc_btn_R.setOnClickListener(this)
+        id_rc_btn_T.setOnClickListener(this)
+        id_rc_btn_G.setOnClickListener(this)
+        id_rc_btn_S.setOnClickListener(this)
+        
         (view.findViewById<Button>(R.id.id_rc_btn_cancel)).setOnClickListener(this)
         // special case or the OK button.
         btnOK = view.findViewById<Button>(R.id.id_rc_btn_ok)
