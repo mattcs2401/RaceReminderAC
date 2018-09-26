@@ -47,12 +47,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 //    }
 
     override fun onFinishCityCodes(code: String) {
-
         val bp = ""
     }
 
     override fun onFinishRaceCodes(code: String) {
-
         val bp = ""
     }
 

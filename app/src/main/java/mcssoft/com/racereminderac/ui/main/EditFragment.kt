@@ -26,21 +26,21 @@ import org.greenrobot.eventbus.Subscribe
 
 class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
-    companion object {
-        //fun newInstance() = EditFragment()
-    }
+//    companion object { }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        rootView = inflater.inflate(R.layout.edit_fragment, container, false)
-        return rootView
+        return inflater.inflate(R.layout.edit_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initialiseUI(view)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        initialiseUI()
-
         // Get the argumnets (if exist).
         if(arguments != null) {
             editType = arguments?.getString(getString(R.string.key_edit_type))
@@ -62,17 +62,19 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         EventBus.getDefault().unregister(this)
     }
 
+    /**
+     * EventBus returns here.
+     * @param event - The EventBus message object.
+     */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(event: EventMessage) {
-        var bp = event.message
+        val msg = event.message
         when(event.ident) {
             R.integer.race_codes_dialog_id -> {
-                var bp = ""
-
+                etRaceCode.setText(msg)
             }
             R.integer.city_codes_dialog_id -> {
-                var bp = ""
-
+                etCityCode.setText(msg)
             }
         }
     }
@@ -85,11 +87,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                     when(editType) {
                         "edit_type_existing" -> {
                             raceViewModel.update(race)
-//                            raceViewModel.update(raceCache)
                         }
                         "edit_type_new" -> {
                             raceViewModel.insert(race)
-//                            raceViewModel.insert(raceCache)
                         }
                     }
                     Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
@@ -123,52 +123,44 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     }
 
     /**
-     * Simple check that all values are entered.
-     */
-    private fun checkValues(): Boolean {
-        // TBA
-        return true
-    }
-
-    /**
      * Setup UI and view model.
      */
-    private fun initialiseUI() {
+    private fun initialiseUI(view: View) {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
 
         // Set the Save button and listener.
-        btnSave = rootView.findViewById<Button>(R.id.id_btn_save)
+        btnSave = view.findViewById<Button>(R.id.id_btn_save)
         btnSave.setOnClickListener(this)
 
         // Get the toolbar.
         toolBar = activity?.findViewById(R.id.id_toolbar) as Toolbar
 
         // Get the Race related views.
-        etCityCode = rootView.findViewById(R.id.etCityCode)
+        etCityCode = view.findViewById(R.id.etCityCode)
         etCityCode.setOnTouchListener(this)
         etCityCode.showSoftInputOnFocus = false  // use dialog.
 
-        etRaceCode = rootView.findViewById(R.id.etRaceCode)
+        etRaceCode = view.findViewById(R.id.etRaceCode)
         etRaceCode.setOnTouchListener(this)
         etCityCode.showSoftInputOnFocus = false  // use dialog.
 
-        etRaceNum = rootView.findViewById(R.id.etRaceNum)
+        etRaceNum = view.findViewById(R.id.etRaceNum)
         etRaceNum.setOnTouchListener(this)
 //        etCityCode.showSoftInputOnFocus = false
 
-        etRaceSel = rootView.findViewById(R.id.etRaceSel)
+        etRaceSel = view.findViewById(R.id.etRaceSel)
         etRaceSel.setOnTouchListener(this)
 //        etCityCode.showSoftInputOnFocus = false
 
-        etRaceTime = rootView.findViewById(R.id.etRaceTime)
+        etRaceTime = view.findViewById(R.id.etRaceTime)
         etRaceTime.setOnTouchListener(this)
 //        etCityCode.showSoftInputOnFocus = false
 
         // view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
         raceId = arguments?.getLong(getString(R.string.key_edit_existing))
-        raceViewModel.getRaceLD(raceId!!).observe(activity!!, RaceObserver(raceViewModel.getRaceLD(raceId!!), rootView))
+        raceViewModel.getRaceLD(raceId!!).observe(activity!!, RaceObserver(raceViewModel.getRaceLD(raceId!!), view))
     }
 
     /**
@@ -201,7 +193,14 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         }
     }
 
-    private lateinit var rootView: View
+    /**
+     * Simple check that all values are entered.
+     */
+    private fun checkValues(): Boolean {
+        // TODO - simple check all values entered.
+        return true
+    }
+
     private lateinit var toolBar: Toolbar
 
     private var raceId: Long? = null
@@ -216,10 +215,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
     private var editType: String? = null
 
-    private lateinit var raceCache: Race
-
     private lateinit var cityCodesDialog: DialogFragment
     private lateinit var raceCodesDilaog: DialogFragment
-//    private lateinit var raceKbd: RaceKeyboard
 
 }

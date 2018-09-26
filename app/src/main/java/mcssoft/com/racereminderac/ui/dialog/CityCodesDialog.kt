@@ -1,16 +1,12 @@
 package mcssoft.com.racereminderac.ui.dialog
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import mcssoft.com.racereminderac.R
-import mcssoft.com.racereminderac.interfaces.ICodes
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.EventBus
 
@@ -38,13 +34,32 @@ class CityCodesDialog : DialogFragment(), View.OnClickListener {
             }
             else -> {
                 cityCode = (view as Button).text.toString()
-                btnOk.isEnabled = true
+                if(!btnOk.isEnabled) {
+                    btnOk.isEnabled = true
+                }
             }
         }
     }
 
     private fun initialiseViews(view: View) {
-        // TBA - other views
+        (view.findViewById<Button>(R.id.id_btn_A)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_B)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_C)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_D)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_E)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_F)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_I)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_L)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_M)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_N)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_O)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_P)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_Q)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_S)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_T)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_V)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_X)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_btn_Z)).setOnClickListener(this)
 
         btnOk = view.findViewById<Button>(R.id.id_btn_cc_ok)
         btnOk.setOnClickListener(this)
@@ -54,8 +69,6 @@ class CityCodesDialog : DialogFragment(), View.OnClickListener {
         btnCancel.setOnClickListener(this)
     }
 
-    private val OK: Int = -1
-    private val CANCEL: Int = -2
     private var cityCode: String = ""
     private lateinit var btnOk: Button
     private lateinit var btnCancel: Button

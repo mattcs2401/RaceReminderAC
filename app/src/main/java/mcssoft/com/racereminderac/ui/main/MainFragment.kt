@@ -18,7 +18,6 @@ import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.model.RaceViewModel
 
-
 class MainFragment : Fragment(), IClick.ItemSelect {
 
     companion object {

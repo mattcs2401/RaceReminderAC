@@ -3,17 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/id_city_codes"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="top|center_horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/id_tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/id_cc_tv_title"
+        android:layout_width="192dp"
+        android:layout_height="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/cc_title"
@@ -27,213 +24,137 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="64dp" />
+        app:layout_constraintGuide_begin="48dp" />
 
-    <Button
-        android:id="@+id/id_btn_A"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="A"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/id_cc_top_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_B"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="B"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_A"
-        app:layout_constraintTop_toTopOf="@+id/id_cc_top_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_C"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="C"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_B"
-        app:layout_constraintTop_toTopOf="@+id/id_cc_top_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_D"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="D"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_C"
-        app:layout_constraintTop_toTopOf="@+id/id_cc_top_guideline" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/id_2nd_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="128dp" />
-
-    <Button
-        android:id="@+id/id_btn_E"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="E"
+    <ScrollView
+        android:id="@+id/id_cc_scollview"
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_D"
-        app:layout_constraintTop_toTopOf="@+id/id_cc_top_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_F"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="F"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/id_2nd_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/id_cc_top_guideline">
 
-    <Button
-        android:id="@+id/id_btn_I"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="I"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_F"
-        app:layout_constraintTop_toTopOf="@+id/id_2nd_guideline" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/id_btn_L"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="L"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_I"
-        app:layout_constraintTop_toTopOf="@+id/id_2nd_guideline" />
+            <Button
+                android:id="@+id/id_btn_A"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="A" />
+
+            <Button
+                android:id="@+id/id_btn_B"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="B" />
+
+            <Button
+                android:id="@+id/id_btn_C"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="C" />
+
+            <Button
+                android:id="@+id/id_btn_D"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="D" />
+
+            <Button
+                android:id="@+id/id_btn_E"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="E" />
+
+            <Button
+                android:id="@+id/id_btn_F"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="F" />
+
+            <Button
+                android:id="@+id/id_btn_I"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="I" />
+
+            <Button
+                android:id="@+id/id_btn_L"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="L" />
+
+            <Button
+                android:id="@+id/id_btn_M"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="M" />
+
+            <Button
+                android:id="@+id/id_btn_N"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="N" />
+
+            <Button
+                android:id="@+id/id_btn_O"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="O" />
+
+            <Button
+                android:id="@+id/id_btn_P"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="P" />
+
+            <Button
+                android:id="@+id/id_btn_Q"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Q" />
+
+            <Button
+                android:id="@+id/id_btn_S"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="S" />
+
+            <Button
+                android:id="@+id/id_btn_T"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="T" />
+
+            <Button
+                android:id="@+id/id_btn_V"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="V" />
+
+            <Button
+                android:id="@+id/id_btn_X"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="X" />
+
+            <Button
+                android:id="@+id/id_btn_Z"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Z" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/id_3rd_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="192dp" />
-
-    <Button
-        android:id="@+id/id_btn_M"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="M"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_L"
-        app:layout_constraintTop_toTopOf="@+id/id_2nd_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_N"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="N"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_M"
-        app:layout_constraintTop_toTopOf="@+id/id_2nd_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_O"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="O"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/id_3rd_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_P"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="P"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_O"
-        app:layout_constraintTop_toTopOf="@+id/id_3rd_guideline" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/id_4th_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="256dp" />
-
-    <Button
-        android:id="@+id/id_btn_Q"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Q"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_P"
-        app:layout_constraintTop_toTopOf="@+id/id_3rd_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_S"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="S"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_Q"
-        app:layout_constraintTop_toTopOf="@+id/id_3rd_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_T"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="8dp"
-        android:text="T"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/id_4th_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_V"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="V"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_T"
-        app:layout_constraintTop_toTopOf="@+id/id_4th_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_X"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="X"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_S"
-        app:layout_constraintTop_toTopOf="@+id/id_3rd_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_Z"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Z"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_V"
-        app:layout_constraintTop_toTopOf="@+id/id_4th_guideline" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/id_cc_bottom_guideline"
+        android:id="@+id/id_cc_2nd_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -242,23 +163,32 @@
     <Button
         android:id="@+id/id_btn_cc_cancel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/id_cc_bottom_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/id_cc_bottom_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/id_cc_2nd_guideline" />
 
     <Button
         android:id="@+id/id_btn_cc_ok"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="OK"
+        app:layout_constraintBottom_toTopOf="@+id/id_cc_bottom_guideline"
         app:layout_constraintStart_toEndOf="@+id/id_btn_cc_cancel"
-        app:layout_constraintTop_toTopOf="@+id/id_cc_bottom_guideline" />
+        app:layout_constraintTop_toTopOf="@+id/id_cc_2nd_guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_cc_bottom_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="400dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
