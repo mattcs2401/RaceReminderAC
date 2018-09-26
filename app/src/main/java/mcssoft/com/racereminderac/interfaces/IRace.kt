@@ -10,19 +10,4 @@ interface IRace {
          */
         fun onRaceSelect(id: Long)
     }
-
-    interface IRaceNum {
-        /**
-         * The race number selected from the xxx dialog.
-         */
-        fun onRaceNum(raceNum: String)
-    }
-
-    interface IRaceSel {
-        /**
-         * The race selection for a particular race number from the xxx dialog.
-         */
-        fun onRaceSel(raceSel: String)
-    }
-
 }

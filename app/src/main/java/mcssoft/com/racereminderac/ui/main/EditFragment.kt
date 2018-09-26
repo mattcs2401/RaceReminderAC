@@ -110,6 +110,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
     override fun onTouch(view: View, event: MotionEvent): Boolean {
         if(event.action == MotionEvent.ACTION_DOWN) {
+            val bundle = Bundle()
             // set the fragment transaction
             val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
             fragTrans.addToBackStack(null)
@@ -125,18 +126,19 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                     cityCodesDialog.show(fragTrans, "city_codes_dialog")
                 }
                 R.id.etRaceNum -> {
-                    val bundle = Bundle()
                     bundle.putInt("key", R.integer.npCtxRaceNum)
                     numberPadDialog = NumberPadDialog()
                     numberPadDialog.arguments = bundle
                     numberPadDialog.show(fragTrans, "number_pad_dialog")
                 }
                 R.id.etRaceSel -> {
-                    val bundle = Bundle()
                     bundle.putInt("key", R.integer.npCtxRaceSel)
                     numberPadDialog = NumberPadDialog()
                     numberPadDialog.arguments = bundle
                     numberPadDialog.show(fragTrans, "number_pad_dialog")
+                }
+                R.id.etRaceTime -> {
+                    // TBA
                 }
             }
             return true
