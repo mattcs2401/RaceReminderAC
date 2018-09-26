@@ -26,7 +26,7 @@ class CityCodesDialog : DialogFragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when(view.id) {
             R.id.id_btn_cc_ok -> {
-                EventBus.getDefault().post(EventMessage(cityCode, R.integer.city_codes_dialog_id))
+                EventBus.getDefault().post(EventMessage(cityCode, R.integer.city_codes_dialog_id, -1))
                 this.dialog.cancel()
             }
             R.id.id_btn_cc_cancel -> {

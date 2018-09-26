@@ -16,6 +16,7 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.ui.dialog.CityCodesDialog
+import mcssoft.com.racereminderac.ui.dialog.NumberPadDialog
 import mcssoft.com.racereminderac.ui.dialog.RaceCodesDialog
 import org.greenrobot.eventbus.EventBus
 import mcssoft.com.racereminderac.utility.EventMessage
@@ -74,6 +75,16 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             R.integer.city_codes_dialog_id -> {
                 etCityCode.setText(msg)
             }
+            R.integer.number_pad_dialog_id -> {
+                when(event.contex) {
+                    R.integer.npCtxRaceNum -> {
+                        etRaceNum.setText(msg)
+                    }
+                    R.integer.npCtxRaceSel -> {
+                        etRaceSel.setText(msg)
+                    }
+                }
+            }
         }
     }
 
@@ -113,7 +124,20 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                     cityCodesDialog = CityCodesDialog()
                     cityCodesDialog.show(fragTrans, "city_codes_dialog")
                 }
-                R.id.etRaceNum -> { return false }
+                R.id.etRaceNum -> {
+                    val bundle = Bundle()
+                    bundle.putInt("key", R.integer.npCtxRaceNum)
+                    numberPadDialog = NumberPadDialog()
+                    numberPadDialog.arguments = bundle
+                    numberPadDialog.show(fragTrans, "number_pad_dialog")
+                }
+                R.id.etRaceSel -> {
+                    val bundle = Bundle()
+                    bundle.putInt("key", R.integer.npCtxRaceSel)
+                    numberPadDialog = NumberPadDialog()
+                    numberPadDialog.arguments = bundle
+                    numberPadDialog.show(fragTrans, "number_pad_dialog")
+                }
             }
             return true
         }
@@ -215,5 +239,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
     private lateinit var cityCodesDialog: DialogFragment
     private lateinit var raceCodesDilaog: DialogFragment
+    private lateinit var numberPadDialog: DialogFragment
 
 }
