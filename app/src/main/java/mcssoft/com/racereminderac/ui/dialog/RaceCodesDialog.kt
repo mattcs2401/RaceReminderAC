@@ -10,7 +10,6 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.EventBus
 
-
 class RaceCodesDialog : DialogFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

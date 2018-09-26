@@ -12,6 +12,10 @@
     <string name="edit_race">Edit Race</string>
     <string name="new_race">New Race</string>
 
+    <!-- Button labels. -->
+    <string name="lbl_cancel">Cancel</string>
+    <string name="lbl_ok">OK</string>
+
     <!-- Message when no data. -->
     <string name="nothing_to_show">Nothing to show.</string>
 
@@ -33,8 +37,23 @@
     <string name="rc_S">O</string>
     <!-- City Codes -->
     <string name="cc_title">Select a City Code</string>
-
-    <!-- Meeting keyboard. -->
-    <string name="lbl_value_required">A value is required.</string>  <!-- Toast -->
+    <string name="cc_A">A</string>
+    <string name="cc_B">B</string>
+    <string name="cc_C">C</string>
+    <string name="cc_D">D</string>
+    <string name="cc_E">E</string>
+    <string name="cc_F">F</string>
+    <string name="cc_I">I</string>
+    <string name="cc_L">L</string>
+    <string name="cc_M">M</string>
+    <string name="cc_N">N</string>
+    <string name="cc_O">O</string>
+    <string name="cc_P">P</string>
+    <string name="cc_Q">Q</string>
+    <string name="cc_S">S</string>
+    <string name="cc_T">T</string>
+    <string name="cc_V">V</string>
+    <string name="cc_X">X</string>
+    <string name="cc_Z">Z</string>
 
 </resources>

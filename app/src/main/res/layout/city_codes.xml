@@ -45,109 +45,109 @@
                 android:id="@+id/id_btn_A"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="A" />
+                android:text="@string/cc_A" />
 
             <Button
                 android:id="@+id/id_btn_B"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="B" />
+                android:text="@string/cc_B" />
 
             <Button
                 android:id="@+id/id_btn_C"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="C" />
+                android:text="@string/cc_C" />
 
             <Button
                 android:id="@+id/id_btn_D"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="D" />
+                android:text="@string/cc_D" />
 
             <Button
                 android:id="@+id/id_btn_E"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="E" />
+                android:text="@string/cc_E" />
 
             <Button
                 android:id="@+id/id_btn_F"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="F" />
+                android:text="@string/cc_F" />
 
             <Button
                 android:id="@+id/id_btn_I"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="I" />
+                android:text="@string/cc_I" />
 
             <Button
                 android:id="@+id/id_btn_L"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="L" />
+                android:text="@string/cc_L" />
 
             <Button
                 android:id="@+id/id_btn_M"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="M" />
+                android:text="@string/cc_M" />
 
             <Button
                 android:id="@+id/id_btn_N"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="N" />
+                android:text="@string/cc_N" />
 
             <Button
                 android:id="@+id/id_btn_O"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="O" />
+                android:text="@string/cc_O" />
 
             <Button
                 android:id="@+id/id_btn_P"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="P" />
+                android:text="@string/cc_P" />
 
             <Button
                 android:id="@+id/id_btn_Q"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="Q" />
+                android:text="@string/cc_Q" />
 
             <Button
                 android:id="@+id/id_btn_S"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="S" />
+                android:text="@string/cc_S" />
 
             <Button
                 android:id="@+id/id_btn_T"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="T" />
+                android:text="@string/cc_T" />
 
             <Button
                 android:id="@+id/id_btn_V"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="V" />
+                android:text="@string/cc_V" />
 
             <Button
                 android:id="@+id/id_btn_X"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="X" />
+                android:text="@string/cc_X" />
 
             <Button
                 android:id="@+id/id_btn_Z"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="Z" />
+                android:text="@string/cc_Z" />
 
         </LinearLayout>
 
@@ -167,7 +167,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Cancel"
+        android:text="@string/lbl_cancel"
         app:layout_constraintBottom_toTopOf="@+id/id_cc_bottom_guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/id_cc_2nd_guideline" />
@@ -179,7 +179,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="OK"
+        android:text="@string/lbl_ok"
         app:layout_constraintBottom_toTopOf="@+id/id_cc_bottom_guideline"
         app:layout_constraintStart_toEndOf="@+id/id_btn_cc_cancel"
         app:layout_constraintTop_toTopOf="@+id/id_cc_2nd_guideline" />
