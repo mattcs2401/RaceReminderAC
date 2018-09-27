@@ -1,0 +1,24 @@
+|------------------|
+|  RaceReminderAC  |
+|------------------|
+
+** Project notes/comments in no particular order. **
+
+--------
+Dialogs:
+--------
+1) For the city codes, race codes and number pad dialogs, highlight the applicable button when the dialog shows.
+ 
+2) Number pad dialog needs a lot of work.
+
+3) Look at different styles of buttons; round, oval etc.
+
+4) Keep colour inline with app theme (like time pick dialog).
+
+---------
+Other UI:
+--------- 
+1) Swipe to delete in list of races.
+
+2) Implement an undo for the delete.
+

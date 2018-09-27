@@ -20,6 +20,7 @@ import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.ui.dialog.CityCodesDialog
 import mcssoft.com.racereminderac.ui.dialog.NumberPadDialog
 import mcssoft.com.racereminderac.ui.dialog.RaceCodesDialog
+import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import org.greenrobot.eventbus.EventBus
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.ThreadMode
@@ -87,6 +88,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                     }
                 }
             }
+            R.integer.time_pick_dialog_id -> {
+                etRaceTime.setText(msg)
+            }
         }
     }
 
@@ -140,7 +144,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                     numberPadDialog.show(fragTrans, "number_pad_dialog")
                 }
                 R.id.id_etRaceTime -> {
-                    // TBA
+                    timePickDialog = TimePickDialog()
+                    timePickDialog.show(fragTrans, "time_pick_dialog")
                 }
             }
             return true
@@ -244,5 +249,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     private lateinit var cityCodesDialog: DialogFragment
     private lateinit var raceCodesDilaog: DialogFragment
     private lateinit var numberPadDialog: DialogFragment
+    private lateinit var timePickDialog: DialogFragment
 
 }
