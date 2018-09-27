@@ -79,7 +79,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                 etCityCode.setText(msg)
             }
             R.integer.number_pad_dialog_id -> {
-                when(event.contex) {
+                when(event.contxt) {
                     R.integer.npCtxRaceNum -> {
                         etRaceNum.setText(msg)
                     }

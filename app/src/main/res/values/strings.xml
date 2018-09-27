@@ -17,16 +17,12 @@
     <string name="lbl_ok">OK</string>
 
     <!-- Message when no data. -->
-    <string name="nothing_to_show">Nothing to show.</string>
 
     <!-- Keys. -->
     <string name="key_edit_type">edit_type</string>
     <string name="key_edit_existing">edit_existing</string>
-    <string name="key_view_id">view_id</string>
 
     <!-- Values. -->
-    <string name="edit_type_new">edit_type_new</string>
-    <string name="edit_type_existing">edit_type_existing</string>
 
     <!-- Dialog. -->
     <!-- Race Codes-->

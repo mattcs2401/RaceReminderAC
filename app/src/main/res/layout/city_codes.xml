@@ -7,7 +7,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/id_cc_tv_title"
         android:layout_width="192dp"
         android:layout_height="32dp"
         android:layout_marginStart="32dp"
@@ -27,7 +26,6 @@
         app:layout_constraintGuide_begin="48dp" />
 
     <ScrollView
-        android:id="@+id/id_cc_scollview"
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:layout_marginStart="32dp"
@@ -42,109 +40,91 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/id_btn_A"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_A" />
 
             <Button
-                android:id="@+id/id_btn_B"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_B" />
 
             <Button
-                android:id="@+id/id_btn_C"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_C" />
 
             <Button
-                android:id="@+id/id_btn_D"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_D" />
 
             <Button
-                android:id="@+id/id_btn_E"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_E" />
 
             <Button
-                android:id="@+id/id_btn_F"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_F" />
 
             <Button
-                android:id="@+id/id_btn_I"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_I" />
 
             <Button
-                android:id="@+id/id_btn_L"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_L" />
 
             <Button
-                android:id="@+id/id_btn_M"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_M" />
 
             <Button
-                android:id="@+id/id_btn_N"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_N" />
 
             <Button
-                android:id="@+id/id_btn_O"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_O" />
 
             <Button
-                android:id="@+id/id_btn_P"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_P" />
 
             <Button
-                android:id="@+id/id_btn_Q"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_Q" />
 
             <Button
-                android:id="@+id/id_btn_S"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_S" />
 
             <Button
-                android:id="@+id/id_btn_T"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_T" />
 
             <Button
-                android:id="@+id/id_btn_V"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_V" />
 
             <Button
-                android:id="@+id/id_btn_X"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_X" />
 
             <Button
-                android:id="@+id/id_btn_Z"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cc_Z" />
