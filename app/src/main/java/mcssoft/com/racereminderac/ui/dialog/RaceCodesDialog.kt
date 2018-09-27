@@ -25,10 +25,10 @@ class RaceCodesDialog : DialogFragment(), View.OnClickListener {
         id_rc_btn_T.setOnClickListener(this)
         id_rc_btn_G.setOnClickListener(this)
         id_rc_btn_S.setOnClickListener(this)
-        
-        (view.findViewById<Button>(R.id.id_rc_btn_cancel)).setOnClickListener(this)
+        id_rc_btn_cancel.setOnClickListener(this)
+
         // special case or the OK button.
-        btnOK = view.findViewById<Button>(R.id.id_rc_btn_ok)
+        btnOK = id_rc_btn_ok
         btnOK.setOnClickListener(this)
         btnOK.isEnabled = false
     }

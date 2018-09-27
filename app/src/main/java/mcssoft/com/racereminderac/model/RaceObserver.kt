@@ -17,11 +17,11 @@ class RaceObserver(race: LiveData<Race>, view: View) : Observer<Race> {
     override fun onChanged(race: Race?) {
         if(race != null) {
             /* surround with null check so will skip whole block if is null. */
-            rootView.etCityCode.setText(race.cityCode)
-            rootView.etRaceCode.setText(race.raceCode)
-            rootView.etRaceNum.setText(race.raceNum)
-            rootView.etRaceSel.setText(race.raceSel)
-            rootView.etRaceTime.setText(race.raceTime)
+            rootView.id_etCityCode.setText(race.cityCode)
+            rootView.id_etRaceCode.setText(race.raceCode)
+            rootView.id_etRaceNum.setText(race.raceNum)
+            rootView.id_etRaceSel.setText(race.raceSel)
+            rootView.id_etRaceTime.setText(race.raceTime)
         }
     }
 

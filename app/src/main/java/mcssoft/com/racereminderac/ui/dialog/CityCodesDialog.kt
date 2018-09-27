@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import kotlinx.android.synthetic.main.city_codes.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.EventBus
@@ -20,7 +21,7 @@ class CityCodesDialog : DialogFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initialiseViews(view)
+        initialiseViews()
     }
 
     override fun onClick(view: View) {
@@ -41,35 +42,35 @@ class CityCodesDialog : DialogFragment(), View.OnClickListener {
         }
     }
 
-    private fun initialiseViews(view: View) {
-        (view.findViewById<Button>(R.id.id_btn_A)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_B)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_C)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_D)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_E)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_F)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_I)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_L)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_M)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_N)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_O)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_P)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_Q)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_S)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_T)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_V)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_X)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_Z)).setOnClickListener(this)
+    private fun initialiseViews() {
+        id_btn_A.setOnClickListener(this)
+        id_btn_B.setOnClickListener(this)
+        id_btn_C.setOnClickListener(this)
+        id_btn_D.setOnClickListener(this)
+        id_btn_E.setOnClickListener(this)
+        id_btn_F.setOnClickListener(this)
+        id_btn_I.setOnClickListener(this)
+        id_btn_L.setOnClickListener(this)
+        id_btn_M.setOnClickListener(this)
+        id_btn_N.setOnClickListener(this)
+        id_btn_O.setOnClickListener(this)
+        id_btn_P.setOnClickListener(this)
+        id_btn_Q.setOnClickListener(this)
+        id_btn_S.setOnClickListener(this)
+        id_btn_T.setOnClickListener(this)
+        id_btn_V.setOnClickListener(this)
+        id_btn_X.setOnClickListener(this)
+        id_btn_Z.setOnClickListener(this)
 
-        btnOk = view.findViewById<Button>(R.id.id_btn_cc_ok)
+        btnOk = id_btn_cc_ok
         btnOk.setOnClickListener(this)
         btnOk.isEnabled = false
 
-        btnCancel = view.findViewById<Button>(R.id.id_btn_cc_cancel)
+        btnCancel = id_btn_cc_cancel
         btnCancel.setOnClickListener(this)
     }
 
-    private var cityCode: String = ""
+    private lateinit var cityCode: String
     private lateinit var btnOk: Button
     private lateinit var btnCancel: Button
 }

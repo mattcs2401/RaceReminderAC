@@ -11,6 +11,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.edit_fragment.*
+import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceObserver
@@ -94,10 +96,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                 if(checkValues()) {
                     var race = collateValues()
                     when(editType) {
-                        resources.getInteger(R.integer.edit_race_existing) -> {
+                        R.integer.edit_race_existing -> {
                             raceViewModel.update(race)
                         }
-                        resources.getInteger(R.integer.edit_race_new) -> {
+                        R.integer.edit_race_new -> {
                             raceViewModel.insert(race)
                         }
                     }
@@ -117,27 +119,27 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             // set the dialog and show.
             val id = view.id
             when(view.id) {
-                R.id.etRaceCode -> {
+                R.id.id_etRaceCode -> {
                     raceCodesDilaog = RaceCodesDialog()
                     raceCodesDilaog.show(fragTrans, "race_codes_dialog")
                 }
-                R.id.etCityCode -> {
+                R.id.id_etCityCode -> {
                     cityCodesDialog = CityCodesDialog()
                     cityCodesDialog.show(fragTrans, "city_codes_dialog")
                 }
-                R.id.etRaceNum -> {
+                R.id.id_etRaceNum -> {
                     bundle.putInt("key", R.integer.npCtxRaceNum)
                     numberPadDialog = NumberPadDialog()
                     numberPadDialog.arguments = bundle
                     numberPadDialog.show(fragTrans, "number_pad_dialog")
                 }
-                R.id.etRaceSel -> {
+                R.id.id_etRaceSel -> {
                     bundle.putInt("key", R.integer.npCtxRaceSel)
                     numberPadDialog = NumberPadDialog()
                     numberPadDialog.arguments = bundle
                     numberPadDialog.show(fragTrans, "number_pad_dialog")
                 }
-                R.id.etRaceTime -> {
+                R.id.id_etRaceTime -> {
                     // TBA
                 }
             }
@@ -154,32 +156,32 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
 
         // Set the Save button and listener.
-        btnSave = view.findViewById<Button>(R.id.id_btn_save)
+        btnSave = id_btn_save
         btnSave.setOnClickListener(this)
 
         // Get the toolbar.
-        toolBar = activity?.findViewById(R.id.id_toolbar) as Toolbar
+        toolBar = activity?.id_toolbar as Toolbar
 
         // Get the Race related views.
-        etCityCode = view.findViewById(R.id.etCityCode)
+        etCityCode = id_etCityCode
         etCityCode.setOnTouchListener(this)
         etCityCode.showSoftInputOnFocus = false  // use dialog.
 
-        etRaceCode = view.findViewById(R.id.etRaceCode)
+        etRaceCode = id_etRaceCode
         etRaceCode.setOnTouchListener(this)
         etCityCode.showSoftInputOnFocus = false  // use dialog.
 
-        etRaceNum = view.findViewById(R.id.etRaceNum)
+        etRaceNum = id_etRaceNum
         etRaceNum.setOnTouchListener(this)
-//        etCityCode.showSoftInputOnFocus = false
+        etCityCode.showSoftInputOnFocus = false  // use dialog.
 
-        etRaceSel = view.findViewById(R.id.etRaceSel)
+        etRaceSel = id_etRaceSel
         etRaceSel.setOnTouchListener(this)
-//        etCityCode.showSoftInputOnFocus = false
+        etCityCode.showSoftInputOnFocus = false  // use dialog.
 
-        etRaceTime = view.findViewById(R.id.etRaceTime)
+        etRaceTime = id_etRaceTime
         etRaceTime.setOnTouchListener(this)
-//        etCityCode.showSoftInputOnFocus = false
+        etCityCode.showSoftInputOnFocus = false
 
         // view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)

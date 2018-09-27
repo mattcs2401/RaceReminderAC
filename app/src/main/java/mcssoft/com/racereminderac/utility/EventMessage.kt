@@ -4,7 +4,7 @@ package mcssoft.com.racereminderac.utility
  * Utility class to represent an event message posted on the EventBus.
  * @param msg - The message.
  * @param dId - The id of the originating dialog.
- * @param ctx - TBA
+ * @param ctx - A value to give "context" to the message.
  */
 class EventMessage(var msg: String, var dId: Int, val ctx: Int) {
 
