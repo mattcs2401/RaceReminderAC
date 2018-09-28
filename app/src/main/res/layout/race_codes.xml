@@ -60,6 +60,7 @@
         app:layout_constraintTop_toTopOf="@+id/id_rc_top_guideline" />
 
     <Button
+        android:id="@+id/id_rc_btn_S"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
