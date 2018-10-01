@@ -12,5 +12,5 @@ class EventMessage(var msg: String, var dId: Int, val ctx: Int) {
 
     val ident: Int get() = dId
 
-    val contex: Int get() = ctx
+    val contxt: Int get() = ctx
 }

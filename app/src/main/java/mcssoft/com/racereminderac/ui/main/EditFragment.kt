@@ -79,7 +79,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                 etCityCode.setText(msg)
             }
             R.integer.number_pad_dialog_id -> {
-                when(event.contex) {
+                when(event.contxt) {
                     R.integer.npCtxRaceNum -> {
                         etRaceNum.setText(msg)
                     }
@@ -191,7 +191,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         // view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
         raceId = arguments?.getLong(getString(R.string.key_edit_existing))
-        raceViewModel.getRaceLD(raceId!!).observe(activity!!, RaceObserver(raceViewModel.getRaceLD(raceId!!), view))
+        raceViewModel.getRace(raceId!!).observe(activity!!, RaceObserver(raceViewModel.getRace(raceId!!), view))
     }
 
     /**

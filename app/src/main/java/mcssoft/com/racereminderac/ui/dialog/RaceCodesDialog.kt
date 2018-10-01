@@ -20,6 +20,7 @@ class RaceCodesDialog : DialogFragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         // set the listeners.
         id_rc_btn_R.setOnClickListener(this)
         id_rc_btn_T.setOnClickListener(this)
@@ -27,7 +28,7 @@ class RaceCodesDialog : DialogFragment(), View.OnClickListener {
         id_rc_btn_S.setOnClickListener(this)
         id_rc_btn_cancel.setOnClickListener(this)
 
-        // special case or the OK button.
+        // special case for the OK button.
         btnOK = id_rc_btn_ok
         btnOK.setOnClickListener(this)
         btnOK.isEnabled = false
@@ -49,6 +50,6 @@ class RaceCodesDialog : DialogFragment(), View.OnClickListener {
         }
     }
 
-    private var raceCode: String = ""
+    private lateinit var raceCode: String
     private lateinit var btnOK: Button
 }
