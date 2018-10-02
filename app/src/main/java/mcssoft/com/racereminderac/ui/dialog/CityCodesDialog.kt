@@ -50,9 +50,9 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
                 } else {
                     evntMsg = EventMessage(cityCode!!, R.integer.city_codes_dialog_id, -1)
                 }
+                EventBus.getDefault().post(evntMsg)
             }
         }
-        EventBus.getDefault().post(evntMsg)
         this.dialog.dismiss()
     }
 

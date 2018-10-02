@@ -47,9 +47,9 @@ class RaceCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
                 } else {
                     evntMsg = EventMessage(raceCode!!, R.integer.race_codes_dialog_id, -1)
                 }
+                EventBus.getDefault().post(evntMsg)
             }
         }
-        EventBus.getDefault().post(evntMsg)
         this.dialog.dismiss()
     }
 
