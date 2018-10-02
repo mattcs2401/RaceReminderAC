@@ -6,11 +6,13 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.edit_fragment.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
@@ -34,8 +36,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        initialiseUI(view)
+        rootView = view
+        initialiseUI(rootView)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -67,26 +69,36 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(event: EventMessage) {
+        val id = event.ident
         val msg = event.message
-        when(event.ident) {
-            R.integer.race_codes_dialog_id -> {
-                etRaceCode.setText(msg)
-            }
-            R.integer.city_codes_dialog_id -> {
-                etCityCode.setText(msg)
-            }
-            R.integer.number_pad_dialog_id -> {
-                when(event.contxt) {
-                    R.integer.npCtxRaceNum -> {
-                        etRaceNum.setText(msg)
-                    }
-                    R.integer.npCtxRaceSel -> {
-                        etRaceSel.setText(msg)
+        if(msg != "ZZ") {
+            when (id) {
+                R.integer.race_codes_dialog_id -> {
+                    etRaceCode.setText(msg)
+                }
+                R.integer.city_codes_dialog_id -> {
+                    etCityCode.setText(msg)
+                }
+                R.integer.number_pad_dialog_id -> {
+                    when (event.contxt) {
+                        R.integer.npCtxRaceNum -> {
+                            etRaceNum.setText(msg)
+                        }
+                        R.integer.npCtxRaceSel -> {
+                            etRaceSel.setText(msg)
+                        }
                     }
                 }
+                R.integer.time_pick_dialog_id -> {
+                    etRaceTime.setText(msg)
+                }
             }
-            R.integer.time_pick_dialog_id -> {
-                etRaceTime.setText(msg)
+        } else {
+            when(id) {
+                R.integer.city_codes_dialog_id -> {
+                    Snackbar.make(rootView, "No City Code was selected.", Snackbar.LENGTH_LONG)
+                    .setAction("Show", this).show()
+                }
             }
         }
     }
@@ -107,6 +119,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                     Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
                               .navigate(R.id.id_main_fragment)
                 }
+            }
+            else -> {
+                // TODO - option to show the dialog again.
+                val bp = ""
             }
         }
     }
@@ -248,4 +264,5 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     private lateinit var numberPadDialog: DialogFragment
     private lateinit var timePickDialog: DialogFragment
 
+    private lateinit var rootView: View
 }

@@ -8,6 +8,8 @@
     <integer name="edit_race_new">0</integer>
     <integer name="edit_race_existing">1</integer>
 
-    <integer name="npCtxRaceNum">0</integer>
-    <integer name="npCtxRaceSel">1</integer>
+    <integer name="ctxNoCityCode">0</integer> <!-- no City Code selected when dialog showing. -->
+    <integer name="ctxNoRaceCode">1</integer> <!-- no Race Code selected when dialog showing. -->
+    <integer name="npCtxRaceNum">2</integer>
+    <integer name="npCtxRaceSel">3</integer>
 </resources>

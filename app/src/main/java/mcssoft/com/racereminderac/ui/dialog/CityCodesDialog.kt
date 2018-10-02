@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.EventBus
@@ -19,15 +22,16 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
 
         // Get reference to the 'main' view so can set button listeners.
         // Note: onViewCreated() is not called when using the builder.
-        val rootView = inflator.inflate(R.layout.city_codes, null)
+        rootView = inflator.inflate(R.layout.city_codes, null)
         initialiseViews(rootView)
 
         // build the dialog.
-        var builder: AlertDialog.Builder = AlertDialog.Builder(this.context!!)
-        builder.setTitle("Select a City Code")
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this.context!!)
+        builder.setTitle(R.string.cc_title)
                 .setView(rootView)
-                .setPositiveButton("OK", this)
-                .setNegativeButton("Cancel", this)
+                .setPositiveButton(R.string.lbl_ok, this)
+                .setNegativeButton(R.string.lbl_cancel, this)
+                .setOnDismissListener(this)
         return builder.create()
     }
 
@@ -38,12 +42,9 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
     override fun onClick(dialog: DialogInterface?, which: Int) {
         when(which) {
             Dialog.BUTTON_POSITIVE -> {
-                if(cityCode != null) {
-                    EventBus.getDefault().post(EventMessage(cityCode, R.integer.city_codes_dialog_id, -1))
-                    this.dialog.cancel()
-                } else {
-
-                }
+                if(cityCode == null) cityCode = "ZZ"
+                EventBus.getDefault().post(EventMessage(cityCode!!, R.integer.city_codes_dialog_id, R.integer.ctxNoCityCode))
+                this.dialog.cancel()
             }
             Dialog.BUTTON_NEGATIVE -> {
                 this.dialog.dismiss()
@@ -73,5 +74,6 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         (view.findViewById<Button>(R.id.id_btn_cc_Z)).setOnClickListener(this)
     }
 
-    private lateinit var cityCode: String
+    private lateinit var rootView: View
+    private var cityCode: String? = null
 }
