@@ -30,7 +30,6 @@ class RaceCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
                 .setView(rootView)
                 .setPositiveButton(R.string.lbl_ok, this)
                 .setNegativeButton(R.string.lbl_cancel, this)
-                .setOnDismissListener(this)
         return builder.create()
     }
 
