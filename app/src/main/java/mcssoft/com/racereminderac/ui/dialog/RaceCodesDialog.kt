@@ -17,11 +17,11 @@ class RaceCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val inflator: LayoutInflater = activity!!.layoutInflater
+        val inflater: LayoutInflater = activity!!.layoutInflater
 
         // Get reference to the 'main' view so can set button listeners.
         // Note: onViewCreated() is not called when using the builder.
-        rootView = inflator.inflate(R.layout.race_codes, null)
+        rootView = inflater.inflate(R.layout.race_codes, null)
         initialiseViews(rootView)
 
         // build the dialog.
