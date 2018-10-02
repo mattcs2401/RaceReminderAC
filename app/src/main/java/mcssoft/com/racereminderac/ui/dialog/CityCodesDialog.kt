@@ -1,5 +1,6 @@
 package mcssoft.com.racereminderac.ui.dialog
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
@@ -17,12 +18,13 @@ import org.greenrobot.eventbus.EventBus
 
 class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.OnClickListener {
 
+    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val inflator: LayoutInflater = activity!!.layoutInflater
+        val inflater: LayoutInflater = activity!!.layoutInflater
 
         // Get reference to the 'main' view so can set button listeners.
         // Note: onViewCreated() is not called when using the builder.
-        rootView = inflator.inflate(R.layout.city_codes, null)
+        rootView = inflater.inflate(R.layout.city_codes, null)
         initialiseViews(rootView)
 
         // build the dialog.
@@ -42,14 +44,15 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
     override fun onClick(dialog: DialogInterface?, which: Int) {
         when(which) {
             Dialog.BUTTON_POSITIVE -> {
-                if(cityCode == null) cityCode = "ZZ"
-                EventBus.getDefault().post(EventMessage(cityCode!!, R.integer.city_codes_dialog_id, R.integer.ctxNoCityCode))
-                this.dialog.cancel()
-            }
-            Dialog.BUTTON_NEGATIVE -> {
-                this.dialog.dismiss()
+                if(cityCode == null) {
+                    cityCode = ""
+                    EventBus.getDefault().post(EventMessage(cityCode!!, R.integer.city_codes_dialog_id, R.integer.ctxNoCityCode))
+                } else {
+                    EventBus.getDefault().post(EventMessage(cityCode!!, R.integer.city_codes_dialog_id, -1))
+                }
             }
         }
+        this.dialog.dismiss()
     }
 
     private fun initialiseViews(view: View) {

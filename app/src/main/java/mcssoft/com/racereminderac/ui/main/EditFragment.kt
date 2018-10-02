@@ -6,7 +6,6 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
@@ -71,7 +70,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     fun onMessageEvent(event: EventMessage) {
         val id = event.ident
         val msg = event.message
-        if(msg != "ZZ") {
+        if(!msg.isBlank()) {
             when (id) {
                 R.integer.race_codes_dialog_id -> {
                     etRaceCode.setText(msg)
@@ -98,6 +97,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                 R.integer.city_codes_dialog_id -> {
                     Snackbar.make(rootView, "No City Code was selected.", Snackbar.LENGTH_LONG)
                     .setAction("Show", this).show()
+                }
+                R.integer.race_codes_dialog_id -> {
+                    Snackbar.make(rootView, "No Race Code was selected.", Snackbar.LENGTH_LONG)
+                            .setAction("Show", this).show()
                 }
             }
         }
@@ -137,10 +140,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             val id = view.id
             when(view.id) {
                 R.id.id_etRaceCode -> {
+                    etRaceCode.requestFocusFromTouch()
                     raceCodesDilaog = RaceCodesDialog()
                     raceCodesDilaog.show(fragTrans, "race_codes_dialog")
                 }
                 R.id.id_etCityCode -> {
+                    etCityCode.requestFocusFromTouch()
                     cityCodesDialog = CityCodesDialog()
                     cityCodesDialog.show(fragTrans, "city_codes_dialog")
                 }
@@ -187,19 +192,19 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
         etRaceCode = id_etRaceCode
         etRaceCode.setOnTouchListener(this)
-        etCityCode.showSoftInputOnFocus = false  // use dialog.
+        etRaceCode.showSoftInputOnFocus = false  // use dialog.
 
         etRaceNum = id_etRaceNum
         etRaceNum.setOnTouchListener(this)
-        etCityCode.showSoftInputOnFocus = false  // use dialog.
+        etRaceNum.showSoftInputOnFocus = false  // use dialog.
 
         etRaceSel = id_etRaceSel
         etRaceSel.setOnTouchListener(this)
-        etCityCode.showSoftInputOnFocus = false  // use dialog.
+        etRaceSel.showSoftInputOnFocus = false  // use dialog.
 
         etRaceTime = id_etRaceTime
         etRaceTime.setOnTouchListener(this)
-        etCityCode.showSoftInputOnFocus = false
+        etRaceTime.showSoftInputOnFocus = false
 
         // view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
