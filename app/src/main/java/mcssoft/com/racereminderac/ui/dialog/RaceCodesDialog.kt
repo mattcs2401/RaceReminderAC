@@ -39,16 +39,17 @@ class RaceCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
     }
 
     override fun onClick(dialog: DialogInterface?, which: Int) {
+        var evntMsg: EventMessage? = null
         when(which) {
             Dialog.BUTTON_POSITIVE -> {
                 if(raceCode == null) {
-                    raceCode = ""
-                    EventBus.getDefault().post(EventMessage(raceCode!!, R.integer.race_codes_dialog_id, R.integer.ctxNoRaceCode))
+                    evntMsg = EventMessage("", R.integer.race_codes_dialog_id, R.integer.ctxNoRaceCode)
                 } else {
-                    EventBus.getDefault().post(EventMessage(raceCode!!, R.integer.race_codes_dialog_id, -1))
+                    evntMsg = EventMessage(raceCode!!, R.integer.race_codes_dialog_id, -1)
                 }
             }
         }
+        EventBus.getDefault().post(evntMsg)
         this.dialog.dismiss()
     }
 

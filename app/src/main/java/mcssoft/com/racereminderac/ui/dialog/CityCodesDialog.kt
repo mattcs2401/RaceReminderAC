@@ -42,39 +42,40 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
     }
 
     override fun onClick(dialog: DialogInterface?, which: Int) {
+        var evntMsg: EventMessage? = null
         when(which) {
             Dialog.BUTTON_POSITIVE -> {
                 if(cityCode == null) {
-                    cityCode = ""
-                    EventBus.getDefault().post(EventMessage(cityCode!!, R.integer.city_codes_dialog_id, R.integer.ctxNoCityCode))
+                    evntMsg = EventMessage("", R.integer.city_codes_dialog_id, R.integer.ctxNoCityCode)
                 } else {
-                    EventBus.getDefault().post(EventMessage(cityCode!!, R.integer.city_codes_dialog_id, -1))
+                    evntMsg = EventMessage(cityCode!!, R.integer.city_codes_dialog_id, -1)
                 }
             }
         }
+        EventBus.getDefault().post(evntMsg)
         this.dialog.dismiss()
     }
 
     private fun initialiseViews(view: View) {
         // Note: 'synthetic' didn't seem to work ?
-        (view.findViewById<Button>(R.id.id_btn_cc_A)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_B)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_C)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_D)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_E)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_F)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_I)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_L)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_M)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_N)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_O)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_P)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_Q)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_S)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_T)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_V)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_X)).setOnClickListener(this)
-        (view.findViewById<Button>(R.id.id_btn_cc_Z)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_A)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_B)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_C)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_D)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_E)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_F)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_I)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_L)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_M)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_N)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_O)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_P)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_Q)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_S)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_T)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_V)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_X)).setOnClickListener(this)
+        (view.findViewById<Button>(R.id.id_cc_btn_Z)).setOnClickListener(this)
     }
 
     private lateinit var rootView: View
