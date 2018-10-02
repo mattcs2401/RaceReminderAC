@@ -17,10 +17,7 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
-import mcssoft.com.racereminderac.ui.dialog.CityCodesDialog
-import mcssoft.com.racereminderac.ui.dialog.NumberPadDialog
-import mcssoft.com.racereminderac.ui.dialog.RaceCodesDialog
-import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
+import mcssoft.com.racereminderac.ui.dialog.*
 import org.greenrobot.eventbus.EventBus
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.ThreadMode

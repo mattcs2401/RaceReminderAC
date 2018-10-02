@@ -6,33 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="192dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="@string/cc_title"
-        android:textAppearance="@android:style/TextAppearance.Material.Large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/id_cc_top_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="48dp" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/id_cc_top_guideline">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -150,43 +132,4 @@
         </LinearLayout>
 
     </ScrollView>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/id_cc_2nd_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="320dp" />
-
-    <Button
-        android:id="@+id/id_btn_cc_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/lbl_cancel"
-        app:layout_constraintBottom_toTopOf="@+id/id_cc_bottom_guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/id_cc_2nd_guideline" />
-
-    <Button
-        android:id="@+id/id_btn_cc_ok"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/lbl_ok"
-        app:layout_constraintBottom_toTopOf="@+id/id_cc_bottom_guideline"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_cc_cancel"
-        app:layout_constraintTop_toTopOf="@+id/id_cc_2nd_guideline" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/id_cc_bottom_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="400dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

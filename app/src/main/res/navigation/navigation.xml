@@ -10,11 +10,13 @@
         android:label="Home"
         tools:layout="@layout/main_fragment">
 
-        <action app:destination="@id/id_edit_fragment" />
+        <action
+            android:id="@+id/mainFragment_to_editFragment"
+            app:destination="@id/id_edit_fragment" />
     </fragment>
     <fragment
         android:id="@+id/id_edit_fragment"
         android:name="mcssoft.com.racereminderac.ui.main.EditFragment"
         android:label="EditFragment"
-        tools:layout="@layout/edit_fragment"></fragment>
+        tools:layout="@layout/edit_fragment"/>
 </navigation>
