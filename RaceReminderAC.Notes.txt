@@ -22,3 +22,11 @@ Other UI:
 
 2) Implement an undo for the delete.
 
+----------
+Usability:
+----------
+1) When edit existing, then UI updates display ok.
+
+2) When edit new, then UI updates display ok.
+
+
