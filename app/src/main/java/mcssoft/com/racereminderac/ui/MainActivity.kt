@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac
+package mcssoft.com.racereminderac.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.toolbar_base.*
+import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IRace
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelect {

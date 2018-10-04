@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/id_main_fragment"
-        android:name="mcssoft.com.racereminderac.ui.main.MainFragment"
+        android:name="mcssoft.com.racereminderac.ui.fragment.MainFragment"
         android:label="Home"
         tools:layout="@layout/main_fragment">
 
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/id_edit_fragment"
-        android:name="mcssoft.com.racereminderac.ui.main.EditFragment"
+        android:name="mcssoft.com.racereminderac.ui.fragment.EditFragment"
         android:label="EditFragment"
         tools:layout="@layout/edit_fragment"/>
 </navigation>

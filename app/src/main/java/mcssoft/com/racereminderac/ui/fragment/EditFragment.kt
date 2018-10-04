@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.ui.main
+package mcssoft.com.racereminderac.ui.fragment
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -10,8 +10,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.edit_fragment.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
@@ -22,6 +20,8 @@ import mcssoft.com.racereminderac.ui.dialog.*
 import org.greenrobot.eventbus.EventBus
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.ThreadMode
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import org.greenrobot.eventbus.Subscribe
 
 class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
@@ -176,6 +176,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     }
     //</editor-fold>
 
+    /**
+     * Process the event message.
+     * @param event - the EventMessage object.
+     */
     private fun doOnMessageEvent(event: EventMessage) {
         val msg: String = event.msg
         when (event.ident) {
@@ -201,6 +205,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         }
     }
 
+    /**
+     * Set the Snackbar dependant on the dialog id.
+     * @param id - the dialog id.
+     */
     private fun doSnackbar(id: Int) {
         var msg: String = ""
         var snackBar: Snackbar? = null
@@ -296,6 +304,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         return true
     }
 
+    /**
+     * Utility class to create a 'local' Snackbar to differentiate between the diffent dialogs.
+     * @param id - the id of the dialog.
+     */
     inner class SnackBarView(id: Int) : View.OnClickListener {
         private var id: Int = id
 
