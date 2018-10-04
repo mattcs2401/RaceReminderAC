@@ -26,8 +26,7 @@ import org.greenrobot.eventbus.Subscribe
 
 class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
-//    companion object { }
-
+    //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.edit_fragment, container, false)
@@ -61,6 +60,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         super.onStop()
         EventBus.getDefault().unregister(this)
     }
+    //</editor-fold>
 
     /**
      * EventBus returns here.
@@ -68,44 +68,16 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(event: EventMessage) {
-        val id = event.ident
-        val msg = event.message
-        if(!msg.isBlank()) {
-            when (id) {
-                R.integer.race_codes_dialog_id -> {
-                    etRaceCode.setText(msg)
-                }
-                R.integer.city_codes_dialog_id -> {
-                    etCityCode.setText(msg)
-                }
-                R.integer.number_pad_dialog_id -> {
-                    when (event.contxt) {
-                        R.integer.npCtxRaceNum -> {
-                            etRaceNum.setText(msg)
-                        }
-                        R.integer.npCtxRaceSel -> {
-                            etRaceSel.setText(msg)
-                        }
-                    }
-                }
-                R.integer.time_pick_dialog_id -> {
-                    etRaceTime.setText(msg)
-                }
-            }
+        if(!event.message.isBlank()) {
+            doOnMessageEvent(event)
         } else {
-            when(id) {
-                R.integer.city_codes_dialog_id -> {
-                    Snackbar.make(rootView, "No City Code was selected.", Snackbar.LENGTH_LONG)
-                    .setAction("Show", this).show()
-                }
-                R.integer.race_codes_dialog_id -> {
-                    Snackbar.make(rootView, "No Race Code was selected.", Snackbar.LENGTH_LONG)
-                            .setAction("Show", this).show()
-                }
-            }
+            // Nothing was selected in the dialog except for the OK button.
+            doSnackbar(event.ident)
+//            doOnMessageEventBlank(event)
         }
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onClick">
     override fun onClick(view: View) {
         when(view.id) {
             R.id.id_btn_save -> {
@@ -123,13 +95,11 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                               .navigate(R.id.id_main_fragment)
                 }
             }
-            else -> {
-                // TODO - option to show the dialog again.
-                val bp = ""
-            }
         }
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onTouch">
     override fun onTouch(view: View, event: MotionEvent): Boolean {
         if(event.action == MotionEvent.ACTION_DOWN) {
             val bundle = Bundle()
@@ -139,36 +109,112 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             // set the dialog and show.
             val id = view.id
             when(view.id) {
-                R.id.id_etRaceCode -> {
-                    etRaceCode.requestFocusFromTouch()
-                    raceCodesDilaog = RaceCodesDialog()
-                    raceCodesDilaog.show(fragTrans, "race_codes_dialog")
-                }
                 R.id.id_etCityCode -> {
-                    etCityCode.requestFocusFromTouch()
-                    cityCodesDialog = CityCodesDialog()
-                    cityCodesDialog.show(fragTrans, "city_codes_dialog")
+                    launchCityCodes()
+                }
+                R.id.id_etRaceCode -> {
+                    launchRaceCodes()
                 }
                 R.id.id_etRaceNum -> {
-                    bundle.putInt("key", R.integer.npCtxRaceNum)
-                    numberPadDialog = NumberPadDialog()
-                    numberPadDialog.arguments = bundle
-                    numberPadDialog.show(fragTrans, "number_pad_dialog")
+                    launchRaceNum()
                 }
                 R.id.id_etRaceSel -> {
-                    bundle.putInt("key", R.integer.npCtxRaceSel)
-                    numberPadDialog = NumberPadDialog()
-                    numberPadDialog.arguments = bundle
-                    numberPadDialog.show(fragTrans, "number_pad_dialog")
+                    launchRaceSel()
                 }
                 R.id.id_etRaceTime -> {
-                    timePickDialog = TimePickDialog()
-                    timePickDialog.show(fragTrans, "time_pick_dialog")
+                    launchTimePick()
                 }
             }
             return true
         }
         return false
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility - launchers">
+    private fun launchCityCodes() {
+        val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+        fragTrans.addToBackStack(null)
+        etCityCode.requestFocusFromTouch()
+        cityCodesDialog = CityCodesDialog()
+        cityCodesDialog.show(fragTrans, "city_codes_dialog")
+    }
+
+    private fun launchRaceCodes() {
+        val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+        fragTrans.addToBackStack(null)
+        etRaceCode.requestFocusFromTouch()
+        raceCodesDialog = RaceCodesDialog()
+        raceCodesDialog.show(fragTrans, "race_codes_dialog")
+    }
+
+    private fun launchRaceNum() {
+        val bundle = Bundle()
+        bundle.putInt("key", R.integer.npCtxRaceNum)
+        val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+        fragTrans.addToBackStack(null)
+        numberPadDialog = NumberPadDialog()
+        numberPadDialog.arguments = bundle
+        numberPadDialog.show(fragTrans, "number_pad_dialog")
+    }
+
+    private fun launchRaceSel() {
+        val bundle = Bundle()
+        bundle.putInt("key", R.integer.npCtxRaceSel)
+        val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+        fragTrans.addToBackStack(null)
+        numberPadDialog = NumberPadDialog()
+        numberPadDialog.arguments = bundle
+        numberPadDialog.show(fragTrans, "number_pad_dialog")
+    }
+
+    private fun launchTimePick() {
+        val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+        fragTrans.addToBackStack(null)
+        timePickDialog = TimePickDialog()
+        timePickDialog.show(fragTrans, "time_pick_dialog")
+    }
+    //</editor-fold>
+
+    private fun doOnMessageEvent(event: EventMessage) {
+        val msg: String = event.msg
+        when (event.ident) {
+            R.integer.race_codes_dialog_id -> {
+                etRaceCode.setText(msg)
+            }
+            R.integer.city_codes_dialog_id -> {
+                etCityCode.setText(msg)
+            }
+            R.integer.number_pad_dialog_id -> {
+                when (event.contxt) {
+                    R.integer.npCtxRaceNum -> {
+                        etRaceNum.setText(msg)
+                    }
+                    R.integer.npCtxRaceSel -> {
+                        etRaceSel.setText(msg)
+                    }
+                }
+            }
+            R.integer.time_pick_dialog_id -> {
+                etRaceTime.setText(msg)
+            }
+        }
+    }
+
+    private fun doSnackbar(id: Int) {
+        var msg: String = ""
+        var snackBar: Snackbar? = null
+        when(id) {
+            R.integer.city_codes_dialog_id -> {
+                msg = "No City Code was selected."
+            }
+            R.integer.race_codes_dialog_id -> {
+                msg = "No Race Code was selected."
+            }
+        }
+        snackBar = Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG)
+        snackBar.setAction("Show", SnackBarView(id))
+        snackBar.show()
     }
 
     /**
@@ -250,6 +296,22 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         return true
     }
 
+    inner class SnackBarView(id: Int) : View.OnClickListener {
+        private var id: Int = id
+
+        override fun onClick(view: View?) {
+            when (id) {
+                R.integer.city_codes_dialog_id -> {
+                    launchCityCodes()
+                }
+                R.integer.race_codes_dialog_id -> {
+                    launchRaceCodes()
+                }
+            }
+        }
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private lateinit var toolBar: Toolbar
 
     private var raceId: Long? = null
@@ -265,9 +327,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     private var editType: Int? = null
 
     private lateinit var cityCodesDialog: DialogFragment
-    private lateinit var raceCodesDilaog: DialogFragment
+    private lateinit var raceCodesDialog: DialogFragment
     private lateinit var numberPadDialog: DialogFragment
     private lateinit var timePickDialog: DialogFragment
 
     private lateinit var rootView: View
+    //</editor-fold>
 }

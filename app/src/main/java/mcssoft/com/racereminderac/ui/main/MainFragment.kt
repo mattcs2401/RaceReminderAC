@@ -24,6 +24,7 @@ import mcssoft.com.racereminderac.model.RaceViewModel
 
 class MainFragment : Fragment(), IClick.ItemSelect {
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         rootView = inflater.inflate(R.layout.main_fragment, container, false)
@@ -52,23 +53,19 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         if(fab.isOrWillBeHidden) {
             fab.show()
         }
-
         // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
         raceViewModel.getAllRaces().observe(activity!!, Observer<List<Race>> { races ->
             raceAdapter.swapData(races)
         })
-
-//        raceViewModel.getAllRaces().observe(activity!!, RaceListObserver(raceAdapter)) //raceObserver)
-
     }
+    //</editor-fold>
 
     override fun onItemSelect(lPos: Int) {
         // callback to the Activity with the selected Race object
+        // TBA - use EventBus ?
         (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
-//        Snackbar.make(rootView, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
     }
 
     private lateinit var rootView: View
