@@ -60,6 +60,6 @@ class RaceCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         (view.findViewById<Button>(R.id.id_rc_btn_S)).setOnClickListener(this)
     }
 
-    private lateinit var rootView: View
-    private var raceCode: String? = null
+    private lateinit var rootView: View     // dialog's main view.
+    private var raceCode: String? = null    // selected button value.
 }

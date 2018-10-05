@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.ui
+package mcssoft.com.racereminderac.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

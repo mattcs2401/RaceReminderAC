@@ -7,11 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.EventBus
@@ -56,7 +53,7 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
     }
 
     private fun initialiseViews(view: View) {
-        // Note: 'synthetic' didn't seem to work ?
+        // Note: 'synthetic' didn't seem to work here ?
         (view.findViewById<Button>(R.id.id_cc_btn_A)).setOnClickListener(this)
         (view.findViewById<Button>(R.id.id_cc_btn_B)).setOnClickListener(this)
         (view.findViewById<Button>(R.id.id_cc_btn_C)).setOnClickListener(this)
@@ -77,6 +74,6 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         (view.findViewById<Button>(R.id.id_cc_btn_Z)).setOnClickListener(this)
     }
 
-    private lateinit var rootView: View
-    private var cityCode: String? = null
+    private lateinit var rootView: View     // dialog's main view.
+    private var cityCode: String? = null    // selected button value.
 }

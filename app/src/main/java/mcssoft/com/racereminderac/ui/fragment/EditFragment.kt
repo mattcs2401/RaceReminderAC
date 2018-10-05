@@ -1,5 +1,6 @@
 package mcssoft.com.racereminderac.ui.fragment
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
@@ -228,6 +229,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     /**
      * Setup UI and view model.
      */
+    @SuppressLint("ClickableViewAccessibility")
     private fun initialiseUI(view: View) {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
