@@ -220,6 +220,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             R.integer.race_codes_dialog_id -> {
                 msg = "No Race Code was selected."
             }
+            R.integer.number_pad_dialog_id -> {
+                msg = "No number was selected."
+            }
         }
         snackBar = Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG)
         snackBar.setAction("Show", SnackBarView(id))
@@ -320,6 +323,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                 }
                 R.integer.race_codes_dialog_id -> {
                     launchRaceCodes()
+                }
+                R.integer.number_pad_dialog_id -> {
+                    // TODO - differentiate race number or race selection.
+                    //launchNumberPad( )
                 }
             }
         }
