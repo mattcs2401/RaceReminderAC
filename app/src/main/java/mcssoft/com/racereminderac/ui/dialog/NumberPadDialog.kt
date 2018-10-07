@@ -49,12 +49,12 @@ class NumberPadDialog : DialogFragment(), DialogInterface.OnClickListener, View.
 
     override fun onClick(dialog: DialogInterface?, which: Int) {
         var evntMsg: EventMessage? = null
+        args = arguments?.getInt("key")!!
         when(which) {
             Dialog.BUTTON_POSITIVE -> {
                 if(number.isBlank()) {
-                    evntMsg = EventMessage("", R.integer.number_pad_dialog_id, R.integer.ctxNoNumber)
+                    evntMsg = EventMessage("", R.integer.number_pad_dialog_id, args)
                 } else {
-                    arguments?.getInt("key")
                     evntMsg = EventMessage(number, R.integer.number_pad_dialog_id, args)
                 }
                 EventBus.getDefault().post(evntMsg)
@@ -68,7 +68,8 @@ class NumberPadDialog : DialogFragment(), DialogInterface.OnClickListener, View.
     }
 
     private fun initialiseViews(view: View) {
-        // Note: 'synthetic' didn't seem to work here ?
+        /** Note: 'synthetic' didn't seem to work here ? **/
+
         btn0 = view.findViewById<Button>(R.id.id_np_btn_0)
         btn0.setOnClickListener(this)
         btn0.isEnabled = false

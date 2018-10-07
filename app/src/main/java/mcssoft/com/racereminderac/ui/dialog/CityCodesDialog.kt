@@ -42,7 +42,7 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         when(which) {
             Dialog.BUTTON_POSITIVE -> {
                 if(cityCode == null) {
-                    evntMsg = EventMessage("", R.integer.city_codes_dialog_id, R.integer.ctxNoCityCode)
+                    evntMsg = EventMessage("", R.integer.city_codes_dialog_id, -1) //R.integer.ctxNoCityCode)
                 } else {
                     evntMsg = EventMessage(cityCode!!, R.integer.city_codes_dialog_id, -1)
                 }
@@ -53,7 +53,7 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
     }
 
     private fun initialiseViews(view: View) {
-        // Note: 'synthetic' didn't seem to work here ?
+        /** Note: 'synthetic' didn't seem to work here ? **/
         (view.findViewById<Button>(R.id.id_cc_btn_A)).setOnClickListener(this)
         (view.findViewById<Button>(R.id.id_cc_btn_B)).setOnClickListener(this)
         (view.findViewById<Button>(R.id.id_cc_btn_C)).setOnClickListener(this)

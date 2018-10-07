@@ -73,8 +73,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             doOnMessageEvent(event)
         } else {
             // Nothing was selected in the dialog except for the OK button.
-            doSnackbar(event.ident)
-//            doOnMessageEventBlank(event)
+            doSnackbar(event.ident, event.ctx)
         }
     }
 
@@ -210,7 +209,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
      * Set the Snackbar dependant on the dialog id.
      * @param id - the dialog id.
      */
-    private fun doSnackbar(id: Int) {
+    private fun doSnackbar(id: Int, ctx: Int) {
         var msg: String = ""
         var snackBar: Snackbar? = null
         when(id) {
@@ -221,11 +220,22 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                 msg = "No Race Code was selected."
             }
             R.integer.number_pad_dialog_id -> {
-                msg = "No number was selected."
+                when(ctx) {
+                    R.integer.npCtxRaceNum -> {
+                        msg = "No Race number selected."
+                    }
+                    R.integer.npCtxRaceSel -> {
+                        msg = "No Race selection made."
+                    }
+                }
             }
         }
         snackBar = Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG)
-        snackBar.setAction("Show", SnackBarView(id))
+        if(ctx != -1) {
+            snackBar.setAction("Show", SnackBarView(id, ctx))
+        } else {
+            snackBar.setAction("Show", SnackBarView(id))
+        }
         snackBar.show()
     }
 
@@ -310,11 +320,16 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     }
 
     /**
-     * Utility class to create a 'local' Snackbar to differentiate between the diffent dialogs.
+     * Utility class to create a local 'Snackbar view' to differentiate between the different dialogs.
      * @param id - the id of the dialog.
      */
     inner class SnackBarView(id: Int) : View.OnClickListener {
+        constructor(id: Int, ctx: Int) : this(id) {
+            this.ctx = ctx
+        }
+
         private var id: Int = id
+        private var ctx: Int = 0
 
         override fun onClick(view: View?) {
             when (id) {
@@ -325,8 +340,14 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                     launchRaceCodes()
                 }
                 R.integer.number_pad_dialog_id -> {
-                    // TODO - differentiate race number or race selection.
-                    //launchNumberPad( )
+                    when(ctx) {
+                        R.integer.npCtxRaceNum -> {
+                            launchRaceNum()
+                        }
+                        R.integer.npCtxRaceSel -> {
+                            launchRaceSel()
+                        }
+                    }
                 }
             }
         }

@@ -42,7 +42,7 @@ class RaceCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         when(which) {
             Dialog.BUTTON_POSITIVE -> {
                 if(raceCode == null) {
-                    evntMsg = EventMessage("", R.integer.race_codes_dialog_id, R.integer.ctxNoRaceCode)
+                    evntMsg = EventMessage("", R.integer.race_codes_dialog_id, -1) //R.integer.ctxNoRaceCode)
                 } else {
                     evntMsg = EventMessage(raceCode!!, R.integer.race_codes_dialog_id, -1)
                 }
@@ -53,7 +53,7 @@ class RaceCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
     }
 
     private fun initialiseViews(view: View) {
-        // Note: 'synthetic' didn't seem to work ?
+        /** Note: 'synthetic' didn't seem to work ? **/
         (view.findViewById<Button>(R.id.id_rc_btn_R)).setOnClickListener(this)
         (view.findViewById<Button>(R.id.id_rc_btn_T)).setOnClickListener(this)
         (view.findViewById<Button>(R.id.id_rc_btn_G)).setOnClickListener(this)
