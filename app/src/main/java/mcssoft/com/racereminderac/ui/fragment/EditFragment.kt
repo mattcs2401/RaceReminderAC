@@ -127,7 +127,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         fragTrans.addToBackStack(null)
         etCityCode.requestFocusFromTouch()
         cityCodesDialog = CityCodesDialog()
-        cityCodesDialog.show(fragTrans, "city_codes_dialog")
+        cityCodesDialog.show(fragTrans, getString(R.string.cc_tag))
     }
 
     private fun launchRaceCodes() {
@@ -135,34 +135,34 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         fragTrans.addToBackStack(null)
         etRaceCode.requestFocusFromTouch()
         raceCodesDialog = RaceCodesDialog()
-        raceCodesDialog.show(fragTrans, "race_codes_dialog")
+        raceCodesDialog.show(fragTrans, getString(R.string.rc_tag))
     }
 
     private fun launchRaceNum() {
         val bundle = Bundle()
-        bundle.putInt("key", R.integer.npCtxRaceNum)
+        bundle.putInt(getString(R.string.key_general), R.integer.npCtxRaceNum)
         val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
         fragTrans.addToBackStack(null)
         numberPadDialog = NumberPadDialog()
         numberPadDialog.arguments = bundle
-        numberPadDialog.show(fragTrans, "number_pad_dialog")
+        numberPadDialog.show(fragTrans, getString(R.string.np_tag))
     }
 
     private fun launchRaceSel() {
         val bundle = Bundle()
-        bundle.putInt("key", R.integer.npCtxRaceSel)
+        bundle.putInt(getString(R.string.key_general), R.integer.npCtxRaceSel)
         val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
         fragTrans.addToBackStack(null)
         numberPadDialog = NumberPadDialog()
         numberPadDialog.arguments = bundle
-        numberPadDialog.show(fragTrans, "number_pad_dialog")
+        numberPadDialog.show(fragTrans, getString(R.string.np_tag))
     }
 
     private fun launchTimePick() {
         val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
         fragTrans.addToBackStack(null)
         timePickDialog = TimePickDialog()
-        timePickDialog.show(fragTrans, "time_pick_dialog")
+        timePickDialog.show(fragTrans, getString(R.string.tp_tag))
     }
     //</editor-fold>
 
@@ -204,27 +204,27 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         var snackBar: Snackbar? = null
         when(id) {
             R.integer.city_codes_dialog_id -> {
-                msg = "No City Code was selected."
+                msg = getString(R.string.cc_no_selection)
             }
             R.integer.race_codes_dialog_id -> {
-                msg = "No Race Code was selected."
+                msg = getString(R.string.rc_no_selection)
             }
             R.integer.number_pad_dialog_id -> {
                 when(ctx) {
                     R.integer.npCtxRaceNum -> {
-                        msg = "No Race number selected."
+                        msg = getString(R.string.np_no_raceno_sel)
                     }
                     R.integer.npCtxRaceSel -> {
-                        msg = "No Race selection made."
+                        msg = getString(R.string.np_no_race_sel)
                     }
                 }
             }
         }
         snackBar = Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG)
         if(ctx != -1) {
-            snackBar.setAction("Show", SnackBarView(id, ctx))
+            snackBar.setAction(getString(R.string.sb_show), SnackBarView(id, ctx))
         } else {
-            snackBar.setAction("Show", SnackBarView(id))
+            snackBar.setAction(getString(R.string.sb_show), SnackBarView(id))
         }
         snackBar.show()
     }

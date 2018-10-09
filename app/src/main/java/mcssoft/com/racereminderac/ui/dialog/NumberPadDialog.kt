@@ -3,6 +3,7 @@ package mcssoft.com.racereminderac.ui.dialog
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,11 +25,16 @@ class NumberPadDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         rootView = inflater.inflate(R.layout.number_pad, null)
         initialiseViews(rootView)
 
-        args = arguments!!.getInt("key")
+        var title = ""
+        args = arguments!!.getInt(getString(R.string.key_general))
+        when(args) {
+            R.integer.npCtxRaceNum -> title = getString(R.string.np_title_race_no)
+            R.integer.npCtxRaceSel -> title = getString(R.string.np_title_race_sel)
+        }
 
         // build the dialog.
         val builder: AlertDialog.Builder = AlertDialog.Builder(this.context!!)
-        builder.setTitle("Enter a number")
+        builder.setTitle(title)
                 .setView(rootView)
                 .setPositiveButton(R.string.lbl_ok, this)
                 .setNegativeButton(R.string.lbl_cancel, this)
@@ -56,7 +62,7 @@ class NumberPadDialog : DialogFragment(), DialogInterface.OnClickListener, View.
      */
     override fun onClick(dialog: DialogInterface?, which: Int) {
         var evntMsg: EventMessage? = null
-        args = arguments?.getInt("key")!!
+//        args = arguments?.getInt("key")!!
         when(which) {
             // OK button.
             Dialog.BUTTON_POSITIVE -> {
