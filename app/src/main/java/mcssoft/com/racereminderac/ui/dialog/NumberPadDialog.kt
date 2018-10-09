@@ -35,9 +35,13 @@ class NumberPadDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         return builder.create()
     }
 
+    /**
+     * Listener for the dialog's (custom) number buttons.
+     */
     override fun onClick(view: View) {
         // TODO - implement on the fly checking digit validation.
         if(number.isBlank()) {
+            // no number previously selected.
             number = (view as Button).text.toString()
         } else {
             // TBA - validation
@@ -47,14 +51,20 @@ class NumberPadDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         }
     }
 
+    /**
+     * Listener for the dialog's (standard) OK and Cancel buttons.
+     */
     override fun onClick(dialog: DialogInterface?, which: Int) {
         var evntMsg: EventMessage? = null
         args = arguments?.getInt("key")!!
         when(which) {
+            // OK button.
             Dialog.BUTTON_POSITIVE -> {
                 if(number.isBlank()) {
+                    // only the OK button has been selected.
                     evntMsg = EventMessage("", R.integer.number_pad_dialog_id, args)
                 } else {
+                    // a number button has previously been selected.
                     evntMsg = EventMessage(number, R.integer.number_pad_dialog_id, args)
                 }
                 EventBus.getDefault().post(evntMsg)
@@ -64,7 +74,7 @@ class NumberPadDialog : DialogFragment(), DialogInterface.OnClickListener, View.
     }
 
     private fun validate() {
-        // TBA
+        // TODO - validation routine of some sort.
     }
 
     private fun initialiseViews(view: View) {

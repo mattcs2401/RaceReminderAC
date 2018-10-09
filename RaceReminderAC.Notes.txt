@@ -7,13 +7,12 @@
 --------
 Dialogs:
 --------
-1) For the city codes, race codes and number pad dialogs, highlight the applicable button when the dialog shows.
- 
-2) Number pad dialog needs a lot of work.
+1) Highlight the applicable button when the dialog shows.
+   -> what about number pad dialog when number is two digits ?
 
-3) Look at different styles of buttons; round, oval etc.
+2) Look at different styles of buttons; round, oval etc.
 
-4) Keep colour inline with app theme (like time pick dialog).
+3) Keep colour inline with app theme (like time pick dialog).
 
 ---------
 Other UI:

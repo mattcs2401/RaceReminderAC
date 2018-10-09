@@ -102,12 +102,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onTouch">
     override fun onTouch(view: View, event: MotionEvent): Boolean {
         if(event.action == MotionEvent.ACTION_DOWN) {
-            val bundle = Bundle()
             // set the fragment transaction
             val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
             fragTrans.addToBackStack(null)
             // set the dialog and show.
-            val id = view.id
             when(view.id) {
                 R.id.id_etCityCode -> {
                     launchCityCodes()
@@ -322,14 +320,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     /**
      * Utility class to create a local 'Snackbar view' to differentiate between the different dialogs.
      * @param id - the id of the dialog.
+     * @param ctx - optional indicator as to what the dialog is being used for.
      */
-    inner class SnackBarView(id: Int) : View.OnClickListener {
-        constructor(id: Int, ctx: Int) : this(id) {
-            this.ctx = ctx
-        }
+    inner class SnackBarView(id: Int, ctx: Int = -1) : View.OnClickListener {
 
         private var id: Int = id
-        private var ctx: Int = 0
+        private var ctx: Int = ctx
 
         override fun onClick(view: View?) {
             when (id) {
