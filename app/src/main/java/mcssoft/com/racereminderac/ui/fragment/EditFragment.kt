@@ -100,6 +100,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onTouch">
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View, event: MotionEvent): Boolean {
         if(event.action == MotionEvent.ACTION_DOWN) {
             // set the fragment transaction
@@ -107,26 +108,17 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             fragTrans.addToBackStack(null)
             // set the dialog and show.
             when(view.id) {
-                R.id.id_etCityCode -> {
-                    launchCityCodes()
-                }
-                R.id.id_etRaceCode -> {
-                    launchRaceCodes()
-                }
-                R.id.id_etRaceNum -> {
-                    launchRaceNum()
-                }
-                R.id.id_etRaceSel -> {
-                    launchRaceSel()
-                }
-                R.id.id_etRaceTime -> {
-                    launchTimePick()
-                }
+                R.id.id_etCityCode -> launchCityCodes()
+                R.id.id_etRaceCode -> launchRaceCodes()
+                R.id.id_etRaceNum -> launchRaceNum()
+                R.id.id_etRaceSel -> launchRaceSel()
+                R.id.id_etRaceTime -> launchTimePick()
             }
             return true
         }
         return false
     }
+
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility - launchers">
