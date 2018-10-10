@@ -28,7 +28,7 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
 
         args = arguments?.getString("key")!!
         if(!args.isBlank()) {
-            highlightCode()
+            tvCurrSel.setText("Previous selection was: " + args)
         }
 
         // build the dialog.
@@ -58,15 +58,7 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         }
         this.dialog.dismiss()
     }
-
-    private fun highlightCode() {
-        val msg = "Previous selection was: "
-        when(args) {
-            "A" -> {tvCurrSel.setText(msg + "A")}
-            "B" -> {tvCurrSel.setText(msg + "B")}
-        }
-    }
-
+    
     private fun initialiseViews(view: View) {
         /** Note: 'synthetic' didn't seem to work here ? **/
         tvCurrSel = view.findViewById<TextView>(R.id.id_tv_curr_sel)

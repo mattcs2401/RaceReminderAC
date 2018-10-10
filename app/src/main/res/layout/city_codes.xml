@@ -27,15 +27,13 @@
                 android:id="@+id/id_cc_btn_A"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/cc_A"
-                android:theme="@style/PrimaryButtonStyle"/>
+                android:text="@string/cc_A"/>
 
             <Button
                 android:id="@+id/id_cc_btn_B"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/cc_B"
-                android:theme="@style/PrimaryButtonStyle"/>
+                android:text="@string/cc_B"/>
 
             <Button
                 android:id="@+id/id_cc_btn_C"
