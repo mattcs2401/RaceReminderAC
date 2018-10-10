@@ -125,8 +125,14 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     private fun launchCityCodes() {
         val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
         fragTrans.addToBackStack(null)
+        var bundle = Bundle()
+        var code = etCityCode.text.toString()
+        if(!code.isBlank()) {
+            bundle.putString("key", code)
+        }
         etCityCode.requestFocusFromTouch()
         cityCodesDialog = CityCodesDialog()
+        cityCodesDialog.arguments = bundle
         cityCodesDialog.show(fragTrans, getString(R.string.cc_tag))
     }
 

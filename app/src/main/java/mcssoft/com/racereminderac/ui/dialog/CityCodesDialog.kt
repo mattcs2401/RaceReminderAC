@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import kotlinx.android.synthetic.main.city_codes.view.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.EventBus
@@ -23,6 +25,11 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         // Note: onViewCreated() is not called when using the builder.
         rootView = inflater.inflate(R.layout.city_codes, null)
         initialiseViews(rootView)
+
+        args = arguments?.getString("key")!!
+        if(!args.isBlank()) {
+            highlightCode()
+        }
 
         // build the dialog.
         val builder: AlertDialog.Builder = AlertDialog.Builder(this.context!!)
@@ -52,8 +59,20 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         this.dialog.dismiss()
     }
 
+    private fun highlightCode() {
+        val msg = "Previous selection was: "
+        when(args) {
+            "A" -> {tvCurrSel.setText(msg + "A")}
+            "B" -> {tvCurrSel.setText(msg + "B")}
+        }
+    }
+
     private fun initialiseViews(view: View) {
         /** Note: 'synthetic' didn't seem to work here ? **/
+        tvCurrSel = view.findViewById<TextView>(R.id.id_tv_curr_sel)
+
+//        btn_A = view.findViewById<Button>(R.id.id_cc_btn_A)
+//        btn_A.setOnClickListener(this)
         (view.findViewById<Button>(R.id.id_cc_btn_A)).setOnClickListener(this)
         (view.findViewById<Button>(R.id.id_cc_btn_B)).setOnClickListener(this)
         (view.findViewById<Button>(R.id.id_cc_btn_C)).setOnClickListener(this)
@@ -74,6 +93,10 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         (view.findViewById<Button>(R.id.id_cc_btn_Z)).setOnClickListener(this)
     }
 
+    private lateinit var args: String
     private lateinit var rootView: View     // dialog's main view.
     private var cityCode: String? = null    // selected button value.
+
+    private lateinit var tvCurrSel: TextView
+    private lateinit var btn_A: Button
 }

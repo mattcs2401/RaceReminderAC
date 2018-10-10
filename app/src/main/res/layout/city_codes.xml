@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:layout_marginStart="32dp"
@@ -26,19 +27,21 @@
                 android:id="@+id/id_cc_btn_A"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/cc_A" />
+                android:text="@string/cc_A"
+                android:theme="@style/PrimaryButtonStyle"/>
 
             <Button
                 android:id="@+id/id_cc_btn_B"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/cc_B" />
+                android:text="@string/cc_B"
+                android:theme="@style/PrimaryButtonStyle"/>
 
             <Button
                 android:id="@+id/id_cc_btn_C"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:text="@string/cc_C" />
+                android:text="@string/cc_C"/>
 
             <Button
                 android:id="@+id/id_cc_btn_D"
@@ -133,4 +136,14 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/id_tv_curr_sel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Current selection is: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

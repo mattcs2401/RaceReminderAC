@@ -49,6 +49,7 @@ class NumberPadDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         if(number.isBlank()) {
             // no number previously selected.
             number = (view as Button).text.toString()
+            btn0.isEnabled = true
         } else {
             // TBA - validation
             if(number.length < 3) {
