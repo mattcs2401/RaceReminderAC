@@ -10,7 +10,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.city_codes.view.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.EventBus
@@ -28,7 +27,7 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
 
         args = arguments?.getString("key")!!
         if(!args.isBlank()) {
-            tvCurrSel.setText("Previous selection was: " + args)
+            tvPrevSel.setText(args)
         }
 
         // build the dialog.
@@ -58,10 +57,10 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
         }
         this.dialog.dismiss()
     }
-    
+
     private fun initialiseViews(view: View) {
         /** Note: 'synthetic' didn't seem to work here ? **/
-        tvCurrSel = view.findViewById<TextView>(R.id.id_tv_curr_sel)
+        tvPrevSel = view.findViewById<TextView>(R.id.id_tv_prev_sel)
 
 //        btn_A = view.findViewById<Button>(R.id.id_cc_btn_A)
 //        btn_A.setOnClickListener(this)
@@ -89,6 +88,6 @@ class CityCodesDialog : DialogFragment(), DialogInterface.OnClickListener, View.
     private lateinit var rootView: View     // dialog's main view.
     private var cityCode: String? = null    // selected button value.
 
-    private lateinit var tvCurrSel: TextView
+    private lateinit var tvPrevSel: TextView
     private lateinit var btn_A: Button
 }
