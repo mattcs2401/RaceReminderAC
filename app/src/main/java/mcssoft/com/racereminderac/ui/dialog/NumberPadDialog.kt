@@ -3,16 +3,14 @@ package mcssoft.com.racereminderac.ui.dialog
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.DialogInterface
-import android.content.res.Resources
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.EventMessage
+import mcssoft.com.racereminderac.R
 import org.greenrobot.eventbus.EventBus
 
 class NumberPadDialog : DialogFragment(), DialogInterface.OnClickListener, View.OnClickListener {

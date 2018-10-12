@@ -159,7 +159,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         bundle.putInt(getString(R.string.key_general), R.integer.npCtxRaceSel)
         val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
         fragTrans.addToBackStack(null)
-        numberPadDialog = NumberPadDialog()
+        numberPadDialog = NumberPadDialog2()
         numberPadDialog.arguments = bundle
         numberPadDialog.show(fragTrans, getString(R.string.np_tag))
     }

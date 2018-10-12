@@ -14,4 +14,10 @@
     <integer name="ctxNoRaceSel">4</integer>     <!--No race selection made when NumberPad dialog showing.-->
     <integer name="npCtxRaceNum">5</integer>
     <integer name="npCtxRaceSel">6</integer>
+
+    <integer name="raceNoMinVal">1</integer>
+    <integer name="raceNoMaxVal">12</integer>
+    <integer name="raceselMinVal">1</integer>
+    <integer name="raceSelMaxVal">24</integer>
+
 </resources>
