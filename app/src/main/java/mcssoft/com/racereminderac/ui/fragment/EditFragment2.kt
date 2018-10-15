@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.NumberPicker
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.edit_fragment.*
+import kotlinx.android.synthetic.main.edit_fragment2.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceObserver
@@ -171,6 +173,9 @@ class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
         // Get the toolbar.
         toolBar = activity?.id_toolbar as Toolbar
 
+        npCityCode = id_np_city_code
+        
+
 //        // Get the Race related views.
 //        etCityCode = id_etCityCode
 //        etCityCode.setOnTouchListener(this)
@@ -202,6 +207,7 @@ class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private lateinit var toolBar: Toolbar
+    private lateinit var npCityCode: NumberPicker
 
     private var raceId: Long? = null
 //    private lateinit var etCityCode : EditText

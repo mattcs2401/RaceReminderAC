@@ -9,12 +9,23 @@
     tools:context=".ui.fragment.EditFragment2">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/id_tv_city_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:text="EditFragment2"
+        android:text="City Code"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/id_np_city_code"
+        android:layout_width="48dp"
+        android:layout_height="32dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_tv_city_code" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
