@@ -19,6 +19,10 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.model.RaceViewModel
+import mcssoft.com.racereminderac.utility.EventMessage
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class MainFragment : Fragment(), IClick.ItemSelect {
 
@@ -59,6 +63,30 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         })
     }
     //</editor-fold>
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    /**
+     * EventBus returns here.
+     * @param event - The EventBus message object.
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    fun onMessageEvent(event: EventMessage) {
+        if(!event.message.isBlank()) {
+//            doOnMessageEvent(event)
+        } else {
+            // Nothing was selected in the dialog except for the OK button.
+//            doSnackbar(event.ident, event.ctx)
+        }
+    }
 
     override fun onItemSelect(lPos: Int) {
         // callback to the Activity with the selected Race object

@@ -52,30 +52,30 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 //        super.onCreateContextMenu(menu, v, menuInfo)
 //    }
 
-    override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        EventBus.getDefault().register(this)
+//    }
 
-    override fun onStop() {
-        super.onStop()
-        EventBus.getDefault().unregister(this)
-    }
+//    override fun onStop() {
+//        super.onStop()
+//        EventBus.getDefault().unregister(this)
+//    }
     //</editor-fold>
 
-    /**
-     * EventBus returns here.
-     * @param event - The EventBus message object.
-     */
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(event: EventMessage) {
-        if(!event.message.isBlank()) {
-            doOnMessageEvent(event)
-        } else {
-            // Nothing was selected in the dialog except for the OK button.
-            doSnackbar(event.ident, event.ctx)
-        }
-    }
+//    /**
+//     * EventBus returns here.
+//     * @param event - The EventBus message object.
+//     */
+//    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+//    fun onMessageEvent(event: EventMessage) {
+//        if(!event.message.isBlank()) {
+//            doOnMessageEvent(event)
+//        } else {
+//            // Nothing was selected in the dialog except for the OK button.
+//            doSnackbar(event.ident, event.ctx)
+//        }
+//    }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onClick">
     override fun onClick(view: View) {
@@ -118,7 +118,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         }
         return false
     }
-
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility - launchers">

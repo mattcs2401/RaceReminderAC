@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelec
         when(view.id) {
             R.id.id_fab -> {
                 val bundle = Bundle()
-                bundle.putInt(getString(R.string.key_edit_type), R.integer.edit_race_new)
-                navController.navigate(R.id.id_edit_fragment, bundle)
+                bundle.putInt(getString(R.string.key_edit_type), resources.getInteger(R.integer.edit_race_new))
+                navController.navigate(R.id.id_edit_fragment2, bundle)
             }
         }
     }
@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelec
     // From interface IRace.
     override fun onRaceSelect(id: Long ) {
         val bundle = Bundle()
-        bundle.putInt(getString(R.string.key_edit_type), R.integer.edit_race_existing)
+        bundle.putInt(getString(R.string.key_edit_type), resources.getInteger(R.integer.edit_race_existing))
         bundle.putLong(getString(R.string.key_edit_existing), id)
-        navController.navigate(R.id.id_edit_fragment, bundle)
+        navController.navigate(R.id.id_edit_fragment2, bundle)
     }
 
 //    private fun setupBottomNavMenu(navController: NavController) {

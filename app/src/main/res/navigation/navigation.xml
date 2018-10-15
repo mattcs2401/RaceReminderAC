@@ -12,11 +12,11 @@
 
         <action
             android:id="@+id/mainFragment_to_editFragment"
-            app:destination="@id/id_edit_fragment" />
+            app:destination="@id/id_edit_fragment2" />
     </fragment>
     <fragment
-        android:id="@+id/id_edit_fragment"
-        android:name="mcssoft.com.racereminderac.ui.fragment.EditFragment"
+        android:id="@+id/id_edit_fragment2"
+        android:name="mcssoft.com.racereminderac.ui.fragment.EditFragment2"
         android:label="EditFragment"
-        tools:layout="@layout/edit_fragment"/>
+        tools:layout="@layout/edit_fragment2"/>
 </navigation>
