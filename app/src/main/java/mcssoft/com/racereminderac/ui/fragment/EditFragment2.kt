@@ -20,6 +20,10 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.model.RaceObserver
+import mcssoft.com.racereminderac.utility.EventMessage
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
 
@@ -44,10 +48,30 @@ class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
         }
     }
 
-//    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
-//        super.onCreateContextMenu(menu, v, menuInfo)
-//    }
+     override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
     //</editor-fold>
+
+    /**
+     * EventBus returns here (primarily for TimePickDialog).
+     * @param event - The EventBus message object.
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    fun onMessageEvent(event: EventMessage) {
+        if(!event.message.isBlank()) {
+//            doOnMessageEvent(event)
+        } else {
+            // Nothing was selected in the dialog except for the OK button.
+//            doSnackbar(event.ident, event.ctx)
+        }
+    }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onClick">
     override fun onClick(view: View) {
@@ -121,7 +145,11 @@ class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
      */
     private fun collateValues(): Race {
         // TODO - get NumberPicker values.
-        val race = Race("","","","","")
+        val race = Race(ccVals.get(npCityCode.value),
+                rcVals.get(npRaceCode.value),
+                rnVals.get(npRaceNo.value),
+                rsVals.get(npRaceSel.value),
+                "")
         race.id = raceId
         return race
     }
@@ -139,12 +167,16 @@ class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
 
         // Set the number pickers.
         npCityCode = id_np_city_code
-        val ccVals = resources.getStringArray(R.array.cityCodes)
+        ccVals = resources.getStringArray(R.array.cityCodes)
         npCityCode.minValue = 0
         npCityCode.maxValue = ccVals.size - 1
         npCityCode.displayedValues = ccVals
         npCityCode.wrapSelectorWheel = true
+//        npCityCode.setFormatter(this)
 
+        npCityCode.setFormatter(NumberPicker.Formatter { value ->
+            ccVals[value]
+        })
         npRaceCode = id_np_race_code
         val rcVals = resources.getStringArray(R.array.raceCodes)
         npRaceCode.minValue = 0
@@ -183,5 +215,9 @@ class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
     private lateinit var btnSave: Button
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var rootView: View
+    private lateinit var ccVals: Array<String>
+    private lateinit var rcVals: Array<String>
+    private lateinit var rnVals: Array<String>
+    private lateinit var rsVals: Array<String>
     //</editor-fold>
 }
