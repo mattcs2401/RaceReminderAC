@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/id_edit_fragment2"
-        android:name="mcssoft.com.racereminderac.ui.fragment.EditFragment2"
+        android:name="mcssoft.com.racereminderac.ui.fragment.EditFragment"
         android:label="EditFragment"
-        tools:layout="@layout/edit_fragment2"/>
+        tools:layout="@layout/edit_fragment"/>
 </navigation>

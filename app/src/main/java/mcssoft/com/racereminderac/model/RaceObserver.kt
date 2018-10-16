@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.NumberPicker
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.edit_fragment2.view.*
+import kotlinx.android.synthetic.main.edit_fragment.view.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 

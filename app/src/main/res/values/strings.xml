@@ -94,4 +94,7 @@
         <item>24</item>
     </string-array>
 
+    <!-- Time picker. -->
+    <string name="tp_tag">time_pick_dialog</string>
+
 </resources>
