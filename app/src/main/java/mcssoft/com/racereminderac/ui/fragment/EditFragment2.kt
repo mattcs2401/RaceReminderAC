@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.NumberPicker
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
@@ -20,6 +21,7 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.model.RaceObserver
+import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import mcssoft.com.racereminderac.utility.EventMessage
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -66,24 +68,24 @@ class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(event: EventMessage) {
         if(!event.message.isBlank()) {
-//            doOnMessageEvent(event)
-        } else {
-            // Nothing was selected in the dialog except for the OK button.
-//            doSnackbar(event.ident, event.ctx)
+            btnTime.text = event.msg
         }
     }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onClick">
     override fun onClick(view: View) {
         when(view.id) {
+            R.id.id_btn_time -> {
+                launchTimePickDialog()
+            }
             R.id.id_btn_save -> {
                 if(checkValues()) {
                     var race = collateValues()
                     when(editType) {
-                        R.integer.edit_race_existing -> {
+                        resources.getInteger(R.integer.edit_race_existing) -> {
                             raceViewModel.update(race)
                         }
-                        R.integer.edit_race_new -> {
+                        resources.getInteger(R.integer.edit_race_new) -> {
                             raceViewModel.insert(race)
                         }
                     }
@@ -104,11 +106,10 @@ class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
             fragTrans.addToBackStack(null)
             // set the dialog and show.
             when(view.id) {
-//                R.id.id_etCityCode -> launchCityCodes()
-//                R.id.id_etRaceCode -> launchRaceCodes()
-//                R.id.id_etRaceNum -> launchRaceNum()
-//                R.id.id_etRaceSel -> launchRaceSel()
-//                R.id.id_etRaceTime -> launchTimePick()
+//                R.id.id_etRaceTime -> {
+//                    timePickDialog = TimePickDialog()
+//                    timePickDialog.show(fragTrans, getString(R.string.tp_tag))
+//                }
             }
             return true
         }
@@ -149,54 +150,61 @@ class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
                 rcVals.get(npRaceCode.value),
                 rnVals.get(npRaceNo.value),
                 rsVals.get(npRaceSel.value),
-                "")
+                btnTime.text.toString())
         race.id = raceId
         return race
+    }
+
+    private fun launchTimePickDialog() {
+        val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+        fragTrans.addToBackStack(null)
+        timePickDialog = TimePickDialog()
+        timePickDialog.show(fragTrans, getString(R.string.tp_tag))
     }
 
     private fun initialiseUI(view: View) {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
 
-        // Set the Save button and listener.
-        btnSave = id_btn_save
-        btnSave.setOnClickListener(this)
-
         // Get the toolbar.
         toolBar = activity?.id_toolbar as Toolbar
 
-        // Set the number pickers.
+        // Set the 'pickers'.
         npCityCode = id_np_city_code
         ccVals = resources.getStringArray(R.array.cityCodes)
         npCityCode.minValue = 0
         npCityCode.maxValue = ccVals.size - 1
         npCityCode.displayedValues = ccVals
         npCityCode.wrapSelectorWheel = true
-//        npCityCode.setFormatter(this)
 
-        npCityCode.setFormatter(NumberPicker.Formatter { value ->
-            ccVals[value]
-        })
         npRaceCode = id_np_race_code
-        val rcVals = resources.getStringArray(R.array.raceCodes)
+        rcVals = resources.getStringArray(R.array.raceCodes)
         npRaceCode.minValue = 0
         npRaceCode.maxValue = rcVals.size - 1
         npRaceCode.displayedValues = rcVals
         npRaceCode.wrapSelectorWheel = true
 
         npRaceNo = id_np_race_num
-        val rnVals = resources.getStringArray(R.array.raceNum)
+        rnVals = resources.getStringArray(R.array.raceNum)
         npRaceNo.minValue = 0
         npRaceNo.maxValue = rnVals.size - 1
         npRaceNo.displayedValues = rnVals
         npRaceNo.wrapSelectorWheel = true
 
         npRaceSel = id_np_race_sel
-        val rsVals = resources.getStringArray(R.array.raceSel)
+        rsVals = resources.getStringArray(R.array.raceSel)
         npRaceSel.minValue = 0
         npRaceSel.maxValue = rsVals.size - 1
         npRaceSel.displayedValues = rsVals
         npRaceSel.wrapSelectorWheel = true
+
+        // Set the Time button and listener.
+        btnTime = id_btn_time
+        btnTime.setOnClickListener(this)
+
+        // Set the Save button and listener.
+        btnSave = id_btn_save
+        btnSave.setOnClickListener(this)
 
         // view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
@@ -213,11 +221,13 @@ class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
     private var raceId: Long? = null
     private var editType: Int? = null
     private lateinit var btnSave: Button
+    private lateinit var btnTime: Button
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var rootView: View
     private lateinit var ccVals: Array<String>
     private lateinit var rcVals: Array<String>
     private lateinit var rnVals: Array<String>
     private lateinit var rsVals: Array<String>
+    private lateinit var timePickDialog: DialogFragment
     //</editor-fold>
 }
