@@ -41,13 +41,4 @@ class RaceObserver(race: LiveData<Race>, view: View) : Observer<Race> {
     }
 
 }
-//private fun collateValues(): Race {
-//    // TODO - get NumberPicker values.
-//    val race = Race(ccVals.get(npCityCode.value),
-//            rcVals.get(npRaceCode.value),
-//            rnVals.get(npRaceNo.value),
-//            rsVals.get(npRaceSel.value),
-//            btnTime.text.toString())
-//    race.id = raceId
-//    return race
-//}
+

@@ -16,54 +16,10 @@
     <string name="lbl_cancel">Cancel</string>
     <string name="lbl_ok">OK</string>
 
-    <!-- Message when no data. -->
-
     <!-- Keys. -->
     <string name="key_general">key</string>
     <string name="key_edit_type">edit_type</string>
     <string name="key_edit_existing">edit_existing</string>
-
-    <!-- Values. -->
-
-    <!-- *** Dialogs. *** -->
-    <!-- City Codes -->
-    <string name="cc_tag">city_codes_dialog</string>
-    <string name="cc_title">Select a City Code</string>
-    <string name="cc_no_selection">No City Code was selected.</string>
-    <string name="cc_A">A</string>
-    <string name="cc_B">B</string>
-    <string name="cc_C">C</string>
-    <string name="cc_D">D</string>
-    <string name="cc_E">E</string>
-    <string name="cc_F">F</string>
-    <string name="cc_I">I</string>
-    <string name="cc_L">L</string>
-    <string name="cc_M">M</string>
-    <string name="cc_N">N</string>
-    <string name="cc_O">O</string>
-    <string name="cc_P">P</string>
-    <string name="cc_Q">Q</string>
-    <string name="cc_S">S</string>
-    <string name="cc_T">T</string>
-    <string name="cc_V">V</string>
-    <string name="cc_X">X</string>
-    <string name="cc_Z">Z</string>
-    <!-- Race Codes-->
-    <string name="rc_tag">race_codes_dialog</string>
-    <string name="rc_title">Select a Race Code</string>
-    <string name="rc_no_selection">No Race Code was selected.</string>
-    <string name="rc_R">R</string>
-    <string name="rc_T">T</string>
-    <string name="rc_G">G</string>
-    <string name="rc_S">O</string>
-    <!-- Number pad. -->
-    <string name="np_tag">number_pad_dialog</string>
-    <string name="np_title_race_no">Enter a Race Number</string>
-    <string name="np_title_race_sel">Enter a Race Selection</string>
-    <string name="np_no_raceno_sel">No Race number was selected.</string>
-    <string name="np_no_race_sel">No Race selection was made.</string>
-    <!-- Time picker. -->
-    <string name="tp_tag">time_pick_dialog</string>
 
     <!-- Snackbar. -->
     <string name="sb_show">Show</string>

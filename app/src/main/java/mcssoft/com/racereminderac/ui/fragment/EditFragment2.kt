@@ -101,15 +101,8 @@ class EditFragment2 : Fragment(), View.OnClickListener , View.OnTouchListener {
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View, event: MotionEvent): Boolean {
         if(event.action == MotionEvent.ACTION_DOWN) {
-            // set the fragment transaction
-            val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
-            fragTrans.addToBackStack(null)
-            // set the dialog and show.
             when(view.id) {
-//                R.id.id_etRaceTime -> {
-//                    timePickDialog = TimePickDialog()
-//                    timePickDialog.show(fragTrans, getString(R.string.tp_tag))
-//                }
+                // TBA
             }
             return true
         }
