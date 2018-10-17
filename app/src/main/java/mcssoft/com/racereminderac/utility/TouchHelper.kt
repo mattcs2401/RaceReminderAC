@@ -1,0 +1,106 @@
+package mcssoft.com.racereminderac.utility
+
+import android.content.Context
+import android.graphics.*
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.ColorDrawable
+import androidx.core.content.ContextCompat
+import mcssoft.com.racereminderac.R
+
+/** https://www.journaldev.com/23164/android-recyclerview-swipe-to-delete-undo **/
+//class TouchHelper(context: Context) : ItemTouchHelper.Callback() {
+class TouchHelper(context: Context, swipeAction: SwipeAction) : ItemTouchHelper.Callback() {
+
+    public interface SwipeAction {
+        fun onViewSwiped(pos: Int)
+    }
+
+    private val swipeAction: SwipeAction
+    private val context: Context
+//    private val adapter: RaceAdapter
+//    private val viewHolder: RaceViewHolder
+    private val background: ColorDrawable
+    private val backgroundColour: Int
+    private val clearPaint: Paint
+    private val deleteDrawable: Drawable
+    private val intrinsicWidth: Int
+    private val intrinsicHeight: Int
+
+    init {
+        this.swipeAction = swipeAction
+        this.context = context
+//        this.adapter = adapter
+//        this.viewHolder = viewHolder
+
+        background = ColorDrawable()
+        backgroundColour = Color.parseColor("#b80f0a")
+        clearPaint = Paint()
+        clearPaint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.CLEAR))
+        deleteDrawable = ContextCompat.getDrawable(context, R.drawable.ic_delete)!!
+        intrinsicWidth = deleteDrawable.intrinsicWidth
+        intrinsicHeight = deleteDrawable.intrinsicHeight
+    }
+
+    override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+        return makeMovementFlags(0, ItemTouchHelper.LEFT);
+    }
+
+    override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+        // Used for drag and drop.
+        return false
+    }
+
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        swipeAction.onViewSwiped(viewHolder.adapterPosition)
+    }
+
+    override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+//        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+
+        val itemView = viewHolder.itemView
+        val itemHeight = itemView.height
+
+        val isCancelled = dX.equals(0) && !isCurrentlyActive
+
+        if (isCancelled) {
+            clearCanvas(c, itemView.right + dX, itemView.top as Float, itemView.right as Float, itemView.bottom as Float)
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            return
+        }
+
+        background.setColor(backgroundColour)
+        background.setBounds(itemView.right + dX as Int, itemView.top, itemView.right, itemView.bottom)
+        background.draw(c)
+
+        val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
+        val deleteIconMargin = (itemHeight - intrinsicHeight) / 2
+        val deleteIconLeft = itemView.right - deleteIconMargin - intrinsicWidth
+        val deleteIconRight = itemView.right - deleteIconMargin
+        val deleteIconBottom = deleteIconTop + intrinsicHeight
+
+
+        deleteDrawable.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
+        deleteDrawable.draw(c)
+
+        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+    }
+
+    override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
+        return 0.7f
+    }
+
+    override fun isLongPressDragEnabled(): Boolean {
+//        return super.isLongPressDragEnabled()
+        return false
+    }
+
+    private fun clearCanvas(c: Canvas, left: Float, top: Float, right: Float, bottom: Float) {
+        c.drawRect(left, top, right, bottom, clearPaint)
+    }
+
+
+
+
+}

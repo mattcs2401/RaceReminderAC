@@ -8,15 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
+import mcssoft.com.racereminderac.utility.TouchHelper
 
-class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
+class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>(), TouchHelper.SwipeAction {
 
     private var context : Context
     private var lRaces : List<Race>
 
     init {
         this.context = context
-        lRaces = ArrayList<Race>(0)
+        lRaces = ArrayList(0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
@@ -85,6 +86,14 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() {
      * @return The Race object.
      */
     fun getRace(lPos : Int) : Race = lRaces.get(lPos)
+
+    /**
+     * Interface TouchHelper.SwipeAction.
+     */
+    override fun onViewSwiped(position: Int) {
+        lRaces.removeAt(position)
+        notifyItemRemoved(position)
+    }
 
     private var viewType : Int = 0
     private var isEmptyView : Boolean = false

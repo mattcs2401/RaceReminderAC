@@ -30,7 +30,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelec
         }
     }
 
-    // From interface IRace.
+    /**
+     * From interface IRace.IRaceSelect
+     */
     override fun onRaceSelect(id: Long ) {
         val bundle = Bundle()
         bundle.putInt(getString(R.string.key_edit_type), resources.getInteger(R.integer.edit_race_existing))
