@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
@@ -13,11 +14,11 @@ import mcssoft.com.racereminderac.utility.TouchHelper
 class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>(), TouchHelper.SwipeAction {
 
     private var context : Context
-    private var lRaces : List<Race>
+    private var lRaces : ArrayList<Race>
 
     init {
         this.context = context
-        lRaces = ArrayList(0)
+        lRaces = ArrayList<Race>(0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
@@ -70,13 +71,9 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>(), T
         this.icListener = icListener
     }
 
-    fun swapData(lRaces : List<Race>) {
+    fun swapData(lRaces : ArrayList<Race>) {
         this.lRaces = lRaces
-        if (lRaces.size < 1) {
-            isEmptyView = true
-        } else {
-            isEmptyView = false
-        }
+        isEmptyView = if (lRaces.size < 1) true else false
         notifyDataSetChanged()
     }
 
@@ -86,6 +83,10 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>(), T
      * @return The Race object.
      */
     fun getRace(lPos : Int) : Race = lRaces.get(lPos)
+
+    fun setTouchHelper(itemTouchHelper: ItemTouchHelper) {
+        this.itemTouchHelper = itemTouchHelper
+    }
 
     /**
      * Interface TouchHelper.SwipeAction.
@@ -100,6 +101,7 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>(), T
 
     private lateinit var icListener : IClick.ItemSelect
     private lateinit var raceViewHolder : RaceViewHolder
+    private lateinit var itemTouchHelper: ItemTouchHelper
 
     private val EMPTY_VIEW = 0
     private val MEETING_VIEW = 1

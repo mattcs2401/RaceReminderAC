@@ -41,12 +41,21 @@ class MainFragment : Fragment(), IClick.ItemSelect {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val context = this.context
 
-        raceAdapter = RaceAdapter(this.context!!)
+        raceAdapter = RaceAdapter(context!!)
         raceAdapter.setClickListener(this)
 
         recyclerView.adapter = raceAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val touchHelper = TouchHelper(context, raceAdapter)
+        val itemTouchHelper = ItemTouchHelper(touchHelper)
+
+        raceAdapter.setTouchHelper(itemTouchHelper)
+
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -62,7 +71,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
         raceViewModel.getAllRaces().observe(activity!!, Observer<List<Race>> { races ->
-            raceAdapter.swapData(races)
+            raceAdapter.swapData(races as ArrayList<Race>)
         })
     }
     //</editor-fold>

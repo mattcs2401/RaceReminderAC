@@ -9,18 +9,17 @@ import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import mcssoft.com.racereminderac.R
 
-/** https://www.journaldev.com/23164/android-recyclerview-swipe-to-delete-undo **/
-//class TouchHelper(context: Context) : ItemTouchHelper.Callback() {
+/** https://www.journaldev.com/23164/android-recyclerview-swipe-to-delete-undo
+    https://therubberduckdev.wordpress.com/2017/10/24/android-recyclerview-drag-and-drop-and-swipe-to-dismiss/
+ **/
 class TouchHelper(context: Context, swipeAction: SwipeAction) : ItemTouchHelper.Callback() {
 
-    public interface SwipeAction {
+    interface SwipeAction {
         fun onViewSwiped(pos: Int)
     }
 
     private val swipeAction: SwipeAction
     private val context: Context
-//    private val adapter: RaceAdapter
-//    private val viewHolder: RaceViewHolder
     private val background: ColorDrawable
     private val backgroundColour: Int
     private val clearPaint: Paint
@@ -31,8 +30,6 @@ class TouchHelper(context: Context, swipeAction: SwipeAction) : ItemTouchHelper.
     init {
         this.swipeAction = swipeAction
         this.context = context
-//        this.adapter = adapter
-//        this.viewHolder = viewHolder
 
         background = ColorDrawable()
         backgroundColour = Color.parseColor("#b80f0a")
@@ -57,7 +54,6 @@ class TouchHelper(context: Context, swipeAction: SwipeAction) : ItemTouchHelper.
     }
 
     override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
-//        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
 
         val itemView = viewHolder.itemView
         val itemHeight = itemView.height
@@ -65,13 +61,13 @@ class TouchHelper(context: Context, swipeAction: SwipeAction) : ItemTouchHelper.
         val isCancelled = dX.equals(0) && !isCurrentlyActive
 
         if (isCancelled) {
-            clearCanvas(c, itemView.right + dX, itemView.top as Float, itemView.right as Float, itemView.bottom as Float)
+            clearCanvas(c, itemView.right + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             return
         }
 
         background.setColor(backgroundColour)
-        background.setBounds(itemView.right + dX as Int, itemView.top, itemView.right, itemView.bottom)
+        background.setBounds((itemView.right  + dX).toInt(), itemView.top, itemView.right, itemView.bottom)
         background.draw(c)
 
         val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2

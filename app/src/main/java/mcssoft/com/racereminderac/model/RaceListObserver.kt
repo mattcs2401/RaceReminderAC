@@ -15,7 +15,7 @@ class RaceListObserver(raceAdapter: RaceAdapter) : Observer<MutableList<Race>> {
     override fun onChanged(races: MutableList<Race>) {
 
 //        val lRaces: List<Race> = races.toList()
-        raceAdapter?.swapData(races.toList())
+        raceAdapter?.swapData(races.toList() as ArrayList<Race>)
     }
 
 }
