@@ -8,6 +8,12 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import mcssoft.com.racereminderac.R
+import android.graphics.RectF
+import android.graphics.BitmapFactory
+import android.graphics.Color.parseColor
+import android.graphics.Bitmap
+
+
 
 /** https://www.journaldev.com/23164/android-recyclerview-swipe-to-delete-undo
     https://therubberduckdev.wordpress.com/2017/10/24/android-recyclerview-drag-and-drop-and-swipe-to-dismiss/
@@ -53,7 +59,7 @@ class TouchHelper(context: Context, swipeAction: SwipeAction) : ItemTouchHelper.
         swipeAction.onViewSwiped(viewHolder.adapterPosition)
     }
 
-    override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+    override fun onChildDraw(canvas: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
 
         val itemView = viewHolder.itemView
         val itemHeight = itemView.height
@@ -61,14 +67,14 @@ class TouchHelper(context: Context, swipeAction: SwipeAction) : ItemTouchHelper.
         val isCancelled = dX.equals(0) && !isCurrentlyActive
 
         if (isCancelled) {
-            clearCanvas(c, itemView.right + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())
-            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            clearCanvas(canvas, itemView.right + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())
+            super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             return
         }
 
         background.setColor(backgroundColour)
         background.setBounds((itemView.right  + dX).toInt(), itemView.top, itemView.right, itemView.bottom)
-        background.draw(c)
+        background.draw(canvas)
 
         val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
         val deleteIconMargin = (itemHeight - intrinsicHeight) / 2
@@ -78,9 +84,9 @@ class TouchHelper(context: Context, swipeAction: SwipeAction) : ItemTouchHelper.
 
 
         deleteDrawable.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
-        deleteDrawable.draw(c)
+        deleteDrawable.draw(canvas)
 
-        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+        super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
 
     override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
