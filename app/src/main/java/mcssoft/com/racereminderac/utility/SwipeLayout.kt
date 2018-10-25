@@ -26,6 +26,7 @@ package mcssoft.com.racereminderac.utility
 /**
  * Changed class name to SwipeLayout (from SwipeRevealLayout) and converted to Kotlin.
  * Other original comments mainly untouched.
+ * https://android.jlelse.eu/android-recyclerview-swipeable-items-46a3c763498d
  */
 
 import android.content.Context
@@ -182,13 +183,13 @@ class SwipeLayout : ViewGroup {
         private val slideOffset: Float
             get() {
                 when (mDragEdge) {
-                    DRAG_EDGE_LEFT -> return (mMainView!!.getLeft() - mRectMainClose.left).toFloat() / mSecondaryView!!.getWidth()
+                    DRAG_EDGE_LEFT -> return (mMainView!!.left - mRectMainClose.left).toFloat() / mSecondaryView!!.width
 
-                    DRAG_EDGE_RIGHT -> return (mRectMainClose.left - mMainView!!.getLeft()).toFloat() / mSecondaryView!!.getWidth()
+                    DRAG_EDGE_RIGHT -> return (mRectMainClose.left - mMainView!!.left).toFloat() / mSecondaryView!!.width
 
-                    DRAG_EDGE_TOP -> return (mMainView!!.getTop() - mRectMainClose.top).toFloat() / mSecondaryView!!.getHeight()
+                    DRAG_EDGE_TOP -> return (mMainView!!.top - mRectMainClose.top).toFloat() / mSecondaryView!!.height
 
-                    DRAG_EDGE_BOTTOM -> return (mRectMainClose.top - mMainView!!.getTop()).toFloat() / mSecondaryView!!.getHeight()
+                    DRAG_EDGE_BOTTOM -> return (mRectMainClose.top - mMainView!!.top).toFloat() / mSecondaryView!!.height
 
                     else -> return 0f
                 }
@@ -930,7 +931,7 @@ class SwipeLayout : ViewGroup {
                     0, 0
             )
 
-            mDragEdge = a.getInteger(R.styleable.SwipeLayout_dragEdge, DRAG_EDGE_LEFT)
+            mDragEdge = a.getInteger(R.styleable.SwipeLayout_dragFromEdge, DRAG_EDGE_LEFT)
             mMinFlingVelocity = a.getInteger(R.styleable.SwipeLayout_flingVelocity, DEFAULT_MIN_FLING_VELOCITY)
             mMode = a.getInteger(R.styleable.SwipeLayout_mode, MODE_NORMAL)
 

@@ -46,15 +46,15 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         raceAdapter = RaceAdapter(context!!)
         raceAdapter.setClickListener(this)
 
-        recyclerView.adapter = raceAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = raceAdapter
 
-        val touchHelper = TouchHelper(context, raceAdapter)
-        val itemTouchHelper = ItemTouchHelper(touchHelper)
+//        val touchHelper = TouchHelper(context, raceAdapter)
+//        val itemTouchHelper = ItemTouchHelper(touchHelper)
+//
+//        raceAdapter.setTouchHelper(itemTouchHelper)
 
-        raceAdapter.setTouchHelper(itemTouchHelper)
-
-        itemTouchHelper.attachToRecyclerView(recyclerView)
+//        itemTouchHelper.attachToRecyclerView(recyclerView)
 
     }
 

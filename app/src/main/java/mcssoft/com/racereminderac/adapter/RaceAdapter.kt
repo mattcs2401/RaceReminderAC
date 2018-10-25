@@ -11,7 +11,7 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.utility.TouchHelper
 
-class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>(), TouchHelper.SwipeAction {
+class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() { //}, TouchHelper.SwipeAction {
 
     private var context : Context
     private var lRaces : ArrayList<Race>
@@ -33,7 +33,7 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>(), T
                 raceViewHolder = RaceViewHolder(view, "Nothing to show.")
             }
             MEETING_VIEW -> {
-                view = inflater.inflate(R.layout.row_race, parent, false)
+                view = inflater.inflate(R.layout.row_race2, parent, false)
                 raceViewHolder = RaceViewHolder(view, "", icListener)
             }
         }
@@ -84,24 +84,24 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>(), T
      */
     fun getRace(lPos : Int) : Race = lRaces.get(lPos)
 
-    fun setTouchHelper(itemTouchHelper: ItemTouchHelper) {
-        this.itemTouchHelper = itemTouchHelper
-    }
+//    fun setTouchHelper(itemTouchHelper: ItemTouchHelper) {
+//        this.itemTouchHelper = itemTouchHelper
+//    }
 
     /**
      * Interface TouchHelper.SwipeAction.
      */
-    override fun onViewSwiped(position: Int) {
-        lRaces.removeAt(position)
-        notifyItemRemoved(position)
-    }
+//    override fun onViewSwiped(position: Int) {
+//        lRaces.removeAt(position)
+//        notifyItemRemoved(position)
+//    }
 
     private var viewType : Int = 0
     private var isEmptyView : Boolean = false
 
     private lateinit var icListener : IClick.ItemSelect
     private lateinit var raceViewHolder : RaceViewHolder
-    private lateinit var itemTouchHelper: ItemTouchHelper
+//    private lateinit var itemTouchHelper: ItemTouchHelper
 
     private val EMPTY_VIEW = 0
     private val MEETING_VIEW = 1

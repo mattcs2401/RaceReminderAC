@@ -8,12 +8,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import mcssoft.com.racereminderac.R
-import android.graphics.RectF
-import android.graphics.BitmapFactory
-import android.graphics.Color.parseColor
-import android.graphics.Bitmap
-
-
 
 /** https://www.journaldev.com/23164/android-recyclerview-swipe-to-delete-undo
     https://therubberduckdev.wordpress.com/2017/10/24/android-recyclerview-drag-and-drop-and-swipe-to-dismiss/
