@@ -10,6 +10,7 @@
     <!-- This is the reveal layout and must be first. -->
     <!-- TODO - a different layout. -->
     <FrameLayout
+        android:id="@+id/id_swipe_layout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
         <LinearLayout
@@ -21,18 +22,18 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/info_button"
+                android:id="@+id/id_ib_delete"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 app:srcCompat="@drawable/ic_delete"
                 android:text="Delete"/>
 
-            <ImageButton
-                android:id="@+id/edit_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:srcCompat="@drawable/ic_edit"
-                android:text="Edit"/>
+            <!--<ImageButton-->
+                <!--android:id="@+id/id_ib_edit"-->
+                <!--android:layout_width="48dp"-->
+                <!--android:layout_height="48dp"-->
+                <!--app:srcCompat="@drawable/ic_edit"-->
+                <!--android:text="Edit"/>-->
 
         </LinearLayout>
     </FrameLayout>
@@ -49,6 +50,7 @@
         card_view:cardCornerRadius="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/id_recycler_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

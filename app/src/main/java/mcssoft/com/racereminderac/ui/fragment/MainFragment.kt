@@ -103,10 +103,17 @@ class MainFragment : Fragment(), IClick.ItemSelect {
     /**
      * Interface IClick.ItemSelect
      */
-    override fun onItemSelect(lPos: Int) {
+    override fun onItemSelect(view: View, lPos: Int) {
         // callback to the Activity with the selected Race object
         // TBA - use EventBus ?
-        (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
+        when(view.id) {
+            R.id.id_recycler_layout -> {
+                (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
+            }
+            R.id.id_ib_delete -> {
+                val bp = ""
+            }
+        }
     }
 
 

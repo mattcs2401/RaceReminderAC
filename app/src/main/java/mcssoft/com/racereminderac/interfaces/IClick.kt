@@ -9,14 +9,14 @@ interface IClick {
          * Single select (touch) operation.
          * @param lPos The view's position in a list (if applicable).
          */
-        fun onItemSelect(lPos: Int)
+        fun onItemSelect(lPos: Int) {} // braces make this optional
 
         /**
          * Single select operation.
          * @param view The view that was clicked on.
          * @param lPos The view's position in a list (if applicable).
          */
-        fun onItemSelect(view: View, lPos: Int) {}    // braces make this optional
+        fun onItemSelect(view: View, lPos: Int)
     }
 
     interface ItemLongClick {
