@@ -1,8 +1,6 @@
 package mcssoft.com.racereminderac.dao
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import mcssoft.com.racereminderac.entity.Race
 
@@ -14,6 +12,9 @@ internal interface RaceDAO {
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
     fun updateRace(race: Race)
+
+    @Delete
+    fun deleteRace(race: Race)
 
     @Query("select count(*) from race_details")
     fun getCountRaces(): Long
@@ -27,6 +28,4 @@ internal interface RaceDAO {
     @Query("delete from race_details")
     fun deleteAll()
 
-//    @Delete
-//    fun deleteRace(races: Race)
 }

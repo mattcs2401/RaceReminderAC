@@ -84,6 +84,11 @@ class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>() { 
      */
     fun getRace(lPos : Int) : Race = lRaces.get(lPos)
 
+    fun deleteRace(lPos: Int) {
+        lRaces.removeAt(lPos)
+        notifyDataSetChanged()
+    }
+
 //    fun setTouchHelper(itemTouchHelper: ItemTouchHelper) {
 //        this.itemTouchHelper = itemTouchHelper
 //    }

@@ -7,6 +7,7 @@
 
     <integer name="edit_race_new">0</integer>
     <integer name="edit_race_existing">1</integer>
+    <integer name="delete_race">2</integer>
 
     <integer name="ctxNoCityCode">0</integer>    <!--No city code selected when dialog showing.-->
     <integer name="ctxNoRaceCode">1</integer>    <!--No race code selected when dialog showing.-->
