@@ -17,10 +17,10 @@ class RaceRepository(application: Application) {
 
     private var raceDao: RaceDAO
     private var allRaces: LiveData<MutableList<Race>>
-    private val application: Application
+    //private val application: Application
 
     init {
-        this.application = application
+        //this.application = application
         raceDao = RaceDatabase.getInstance(application)!!.raceDao()
         allRaces = raceDao.getAllRaces()
     }
