@@ -99,7 +99,12 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), To
 
     fun deleteRace(lPos: Int) {
         lRaces.removeAt(lPos)
-        notifyDataSetChanged()
+        notifyItemRemoved(lPos)
+    }
+
+    fun reinstateRace(race: Race, lPos: Int) {
+        lRaces.add(lPos, race)
+        notifyItemInserted(lPos)
     }
 
     fun setTouchHelper(itemTouchHelper: ItemTouchHelper) {
