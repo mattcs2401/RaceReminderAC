@@ -18,10 +18,12 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation" />
 
-    <!-- TBA, a BottomNavigationView here will co-exist with the FAB. -->
-    <!--<com.google.android.material.bottomnavigation.BottomNavigationView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
+    <!-- BottomNavigationView here will co-exist with the FAB. -->
+    <!-- Used to anchor a SnackBar with an UNDO button in the RaceAdapter. -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/id_bottom_nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/id_fab"

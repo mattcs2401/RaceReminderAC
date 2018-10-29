@@ -1,5 +1,6 @@
 package mcssoft.com.racereminderac.adapter
 
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -19,19 +20,24 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
         this.icListener = icListener
 
         // Recycler view item, or "front" view.
-        viewRecyclerItem = view.findViewById(R.id.id_recycler_layout)
-        viewRecyclerItem.setOnClickListener(this)
-
-        tvCityCode = viewRecyclerItem.findViewById(R.id.id_tv_city_code)
-        tvRaceCode = viewRecyclerItem.findViewById(R.id.id_tv_race_code)
-        tvRaceNo = viewRecyclerItem.findViewById(R.id.id_tv_race_no)
-        tvRaceSel = viewRecyclerItem.findViewById(R.id.id_tv_race_sel)
-        tvRaceTime = viewRecyclerItem.findViewById(R.id.id_tv_race_time)
-
+//        viewRecyclerItem = view.findViewById(R.id.id_recycler_layout)
+//        viewRecyclerItem.setOnClickListener(this)
         // Swipe view item, or "back" view.
-        viewSwipeItem = view.findViewById(R.id.id_swipe_layout)
-        btnDelete = viewSwipeItem.findViewById(R.id.id_ib_delete)
-        btnDelete.setOnClickListener(this)
+//        viewSwipeItem = view.findViewById(R.id.id_swipe_layout)
+//        btnDelete = viewSwipeItem.findViewById(R.id.id_ib_delete)
+//        btnDelete.setOnClickListener(this)
+        // Recycler view components.
+//        tvCityCode = viewRecyclerItem.findViewById(R.id.id_tv_city_code)
+//        tvRaceCode = viewRecyclerItem.findViewById(R.id.id_tv_race_code)
+//        tvRaceNo = viewRecyclerItem.findViewById(R.id.id_tv_race_no)
+//        tvRaceSel = viewRecyclerItem.findViewById(R.id.id_tv_race_sel)
+//        tvRaceTime = viewRecyclerItem.findViewById(R.id.id_tv_race_time)
+
+        tvCityCode = view.findViewById(R.id.id_tv_city_code)
+        tvRaceCode = view.findViewById(R.id.id_tv_race_code)
+        tvRaceNo = view.findViewById(R.id.id_tv_race_no)
+        tvRaceSel = view.findViewById(R.id.id_tv_race_sel)
+        tvRaceTime = view.findViewById(R.id.id_tv_race_time)
     }
 
     override fun onClick(view : View) {

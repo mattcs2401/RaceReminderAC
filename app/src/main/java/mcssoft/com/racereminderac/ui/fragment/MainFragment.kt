@@ -44,19 +44,18 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         super.onViewCreated(view, savedInstanceState)
         val context = this.context
 
-        raceAdapter = RaceAdapter(context!!)
+        //raceAdapter = RaceAdapter(context!!)
+        raceAdapter = RaceAdapter(activity!!.id_bottom_nav_view)
         raceAdapter.setClickListener(this)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = raceAdapter
 
-//        val touchHelper = TouchHelper(context, raceAdapter)
-//        val itemTouchHelper = ItemTouchHelper(touchHelper)
-//
-//        raceAdapter.setTouchHelper(itemTouchHelper)
+        val touchHelper = TouchHelper(context!!, raceAdapter)
+        val itemTouchHelper = ItemTouchHelper(touchHelper)
 
-//        itemTouchHelper.attachToRecyclerView(recyclerView)
-
+        raceAdapter.setTouchHelper(itemTouchHelper)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -112,7 +111,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {
                 (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
             }
             R.id.id_ib_delete -> {
-                Toast.makeText(activity, "Delete clicked", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(activity, "Delete clicked", Toast.LENGTH_SHORT).show()
                 raceViewModel.delete(raceAdapter.getRace(lPos))
 
             }
