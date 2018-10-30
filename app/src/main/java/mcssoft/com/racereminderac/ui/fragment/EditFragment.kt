@@ -80,7 +80,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             }
             R.id.id_btn_save -> {
                 if(checkValues()) {
-                    var race = collateValues()
+                    val race = collateValues()
                     when(editType) {
                         resources.getInteger(R.integer.edit_race_existing) -> {
                             raceViewModel.update(race)
@@ -138,7 +138,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
      * get the UI values into a Race object ready for Update or Insert.
      */
     private fun collateValues(): Race {
-        // TODO - get NumberPicker values.
         val race = Race(ccVals.get(npCityCode.value),
                 rcVals.get(npRaceCode.value),
                 rnVals.get(npRaceNo.value),
@@ -148,6 +147,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         return race
     }
 
+    /**
+     * Show the TimePicker dialog.
+     */
     private fun launchTimePickDialog() {
         val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
         fragTrans.addToBackStack(null)
@@ -155,6 +157,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         timePickDialog.show(fragTrans, getString(R.string.tp_tag))
     }
 
+    /**
+     * Initialise UI components.
+     */
     private fun initialiseUI(view: View) {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()

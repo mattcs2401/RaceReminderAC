@@ -96,6 +96,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     }
 
     fun reinstateRace(race: Race, lPos: Int) {
+
         lRaces.add(lPos, race)
         notifyItemInserted(lPos)
     }
