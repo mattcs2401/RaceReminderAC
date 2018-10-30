@@ -7,27 +7,27 @@ import mcssoft.com.racereminderac.dao.RaceDAO
 import mcssoft.com.racereminderac.database.RaceDatabase
 import mcssoft.com.racereminderac.entity.Race
 
-class UpdateWorker : Worker {
+class UpdateWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
-    constructor(context: Context, workerParams: WorkerParameters) : super(context, workerParams) {
+    private var raceDao: RaceDAO
+
+    init {
         raceDao = RaceDatabase.getInstance(context)!!.raceDao()
     }
 
     override fun doWork(): Result {
         if(raceDao != null) {
-            // in an update statement, all the object values are required.
+            // Get the elements of that will comprise a Race object.
             val theRace : Array<String> = getInputData().getStringArray("key")!!
-            // construct generic object.
+            // Construct generic object.
             val race = Race(theRace[1], theRace[2], theRace[3], theRace[4], theRace[5])
-            // add in the id as it's not part of the constructor as the id is auto generate.
+            // Add in the id as it's not part of the constructor because its auto generate.
             race.id = theRace[0].toLong()
-            // let Room do it's thing.
+            // Let Room do it's thing.
             raceDao!!.updateRace(race)
 
             return Result.SUCCESS
         }
         return Result.FAILURE
     }
-
-    private var raceDao: RaceDAO
 }

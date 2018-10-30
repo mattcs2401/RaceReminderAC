@@ -80,12 +80,14 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             }
             R.id.id_btn_save -> {
                 if(checkValues()) {
-                    val race = collateValues()
+                    val race: Race //= collateValues()
                     when(editType) {
                         resources.getInteger(R.integer.edit_race_existing) -> {
+                            race = collateValues(R.integer.edit_race_existing)
                             raceViewModel.update(race)
                         }
                         resources.getInteger(R.integer.edit_race_new) -> {
+                            race = collateValues(R.integer.edit_race_new)
                             raceViewModel.insert(race)
                         }
                     }
@@ -135,15 +137,25 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     }
 
     /**
-     * get the UI values into a Race object ready for Update or Insert.
+     * Get the UI values into a Race object ready for Update or Insert.
      */
-    private fun collateValues(): Race {
+    private fun collateValues(action: Int): Race {
         val race = Race(ccVals.get(npCityCode.value),
                 rcVals.get(npRaceCode.value),
                 rnVals.get(npRaceNo.value),
                 rsVals.get(npRaceSel.value),
                 btnTime.text.toString())
-        race.id = raceId
+
+        when(action) {
+            // Update.
+            R.integer.edit_race_existing -> {
+                race.id = raceId
+            }
+            // Insert.
+            R.integer.edit_race_new -> {
+                race.id = -1
+            }
+        }
         return race
     }
 
