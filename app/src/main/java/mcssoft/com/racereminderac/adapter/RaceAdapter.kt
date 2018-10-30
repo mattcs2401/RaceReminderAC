@@ -10,23 +10,14 @@ import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
-import mcssoft.com.racereminderac.utility.TouchHelper
-import androidx.core.view.accessibility.AccessibilityEventCompat.setAction
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.main_activity.view.*
+import mcssoft.com.racereminderac.interfaces.ISwipe
 
+class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
 
-//class RaceAdapter(context : Context) : RecyclerView.Adapter<RaceViewHolder>(), TouchHelper.SwipeAction {
-class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), TouchHelper.SwipeAction, View.OnClickListener {
-
-    //private var context : Context
-    private lateinit var anchorView: View
-    private var lRaces : ArrayList<Race>
+    private var anchorView: View
 
     init {
-        //this.context = context
         this.anchorView = anchorView
-        lRaces = ArrayList<Race>(0)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
@@ -77,7 +68,6 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), To
 
     override fun onClick(view: View) {
         Toast.makeText(anchorView.context, "UNDO button clicked", Toast.LENGTH_SHORT).show()
-        val bp = ""
     }
 
     fun setClickListener(icListener : IClick.ItemSelect) {
@@ -123,6 +113,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), To
 
     private var viewType : Int = 0
     private var isEmptyView : Boolean = false
+    private var lRaces = ArrayList<Race>(0)
 
     private lateinit var icListener : IClick.ItemSelect
     private lateinit var raceViewHolder : RaceViewHolder

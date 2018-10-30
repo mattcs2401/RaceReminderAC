@@ -8,17 +8,14 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import mcssoft.com.racereminderac.R
+import mcssoft.com.racereminderac.interfaces.ISwipe
 
 /** https://www.journaldev.com/23164/android-recyclerview-swipe-to-delete-undo
     https://therubberduckdev.wordpress.com/2017/10/24/android-recyclerview-drag-and-drop-and-swipe-to-dismiss/
  **/
-class TouchHelper(context: Context, swipeAction: SwipeAction) : ItemTouchHelper.Callback() {
+class TouchHelper(context: Context, swipeAction: ISwipe) : ItemTouchHelper.Callback() {
 
-    interface SwipeAction {
-        fun onViewSwiped(pos: Int)
-    }
-
-    private val swipeAction: SwipeAction
+    private val swipeAction: ISwipe
     private val context: Context
     private val background: ColorDrawable
     private val backgroundColour: Int
@@ -84,6 +81,7 @@ class TouchHelper(context: Context, swipeAction: SwipeAction) : ItemTouchHelper.
     }
 
     override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
+        // This means if the row is swiped less than 70%, the onSwipe method won’t be triggered.
         return 0.7f
     }
 
@@ -92,8 +90,8 @@ class TouchHelper(context: Context, swipeAction: SwipeAction) : ItemTouchHelper.
         return false
     }
 
-    private fun clearCanvas(c: Canvas, left: Float, top: Float, right: Float, bottom: Float) {
-        c.drawRect(left, top, right, bottom, clearPaint)
+    private fun clearCanvas(canvas: Canvas, left: Float, top: Float, right: Float, bottom: Float) {
+        canvas.drawRect(left, top, right, bottom, clearPaint)
     }
 
 

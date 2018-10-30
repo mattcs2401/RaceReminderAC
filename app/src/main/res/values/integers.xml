@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="city_codes_dialog_id">0</integer>
-    <integer name="race_codes_dialog_id">1</integer>
-    <integer name="number_pad_dialog_id">2</integer>
-    <integer name="time_pick_dialog_id">3</integer>
+    <integer name="time_pick_dialog_id">1</integer>
 
     <integer name="edit_race_new">0</integer>
     <integer name="edit_race_existing">1</integer>
     <integer name="delete_race">2</integer>
 
-    <integer name="ctxNoCityCode">0</integer>    <!--No city code selected when dialog showing.-->
-    <integer name="ctxNoRaceCode">1</integer>    <!--No race code selected when dialog showing.-->
-    <integer name="ctxNoRaceNumber">3</integer>  <!--No race number selected when NumberPad dialog showing.-->
-    <integer name="ctxNoRaceSel">4</integer>     <!--No race selection made when NumberPad dialog showing.-->
-    <integer name="npCtxRaceNum">5</integer>
-    <integer name="npCtxRaceSel">6</integer>
-
-    <integer name="raceNoMinVal">1</integer>
-    <integer name="raceNoMaxVal">12</integer>
-    <integer name="raceselMinVal">1</integer>
-    <integer name="raceSelMaxVal">24</integer>
-
+    <integer name="empty_view">0</integer>
+    <integer name="meeting_view">1</integer>
 </resources>

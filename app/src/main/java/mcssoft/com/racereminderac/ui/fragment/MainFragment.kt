@@ -44,8 +44,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         super.onViewCreated(view, savedInstanceState)
         val context = this.context
 
-        //raceAdapter = RaceAdapter(context!!)
-        raceAdapter = RaceAdapter(activity!!.id_bottom_nav_view)
+        raceAdapter = RaceAdapter(activity!!.id_container)
         raceAdapter.setClickListener(this)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
