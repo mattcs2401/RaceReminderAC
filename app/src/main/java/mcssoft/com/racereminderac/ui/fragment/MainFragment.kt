@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +16,6 @@ import kotlinx.android.synthetic.main.main_fragment.view.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
-import mcssoft.com.racereminderac.adapter.RaceViewHolder
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.IRace
@@ -50,11 +48,11 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = raceAdapter
 
-        val touchHelper = TouchHelper(context!!, raceAdapter)
-        val itemTouchHelper = ItemTouchHelper(touchHelper)
-
-        raceAdapter.setTouchHelper(itemTouchHelper)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
+//        val touchHelper = TouchHelper(context!!, raceAdapter)
+//        val itemTouchHelper = ItemTouchHelper(touchHelper)
+//
+//        raceAdapter.setTouchHelper(itemTouchHelper)
+//        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -103,6 +101,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {
      * Interface IClick.ItemSelect
      */
     override fun onItemSelect(view: View, lPos: Int) {
+        val bp = ""
         // callback to the Activity with the selected Race object
         // TBA - use EventBus ?
         when(view.id) {
@@ -116,7 +115,6 @@ class MainFragment : Fragment(), IClick.ItemSelect {
             }
         }
     }
-
 
     private lateinit var rootView: View
     private lateinit var raceAdapter: RaceAdapter

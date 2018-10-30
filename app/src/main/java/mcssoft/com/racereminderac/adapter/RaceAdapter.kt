@@ -17,6 +17,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     private var anchorView: View
 
     init {
+        // the view that any SnackBar is anchored to.
         this.anchorView = anchorView   // the view that any SnackBar is anchored to.
     }
 

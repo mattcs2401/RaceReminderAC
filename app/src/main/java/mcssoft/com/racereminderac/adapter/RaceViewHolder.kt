@@ -17,6 +17,9 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
     }
 
     constructor(view: View, message: String, icListener: IClick.ItemSelect) : this(view, message) {
+        // Set the listener for the View.
+        view.setOnClickListener(this)
+        // Set the interface callback.
         this.icListener = icListener
 
         // Recycler view item, or "front" view.
@@ -33,6 +36,7 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
 //        tvRaceSel = viewRecyclerItem.findViewById(R.id.id_tv_race_sel)
 //        tvRaceTime = viewRecyclerItem.findViewById(R.id.id_tv_race_time)
 
+        // Set the components of the View.
         tvCityCode = view.findViewById(R.id.id_tv_city_code)
         tvRaceCode = view.findViewById(R.id.id_tv_race_code)
         tvRaceNo = view.findViewById(R.id.id_tv_race_no)
@@ -46,13 +50,12 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
 
     private lateinit var icListener: IClick.ItemSelect
 
-    lateinit var tvCityCode: TextView
-    lateinit var tvRaceCode: TextView
-    lateinit var tvRaceNo: TextView
-    lateinit var tvRaceSel: TextView
-    lateinit var tvRaceTime: TextView
-    lateinit var viewRecyclerItem: View
-
-    lateinit var viewSwipeItem: View
-    lateinit var btnDelete: ImageButton
+    private lateinit var tvCityCode: TextView
+    private lateinit var tvRaceCode: TextView
+    private lateinit var tvRaceNo: TextView
+    private lateinit var tvRaceSel: TextView
+    private lateinit var tvRaceTime: TextView
+//    private lateinit var viewRecyclerItem: View
+//    private lateinit var viewSwipeItem: View
+//    private lateinit var btnDelete: ImageButton
 }
