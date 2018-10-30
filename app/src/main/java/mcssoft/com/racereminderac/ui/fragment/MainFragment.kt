@@ -48,11 +48,11 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = raceAdapter
 
-//        val touchHelper = TouchHelper(context!!, raceAdapter)
-//        val itemTouchHelper = ItemTouchHelper(touchHelper)
-//
-//        raceAdapter.setTouchHelper(itemTouchHelper)
-//        itemTouchHelper.attachToRecyclerView(recyclerView)
+        val touchHelper = TouchHelper(context!!, raceAdapter)
+        val itemTouchHelper = ItemTouchHelper(touchHelper)
+
+        raceAdapter.setTouchHelper(itemTouchHelper)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -101,19 +101,20 @@ class MainFragment : Fragment(), IClick.ItemSelect {
      * Interface IClick.ItemSelect
      */
     override fun onItemSelect(view: View, lPos: Int) {
-        val bp = ""
         // callback to the Activity with the selected Race object
         // TBA - use EventBus ?
-        when(view.id) {
-            R.id.id_recycler_layout -> {
-                (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
-            }
-            R.id.id_ib_delete -> {
-//                Toast.makeText(activity, "Delete clicked", Toast.LENGTH_SHORT).show()
-                raceViewModel.delete(raceAdapter.getRace(lPos))
+        (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
 
-            }
-        }
+        // This is for the alternate layout (refer race_row2.xml)
+//        when(view.id) {
+//            R.id.id_recycler_layout -> {
+//                (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
+//            }
+//            R.id.id_ib_delete -> {
+//                raceViewModel.delete(raceAdapter.getRace(lPos))
+//
+//            }
+//        }
     }
 
     private lateinit var rootView: View

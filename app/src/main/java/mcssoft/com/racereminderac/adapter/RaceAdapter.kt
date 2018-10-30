@@ -93,11 +93,11 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
 
     fun deleteRace(lPos: Int) {
         lRaces.removeAt(lPos)
+        if(lRaces.size < 1) isEmptyView = true
         notifyItemRemoved(lPos)
     }
 
     fun reinstateRace(race: Race, lPos: Int) {
-
         lRaces.add(lPos, race)
         notifyItemInserted(lPos)
     }

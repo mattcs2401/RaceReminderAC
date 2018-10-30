@@ -44,18 +44,21 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
         tvRaceTime = view.findViewById(R.id.id_tv_race_time)
     }
 
+    /**
+     * View.OnClickListener
+     */
     override fun onClick(view : View) {
         icListener.onItemSelect(view, adapterPosition)
     }
 
     private lateinit var icListener: IClick.ItemSelect
 
-    private lateinit var tvCityCode: TextView
-    private lateinit var tvRaceCode: TextView
-    private lateinit var tvRaceNo: TextView
-    private lateinit var tvRaceSel: TextView
-    private lateinit var tvRaceTime: TextView
-//    private lateinit var viewRecyclerItem: View
-//    private lateinit var viewSwipeItem: View
-//    private lateinit var btnDelete: ImageButton
+    lateinit var tvCityCode: TextView
+    lateinit var tvRaceCode: TextView
+    lateinit var tvRaceNo: TextView
+    lateinit var tvRaceSel: TextView
+    lateinit var tvRaceTime: TextView
+//    lateinit var viewRecyclerItem: View
+//    lateinit var viewSwipeItem: View
+//    lateinit var btnDelete: ImageButton
 }
