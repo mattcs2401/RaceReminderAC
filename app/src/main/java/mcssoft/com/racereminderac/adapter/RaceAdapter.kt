@@ -17,7 +17,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     private var anchorView: View
 
     init {
-        this.anchorView = anchorView
+        this.anchorView = anchorView   // the view that any SnackBar is anchored to.
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
@@ -31,8 +31,10 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
                 view = inflater.inflate(R.layout.row_empty, parent, false)
                 raceViewHolder = RaceViewHolder(view, "Nothing to show.")
             }
-            MEETING_VIEW -> {
-//                view = inflater.inflate(R.layout.row_race2, parent, false)
+            RACE_VIEW -> {
+                // TBA as to which view to use.
+                //view = inflater.inflate(R.layout.row_race2, parent, false)
+
                 view = inflater.inflate(R.layout.row_race, parent, false)
                 raceViewHolder = RaceViewHolder(view, "", icListener)
             }
@@ -63,10 +65,11 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     override fun getItemViewType(position : Int) : Int {
         return if (isEmptyView) {
             EMPTY_VIEW
-        } else MEETING_VIEW
+        } else RACE_VIEW
     }
 
     override fun onClick(view: View) {
+        // TODO - undo the removal from the list.
         Toast.makeText(anchorView.context, "UNDO button clicked", Toast.LENGTH_SHORT).show()
     }
 
@@ -102,7 +105,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     }
 
     /**
-     * Interface TouchHelper.SwipeAction.
+     * Interface ISwipe.
      */
     override fun onViewSwiped(pos: Int) {
         deleteRace(pos)
@@ -111,15 +114,14 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
         snackBar.show()
     }
 
-    private var viewType : Int = 0
-    private var isEmptyView : Boolean = false
+    private var viewType: Int = 0
+    private var isEmptyView: Boolean = false
     private var lRaces = ArrayList<Race>(0)
 
-    private lateinit var icListener : IClick.ItemSelect
-    private lateinit var raceViewHolder : RaceViewHolder
+    private lateinit var icListener: IClick.ItemSelect
+    private lateinit var raceViewHolder: RaceViewHolder
     private lateinit var itemTouchHelper: ItemTouchHelper
 
     private val EMPTY_VIEW = 0
-    private val MEETING_VIEW = 1
-
+    private val RACE_VIEW = 1
 }
