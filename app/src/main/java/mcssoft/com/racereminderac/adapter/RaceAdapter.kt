@@ -1,6 +1,7 @@
 package mcssoft.com.racereminderac.adapter
 
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -12,7 +13,7 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.ISwipe
 
-class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
+class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe, View.OnTouchListener {
 
     private var anchorView: View
 
@@ -24,6 +25,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
         val view: View?
         this.viewType = viewType
+        parent.setOnTouchListener(this)
 
         val inflater = LayoutInflater.from(parent.context)
 
@@ -74,6 +76,11 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
         Toast.makeText(anchorView.context, "UNDO button clicked", Toast.LENGTH_SHORT).show()
     }
 
+    override fun onTouch(view: View, event: MotionEvent): Boolean {
+
+        return true
+    }
+
     fun setClickListener(icListener : IClick.ItemSelect) {
         this.icListener = icListener
     }
@@ -93,7 +100,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
 
     fun deleteRace(lPos: Int) {
         lRaces.removeAt(lPos)
-        if(lRaces.size < 1) isEmptyView = true
+        isEmptyView = if (lRaces.size < 1) true else false
         notifyItemRemoved(lPos)
     }
 
