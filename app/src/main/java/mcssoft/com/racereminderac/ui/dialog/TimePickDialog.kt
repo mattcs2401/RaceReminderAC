@@ -7,7 +7,7 @@ import android.text.format.DateFormat
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
 import mcssoft.com.racereminderac.R
-import mcssoft.com.racereminderac.utility.EventMessage
+import mcssoft.com.racereminderac.utility.DialogMessage
 import org.greenrobot.eventbus.EventBus
 import java.util.Calendar
 
@@ -24,7 +24,7 @@ class TimePickDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         var time = hourOfDay.toString() + ":" + minute.toString()
-        EventBus.getDefault().post(EventMessage(time, R.integer.time_pick_dialog_id, -1))
+        EventBus.getDefault().post(DialogMessage(time, R.integer.time_pick_dialog_id, -1))
         this.dialog.cancel()
     }
 }

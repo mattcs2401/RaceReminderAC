@@ -13,7 +13,7 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.ISwipe
 
-class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe, View.OnTouchListener {
+class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
 
     private var anchorView: View
 
@@ -25,7 +25,6 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
         val view: View?
         this.viewType = viewType
-        parent.setOnTouchListener(this)
 
         val inflater = LayoutInflater.from(parent.context)
 
@@ -74,11 +73,6 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     override fun onClick(view: View) {
         // TODO - undo the removal from the list.
         Toast.makeText(anchorView.context, "UNDO button clicked", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onTouch(view: View, event: MotionEvent): Boolean {
-
-        return true
     }
 
     fun setClickListener(icListener : IClick.ItemSelect) {

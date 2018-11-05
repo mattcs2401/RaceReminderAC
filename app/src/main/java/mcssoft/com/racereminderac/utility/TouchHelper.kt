@@ -94,7 +94,4 @@ class TouchHelper(context: Context, swipeAction: ISwipe) : ItemTouchHelper.Callb
         canvas.drawRect(left, top, right, bottom, clearPaint)
     }
 
-
-
-
 }

@@ -3,7 +3,6 @@ package mcssoft.com.racereminderac.ui.fragment
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
-import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -19,7 +18,8 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.model.RaceViewModel
-import mcssoft.com.racereminderac.utility.EventMessage
+import mcssoft.com.racereminderac.utility.DialogMessage
+import mcssoft.com.racereminderac.utility.DividerItemDecoration
 import mcssoft.com.racereminderac.utility.TouchHelper
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -46,6 +46,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = raceAdapter
+        recyclerView.addItemDecoration(DividerItemDecoration(context!!))
 
         val touchHelper = TouchHelper(context!!, raceAdapter)
         val itemTouchHelper = ItemTouchHelper(touchHelper)
@@ -84,15 +85,15 @@ class MainFragment : Fragment(), IClick.ItemSelect {
 
     /**
      * EventBus returns here.
-     * @param event - The EventBus message object.
+     * @param dialog - The EventBus message object.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(event: EventMessage) {
-        if(!event.message.isBlank()) {
-//            doOnMessageEvent(event)
+    fun onMessageEvent(dialog: DialogMessage) {
+        if(!dialog.message.isBlank()) {
+//            doOnMessageEvent(dialog)
         } else {
             // Nothing was selected in the dialog except for the OK button.
-//            doSnackbar(event.ident, event.ctx)
+//            doSnackbar(dialog.ident, dialog.ctx)
         }
     }
 

@@ -22,7 +22,7 @@ import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
-import mcssoft.com.racereminderac.utility.EventMessage
+import mcssoft.com.racereminderac.utility.DialogMessage
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -63,12 +63,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
 
     /**
      * EventBus returns here (primarily for TimePickDialog).
-     * @param event - The EventBus message object.
+     * @param dialog - The EventBus message object.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(event: EventMessage) {
-        if(!event.message.isBlank()) {
-            btnTime.text = event.msg
+    fun onMessageEvent(dialog: DialogMessage) {
+        if(!dialog.message.isBlank()) {
+            btnTime.text = dialog.msg
         }
     }
 
