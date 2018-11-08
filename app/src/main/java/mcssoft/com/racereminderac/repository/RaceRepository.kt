@@ -17,10 +17,8 @@ class RaceRepository(application: Application) {
 
     private var raceDao: RaceDAO
     private var allRaces: LiveData<MutableList<Race>>
-    //private val application: Application
 
     init {
-        //this.application = application
         raceDao = RaceDatabase.getInstance(application)!!.raceDao()
         allRaces = raceDao.getAllRaces()
     }
@@ -58,50 +56,5 @@ class RaceRepository(application: Application) {
             // TBA
         }
     }
-
-//    internal fun insert(race: Race) {
-//        try {
-//            val data : Data = Data.Builder().putStringArray("key", race.toArray()).build()
-//            val request = OneTimeWorkRequest.Builder(InsertWorker::class.java)
-//                    .setInputData(data)
-//                    .build()
-//            val workManager : WorkManager = WorkManager.getInstance()
-//            return workManager.enqueue(request)
-//        } catch(e: Exception) {
-//            Log.d("RaceRepository","fun insert: " + e.message)
-//        } finally {
-//            // TBA
-//        }
-//    }
-
-//    internal fun update(race: Race) {
-//        try {
-//            val data : Data = Data.Builder().putStringArray("key", race.toArray()).build()
-//            val request = OneTimeWorkRequest.Builder(UpdateWorker::class.java)
-//                    .setInputData(data)
-//                    .build()
-//            val workManager : WorkManager = WorkManager.getInstance()
-//            return workManager.enqueue(request)
-//        } catch(e: Exception) {
-//            Log.d("RaceRepository","fun update: " + e.message)
-//        } finally {
-//            // TBA
-//        }
-//    }
-
-//    internal fun deleteRace(race: Race) {
-//        try {
-//            val data : Data = Data.Builder().putStringArray("key", race.toArray()).build()
-//            val request = OneTimeWorkRequest.Builder(DeleteWorker::class.java)
-//                    .setInputData(data)
-//                    .build()
-//            val workManager = WorkManager.getInstance()
-//            return workManager.enqueue(request)
-//        } catch(e: java.lang.Exception) {
-//            Log.d("RaceRepository","fun delete: " + e.message)
-//        } finally {
-//            // TBA
-//        }
-//    }
 
 }

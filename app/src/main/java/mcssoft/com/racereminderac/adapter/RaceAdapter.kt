@@ -1,17 +1,20 @@
 package mcssoft.com.racereminderac.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.BaseTransientBottomBar.BaseCallback
 import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.ISwipe
+import mcssoft.com.racereminderac.utility.RemoveMessage
+import org.greenrobot.eventbus.EventBus
 
 class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
 
@@ -62,6 +65,9 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
         return if (isEmptyView) EMPTY_VIEW else RACE_VIEW
     }
 
+    /**
+     * OnClick for the Snackbar UNDO.
+     */
     override fun onClick(view: View) {
         reinstateRace(raceUndo!!, posUndo)
         Toast.makeText(anchorView.context, "Race re-instated.", Toast.LENGTH_SHORT).show()
@@ -123,7 +129,34 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
         deleteRace(pos)
         val snackBar = Snackbar.make(anchorView, "Item removed.", Snackbar.LENGTH_LONG)
         snackBar.setAction("UNDO", this)
+        snackBar.addCallback(SnackBarCB(raceUndo!!))
         snackBar.show()
+    }
+
+    class SnackBarCB(race: Race) : Snackbar.Callback() {
+        var race: Race
+        init {
+            this.race = race
+        }
+
+        @SuppressLint("SwitchIntDef") // <<-- this because not all events considered.
+        override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+            //super.onDismissed(transientBottomBar, event)
+            // The UNDO timeout has expired or the Snackbar was swipe dismissed, so also remove from
+            // database.
+            when(event) {
+                BaseCallback.DISMISS_EVENT_TIMEOUT -> {
+                    removeRace()
+                }
+                BaseCallback.DISMISS_EVENT_SWIPE -> {
+                    removeRace()
+                }
+            }
+        }
+
+        fun removeRace() {
+            EventBus.getDefault().post(RemoveMessage(race))
+        }
     }
 
     private fun emptyViewCheck() {
@@ -141,6 +174,6 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     private val EMPTY_VIEW = 0
     private val RACE_VIEW = 1
 
-    private var raceUndo: Race? = null      // local copy for any UNDO action.
+    var raceUndo: Race? = null      // local copy for any UNDO action.
     private var posUndo: Int = -1           // "     "    "   "   "    "
 }

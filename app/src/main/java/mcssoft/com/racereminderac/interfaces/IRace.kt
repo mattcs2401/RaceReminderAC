@@ -6,7 +6,9 @@ interface IRace {
 
     interface IRaceSelect {
         /**
-         * The (database) id of the Race object selected from the list (from the object).
+         * Get the database (row) id of the adapter selection.
+         * @param id: The id of the Race object selected from the adapter listing.
+         * @note: Used by the EditFragment to show Race details.
          */
         fun onRaceSelect(id: Long)
     }
