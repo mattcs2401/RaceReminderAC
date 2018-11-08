@@ -54,12 +54,13 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     }
 
     override fun getItemCount() : Int {
-        // Need to set at least 1 so the onCreateViewHolder fires.
-        return if (isEmptyView) 1 else lRaces.size
+        return lRaces.size
     }
 
     override fun getItemViewType(position : Int) : Int {
-        return if (isEmptyView) EMPTY_VIEW else RACE_VIEW
+        return if (isEmptyView) {
+            EMPTY_VIEW
+        } else RACE_VIEW
     }
 
     override fun onClick(view: View) {
@@ -71,7 +72,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
         this.icListener = icListener
     }
 
-    internal fun swapData(lRaces : ArrayList<Race>) {
+    fun swapData(lRaces : ArrayList<Race>) {
         this.lRaces = lRaces
         emptyViewCheck()
         notifyDataSetChanged()
@@ -105,6 +106,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
      */
     internal fun reinstateRace(race: Race, lPos: Int) {
         lRaces.add(lPos, race)
+        emptyViewCheck()
         notifyItemInserted(lPos)
     }
 
@@ -126,7 +128,9 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     }
 
     private fun emptyViewCheck() {
-        isEmptyView = if (lRaces.size < 1) true else false
+        isEmptyView = if (lRaces.size < 1) {
+            true
+        } else false
     }
 
     private var viewType: Int = -1                         // either EMPTY_VIEW or RACE_VIEW.
