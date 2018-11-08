@@ -58,6 +58,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     }
 
     override fun getItemViewType(position : Int) : Int {
+        //emptyViewCheck()
         return if (isEmptyView) EMPTY_VIEW else RACE_VIEW
     }
 
@@ -104,7 +105,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
      */
     internal fun reinstateRace(race: Race, lPos: Int) {
         lRaces.add(lPos, race)
-        emptyViewCheck()
+//        emptyViewCheck()
         notifyItemInserted(lPos)
     }
 
@@ -126,7 +127,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     }
 
     private fun emptyViewCheck() {
-        isEmptyView = (lRaces.size < 1)
+        isEmptyView = lRaces.isEmpty()
     }
 
     private var viewType: Int = -1                         // either EMPTY_VIEW or RACE_VIEW.

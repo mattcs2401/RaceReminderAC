@@ -43,8 +43,10 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         raceAdapter = RaceAdapter(activity!!.id_container)
         raceAdapter.setClickListener(this)
 
+
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = raceAdapter
+//        recyclerView.setHasFixedSize(true)
 
         val touchHelper = TouchHelper(context!!, raceAdapter)
         val itemTouchHelper = ItemTouchHelper(touchHelper)
