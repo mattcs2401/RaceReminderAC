@@ -18,8 +18,8 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     private var anchorView: View
 
     init {
-        // the view that any SnackBar is anchored to.
-        this.anchorView = anchorView   // the view that any SnackBar is anchored to.
+        // the view that the 'UNDO' SnackBar is anchored to.
+        this.anchorView = anchorView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
@@ -69,7 +69,9 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
 
     override fun onClick(view: View) {
         // TODO - undo the removal from the list.
-        Toast.makeText(anchorView.context, "UNDO button clicked", Toast.LENGTH_SHORT).show()
+        reinstateRace(raceUndo!!, posUndo)
+        Toast.makeText(anchorView.context, "Race re-instated.", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(anchorView.context, "UNDO button clicked", Toast.LENGTH_SHORT).show()
     }
 
     fun setClickListener(icListener : IClick.ItemSelect) {
@@ -90,7 +92,8 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     fun getRace(lPos : Int) : Race = lRaces.get(lPos)
 
     fun deleteRace(lPos: Int) {
-        lRaces.removeAt(lPos)
+        posUndo = lPos
+        raceUndo = lRaces.removeAt(lPos)
         isEmptyView = if (lRaces.size < 1) true else false
         notifyItemRemoved(lPos)
     }
@@ -109,7 +112,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
      */
     override fun onViewSwiped(pos: Int) {
         deleteRace(pos)
-        val snackBar = Snackbar.make(anchorView, "Item removed.", Snackbar.LENGTH_SHORT)
+        val snackBar = Snackbar.make(anchorView, "Item removed.", Snackbar.LENGTH_LONG)
         snackBar.setAction("UNDO", this)
         snackBar.show()
     }
@@ -124,4 +127,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
 
     private val EMPTY_VIEW = 0
     private val RACE_VIEW = 1
+
+    private var raceUndo: Race? = null      // local copy for any UNDO
+    private var posUndo: Int = -1           // "     "    "   "   "
 }
