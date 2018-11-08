@@ -19,7 +19,6 @@ import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.utility.DialogMessage
-import mcssoft.com.racereminderac.utility.DividerItemDecoration
 import mcssoft.com.racereminderac.utility.TouchHelper
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -46,7 +45,6 @@ class MainFragment : Fragment(), IClick.ItemSelect {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = raceAdapter
-        recyclerView.addItemDecoration(DividerItemDecoration(context!!))
 
         val touchHelper = TouchHelper(context!!, raceAdapter)
         val itemTouchHelper = ItemTouchHelper(touchHelper)

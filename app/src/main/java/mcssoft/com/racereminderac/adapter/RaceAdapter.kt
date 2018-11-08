@@ -34,9 +34,6 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
                 raceViewHolder = RaceViewHolder(view, "Nothing to show.")
             }
             RACE_VIEW -> {
-                // TBA as to which view to use.
-                //view = inflater.inflate(R.layout.row_race2, parent, false)
-
                 view = inflater.inflate(R.layout.row_race, parent, false)
                 raceViewHolder = RaceViewHolder(view, "", icListener)
             }
