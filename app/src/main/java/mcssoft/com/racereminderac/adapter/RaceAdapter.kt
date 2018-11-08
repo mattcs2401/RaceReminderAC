@@ -54,11 +54,8 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     }
 
     override fun getItemCount() : Int {
-        return if (isEmptyView) {
-            1                     // need to do this so the onCreateViewHolder fires.
-        } else {
-             lRaces.size
-        }
+        // Need to set at least 1 so the onCreateViewHolder fires.
+        return if (isEmptyView) 1 else lRaces.size
     }
 
     override fun getItemViewType(position : Int) : Int {
