@@ -33,7 +33,7 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
     }
 
     /**
-     * View.OnClickListener
+     * Call back through the IClick.ItemSelect interface with View and adapter position info.
      */
     override fun onClick(view : View) {
         icListener.onItemSelect(view, adapterPosition)

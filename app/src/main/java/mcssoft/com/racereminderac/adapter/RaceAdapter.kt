@@ -62,48 +62,59 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     }
 
     override fun getItemViewType(position : Int) : Int {
-        return if (isEmptyView) {
-            EMPTY_VIEW
-        } else RACE_VIEW
+        return if (isEmptyView) EMPTY_VIEW else RACE_VIEW
     }
 
     override fun onClick(view: View) {
-        // TODO - undo the removal from the list.
         reinstateRace(raceUndo!!, posUndo)
         Toast.makeText(anchorView.context, "Race re-instated.", Toast.LENGTH_SHORT).show()
-//        Toast.makeText(anchorView.context, "UNDO button clicked", Toast.LENGTH_SHORT).show()
     }
 
-    fun setClickListener(icListener : IClick.ItemSelect) {
+    internal fun setClickListener(icListener : IClick.ItemSelect) {
         this.icListener = icListener
     }
 
-    fun swapData(lRaces : ArrayList<Race>) {
+    internal fun swapData(lRaces : ArrayList<Race>) {
         this.lRaces = lRaces
-        isEmptyView = if (lRaces.size < 1) true else false
+        emptyViewCheck()
         notifyDataSetChanged()
     }
 
     /**
      * Return the Meeting object at the adapter position.
-     * @param lPos The adapter position (0 based).
+     * @param lPos: The adapter position (0 based).
      * @return The Race object.
      */
-    fun getRace(lPos : Int) : Race = lRaces.get(lPos)
+    internal fun getRace(lPos : Int) : Race = lRaces.get(lPos)
 
-    fun deleteRace(lPos: Int) {
+    /**
+     * Remove a Race from the listing.
+     * @param lPos: The position in the listing.
+     */
+    internal fun deleteRace(lPos: Int) {
+        // keep backup in case of UNDO.
         posUndo = lPos
         raceUndo = lRaces.removeAt(lPos)
-        isEmptyView = if (lRaces.size < 1) true else false
+        // check list size.
+        emptyViewCheck()
+        // notify the adapter.
         notifyItemRemoved(lPos)
     }
 
-    fun reinstateRace(race: Race, lPos: Int) {
+    /**
+     * Re-instate a previously removed Race.
+     * @param race: The Race object at time of last UNDO.
+     * @param lPos: The position in the list at time of last UNDO.
+     */
+    internal fun reinstateRace(race: Race, lPos: Int) {
         lRaces.add(lPos, race)
         notifyItemInserted(lPos)
     }
 
-    fun setTouchHelper(itemTouchHelper: ItemTouchHelper) {
+    /**
+     * Set the TouchHelper associated with the adapter.
+     */
+    internal fun setTouchHelper(itemTouchHelper: ItemTouchHelper) {
         this.itemTouchHelper = itemTouchHelper
     }
 
@@ -117,17 +128,21 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
         snackBar.show()
     }
 
-    private var viewType: Int = 0
-    private var isEmptyView: Boolean = false
-    private var lRaces = ArrayList<Race>(0)
+    private fun emptyViewCheck() {
+        isEmptyView = if (lRaces.size < 1) true else false
+    }
 
-    private lateinit var icListener: IClick.ItemSelect
-    private lateinit var raceViewHolder: RaceViewHolder
-    private lateinit var itemTouchHelper: ItemTouchHelper
+    private var viewType: Int = -1                         // either EMPTY_VIEW or RACE_VIEW.
+    private var isEmptyView: Boolean = false               // flag, view is empty.
+    private var lRaces = ArrayList<Race>(0)   // listing backing data.
+
+    private lateinit var icListener: IClick.ItemSelect     //
+    private lateinit var raceViewHolder: RaceViewHolder    //
+    private lateinit var itemTouchHelper: ItemTouchHelper  //
 
     private val EMPTY_VIEW = 0
     private val RACE_VIEW = 1
 
-    private var raceUndo: Race? = null      // local copy for any UNDO
-    private var posUndo: Int = -1           // "     "    "   "   "
+    private var raceUndo: Race? = null      // local copy for any UNDO action.
+    private var posUndo: Int = -1           // "     "    "   "   "    "
 }
