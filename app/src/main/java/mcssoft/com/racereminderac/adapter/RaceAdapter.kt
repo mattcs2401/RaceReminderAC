@@ -13,7 +13,7 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.ISwipe
-import mcssoft.com.racereminderac.utility.RemoveMessage
+import mcssoft.com.racereminderac.utility.eventbus.RemoveMessage
 import org.greenrobot.eventbus.EventBus
 
 class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {

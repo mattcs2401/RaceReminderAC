@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.utility
+package mcssoft.com.racereminderac.utility.eventbus
 
 import mcssoft.com.racereminderac.entity.Race
 

@@ -18,8 +18,8 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.model.RaceViewModel
-import mcssoft.com.racereminderac.utility.DialogMessage
-import mcssoft.com.racereminderac.utility.RemoveMessage
+import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
+import mcssoft.com.racereminderac.utility.eventbus.RemoveMessage
 import mcssoft.com.racereminderac.utility.TouchHelper
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -89,8 +89,8 @@ class MainFragment : Fragment(), IClick.ItemSelect {
      * @param dialog - The EventBus message object.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(dialog: DialogMessage) {
-        if(!dialog.message.isBlank()) {
+    fun onMessageEvent(time: TimeMessage) {
+        if(!time.message.isBlank()) {
 //            doOnMessageEvent(dialog)
         } else {
             // Nothing was selected in the dialog except for the OK button.
