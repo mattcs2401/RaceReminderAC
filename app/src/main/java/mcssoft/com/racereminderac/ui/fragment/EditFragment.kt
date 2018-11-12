@@ -119,11 +119,11 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         when(editType) {
             resources.getInteger(R.integer.edit_race_existing) -> {
                 toolBar.title = getString(R.string.edit_race)
-                btnSave.text = getString(R.string.update)
+                btnSave.text = getString(R.string.lbl_update)
             }
             resources.getInteger(R.integer.edit_race_new) -> {
                 toolBar.title = getString(R.string.new_race)
-                btnSave.text = getString(R.string.save)
+                btnSave.text = getString(R.string.lbl_save)
             }
         }
     }

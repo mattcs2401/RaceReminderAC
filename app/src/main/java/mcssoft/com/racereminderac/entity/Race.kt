@@ -22,7 +22,7 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
      * Utility function; return the Race details as a Array<String>.
      */
     fun toArray(): Array<String> {
-        val array: Array<String> = Array(6, {i -> ""})
+        val array: Array<String> = Array(6) { i -> ""}
         array.set(0, id.toString())
         array.set(1, cityCode)
         array.set(2, raceCode)

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="City Code"
+        android:text="@string/city_code"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Race Code"
+        android:text="@string/race_code"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         app:layout_constraintStart_toEndOf="@+id/id_tv_city_code"
         app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Race No"
+        android:text="@string/race_no"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         app:layout_constraintStart_toEndOf="@+id/id_tv_race_code"
         app:layout_constraintTop_toTopOf="parent" />
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Race Sel"
+        android:text="@string/race_sel"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         app:layout_constraintStart_toEndOf="@+id/id_tv_race_num"
         app:layout_constraintTop_toTopOf="parent" />
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="256dp"
         android:layout_marginTop="256dp"
-        android:text="Save"
+        android:text="@string/lbl_save"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -109,11 +109,10 @@
         android:id="@+id/id_tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:text="Time"
+        android:text="@string/lbl_time"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/id_btn_time"
+        app:layout_constraintStart_toStartOf="@+id/id_btn_time"
         app:layout_constraintTop_toBottomOf="@+id/id_btn_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

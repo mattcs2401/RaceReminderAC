@@ -7,8 +7,6 @@
     <string name="race_time">Race Time</string>
     <string name="race_code">Race Code</string>
 
-    <string name="save">Save</string>
-    <string name="update">Update</string>
     <string name="edit_race">Edit Race</string>
     <string name="new_race">New Race</string>
 
@@ -17,6 +15,9 @@
     <!-- Button labels. -->
     <string name="lbl_cancel">Cancel</string>
     <string name="lbl_ok">OK</string>
+    <string name="lbl_time">Time</string>
+    <string name="lbl_save">Save</string>
+    <string name="lbl_update">Update</string>
 
     <!-- Keys. -->
     <string name="key_general">key</string>
@@ -98,5 +99,12 @@
 
     <!-- Time picker. -->
     <string name="tp_tag">time_pick_dialog</string>
+
+    <!-- EditText layout default values. -->
+    <string name="abbrv_city_code">B</string>
+    <string name="abbrv_time">23:59</string>
+    <string name="abbrv_race_no">8</string>
+    <string name="abbrv_race_sel">8</string>
+    <string name="abbrv_race_code">R</string>
 
 </resources>
