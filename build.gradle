@@ -5,7 +5,7 @@ buildscript {
         kotlinVer = '1.3.0'
         navVer = '1.0.0-alpha07'
         roomVer = "1.1.1"
-        workVer = "1.0.0-alpha11"
+        workVer = "1.0.0-alpha09" // alpha11 causes issues.
         xCycleVer = "2.0.0"
         xAnnotVer = "1.0.0"
         xAppComVer = "1.0.2"

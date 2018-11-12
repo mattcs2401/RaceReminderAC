@@ -12,6 +12,8 @@
     <string name="edit_race">Edit Race</string>
     <string name="new_race">New Race</string>
 
+    <string name="title_race_reminder">Race Reminder</string>
+
     <!-- Button labels. -->
     <string name="lbl_cancel">Cancel</string>
     <string name="lbl_ok">OK</string>

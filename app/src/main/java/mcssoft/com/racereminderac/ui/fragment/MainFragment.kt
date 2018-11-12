@@ -58,7 +58,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (activity?.id_toolbar)?.title = "Race Reminder"
+        (activity?.id_toolbar)?.title = getString(R.string.title_race_reminder)
 
         // If FAB was previously hidden by a New or Edit etc, then show again.
         val fab = activity?.id_fab as FloatingActionButton
@@ -68,7 +68,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
-        raceViewModel.getAllRaces().observe(activity!!, Observer<List<Race>> { races ->
+        raceViewModel.getAllRaces().observe(viewLifecycleOwner, Observer<List<Race>> { races ->
             raceAdapter.swapData(races as ArrayList<Race>)
         })
     }
@@ -86,7 +86,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {
 
     /**
      * EventBus returns here.
-     * @param dialog - The EventBus message object.
+     * @param time - The EventBus message object.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(time: TimeMessage) {
