@@ -72,7 +72,6 @@ class MainFragment : Fragment(), IClick.ItemSelect {
             raceAdapter.swapData(races as ArrayList<Race>)
         })
     }
-    //</editor-fold>
 
     override fun onStart() {
         super.onStart()
@@ -83,7 +82,9 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         super.onStop()
         EventBus.getDefault().unregister(this)
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
     /**
      * EventBus returns here.
      * @param time - The EventBus message object.
@@ -102,7 +103,9 @@ class MainFragment : Fragment(), IClick.ItemSelect {
     fun onMessageEvent(remove: RemoveMessage) {
         raceViewModel.delete(remove.theRace)
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Interface IClick.ItemSelect">
     /**
      * Interface IClick.ItemSelect
      */
@@ -111,6 +114,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         // TBA - use EventBus ?
         (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
     }
+    //</editor-fold>
 
     private lateinit var rootView: View
     private lateinit var raceAdapter: RaceAdapter
