@@ -20,6 +20,10 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getAllRaces(): LiveData<MutableList<Race>> = allRaces
 
+    fun getAllRacesBasic(): List<Race> = raceRepository.getAllRacesBasic()
+
+    fun getCountRaces(): Int = raceRepository.getCountRaces()
+
 //    fun insert(race: Race) = raceRepository.insert(race)
     fun insert(race: Race) = raceRepository.doDatabaseOperation("insert", race)
 

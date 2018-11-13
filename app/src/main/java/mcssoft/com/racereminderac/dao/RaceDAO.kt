@@ -17,7 +17,7 @@ internal interface RaceDAO {
     fun deleteRace(race: Race)
 
     @Query("select count(*) from race_details")
-    fun getCountRaces(): Long
+    fun getCountRaces(): Int
 
     @Query("select * from race_details where _id = :id")
     fun getRaceLD(id: Long): LiveData<Race>

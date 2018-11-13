@@ -25,6 +25,8 @@ class RaceRepository(application: Application) {
 
     internal fun getAllRaces(): LiveData<MutableList<Race>> = allRaces
 
+    internal fun getAllRacesBasic(): List<Race> = raceDao.getAllRacesBasic()
+
     internal fun getRace(id: Long): LiveData<Race> = raceDao.getRaceLD(id)
 
     internal fun doDatabaseOperation(type: String, race: Race) {
@@ -56,5 +58,7 @@ class RaceRepository(application: Application) {
             // TBA
         }
     }
+
+    fun getCountRaces(): Int = raceDao.getCountRaces()
 
 }

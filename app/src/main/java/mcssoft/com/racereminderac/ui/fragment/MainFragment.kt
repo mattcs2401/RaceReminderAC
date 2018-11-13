@@ -71,6 +71,10 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         raceViewModel.getAllRaces().observe(viewLifecycleOwner, Observer<List<Race>> { races ->
             raceAdapter.swapData(races as ArrayList<Race>)
         })
+
+        if(raceViewModel.getCountRaces() > 0) {
+
+        }
     }
 
     override fun onStart() {
