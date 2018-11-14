@@ -3,10 +3,14 @@ package mcssoft.com.racereminderac.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.Nullable
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.work.WorkManager
+import androidx.work.WorkStatus
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
@@ -63,6 +67,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelec
         Navigation.setViewNavController(id_fab, navController)
         // Back Navigation.
         setupActionBarWithNavController(this, navController)
+
+//        WorkManager.getInstance().getStatusById(simpleRequest.getId())
+//                .observe(this, object : Observer<WorkStatus> {
+//                    override fun onChanged(@Nullable workStatus: WorkStatus?) {
+//                        if (workStatus != null) {
+//                            mTextView.append("SimpleWorkRequest: " + workStatus.state.name + "\n")
+//                        }
+//
+//                        if (workStatus != null && workStatus.state.isFinished) {
+//                            val message = workStatus.outputData.getString(MyWorker.EXTRA_OUTPUT_MESSAGE)//, "Default message");
+//                            mTextView.append("SimpleWorkRequest (Data): " + message!!)
+//                        }
+//                    }
+//                })
     }
 
     private lateinit var navController: NavController

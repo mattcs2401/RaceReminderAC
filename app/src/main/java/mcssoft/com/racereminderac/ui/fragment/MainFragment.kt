@@ -8,12 +8,15 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_fragment.view.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
+import mcssoft.com.racereminderac.background.NotifyWorker
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.IRace
@@ -24,6 +27,7 @@ import mcssoft.com.racereminderac.utility.TouchHelper
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.util.concurrent.TimeUnit
 
 class MainFragment : Fragment(), IClick.ItemSelect {
 
@@ -72,9 +76,16 @@ class MainFragment : Fragment(), IClick.ItemSelect {
             raceAdapter.swapData(races as ArrayList<Race>)
         })
 
-        if(raceViewModel.getCountRaces() > 0) {
+        val bp = ""
 
-        }
+//        if(raceAdapter.itemCount > 0) {
+            // Races exist.
+            val periodicWorkRequest = PeriodicWorkRequest.Builder(NotifyWorker::class.java, 1, TimeUnit.MINUTES)
+                    .addTag("periodic_work")
+                    .build()
+
+            WorkManager.getInstance().enqueue(periodicWorkRequest)
+//        }
     }
 
     override fun onStart() {

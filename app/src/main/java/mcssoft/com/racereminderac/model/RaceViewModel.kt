@@ -24,12 +24,9 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getCountRaces(): Int = raceRepository.getCountRaces()
 
-//    fun insert(race: Race) = raceRepository.insert(race)
     fun insert(race: Race) = raceRepository.doDatabaseOperation("insert", race)
 
-//    fun update(race: Race) = raceRepository.update(race)
     fun update(race: Race) = raceRepository.doDatabaseOperation("update", race)
 
-//    fun deleteRace(race: Race) = raceRepository.deleteRace(race)
     fun delete(race: Race) = raceRepository.doDatabaseOperation("delete", race)
 }
