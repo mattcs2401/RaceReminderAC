@@ -77,6 +77,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         })
     }
 
+
     override fun onStart() {
         super.onStart()
         if(raceViewModel.getCountRaces() > 0) {
