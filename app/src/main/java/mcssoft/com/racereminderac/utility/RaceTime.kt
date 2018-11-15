@@ -6,7 +6,6 @@ import java.util.Locale
 import java.util.Calendar
 import java.util.Date
 
-
 class RaceTime(context: Context) {
 
     companion object {
