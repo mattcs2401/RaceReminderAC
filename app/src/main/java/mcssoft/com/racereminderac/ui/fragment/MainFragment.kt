@@ -75,26 +75,19 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         raceViewModel.getAllRaces().observe(viewLifecycleOwner, Observer<List<Race>> { races ->
             raceAdapter.swapData(races as ArrayList<Race>)
         })
-
-        val bp = ""
-
-//        if(raceAdapter.itemCount > 0) {
-            // Races exist.
-            val periodicWorkRequest = PeriodicWorkRequest.Builder(NotifyWorker::class.java, 1, TimeUnit.MINUTES)
-                    .addTag("periodic_work")
-                    .build()
-
-            WorkManager.getInstance().enqueue(periodicWorkRequest)
-//        }
     }
 
     override fun onStart() {
         super.onStart()
+        if(raceViewModel.getCountRaces() > 0) {
+            startMonitorRaceListing()
+        }
         EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
         super.onStop()
+        stopMonitorRaceListing()
         EventBus.getDefault().unregister(this)
     }
     //</editor-fold>
@@ -128,6 +121,16 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         // callback to the Activity with the selected Race object
         // TBA - use EventBus ?
         (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
+    private fun startMonitorRaceListing() {
+        // TBA
+    }
+
+    private fun stopMonitorRaceListing() {
+        // TBA
     }
     //</editor-fold>
 
