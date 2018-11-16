@@ -1,30 +1,28 @@
 package mcssoft.com.racereminderac.model
 
 import android.view.View
-import android.widget.NumberPicker
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.edit_fragment.view.*
-import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 
 class RaceObserver(race: LiveData<Race>, view: View) : Observer<Race> {
 
-    var rootView: View
+    var view: View
 
     init {
-        this.rootView = view
+        this.view = view
     }
 
-    override fun onChanged(race: Race?) {
-        if(race != null) {
-            /* surround with null check so will skip whole block if is null. */
-            rootView.id_np_city_code.value = findInArray(rootView.id_np_city_code.displayedValues,race.cityCode)
-            rootView.id_np_race_code.value = findInArray(rootView.id_np_race_code.displayedValues,race.raceCode)
-            rootView.id_np_race_num.value = findInArray(rootView.id_np_race_num.displayedValues,race.raceNum)
-            rootView.id_np_race_sel.value = findInArray(rootView.id_np_race_sel.displayedValues,race.raceSel)
-            rootView.id_btn_time.setText(race.raceTime)
-        }
+    override fun onChanged(race: Race) {
+//        if(race != null) {
+//            /* surround with null check so will skip whole block if is null. */
+            view.id_np_city_code.value = findInArray(view.id_np_city_code.displayedValues,race.cityCode)
+            view.id_np_race_code.value = findInArray(view.id_np_race_code.displayedValues,race.raceCode)
+            view.id_np_race_num.value = findInArray(view.id_np_race_num.displayedValues,race.raceNum)
+            view.id_np_race_sel.value = findInArray(view.id_np_race_sel.displayedValues,race.raceSel)
+            view.id_btn_time.setText(race.raceTime)
+//        }
     }
 
     /**

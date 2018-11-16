@@ -3,6 +3,7 @@ package mcssoft.com.racereminderac.repository
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
@@ -24,8 +25,6 @@ class RaceRepository(application: Application) {
     }
 
     internal fun getAllRaces(): LiveData<MutableList<Race>> = allRaces
-
-    internal fun getAllRacesBasic(): List<Race> = raceDao.getAllRacesBasic()
 
     internal fun getRace(id: Long): LiveData<Race> = raceDao.getRaceLD(id)
 
@@ -55,10 +54,12 @@ class RaceRepository(application: Application) {
         } catch (e: java.lang.Exception) {
             Log.d("RaceRepository: ", e.message)
         } finally {
-            // TBA
+            // update the repository (regardless).
+            allRaces = raceDao.getAllRaces()
         }
     }
 
-    fun getCountRaces(): Int = raceDao.getCountRaces()
+    // TBA - this needs to be a Worker, but need to get output of Worker.
+    //fun getCountRaces(): Int = raceDao.getCountRaces()
 
 }

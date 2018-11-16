@@ -27,14 +27,14 @@ class NotifyWorker(context: Context, workerParams: WorkerParameters) : Worker(co
         // Get the current time, and compare against the entries in the database.
         val time = RaceTime.getInstance(context).getFormattedTime()
 
-        val races = raceDao.getAllRacesBasic()
+        val lRaces = raceDao.getAllRaces()
 
-        for(race in races) {
+//        for(race in races) {
+//
+//            val bp = ""
+//        }
 
-            val bp = ""
-        }
-
-        sendNotification("Testing","A testing message.")
+//        sendNotification("Testing","A testing message.")
         return Result.SUCCESS
     }
 

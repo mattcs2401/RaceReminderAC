@@ -16,17 +16,18 @@ class InsertWorker(context: Context, workerParams: WorkerParameters) : Worker(co
     }
 
     override fun doWork(): Result {
-        if(raceDao != null) {
+//        if(raceDao != null) {
+        try {
             // Get the elements of that will comprise a Race object.
             val theRace : Array<String> = getInputData().getStringArray("key")!!
             // Construct generic object (note: race.get(0) == -1)
             val race = Race(theRace.get(1), theRace.get(2), theRace.get(3), theRace.get(4), theRace.get(5))
             // Let Room do it's thing.
-            raceDao!!.insertRace(race)
+            raceDao.insertRace(race)
 
             return Result.SUCCESS
+        } catch(ex: Exception) {
+            return Result.FAILURE
         }
-
-        return Result.FAILURE
     }
 }
