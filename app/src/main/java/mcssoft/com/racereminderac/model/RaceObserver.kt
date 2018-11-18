@@ -14,15 +14,15 @@ class RaceObserver(race: LiveData<Race>, view: View) : Observer<Race> {
         this.view = view
     }
 
-    override fun onChanged(race: Race) {
-//        if(race != null) {
-//            /* surround with null check so will skip whole block if is null. */
+    override fun onChanged(race: Race?) {
+        if(race != null) {
+            /* Parameter race == null if where entering details for a new Race. */
             view.id_np_city_code.value = findInArray(view.id_np_city_code.displayedValues,race.cityCode)
             view.id_np_race_code.value = findInArray(view.id_np_race_code.displayedValues,race.raceCode)
             view.id_np_race_num.value = findInArray(view.id_np_race_num.displayedValues,race.raceNum)
             view.id_np_race_sel.value = findInArray(view.id_np_race_sel.displayedValues,race.raceSel)
             view.id_btn_time.setText(race.raceTime)
-//        }
+        }
     }
 
     /**

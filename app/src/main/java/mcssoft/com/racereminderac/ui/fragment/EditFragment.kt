@@ -207,6 +207,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         npRaceNo.displayedValues = rnVals
         npRaceNo.wrapSelectorWheel = true
 
+        // TODO - if RaceCode == G, then only 8 selections in numberpicker.
         npRaceSel = id_np_race_sel
         rsVals = resources.getStringArray(R.array.raceSel)
         npRaceSel.minValue = 0
