@@ -73,34 +73,15 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         })
     }
 
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        (activity?.id_toolbar)?.title = getString(R.string.title_race_reminder)
-//
-//        // If FAB was previously hidden by a New or Edit etc, then show again.
-//        val fab = activity?.id_fab as FloatingActionButton
-//        if(fab.isOrWillBeHidden) {
-//            fab.show()
-//        }
-//        // Set the view model.
-//        raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
-//
-//        raceViewModel.getAllRaces().observe(viewLifecycleOwner, Observer<List<Race>> { races ->
-//            raceAdapter.swapData(races as ArrayList<Race>)
-//        })
-//    }
-
     override fun onStart() {
         super.onStart()
-//        if(raceViewModel.getCountRaces() > 0) {
-//            startMonitorRaceListing()
-//        }
+//        startMonitorRaceListing()
         EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
         super.onStop()
-        stopMonitorRaceListing()
+//        stopMonitorRaceListing()
         EventBus.getDefault().unregister(this)
     }
     //</editor-fold>
