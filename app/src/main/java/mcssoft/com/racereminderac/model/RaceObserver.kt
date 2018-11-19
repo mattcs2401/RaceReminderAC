@@ -16,7 +16,7 @@ class RaceObserver(race: LiveData<Race>, view: View) : Observer<Race> {
 
     override fun onChanged(race: Race?) {
         if(race != null) {
-            /* Parameter race == null if where entering details for a new Race. */
+            /* Parameter race == null if we're entering details for a new Race. */
             view.id_np_city_code.value = findInArray(view.id_np_city_code.displayedValues,race.cityCode)
             view.id_np_race_code.value = findInArray(view.id_np_race_code.displayedValues,race.raceCode)
             view.id_np_race_num.value = findInArray(view.id_np_race_num.displayedValues,race.raceNum)

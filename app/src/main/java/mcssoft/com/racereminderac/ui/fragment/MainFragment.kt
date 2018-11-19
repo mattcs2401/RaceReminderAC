@@ -8,8 +8,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.Constraints
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
+import androidx.work.WorkStatus
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_fragment.view.*
@@ -20,6 +22,7 @@ import mcssoft.com.racereminderac.background.NotifyWorker
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.IRace
+import mcssoft.com.racereminderac.model.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
 import mcssoft.com.racereminderac.utility.eventbus.RemoveMessage
@@ -28,6 +31,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.util.concurrent.TimeUnit
+
 
 class MainFragment : Fragment(), IClick.ItemSelect {
 
@@ -68,20 +72,19 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
-        raceViewModel.getAllRaces().observe(viewLifecycleOwner, Observer<List<Race>> { races ->
-            raceAdapter.swapData(races as ArrayList<Race>)
-        })
+        val lRaces = raceViewModel.getAllRaces()
+        lRaces.observe(viewLifecycleOwner, RaceListObserver(lRaces, raceAdapter))
     }
 
     override fun onStart() {
         super.onStart()
-//        startMonitorRaceListing()
+        startMonitorRaceListing()
         EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
         super.onStop()
-//        stopMonitorRaceListing()
+        stopMonitorRaceListing()
         EventBus.getDefault().unregister(this)
     }
     //</editor-fold>
@@ -120,9 +123,18 @@ class MainFragment : Fragment(), IClick.ItemSelect {
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     private fun startMonitorRaceListing() {
-        // ?? this is null on app start ??
-//        val list = raceViewModel.getAllRaces()
-//        val bp = ""
+        val constraints = Constraints.Builder().build()
+        notifyWork = PeriodicWorkRequest.Builder(NotifyWorker::class.java, 15, TimeUnit.MINUTES).addTag("NotifyWorker")
+                .setConstraints(constraints).build()
+        WorkManager.getInstance().enqueue(notifyWork)
+
+        WorkManager.getInstance().getStatusById(notifyWork.getId()).observe(viewLifecycleOwner,
+                Observer<WorkStatus> { workStatus ->
+            if(workStatus != null && workStatus.getState().isFinished()){
+                val bp = ""
+            }
+        })
+        val bp = ""
     }
 
     private fun stopMonitorRaceListing() {
@@ -134,6 +146,8 @@ class MainFragment : Fragment(), IClick.ItemSelect {
     private lateinit var raceAdapter: RaceAdapter
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var recyclerView: RecyclerView
+
+    private lateinit var notifyWork: PeriodicWorkRequest
 
 }
 

@@ -77,7 +77,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
         this.icListener = icListener
     }
 
-    internal fun swapData(lRaces : ArrayList<Race>) {
+    internal fun swapData(lRaces: ArrayList<Race>) {
         this.lRaces = lRaces
         emptyViewCheck()
         notifyDataSetChanged()

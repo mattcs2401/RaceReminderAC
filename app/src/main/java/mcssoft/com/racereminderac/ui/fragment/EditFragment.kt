@@ -226,7 +226,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         // view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
         raceId = arguments?.getLong(getString(R.string.key_edit_existing))
-        raceViewModel.getRace(raceId!!).observe(viewLifecycleOwner, RaceObserver(raceViewModel.getRace(raceId!!), view))
+        val race = raceViewModel.getRace(raceId!!)
+        race.observe(viewLifecycleOwner, RaceObserver(race, view))
     }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">

@@ -31,7 +31,7 @@ class NotifyWorker(context: Context, workerParams: WorkerParameters) : Worker(co
 
 //        for(race in races) {
 //
-//            val bp = ""
+            val bp = ""
 //        }
 
 //        sendNotification("Testing","A testing message.")
