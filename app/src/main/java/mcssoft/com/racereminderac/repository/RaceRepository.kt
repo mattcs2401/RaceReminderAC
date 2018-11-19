@@ -3,7 +3,6 @@ package mcssoft.com.racereminderac.repository
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
@@ -24,15 +23,18 @@ class RaceRepository(application: Application) {
         allRaces = raceDao.getAllRaces()
     }
 
-    internal fun getAllRaces(): LiveData<MutableList<Race>> = allRaces
+    internal fun getAllRaces(): LiveData<MutableList<Race>> {
+        allRaces = raceDao.getAllRaces()
+        return allRaces
+    }
 
-    internal fun getRace(id: Long): LiveData<Race> = raceDao.getRaceLD(id)
+    internal fun getRace(id: Long): LiveData<Race> = raceDao.getRace(id)
 
     internal fun doDatabaseOperation(type: String, race: Race) {
         var request: OneTimeWorkRequest? = null
         try {
             val workManager = WorkManager.getInstance()
-            val data: Data = Data.Builder().putStringArray("key", race.toArray()).build()
+            val data= Data.Builder().putStringArray("key", race.toArray()).build()
             when (type) {
                 "insert" -> {
                     request = OneTimeWorkRequest.Builder(InsertWorker::class.java)

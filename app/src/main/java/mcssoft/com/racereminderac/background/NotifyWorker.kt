@@ -25,9 +25,9 @@ class NotifyWorker(context: Context, workerParams: WorkerParameters) : Worker(co
 
     override fun doWork(): Result {
         // Get the current time, and compare against the entries in the database.
-        val time = RaceTime.getInstance(context).getFormattedTime()
+//        val time = RaceTime.getInstance(context).getFormattedTime()
 
-        val lRaces = raceDao.getAllRaces()
+//        val lRaces = raceDao.getAllRaces()
 
 //        for(race in races) {
 //

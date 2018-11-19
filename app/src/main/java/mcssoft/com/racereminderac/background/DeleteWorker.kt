@@ -16,18 +16,20 @@ class DeleteWorker(context: Context, workerParams: WorkerParameters) : Worker(co
     }
 
     override fun doWork(): Result {
-        if(raceDao != null) {
+        try {
             // Get the elements of that will comprise a Race object.
-            val theRace : Array<String> = getInputData().getStringArray("key")!!
+            val theRace: Array<String> = getInputData().getStringArray("key")!!
             // Construct generic object.
-            val race = Race(theRace[1], theRace[2], theRace[3], theRace[4], theRace[5])
+//            val race = Race(theRace[1], theRace[2], theRace[3], theRace[4], theRace[5])
             // Add in the id as it's not part of the constructor because its auto generate.
-            race.id = theRace[0].toLong()
+//            race.id = theRace[0].toLong()
             // Let Room do it's thing.
-            raceDao!!.deleteRace(race)
+//            raceDao.deleteRace(race)
+            raceDao.deleteRace(theRace[0].toLong())
 
             return Result.SUCCESS
+        } catch (ex: Exception) {
+            return Result.FAILURE
         }
-        return Result.FAILURE
     }
 }
