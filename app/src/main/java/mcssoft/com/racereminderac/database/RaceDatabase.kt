@@ -39,7 +39,8 @@ abstract class RaceDatabase : RoomDatabase() {
                 // pre-populate database - dummy data
                 val request: OneTimeWorkRequest = OneTimeWorkRequest.Builder(InitWorker::class.java).build()
                 val workMgr : WorkManager = WorkManager.getInstance()
-                return workMgr.enqueue(request)
+                //return workMgr.enqueue(request)
+                workMgr.enqueue(request)
             }
         }
     }

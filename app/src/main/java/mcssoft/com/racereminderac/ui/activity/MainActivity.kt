@@ -10,7 +10,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.work.WorkManager
-import androidx.work.WorkStatus
+import androidx.work.WorkInfo
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R

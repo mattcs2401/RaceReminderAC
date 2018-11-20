@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.work.Constraints
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
-import androidx.work.WorkStatus
+import androidx.work.WorkInfo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_fragment.view.*
@@ -78,13 +78,11 @@ class MainFragment : Fragment(), IClick.ItemSelect {
 
     override fun onStart() {
         super.onStart()
-        startMonitorRaceListing()
         EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
         super.onStop()
-        stopMonitorRaceListing()
         EventBus.getDefault().unregister(this)
     }
     //</editor-fold>
@@ -104,7 +102,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe(threadMode = ThreadMode.BACKGROUND) //ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(remove: RemoveMessage) {
         raceViewModel.delete(remove.theRace)
     }
@@ -118,27 +116,6 @@ class MainFragment : Fragment(), IClick.ItemSelect {
         // callback to the Activity with the selected Race object
         // TBA - use EventBus ?
         (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
-    private fun startMonitorRaceListing() {
-        val constraints = Constraints.Builder().build()
-        notifyWork = PeriodicWorkRequest.Builder(NotifyWorker::class.java, 15, TimeUnit.MINUTES).addTag("NotifyWorker")
-                .setConstraints(constraints).build()
-        WorkManager.getInstance().enqueue(notifyWork)
-
-        WorkManager.getInstance().getStatusById(notifyWork.getId()).observe(viewLifecycleOwner,
-                Observer<WorkStatus> { workStatus ->
-            if(workStatus != null && workStatus.getState().isFinished()){
-                val bp = ""
-            }
-        })
-        val bp = ""
-    }
-
-    private fun stopMonitorRaceListing() {
-        // TBA
     }
     //</editor-fold>
 

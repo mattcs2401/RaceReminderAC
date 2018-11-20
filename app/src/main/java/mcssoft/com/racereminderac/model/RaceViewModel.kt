@@ -35,4 +35,6 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
     fun update(race: Race) = raceRepository.doDatabaseOperation("update", race)
 
     fun delete(race: Race) = raceRepository.doDatabaseOperation("delete", race)
+
+    fun getOutputStatus() = raceRepository.getOutputStatus()
 }

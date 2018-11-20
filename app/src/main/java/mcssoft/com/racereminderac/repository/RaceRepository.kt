@@ -3,9 +3,7 @@ package mcssoft.com.racereminderac.repository
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
+import androidx.work.*
 import mcssoft.com.racereminderac.background.DeleteWorker
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.background.InsertWorker
@@ -16,11 +14,15 @@ import mcssoft.com.racereminderac.database.RaceDatabase
 class RaceRepository(application: Application) {
 
     private var raceDao: RaceDAO
+    private var workManager: WorkManager
     private var allRaces: LiveData<MutableList<Race>>
+    private var workInfo: LiveData<List<WorkInfo>>
 
     init {
         raceDao = RaceDatabase.getInstance(application)!!.raceDao()
         allRaces = raceDao.getAllRaces()
+        workManager = WorkManager.getInstance()
+        workInfo = workManager.getWorkInfosByTagLiveData("OUTPUT")
     }
 
     internal fun getAllRaces(): LiveData<MutableList<Race>> {
@@ -33,7 +35,6 @@ class RaceRepository(application: Application) {
     internal fun doDatabaseOperation(type: String, race: Race) {
         var request: OneTimeWorkRequest? = null
         try {
-            val workManager = WorkManager.getInstance()
             val data= Data.Builder().putStringArray("key", race.toArray()).build()
             when (type) {
                 "insert" -> {
@@ -49,19 +50,21 @@ class RaceRepository(application: Application) {
                 "delete" -> {
                     request = OneTimeWorkRequest.Builder(DeleteWorker::class.java)
                             .setInputData(data)
+                            .addTag("OUTPUT")
                             .build()
                 }
             }
-            return workManager.enqueue(request)
-        } catch (e: java.lang.Exception) {
-            Log.d("RaceRepository: ", e.message)
+            workManager.enqueue(request!!)
+        } catch (ex: Exception) {
+            Log.d("RaceRepository: ", ex.message)
         } finally {
             // update the repository (regardless).
-            allRaces = raceDao.getAllRaces()
+//            allRaces = raceDao.getAllRaces()
         }
     }
 
-    // TBA - this needs to be a Worker, but need to get output of Worker.
-    //fun getCountRaces(): Int = raceDao.getCountRaces()
+    internal fun getOutputStatus(): LiveData<List<WorkInfo>> {
+        return workInfo
+    }
 
 }

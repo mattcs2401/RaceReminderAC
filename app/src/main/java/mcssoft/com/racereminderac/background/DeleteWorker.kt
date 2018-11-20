@@ -1,11 +1,14 @@
 package mcssoft.com.racereminderac.background
 
 import android.content.Context
+import android.util.Log
+import androidx.work.Data
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import mcssoft.com.racereminderac.dao.RaceDAO
 import mcssoft.com.racereminderac.database.RaceDatabase
 import mcssoft.com.racereminderac.entity.Race
+import java.lang.Exception
 
 class DeleteWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
@@ -26,10 +29,16 @@ class DeleteWorker(context: Context, workerParams: WorkerParameters) : Worker(co
             // Let Room do it's thing.
 //            raceDao.deleteRace(race)
             raceDao.deleteRace(theRace[0].toLong())
-
+            setOutputData(createOutput("DeleteWorker success."))
             return Result.SUCCESS
         } catch (ex: Exception) {
+            Log.d("Delete Worker: ", ex.message)
+            setOutputData(createOutput("DeleteWorker failure."))
             return Result.FAILURE
         }
+    }
+
+    private fun createOutput(msg: String) : Data {
+        return Data.Builder().putString("key", msg).build()
     }
 }
