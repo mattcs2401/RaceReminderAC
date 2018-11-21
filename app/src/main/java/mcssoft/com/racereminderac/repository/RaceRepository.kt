@@ -3,7 +3,10 @@ package mcssoft.com.racereminderac.repository
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.work.*
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import mcssoft.com.racereminderac.background.DeleteWorker
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.background.InsertWorker

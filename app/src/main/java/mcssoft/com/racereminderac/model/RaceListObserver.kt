@@ -2,10 +2,14 @@ package mcssoft.com.racereminderac.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DiffUtil
 import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.entity.Race
+import java.util.*
 
 class RaceListObserver(lRaces: LiveData<MutableList<Race>>, adapter: RaceAdapter) : Observer<List<Race>> {
+
+    // https://android.jlelse.eu/smart-way-to-update-recyclerview-using-diffutil-345941a160e0
 
     private var adapter: RaceAdapter
 
@@ -14,10 +18,15 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, adapter: RaceAdapter
     }
 
     override fun onChanged(lRaces: List<Race>?) {
-        adapter.swapData(lRaces as ArrayList<Race>)
+        if(lRaces == null) {
+            return
+        } else {
+            adapter.swapData(lRaces as ArrayList<Race>)
 
+        }
+
+        
         // TODO - races nearing race time check can be done here. Have access to the whole list.
     }
-
 
 }

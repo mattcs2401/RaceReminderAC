@@ -127,10 +127,10 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
      */
     override fun onViewSwiped(pos: Int) {
         deleteRace(pos)
-        val snackBar = Snackbar.make(anchorView, "Item removed.", Snackbar.LENGTH_LONG)
-        snackBar.setAction("UNDO", this)
-        snackBar.addCallback(SnackBarCB(raceUndo!!))
-        snackBar.show()
+//        val snackBar = Snackbar.make(anchorView, "Item removed.", Snackbar.LENGTH_LONG)
+//        snackBar.setAction("UNDO", this)
+//        snackBar.addCallback(SnackBarCB(raceUndo!!))
+//        snackBar.show()
     }
 
     class SnackBarCB(race: Race) : Snackbar.Callback() {
