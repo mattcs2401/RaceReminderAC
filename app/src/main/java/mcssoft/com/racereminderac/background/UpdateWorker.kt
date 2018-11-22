@@ -20,9 +20,9 @@ class UpdateWorker(context: Context, workerParams: WorkerParameters) : Worker(co
             // Get the elements of that will comprise a Race object.
             val theRace : Array<String> = getInputData().getStringArray("key")!!
             // Construct generic object.
-            val race = Race(theRace[1], theRace[2], theRace[3], theRace[4], theRace[5])
+            val race = Race(theRace[0], theRace[1], theRace[2], theRace[3], theRace[4])
             // Add in the id as it's not part of the constructor because its auto generate.
-            race.id = theRace[0].toLong()
+            race.id = getInputData().getLong("key2",-1)//theRace[0].toLong()
             // Let Room do it's thing.
             raceDao!!.updateRace(race)
 

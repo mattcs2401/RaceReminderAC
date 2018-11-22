@@ -25,7 +25,7 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, adapter: RaceAdapter
 
         }
 
-        
+
         // TODO - races nearing race time check can be done here. Have access to the whole list.
     }
 
