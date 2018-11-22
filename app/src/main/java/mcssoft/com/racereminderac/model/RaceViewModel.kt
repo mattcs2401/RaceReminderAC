@@ -36,5 +36,7 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
 
     fun delete(race: Race) = raceRepository.doDatabaseOperation("delete", race)
 
+//    fun delete(id: Long) = raceRepository.delete(id)
+
     fun getOutputStatus() = raceRepository.getOutputStatus()
 }

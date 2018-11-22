@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.BaseTransientBottomBar.BaseCallback
@@ -12,17 +13,20 @@ import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
+import mcssoft.com.racereminderac.interfaces.IDelete
 import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.eventbus.RemoveMessage
 import org.greenrobot.eventbus.EventBus
 
-class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
+class RaceAdapter(anchorView: View, fragment: Fragment) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
 
     private var anchorView: View
+    private var fragment: Fragment
 
     init {
         // the view that the 'UNDO' SnackBar is anchored to.
         this.anchorView = anchorView
+        this.fragment = fragment
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
@@ -127,37 +131,39 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
      */
     override fun onViewSwiped(pos: Int) {
         deleteRace(pos)
+        (fragment as IDelete).onDelete(raceUndo!!)
+//        EventBus.getDefault().post(RemoveMessage(raceUndo!!))
 //        val snackBar = Snackbar.make(anchorView, "Item removed.", Snackbar.LENGTH_LONG)
 //        snackBar.setAction("UNDO", this)
 //        snackBar.addCallback(SnackBarCB(raceUndo!!))
 //        snackBar.show()
     }
 
-    class SnackBarCB(race: Race) : Snackbar.Callback() {
-        var race: Race
-        init {
-            this.race = race
-        }
-
-        @SuppressLint("SwitchIntDef") // <<-- this because not all events considered.
-        override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-            //super.onDismissed(transientBottomBar, event)
-            // The UNDO timeout has expired or the Snackbar was swipe dismissed, so also remove from
-            // database.
-            when(event) {
-                BaseCallback.DISMISS_EVENT_TIMEOUT -> {
-                    removeRace()
-                }
-                BaseCallback.DISMISS_EVENT_SWIPE -> {
-                    removeRace()
-                }
-            }
-        }
-
-        fun removeRace() {
-            EventBus.getDefault().post(RemoveMessage(race))
-        }
-    }
+//    class SnackBarCB(race: Race) : Snackbar.Callback() {
+//        var race: Race
+//        init {
+//            this.race = race
+//        }
+//
+//        @SuppressLint("SwitchIntDef") // <<-- this because not all events considered.
+//        override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+//            //super.onDismissed(transientBottomBar, event)
+//            // The UNDO timeout has expired or the Snackbar was swipe dismissed, so also remove from
+//            // database.
+//            when(event) {
+//                BaseCallback.DISMISS_EVENT_TIMEOUT -> {
+//                    removeRace()
+//                }
+//                BaseCallback.DISMISS_EVENT_SWIPE -> {
+//                    removeRace()
+//                }
+//            }
+//        }
+//
+//        fun removeRace() {
+//            EventBus.getDefault().post(RemoveMessage(race))
+//        }
+//    }
 
     private fun emptyViewCheck() {
         isEmptyView = lRaces.isEmpty()

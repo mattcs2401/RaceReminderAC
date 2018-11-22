@@ -1,6 +1,7 @@
 package mcssoft.com.racereminderac.repository
 
 import android.app.Application
+import android.os.AsyncTask
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.work.Data
@@ -38,7 +39,10 @@ class RaceRepository(application: Application) {
     internal fun doDatabaseOperation(type: String, race: Race) {
         var request: OneTimeWorkRequest? = null
         try {
-            val data= Data.Builder().putStringArray("key", race.toArray()).build()
+            val dataBuilder= Data.Builder() //.putStringArray("key", race.toArray()).build()
+            dataBuilder.putStringArray("key", race.valuesToArray())
+                .putLong("key2", race.id!!)
+            val data = dataBuilder.build()
             when (type) {
                 "insert" -> {
                     request = OneTimeWorkRequest.Builder(InsertWorker::class.java)
@@ -51,13 +55,15 @@ class RaceRepository(application: Application) {
                             .build()
                 }
                 "delete" -> {
+//                    var delAsysnc = DeleteAsync(raceDao)
+//                    delAsysnc.execute(race)
                     request = OneTimeWorkRequest.Builder(DeleteWorker::class.java)
                             .setInputData(data)
                             .addTag("OUTPUT")
                             .build()
                 }
             }
-            workManager.enqueue(request!!)
+            if(request != null) { workManager.enqueue(request!!) }
         } catch (ex: Exception) {
             Log.d("RaceRepository: ", ex.message)
         } finally {
@@ -68,6 +74,18 @@ class RaceRepository(application: Application) {
 
     internal fun getOutputStatus(): LiveData<List<WorkInfo>> {
         return workInfo
+    }
+
+    private class DeleteAsync(dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
+        private var dao: RaceDAO
+        init {
+            this.dao = dao
+        }
+
+        override fun doInBackground(vararg params: Race?) : Void? {
+            dao.deleteRace(params[0]!!)
+            return null
+        }
     }
 
 }

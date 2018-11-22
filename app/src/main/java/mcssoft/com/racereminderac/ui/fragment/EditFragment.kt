@@ -153,7 +153,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             }
             // Insert.
             R.integer.edit_race_new -> {
-                race.id = -1
+//                race.id = -1
             }
         }
         return race

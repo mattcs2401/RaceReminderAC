@@ -21,15 +21,15 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
     /**
      * Utility function; return the Race details as a Array<String>.
      */
-    fun toArray(): Array<String> {
-        val array: Array<String> = Array(7) { i -> ""}
-        array.set(0, id.toString())
-        array.set(1, cityCode)
-        array.set(2, raceCode)
-        array.set(3, raceNum)
-        array.set(4, raceSel)
-        array.set(5, raceTime)
-        array.set(6, archvRace)
+    fun valuesToArray(): Array<String> {
+        val array: Array<String> = Array(6) { i -> ""}
+//        array.set(0, id.toString())
+        array.set(0, cityCode)
+        array.set(1, raceCode)
+        array.set(2, raceNum)
+        array.set(3, raceSel)
+        array.set(4, raceTime)
+        array.set(5, archvRace)
         return array
     }
 
