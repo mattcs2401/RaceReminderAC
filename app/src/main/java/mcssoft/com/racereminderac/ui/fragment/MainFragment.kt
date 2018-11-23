@@ -4,25 +4,17 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.work.Constraints
 import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
-import androidx.work.WorkInfo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_fragment.view.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
-import mcssoft.com.racereminderac.background.NotifyWorker
-import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
-import mcssoft.com.racereminderac.interfaces.IDelete
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.model.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
@@ -32,10 +24,9 @@ import mcssoft.com.racereminderac.utility.TouchHelper
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.util.concurrent.TimeUnit
 
 
-class MainFragment : Fragment(), IClick.ItemSelect, IDelete {
+class MainFragment : Fragment(), IClick.ItemSelect {//}, IDelete {
 
     //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -121,9 +112,9 @@ class MainFragment : Fragment(), IClick.ItemSelect, IDelete {
     }
     //</editor-fold>
 
-    override fun onDelete(race: Race) {
-        raceViewModel.delete(race)
-    }
+//    override fun onDelete(race: Race) {
+//        raceViewModel.delete(race)
+//    }
 
     private lateinit var rootView: View
     private lateinit var raceAdapter: RaceAdapter

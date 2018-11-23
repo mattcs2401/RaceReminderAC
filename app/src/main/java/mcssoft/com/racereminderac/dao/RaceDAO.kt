@@ -10,7 +10,7 @@ import androidx.room.Query
 import mcssoft.com.racereminderac.entity.Race
 
 @Dao
-internal interface RaceDAO {
+interface RaceDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRace(race: Race): Long

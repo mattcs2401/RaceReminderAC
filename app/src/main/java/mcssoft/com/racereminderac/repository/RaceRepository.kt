@@ -1,91 +1,44 @@
 package mcssoft.com.racereminderac.repository
 
 import android.app.Application
-import android.os.AsyncTask
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkInfo
-import androidx.work.WorkManager
-import mcssoft.com.racereminderac.background.DeleteWorker
 import mcssoft.com.racereminderac.entity.Race
-import mcssoft.com.racereminderac.background.InsertWorker
-import mcssoft.com.racereminderac.background.UpdateWorker
 import mcssoft.com.racereminderac.dao.RaceDAO
 import mcssoft.com.racereminderac.database.RaceDatabase
+import mcssoft.com.racereminderac.background.TaskAsync
 
 class RaceRepository(application: Application) {
 
     private var raceDao: RaceDAO
-    private var workManager: WorkManager
     private var allRaces: LiveData<MutableList<Race>>
-    private var workInfo: LiveData<List<WorkInfo>>
 
     init {
         raceDao = RaceDatabase.getInstance(application)!!.raceDao()
         allRaces = raceDao.getAllRaces()
-        workManager = WorkManager.getInstance()
-        workInfo = workManager.getWorkInfosByTagLiveData("OUTPUT")
     }
 
+    /**
+     * Get a list of all the Race objects from the database.
+     */
     internal fun getAllRaces(): LiveData<MutableList<Race>> {
         allRaces = raceDao.getAllRaces()
         return allRaces
     }
 
+    /**
+     * Get a Race by it's database row id.
+     * @param id: The id.
+     */
     internal fun getRace(id: Long): LiveData<Race> = raceDao.getRace(id)
 
+    /**
+     * Do a database operation.
+     * @param type: The operation type, one of "insert", "update" or "delete".
+     * @param race: The Race object.
+     */
     internal fun doDatabaseOperation(type: String, race: Race) {
-        var request: OneTimeWorkRequest? = null
-        try {
-            val dataBuilder= Data.Builder() //.putStringArray("key", race.toArray()).build()
-            dataBuilder.putStringArray("key", race.valuesToArray())
-                .putLong("key2", race.id!!)
-            val data = dataBuilder.build()
-            when (type) {
-                "insert" -> {
-                    request = OneTimeWorkRequest.Builder(InsertWorker::class.java)
-                            .setInputData(data)
-                            .build()
-                }
-                "update" -> {
-                    request = OneTimeWorkRequest.Builder(UpdateWorker::class.java)
-                            .setInputData(data)
-                            .build()
-                }
-                "delete" -> {
-//                    var delAsysnc = DeleteAsync(raceDao)
-//                    delAsysnc.execute(race)
-                    request = OneTimeWorkRequest.Builder(DeleteWorker::class.java)
-                            .setInputData(data)
-                            .addTag("OUTPUT")
-                            .build()
-                }
-            }
-            if(request != null) { workManager.enqueue(request!!) }
-        } catch (ex: Exception) {
-            Log.d("RaceRepository: ", ex.message)
-        } finally {
-            // update the repository (regardless).
-//            allRaces = raceDao.getAllRaces()
-        }
-    }
-
-    internal fun getOutputStatus(): LiveData<List<WorkInfo>> {
-        return workInfo
-    }
-
-    private class DeleteAsync(dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
-        private var dao: RaceDAO
-        init {
-            this.dao = dao
-        }
-
-        override fun doInBackground(vararg params: Race?) : Void? {
-            dao.deleteRace(params[0]!!)
-            return null
-        }
+        val taskAsync = TaskAsync(type, raceDao)
+        taskAsync.execute(race)
     }
 
 }
