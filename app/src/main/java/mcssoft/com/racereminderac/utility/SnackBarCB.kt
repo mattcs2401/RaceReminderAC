@@ -29,7 +29,7 @@ class SnackBarCB(race: Race) : Snackbar.Callback() {
         }
     }
 
-    fun removeRace() {
+    private fun removeRace() {
         EventBus.getDefault().post(RemoveMessage(race))
     }
 }

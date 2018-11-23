@@ -78,6 +78,10 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
         this.icListener = icListener
     }
 
+    /**
+     * Refresh the backing data.
+     * @param lRaces: The list of Race objects that comprise the data.
+     */
     internal fun swapData(lRaces: ArrayList<Race>) {
         this.lRaces = lRaces
         emptyViewCheck()
@@ -85,7 +89,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     }
 
     /**
-     * Return the Meeting object at the adapter position.
+     * Return the Race object at the adapter position.
      * @param lPos: The adapter position (0 based).
      * @return The Race object.
      */

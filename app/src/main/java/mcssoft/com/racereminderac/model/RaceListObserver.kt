@@ -9,8 +9,6 @@ import java.util.*
 
 class RaceListObserver(lRaces: LiveData<MutableList<Race>>, adapter: RaceAdapter) : Observer<List<Race>> {
 
-    // https://android.jlelse.eu/smart-way-to-update-recyclerview-using-diffutil-345941a160e0
-
     private var adapter: RaceAdapter
 
     init {
