@@ -16,7 +16,7 @@ class RaceTime(context: Context) {
      * Get the time as a string formatted HH:MM.
      * @return The current time.
      */
-    fun getFormattedTime(): String {
+    internal fun getFormattedTime(): String {
         val time: String
 
         val locale = Locale.getDefault()

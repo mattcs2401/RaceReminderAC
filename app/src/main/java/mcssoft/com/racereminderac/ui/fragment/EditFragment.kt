@@ -22,6 +22,7 @@ import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
+import mcssoft.com.racereminderac.utility.RaceTime
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -124,6 +125,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             resources.getInteger(R.integer.edit_race_new) -> {
                 toolBar.title = getString(R.string.new_race)
                 btnSave.text = getString(R.string.lbl_save)
+                btnTime.text = RaceTime.getInstance(activity!!).getFormattedTime()
             }
         }
     }
