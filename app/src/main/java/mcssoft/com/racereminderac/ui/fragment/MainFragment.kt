@@ -42,7 +42,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {//}, IDelete {
         super.onViewCreated(view, savedInstanceState)
         val context = this.context
 
-        raceAdapter = RaceAdapter(activity!!.id_container, this)
+        raceAdapter = RaceAdapter(activity!!.id_container)
         raceAdapter.setClickListener(this)
 
 
@@ -111,10 +111,6 @@ class MainFragment : Fragment(), IClick.ItemSelect {//}, IDelete {
         (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
     }
     //</editor-fold>
-
-//    override fun onDelete(race: Race) {
-//        raceViewModel.delete(race)
-//    }
 
     private lateinit var rootView: View
     private lateinit var raceAdapter: RaceAdapter

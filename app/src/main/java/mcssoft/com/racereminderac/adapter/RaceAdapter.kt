@@ -14,18 +14,17 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.ISwipe
+import mcssoft.com.racereminderac.utility.SnackBarCB
 import mcssoft.com.racereminderac.utility.eventbus.RemoveMessage
 import org.greenrobot.eventbus.EventBus
 
-class RaceAdapter(anchorView: View, fragment: Fragment) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
+class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
 
     private var anchorView: View
-    private var fragment: Fragment
 
     init {
         // the view that the 'UNDO' SnackBar is anchored to.
         this.anchorView = anchorView
-        this.fragment = fragment
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
@@ -64,7 +63,6 @@ class RaceAdapter(anchorView: View, fragment: Fragment) : RecyclerView.Adapter<R
     }
 
     override fun getItemViewType(position : Int) : Int {
-        //emptyViewCheck()
         return if (isEmptyView) EMPTY_VIEW else RACE_VIEW
     }
 
@@ -141,32 +139,9 @@ class RaceAdapter(anchorView: View, fragment: Fragment) : RecyclerView.Adapter<R
         snackBar.show()
     }
 
-    class SnackBarCB(race: Race) : Snackbar.Callback() {
-        var race: Race
-        init {
-            this.race = race
-        }
-
-        @SuppressLint("SwitchIntDef") // <<-- this because not all events considered.
-        override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-            //super.onDismissed(transientBottomBar, event)
-            // The UNDO timeout has expired or the Snackbar was swipe dismissed, so also remove from
-            // database.
-            when(event) {
-                BaseCallback.DISMISS_EVENT_TIMEOUT -> {
-                    removeRace()
-                }
-                BaseCallback.DISMISS_EVENT_SWIPE -> {
-                    removeRace()
-                }
-            }
-        }
-
-        fun removeRace() {
-            EventBus.getDefault().post(RemoveMessage(race))
-        }
-    }
-
+    /**
+     * Set flag for view is empty of Races to display.
+     */
     private fun emptyViewCheck() {
         isEmptyView = lRaces.isEmpty()
     }
@@ -183,5 +158,5 @@ class RaceAdapter(anchorView: View, fragment: Fragment) : RecyclerView.Adapter<R
     private val RACE_VIEW = 1
 
     var raceUndo: Race? = null      // local copy for any UNDO action.
-    private var posUndo: Int = -1           // "     "    "   "   "    "
+    private var posUndo: Int = -1   // "     "    "   "   "    "
 }
