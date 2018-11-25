@@ -6,10 +6,12 @@ import java.util.Locale
 import java.util.Calendar
 import java.util.Date
 
-class RaceTime(context: Context) {
+//class RaceTime(context: Context) {
+class RaceTime {
 
     companion object {
-        fun getInstance(context: Context): RaceTime = RaceTime(context)
+//        fun getInstance(context: Context): RaceTime = RaceTime(context)
+        fun getInstance(): RaceTime = RaceTime()
     }
 
     /**
@@ -17,17 +19,12 @@ class RaceTime(context: Context) {
      * @return The current time.
      */
     internal fun getFormattedTime(): String {
-        val time: String
-
         val locale = Locale.getDefault()
         val calendar = Calendar.getInstance(locale)
-//        val timeInMillis = calendar.getTimeInMillis()
-        val sdFormat: SimpleDateFormat = SimpleDateFormat("kk:mm", locale)
+        val sdFormat = SimpleDateFormat("kk:mm", locale)
 
         calendar.setTime(Date(calendar.getTimeInMillis()))
-        time = sdFormat.format(calendar.getTime())
-
-        return time
+        return sdFormat.format(calendar.getTime())
     }
 
 }
