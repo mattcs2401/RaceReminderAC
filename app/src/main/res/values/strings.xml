@@ -108,7 +108,4 @@
     <string name="abbrv_race_sel">8</string>
     <string name="abbrv_race_code">R</string>
 
-    <!-- Time. -->
-    <string name="time_format_24hr">kk:mm</string>
-
 </resources>

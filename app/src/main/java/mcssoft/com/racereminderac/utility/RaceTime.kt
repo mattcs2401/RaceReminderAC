@@ -27,12 +27,16 @@ class RaceTime {
 
         when(which) {
             TIME -> {
-                sdFormat = SimpleDateFormat("kk:mm", locale)
+                sdFormat = SimpleDateFormat(timeFormat24, locale)
             }
             DATE -> {
-                sdFormat = SimpleDateFormat("dd/MM/yyyy", locale)
+                sdFormat = SimpleDateFormat(dateFormat, locale)
             }
         }
         return sdFormat.format(calendar.getTime())
     }
+
+    // Local constants.
+    private val timeFormat24 = "kk:mm"
+    private val dateFormat = "dd/MM/yyyy"
 }
