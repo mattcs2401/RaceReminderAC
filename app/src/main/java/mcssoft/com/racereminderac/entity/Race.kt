@@ -18,10 +18,10 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
     @ColumnInfo(name = "ArchvRace") var archvRace: String = "N"
 
     /**
-     * Simple compare on RaceDate.
+     * Simple compare on RaceTime.
      * @param other: The object to compare (this) against.
      */
     override fun compareTo(other: Race): Int {
-        return raceDate.compareTo(other.raceDate)
+        return raceTime.compareTo(other.raceTime)
     }
 }
