@@ -125,8 +125,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             resources.getInteger(R.integer.edit_race_new) -> {
                 toolBar.title = getString(R.string.new_race)
                 btnSave.text = getString(R.string.lbl_save)
-//                btnTime.text = RaceTime.getInstance(activity!!).getFormattedTime()
-                btnTime.text = RaceTime.getInstance().getFormattedTime()
+                btnTime.text = RaceTime.getInstance().getFormattedDateTime(RaceTime.TIME)
             }
         }
     }
@@ -148,6 +147,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                 rnVals.get(npRaceNo.value),
                 rsVals.get(npRaceSel.value),
                 btnTime.text.toString())
+        race.raceDate = RaceTime.getInstance().getFormattedDateTime(RaceTime.DATE)
 
         when(action) {
             // Update.

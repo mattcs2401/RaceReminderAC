@@ -103,6 +103,7 @@
     <!-- EditText layout default values. -->
     <string name="abbrv_city_code">B</string>
     <string name="abbrv_time">23:59</string>
+    <string name="abbrv_date">01/01/2019</string>
     <string name="abbrv_race_no">8</string>
     <string name="abbrv_race_sel">8</string>
     <string name="abbrv_race_code">R</string>

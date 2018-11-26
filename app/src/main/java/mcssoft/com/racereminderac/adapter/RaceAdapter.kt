@@ -14,6 +14,7 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IClick
 import mcssoft.com.racereminderac.interfaces.ISwipe
+import mcssoft.com.racereminderac.utility.RaceTime
 import mcssoft.com.racereminderac.utility.SnackBarCB
 import mcssoft.com.racereminderac.utility.eventbus.RemoveMessage
 import org.greenrobot.eventbus.EventBus
@@ -55,6 +56,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
             holder.tvRaceNo.text = race.raceNum
             holder.tvRaceSel.text = race.raceSel
             holder.tvRaceTime.text = race.raceTime
+            holder.tvRaceDate.text = race.raceDate
         }
     }
 

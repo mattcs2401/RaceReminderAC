@@ -1,7 +1,5 @@
 package mcssoft.com.racereminderac.entity
 
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -16,21 +14,6 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "_id") var id: Long? = null
 
+    @ColumnInfo(name = "RaceDate") var raceDate: String = "01/01/2019"
     @ColumnInfo(name = "ArchvRace") var archvRace: String = "N"
-
-    /**
-     * Utility function; return the Race details as a Array<String>.
-     */
-    fun valuesToArray(): Array<String> {
-        val array: Array<String> = Array(6) { i -> ""}
-//        array.set(0, id.toString())
-        array.set(0, cityCode)
-        array.set(1, raceCode)
-        array.set(2, raceNum)
-        array.set(3, raceSel)
-        array.set(4, raceTime)
-        array.set(5, archvRace)
-        return array
-    }
-
 }

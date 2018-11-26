@@ -81,18 +81,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="16dp" />
 
-        <!-- TBA -->
         <TextView
+            android:id="@+id/id_tv_race_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintLeft_toRightOf="@+id/id_tv_race_time"
-            android:textAppearance="@android:style/TextAppearance.Material.Large"
-            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/abbrv_date"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp"
-            android:gravity="center_vertical|center_horizontal" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

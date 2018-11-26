@@ -30,6 +30,7 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
         tvRaceNo = view.findViewById(R.id.id_tv_race_no)
         tvRaceSel = view.findViewById(R.id.id_tv_race_sel)
         tvRaceTime = view.findViewById(R.id.id_tv_race_time)
+        tvRaceDate = view.findViewById(R.id.id_tv_race_date)
     }
 
     /**
@@ -46,4 +47,5 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
     lateinit var tvRaceNo: TextView
     lateinit var tvRaceSel: TextView
     lateinit var tvRaceTime: TextView
+    lateinit var tvRaceDate: TextView
 }
