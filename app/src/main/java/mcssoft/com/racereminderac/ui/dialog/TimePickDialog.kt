@@ -37,8 +37,24 @@ class TimePickDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
      * TimePickerDialog.OnTimeSetListener
      */
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
-        val time = hourOfDay.toString() + ":" + minute.toString()
-        EventBus.getDefault().post(TimeMessage(time, R.integer.time_pick_dialog_id, -1))
+        var sHour = ""
+        var sMinute = ""
+
+        // pad values for display as applicable.
+        if(hourOfDay < 10) {
+            sHour = "0" + hourOfDay.toString()
+        } else {
+            sHour = hourOfDay.toString()
+        }
+        if(minute < 10) {
+            sMinute = "0" + minute.toString()
+        } else {
+            sMinute = minute.toString()
+        }
+
+        val sTime = sHour + ":" + sMinute
+
+        EventBus.getDefault().post(TimeMessage(sTime, R.integer.time_pick_dialog_id, -1))
         this.dialog.cancel()
     }
 
