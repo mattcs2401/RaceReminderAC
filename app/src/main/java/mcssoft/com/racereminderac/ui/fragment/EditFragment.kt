@@ -147,7 +147,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
                 rnVals.get(npRaceNo.value),
                 rsVals.get(npRaceSel.value),
                 btnTime.text.toString())
-        race.raceDate = RaceTime.getInstance().getFormattedDateTime(RaceTime.DATE)
+//        race.raceDate = RaceTime.getInstance().getFormattedDateTime(RaceTime.DATE)
 
         when(action) {
             // Update.
@@ -156,7 +156,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             }
             // Insert.
             R.integer.edit_race_new -> {
-//                race.id = -1
+                race.raceDate = RaceTime.getInstance().getFormattedDateTime(RaceTime.DATE)
             }
         }
         return race
