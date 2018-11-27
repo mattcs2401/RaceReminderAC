@@ -22,6 +22,12 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
      * @param other: The object to compare (this) against.
      */
     override fun compareTo(other: Race): Int {
-        return raceTime.compareTo(other.raceTime)
+        var result = raceDate.compareTo(other.raceDate)
+        if(result == 0) {
+            // dates are equal, so compare time.
+            result = raceTime.compareTo(other.raceTime)
+        }
+        return result
     }
+    // TODO - this compareTo will likely need tweaking.
 }
