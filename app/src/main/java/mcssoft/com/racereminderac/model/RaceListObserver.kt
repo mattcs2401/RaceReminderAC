@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.entity.Race
 import java.util.*
+import java.util.Collections.sort
 
-class RaceListObserver(lRaces: LiveData<MutableList<Race>>, adapter: RaceAdapter) : Observer<List<Race>> {
+class RaceListObserver(lRaces: LiveData<MutableList<Race>>, adapter: RaceAdapter) : Observer<MutableList<Race>> {
 
     private var adapter: RaceAdapter
 
@@ -15,10 +16,11 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, adapter: RaceAdapter
         this.adapter = adapter
     }
 
-    override fun onChanged(lRaces: List<Race>?) {
-        if(lRaces == null) {
+    override fun onChanged(lRaces: MutableList<Race>?) {
+        if((lRaces == null) || (lRaces.size < 2)) {
             return
         } else {
+            Collections.sort(lRaces)
             adapter.swapData(lRaces as ArrayList<Race>)
 
         }

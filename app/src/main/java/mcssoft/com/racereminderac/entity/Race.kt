@@ -18,7 +18,7 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
     @ColumnInfo(name = "ArchvRace") var archvRace: String = "N"
 
     /**
-     * Simple compare on RaceTime.
+     * Simple compare on RaceTime. Used in, e.g.,  Collections.sort(List<Race>)
      * @param other: The object to compare (this) against.
      */
     override fun compareTo(other: Race): Int {
