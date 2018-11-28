@@ -28,7 +28,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
+class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, NumberPicker.OnValueChangeListener {
 
     //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +62,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
     /**
      * EventBus returns here (primarily for TimePickDialog).
      * @param dialog - The EventBus message object.
@@ -72,6 +73,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
             btnTime.text = dialog.msg
         }
     }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onClick">
     override fun onClick(view: View) {
@@ -113,6 +115,20 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onValueChange">
+    override fun onValueChange(picker: NumberPicker, oldVal: Int, newVal: Int) {
+        if(picker.id == R.id.id_np_race_code) {
+            // greyhound race only has 8 runners.
+            if (picker.displayedValues[newVal].equals("G")) {
+                npRaceSel.maxValue = rsVals.size - 17
+            } else {
+                npRaceSel.maxValue = rsVals.size - 1
+            }
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     /**
      * Update UI elements depending on whether editing an existing Race, or it's a new Race.
      */
@@ -202,6 +218,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         npRaceCode.maxValue = rcVals.size - 1
         npRaceCode.displayedValues = rcVals
         npRaceCode.wrapSelectorWheel = true
+        npRaceCode.setOnValueChangedListener(this)
 
         npRaceNo = id_np_race_num
         rnVals = resources.getStringArray(R.array.raceNum)
@@ -210,7 +227,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         npRaceNo.displayedValues = rnVals
         npRaceNo.wrapSelectorWheel = true
 
-        // TODO - if RaceCode == G, then only 8 selections in numberpicker.
         npRaceSel = id_np_race_sel
         rsVals = resources.getStringArray(R.array.raceSel)
         npRaceSel.minValue = 0
@@ -232,6 +248,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener {
         val race = raceViewModel.getRace(raceId!!)
         race.observe(viewLifecycleOwner, RaceObserver(race, view))
     }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private lateinit var toolBar: Toolbar
