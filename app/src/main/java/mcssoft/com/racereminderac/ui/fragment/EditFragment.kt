@@ -23,6 +23,7 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import mcssoft.com.racereminderac.utility.RaceTime
+import mcssoft.com.racereminderac.utility.eventbus.RaceMessage
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -73,6 +74,11 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             btnTime.text = dialog.msg
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    fun onMessageEvent(race: RaceMessage) {
+        this.raceDate = race.theRace.raceDate
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onClick">
@@ -82,21 +88,19 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 launchTimePickDialog()
             }
             R.id.id_btn_save -> {
-                if(checkValues()) {
-                    val race: Race //= collateValues()
-                    when(editType) {
-                        resources.getInteger(R.integer.edit_race_existing) -> {
-                            race = collateValues(R.integer.edit_race_existing)
-                            raceViewModel.update(race)
-                        }
-                        resources.getInteger(R.integer.edit_race_new) -> {
-                            race = collateValues(R.integer.edit_race_new)
-                            raceViewModel.insert(race)
-                        }
+                val race: Race
+                when(editType) {
+                    resources.getInteger(R.integer.edit_race_existing) -> {
+                        race = collateValues(R.integer.edit_race_existing)
+                        raceViewModel.update(race)
                     }
-                    Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
-                            .navigate(R.id.id_main_fragment)
+                    resources.getInteger(R.integer.edit_race_new) -> {
+                        race = collateValues(R.integer.edit_race_new)
+                        raceViewModel.insert(race)
+                    }
                 }
+                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+                            .navigate(R.id.id_main_fragment)
             }
         }
     }
@@ -137,6 +141,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             resources.getInteger(R.integer.edit_race_existing) -> {
                 toolBar.title = getString(R.string.edit_race)
                 btnSave.text = getString(R.string.lbl_update)
+
+                // save local copy of Race date.
+                getRaceDate(raceId!!)
             }
             resources.getInteger(R.integer.edit_race_new) -> {
                 toolBar.title = getString(R.string.new_race)
@@ -144,14 +151,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 btnTime.text = RaceTime.getInstance().getFormattedDateTime(RaceTime.TIME)
             }
         }
-    }
-
-    /**
-     * Simple check that all values are entered.
-     */
-    private fun checkValues(): Boolean {
-        // TODO - simple check all values entered.
-        return true
     }
 
     /**
@@ -169,6 +168,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             // Update.
             R.integer.edit_race_existing -> {
                 race.id = raceId
+                race.raceDate = raceDate
             }
             // Insert.
             R.integer.edit_race_new -> {
@@ -192,6 +192,11 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         }
         timePickDialog.arguments = args
         timePickDialog.show(fragTrans, getString(R.string.tp_tag))
+    }
+
+    fun getRaceDate(id: Long) {
+        // Note: "returns" via EventBus.
+        raceViewModel.getRaceNoLD(id)
     }
 
     /**
@@ -257,6 +262,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private lateinit var npRaceNo: NumberPicker
     private lateinit var npRaceSel: NumberPicker
     private var raceId: Long? = null
+    private lateinit var raceDate: String
     private var editType: Int? = null
     private lateinit var btnSave: Button
     private lateinit var btnTime: Button

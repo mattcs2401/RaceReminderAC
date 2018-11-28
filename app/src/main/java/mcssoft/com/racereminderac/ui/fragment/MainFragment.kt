@@ -25,7 +25,6 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-
 class MainFragment : Fragment(), IClick.ItemSelect {//}, IDelete {
 
     //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">

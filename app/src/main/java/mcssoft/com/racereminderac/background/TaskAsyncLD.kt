@@ -4,7 +4,7 @@ import android.os.AsyncTask
 import mcssoft.com.racereminderac.dao.RaceDAO
 import mcssoft.com.racereminderac.entity.Race
 
-class TaskAsync(type: String, dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
+class TaskAsyncLD(type: String, dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
 
     private var type: String
     private var dao: RaceDAO
