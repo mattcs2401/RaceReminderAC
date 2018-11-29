@@ -4,9 +4,13 @@ import android.os.AsyncTask
 import mcssoft.com.racereminderac.dao.RaceDAO
 import mcssoft.com.racereminderac.entity.Race
 
-class TaskAsyncLD(type: String, dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
+/**
+ * Utility class for database operations. Mainly because couldn't seem to get Android's Worker(s)
+ * to work properly.
+ */
+class TaskAsyncLD(type: Int, dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
 
-    private var type: String
+    private var type: Int
     private var dao: RaceDAO
 
     init {
@@ -14,22 +18,26 @@ class TaskAsyncLD(type: String, dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
         this.dao = dao
     }
 
+    // simply to provide some constants.
+    companion object {
+        val INSERT = 1
+        val UPDATE = 2
+        val DELETE = 3
+    }
+
     override fun doInBackground(vararg params: Race?) : Void? {
         when(type) {
-            "insert" -> {
+            INSERT -> {
                 dao.insertRace(params[0]!!)
             }
-            "update" -> {
+            UPDATE -> {
                 dao.updateRace(params[0]!!)
             }
-            "delete" -> {
+            DELETE -> {
                 dao.deleteRace(params[0]!!)
             }
         }
         return null
     }
 
-    override fun onPostExecute(result: Void?) {
-        // TBA super.onPostExecute(result)
-    }
 }
