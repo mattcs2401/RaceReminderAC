@@ -21,7 +21,7 @@ class TaskAsyncNoLD(dao: RaceDAO) : AsyncTask<Long, Void, Race>() {
         this.dao = dao
     }
 
-    override fun doInBackground(vararg params: Long?) : Race? {
+    override fun doInBackground(vararg params: Long?) : Race {
         val race = dao.getRaceNoLD(params[0]!!)
         return race
     }

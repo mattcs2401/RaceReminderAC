@@ -6,7 +6,8 @@ import mcssoft.com.racereminderac.entity.Race
 
 /**
  * Utility class for database operations. Mainly because couldn't seem to get Android's Worker(s)
- * to work properly.
+ * to work properly. An AsyncTask will take an object as a parameter, e.g. Race, while Workers only
+ * take primitives, e.g. Int, String etc
  */
 class TaskAsyncLD(type: Int, dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
 
@@ -25,16 +26,16 @@ class TaskAsyncLD(type: Int, dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
         val DELETE = 3
     }
 
-    override fun doInBackground(vararg params: Race?) : Void? {
+    override fun doInBackground(vararg params: Race) : Void? {
         when(type) {
             INSERT -> {
-                dao.insertRace(params[0]!!)
+                dao.insertRace(params[0])
             }
             UPDATE -> {
-                dao.updateRace(params[0]!!)
+                dao.updateRace(params[0])
             }
             DELETE -> {
-                dao.deleteRace(params[0]!!)
+                dao.deleteRace(params[0])
             }
         }
         return null
