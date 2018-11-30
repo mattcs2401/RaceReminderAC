@@ -23,7 +23,6 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getAllRaces(): LiveData<MutableList<Race>> = allRaces
 
-//    fun insert(race: Race) = raceRepository.doDatabaseOperation("insert", race)
     fun insert(race: Race) = raceRepository.doDatabaseOperation(TaskAsyncLD.INSERT, race)
 
     fun update(race: Race) = raceRepository.doDatabaseOperation(TaskAsyncLD.UPDATE, race)

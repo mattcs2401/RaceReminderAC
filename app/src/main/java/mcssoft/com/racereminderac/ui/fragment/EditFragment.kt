@@ -65,16 +65,20 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
     /**
-     * EventBus returns here (primarily for TimePickDialog).
-     * @param dialog - The EventBus message object.
+     * EventBus return for TimePickDialog.
+     * @param time: The EventBus message object.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(dialog: TimeMessage) {
-        if(!dialog.message.isBlank()) {
-            btnTime.text = dialog.msg
+    fun onMessageEvent(time: TimeMessage) {
+        if(!time.message.isBlank()) {
+            btnTime.text = time.msg
         }
     }
 
+    /**
+     * EventBus return from getting the Race date.
+     * @param race: The Race object.
+     */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(race: RaceMessage) {
         this.raceDate = race.theRace.raceDate
