@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
-import mcssoft.com.racereminderac.interfaces.IClick
+import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.SnackBarCB
 import mcssoft.com.racereminderac.utility.eventbus.RemoveMessage
@@ -37,7 +37,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
             }
             RACE_VIEW -> {
                 view = inflater.inflate(R.layout.row_race, parent, false)
-                raceViewHolder = RaceViewHolder(view, "", icListener)
+                raceViewHolder = RaceViewHolder(view, "", itemSelect, itemLongSelect)
             }
         }
         return raceViewHolder
@@ -72,8 +72,12 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
         Toast.makeText(anchorView.context, "Race re-instated.", Toast.LENGTH_SHORT).show()
     }
 
-    internal fun setClickListener(icListener : IClick.ItemSelect) {
-        this.icListener = icListener
+    internal fun setClickListener(itemSelect : ISelect.ItemSelect) {
+        this.itemSelect = itemSelect
+    }
+
+    internal fun setLongClickListener(itemLongSelect : ISelect.ItemLongSelect) {
+        this.itemLongSelect = itemLongSelect
     }
 
     /**
@@ -152,7 +156,9 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
     private var isEmptyView: Boolean = false               // flag, view is empty.
     private var lRaces = ArrayList<Race>(0)   // listing backing data.
 
-    private lateinit var icListener: IClick.ItemSelect     //
+    private lateinit var itemSelect: ISelect.ItemSelect     //
+    private lateinit var itemLongSelect: ISelect.ItemLongSelect     //
+
     private lateinit var raceViewHolder: RaceViewHolder    //
     private lateinit var itemTouchHelper: ItemTouchHelper  //
 

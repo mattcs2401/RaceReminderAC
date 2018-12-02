@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.main_fragment.view.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
-import mcssoft.com.racereminderac.interfaces.IClick
+import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.model.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
@@ -25,7 +25,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class MainFragment : Fragment(), IClick.ItemSelect {//}, IDelete {
+class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
 
     //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +43,7 @@ class MainFragment : Fragment(), IClick.ItemSelect {//}, IDelete {
 
         raceAdapter = RaceAdapter(activity!!.id_container)
         raceAdapter.setClickListener(this)
-
+        raceAdapter.setLongClickListener(this)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = raceAdapter
@@ -100,15 +100,20 @@ class MainFragment : Fragment(), IClick.ItemSelect {//}, IDelete {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Interface IClick.ItemSelect">
+    //<editor-fold defaultstate="collapsed" desc="Region: Interface ISelect.ItemSelect">
     /**
-     * Interface IClick.ItemSelect
+     * Interface ISelect.ItemSelect
      */
     override fun onItemSelect(view: View, lPos: Int) {
         // callback to the Activity with the selected Race object
         // TBA - use EventBus ?
         (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
     }
+
+    override fun onItemLongSelect(lPos: Int) {
+
+    }
+
     //</editor-fold>
 
     private lateinit var rootView: View

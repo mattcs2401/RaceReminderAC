@@ -2,7 +2,7 @@ package mcssoft.com.racereminderac.interfaces
 
 import android.view.View
 
-interface IClick {
+interface ISelect {
 
     interface ItemSelect {
         /**
@@ -19,19 +19,19 @@ interface IClick {
         fun onItemSelect(view: View, lPos: Int)
     }
 
-    interface ItemLongClick {
+    interface ItemLongSelect {
         /**
          * Long press operation.
          * @param lPos The view's position in a list (if applicable).
          */
-        fun onItemLongClick(lPos: Int)
+        fun onItemLongSelect(lPos: Int)
 
         /**
          * Long press operation.
          * @param view The view that was pressed on.
          * @param lPos The view's position in a list (if applicable).
          */
-        fun onItemLongClick(view: View, lPos: Int) {} // braces make this optional
+        fun onItemLongSelect(view: View, lPos: Int) {} // braces make this optional
     }
 
 }

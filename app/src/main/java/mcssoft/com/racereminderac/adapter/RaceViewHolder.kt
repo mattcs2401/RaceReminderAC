@@ -1,14 +1,12 @@
 package mcssoft.com.racereminderac.adapter
 
-import android.view.MotionEvent
 import android.view.View
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import mcssoft.com.racereminderac.R
-import mcssoft.com.racereminderac.interfaces.IClick
+import mcssoft.com.racereminderac.interfaces.ISelect
 
-class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(view), View.OnClickListener {
+class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
 
     init {
         if(message != "") {
@@ -16,13 +14,14 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
         }
     }
 
-    constructor(view: View, message: String, icListener: IClick.ItemSelect) : this(view, message) {
+    constructor(view: View, message: String, itemSelect: ISelect.ItemSelect, itemLongSelect: ISelect.ItemLongSelect) : this(view, message) {
 
         // Set the listener for the View.
         view.setOnClickListener(this)
 
-        // Set the interface callback.
-        this.icListener = icListener
+        // Set the interface callbacks for select and long select.
+        this.itemSelect = itemSelect
+        this.itemLongSelect = itemLongSelect
 
         // Set the components of the View.
         tvCityCode = view.findViewById(R.id.id_tv_city_code)
@@ -34,13 +33,19 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
     }
 
     /**
-     * Call back through the IClick.ItemSelect interface with View and adapter position info.
+     * Call back through the ISelect.ItemSelect interface with View and adapter position info.
      */
     override fun onClick(view : View) {
-        icListener.onItemSelect(view, adapterPosition)
+        itemSelect.onItemSelect(view, adapterPosition)
     }
 
-    private lateinit var icListener: IClick.ItemSelect
+    override fun onLongClick(view: View): Boolean {
+        itemSelect.onItemSelect(view, adapterPosition)
+        return true
+    }
+
+    private lateinit var itemSelect: ISelect.ItemSelect
+    private lateinit var itemLongSelect: ISelect.ItemLongSelect
 
     lateinit var tvCityCode: TextView
     lateinit var tvRaceCode: TextView
