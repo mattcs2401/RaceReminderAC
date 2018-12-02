@@ -9,6 +9,7 @@
 
     <string name="edit_race">Edit Race</string>
     <string name="new_race">New Race</string>
+    <string name="copy_race">Copy Race</string>
 
     <string name="title_race_reminder">Race Reminder</string>
 
@@ -17,12 +18,14 @@
     <string name="lbl_ok">OK</string>
     <string name="lbl_time">Time</string>
     <string name="lbl_save">Save</string>
+    <string name="lbl_copy">Copy</string>
     <string name="lbl_update">Update</string>
 
     <!-- Keys. -->
     <string name="key_general">key</string>
     <string name="key_edit_type">edit_type</string>
     <string name="key_edit_existing">edit_existing</string>
+    <string name="key_edit_copy">edit_copy</string>
 
     <!-- Snackbar. -->
     <string name="sb_show">Show</string>

@@ -3,6 +3,7 @@ package mcssoft.com.racereminderac.ui.fragment
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -104,14 +105,15 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
     /**
      * Interface ISelect.ItemSelect
      */
-    override fun onItemSelect(view: View, lPos: Int) {
-        // callback to the Activity with the selected Race object
+    override fun onItemSelect(lPos: Int) {
+        // callback to the Activity with the selected Race object's id.
         // TBA - use EventBus ?
         (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
     }
 
     override fun onItemLongSelect(lPos: Int) {
-
+//        Toast.makeText(activity, "long press on position: " + lPos, Toast.LENGTH_SHORT).show()
+        (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
     }
 
     //</editor-fold>

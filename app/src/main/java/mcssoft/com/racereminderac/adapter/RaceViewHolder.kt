@@ -16,12 +16,13 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
 
     constructor(view: View, message: String, itemSelect: ISelect.ItemSelect, itemLongSelect: ISelect.ItemLongSelect) : this(view, message) {
 
-        // Set the listener for the View.
-        view.setOnClickListener(this)
-
         // Set the interface callbacks for select and long select.
         this.itemSelect = itemSelect
         this.itemLongSelect = itemLongSelect
+
+        // Set the listener for the View.
+        view.setOnClickListener(this)
+        view.setOnLongClickListener(this)
 
         // Set the components of the View.
         tvCityCode = view.findViewById(R.id.id_tv_city_code)
@@ -36,11 +37,13 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
      * Call back through the ISelect.ItemSelect interface with View and adapter position info.
      */
     override fun onClick(view : View) {
-        itemSelect.onItemSelect(view, adapterPosition)
+//        itemSelect.onItemSelect(view, adapterPosition)
+        itemSelect.onItemSelect(adapterPosition)
     }
 
     override fun onLongClick(view: View): Boolean {
-        itemSelect.onItemSelect(view, adapterPosition)
+//        itemLongSelect.onItemLongSelect(view, adapterPosition)
+        itemLongSelect.onItemLongSelect(adapterPosition)
         return true
     }
 

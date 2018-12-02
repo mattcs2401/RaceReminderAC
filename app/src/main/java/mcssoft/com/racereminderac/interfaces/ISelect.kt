@@ -9,14 +9,14 @@ interface ISelect {
          * Single select (touch) operation.
          * @param lPos The view's position in a list (if applicable).
          */
-        fun onItemSelect(lPos: Int) {} // braces make this optional
+        fun onItemSelect(lPos: Int)
 
         /**
          * Single select operation.
          * @param view The view that was clicked on.
          * @param lPos The view's position in a list (if applicable).
          */
-        fun onItemSelect(view: View, lPos: Int)
+        fun onItemSelect(view: View, lPos: Int) {}
     }
 
     interface ItemLongSelect {
@@ -31,7 +31,7 @@ interface ISelect {
          * @param view The view that was pressed on.
          * @param lPos The view's position in a list (if applicable).
          */
-        fun onItemLongSelect(view: View, lPos: Int) {} // braces make this optional
+        fun onItemLongSelect(view: View, lPos: Int) {}
     }
 
 }

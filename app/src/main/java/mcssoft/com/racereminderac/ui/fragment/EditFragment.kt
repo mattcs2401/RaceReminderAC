@@ -40,17 +40,21 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rootView = view
+        editType = arguments?.getInt(getString(R.string.key_edit_type))
+        // set base UI elements.
         initialiseUI(rootView)
+        // update labels etc depending on edit type, e.g. new, or copy etc.
+        setForEditType(editType!!)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // Get the argumnets (if exist).
-        if(arguments != null) {
-            editType = arguments?.getInt(getString(R.string.key_edit_type))
-            setForEditType(editType!!)
-        }
-    }
+//    override fun onActivityCreated(savedInstanceState: Bundle?) {
+//        super.onActivityCreated(savedInstanceState)
+//        // Get the argumnets (if exist).
+//        if(arguments != null) {
+//            editType = arguments?.getInt(getString(R.string.key_edit_type))
+//            setForEditType(editType!!)
+//        }
+//    }
 
      override fun onStart() {
         super.onStart()
@@ -102,6 +106,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                         race = collateValues(R.integer.edit_race_new)
                         raceViewModel.insert(race)
                     }
+                    resources.getInteger(R.integer.edit_race_copy) -> {
+                        race = collateValues(R.integer.edit_race_copy)
+                        raceViewModel.insert(race)
+                    }
                 }
                 Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
                             .navigate(R.id.id_main_fragment)
@@ -145,7 +153,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             resources.getInteger(R.integer.edit_race_existing) -> {
                 toolBar.title = getString(R.string.edit_race)
                 btnSave.text = getString(R.string.lbl_update)
-
                 // save local copy of Race date.
                 getRaceDate(raceId!!)
             }
@@ -154,6 +161,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 btnSave.text = getString(R.string.lbl_save)
                 btnTime.text = RaceTime.getInstance().getFormattedDateTime(RaceTime.TIME)
             }
+            resources.getInteger(R.integer.edit_race_copy) -> {
+                toolBar.title = getString(R.string.copy_race)
+                btnSave.text = getString(R.string.lbl_copy)
+                // save local copy of Race date.
+                getRaceDate(raceId!!)
+            }
         }
     }
 
@@ -161,12 +174,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Get the UI values into a Race object ready for Update or Insert.
      */
     private fun collateValues(action: Int): Race {
+        // Get the base values.
         val race = Race(ccVals.get(npCityCode.value),
                 rcVals.get(npRaceCode.value),
                 rnVals.get(npRaceNo.value),
                 rsVals.get(npRaceSel.value),
                 btnTime.text.toString())
-//        race.raceDate = RaceTime.getInstance().getFormattedDateTime(RaceTime.DATE)
 
         when(action) {
             // Update.
@@ -174,9 +187,13 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 race.id = raceId
                 race.raceDate = raceDate
             }
-            // Insert.
+            // Insert as New.
             R.integer.edit_race_new -> {
                 race.raceDate = RaceTime.getInstance().getFormattedDateTime(RaceTime.DATE)
+            }
+            // Insert as Copy.
+            R.integer.edit_race_copy -> {
+                race.raceDate = raceDate
             }
         }
         return race
@@ -251,9 +268,18 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         btnSave = id_btn_save
         btnSave.setOnClickListener(this)
 
-        // view model.
+        // Get the id.
+        when(editType) {
+            resources.getInteger(R.integer.edit_race_existing) -> {
+                raceId = arguments?.getLong(getString(R.string.key_edit_existing))
+            }
+            resources.getInteger(R.integer.edit_race_copy) -> {
+                raceId = arguments?.getLong(getString(R.string.key_edit_copy))
+            }
+        }
+
+        // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
-        raceId = arguments?.getLong(getString(R.string.key_edit_existing))
         val race = raceViewModel.getRace(raceId!!)
         race.observe(viewLifecycleOwner, RaceObserver(race, view))
     }
