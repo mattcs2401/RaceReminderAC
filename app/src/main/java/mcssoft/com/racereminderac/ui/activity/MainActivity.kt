@@ -78,8 +78,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelec
         Navigation.setViewNavController(id_fab, navController)
         // Back Navigation.
         setupActionBarWithNavController(this, navController)
-
-        // TODO - Begin periodic work request here ??
     }
 
     private lateinit var navController: NavController

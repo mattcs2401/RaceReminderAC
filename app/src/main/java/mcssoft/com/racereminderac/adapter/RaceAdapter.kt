@@ -12,7 +12,7 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.SnackBarCB
-import mcssoft.com.racereminderac.utility.eventbus.RemoveMessage
+import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import org.greenrobot.eventbus.EventBus
 
 class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
@@ -138,7 +138,7 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
      */
     override fun onViewSwiped(pos: Int) {
         deleteRace(pos)
-        EventBus.getDefault().post(RemoveMessage(raceUndo!!))
+        EventBus.getDefault().post(DeleteMessage(raceUndo!!))
         val snackBar = Snackbar.make(anchorView, "Item removed.", Snackbar.LENGTH_LONG)
         snackBar.setAction("UNDO", this)
         snackBar.addCallback(SnackBarCB(raceUndo!!))

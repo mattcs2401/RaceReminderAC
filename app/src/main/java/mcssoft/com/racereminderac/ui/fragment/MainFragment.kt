@@ -3,7 +3,6 @@ package mcssoft.com.racereminderac.ui.fragment
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,8 +18,7 @@ import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.model.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
-import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
-import mcssoft.com.racereminderac.utility.eventbus.RemoveMessage
+import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import mcssoft.com.racereminderac.utility.TouchHelper
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -81,23 +79,9 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
-    /**
-     * EventBus returns here.
-     * @param time - The EventBus message object.
-     */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(time: TimeMessage) {
-        if(!time.message.isBlank()) {
-//            doOnMessageEvent(dialog)
-        } else {
-            // Nothing was selected in the dialog except for the OK button.
-//            doSnackbar(dialog.ident, dialog.ctx)
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(remove: RemoveMessage) {
-        raceViewModel.delete(remove.theRace)
+    fun onMessageEvent(delete: DeleteMessage) {
+        raceViewModel.delete(delete.theRace)
     }
     //</editor-fold>
 
@@ -112,10 +96,8 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
     }
 
     override fun onItemLongSelect(lPos: Int) {
-//        Toast.makeText(activity, "long press on position: " + lPos, Toast.LENGTH_SHORT).show()
         (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
     }
-
     //</editor-fold>
 
     private lateinit var rootView: View

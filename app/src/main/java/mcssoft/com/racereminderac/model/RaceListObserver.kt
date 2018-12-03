@@ -15,11 +15,13 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, adapter: RaceAdapter
     }
 
     override fun onChanged(lRaces: MutableList<Race>?) {
-        if(!(lRaces == null) && (lRaces.size > 1)) {
+        if((lRaces != null) && (lRaces.size > 1)) {
             Collections.sort(lRaces)
         }
 
         adapter.swapData(lRaces as ArrayList<Race>)
     }
+
+    // TODO - Begin periodic work request here ??
 
 }

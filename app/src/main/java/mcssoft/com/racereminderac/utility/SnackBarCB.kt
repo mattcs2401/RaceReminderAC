@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.entity.Race
-import mcssoft.com.racereminderac.utility.eventbus.RemoveMessage
+import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import org.greenrobot.eventbus.EventBus
 
 class SnackBarCB(race: Race) : Snackbar.Callback() {
@@ -21,15 +21,15 @@ class SnackBarCB(race: Race) : Snackbar.Callback() {
         // database.
         when(event) {
             BaseTransientBottomBar.BaseCallback.DISMISS_EVENT_TIMEOUT -> {
-                removeRace()
+                deleteRace()
             }
             BaseTransientBottomBar.BaseCallback.DISMISS_EVENT_SWIPE -> {
-                removeRace()
+                deleteRace()
             }
         }
     }
 
-    private fun removeRace() {
-        EventBus.getDefault().post(RemoveMessage(race))
+    private fun deleteRace() {
+        EventBus.getDefault().post(DeleteMessage(race))
     }
 }
