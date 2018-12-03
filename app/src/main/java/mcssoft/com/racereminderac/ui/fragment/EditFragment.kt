@@ -273,7 +273,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
         if(editType != resources.getInteger(R.integer.edit_race_new)) {
-            // entering a new Race object, it's id doesn't exist yet.
+            // not a new Race object (it's id wouldn't exist yet).
             val race = raceViewModel.getRace(raceId!!)
             race.observe(viewLifecycleOwner, RaceObserver(race, view))
         }

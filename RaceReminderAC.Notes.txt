@@ -2,30 +2,22 @@
 |  RaceReminderAC  |
 |------------------|
 
-** Project notes/comments in no particular order. **
+** Project notes/comments/etc in no particular order. **
 
---------
-Dialogs:
---------
-1) Highlight the applicable button when the dialog shows.
-   -> what about number pad dialog when number is two digits ?
+------
+Views:
+------
+1) Update recycler view items (background ?) based on time to Race time.
 
-2) Look at different styles of buttons; round, oval etc.
-
-3) Keep colour inline with app theme (like time pick dialog).
-
----------
-Other UI:
---------- 
-1) Swipe to delete in list of races.
-
-2) Implement an undo for the delete.
+------
+Other:
+------
+1) xxx
 
 ----------
 Usability:
 ----------
-1) When edit existing, then UI updates display ok.
+1) Periodic check (15 mins) on Race start time compared to current time.
 
-2) When edit new, then UI updates display ok.
 
 
