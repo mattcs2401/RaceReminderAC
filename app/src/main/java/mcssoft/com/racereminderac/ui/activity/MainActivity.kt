@@ -35,55 +35,51 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelec
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Interface - IRace">
     /**
      * From interface IRace.IRaceSelect
      */
     override fun onRaceSelect(id: Long ) {
         val bundle = Bundle()
-        bundle.putInt(getString(R.string.key_edit_type), resources.getInteger(R.integer.edit_race_existing))
+        bundle.putInt(getString(R.string.key_edit_type), resources.getInteger(R.integer.edit_race_update))
         bundle.putLong(getString(R.string.key_edit_existing), id)
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
 
+    /**
+     * From interface IRace.IRaceLongSelect
+     */
     override fun onRaceLongSelect(id: Long) {
         val bundle = Bundle()
         bundle.putInt(getString(R.string.key_edit_type), resources.getInteger(R.integer.edit_race_copy))
         bundle.putLong(getString(R.string.key_edit_copy), id)
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
+    //</editor-fold>
 
-    //    private fun setupBottomNavMenu(navController: NavController) {
+    private fun setupBottomNavMenu(navController: NavController) {
+        // TBA.
 //        findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.let { bottomNavView ->
 //            NavigationUI.setupWithNavController(bottomNavView, navController)
 //        }
-//    }
+    }
 
     private fun initialise() {
         // Toolbar.
         setSupportActionBar(id_toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         // FAB
         id_fab.setOnClickListener(this)
+
         // Navigation.
         navController = findNavController(this, R.id.id_nav_host_fragment)
         Navigation.setViewNavController(id_fab, navController)
         // Back Navigation.
         setupActionBarWithNavController(this, navController)
 
-//        WorkManager.getInstance().getStatusById(simpleRequest.getId())
-//                .observe(this, object : Observer<WorkStatus> {
-//                    override fun onChanged(@Nullable workStatus: WorkStatus?) {
-//                        if (workStatus != null) {
-//                            mTextView.append("SimpleWorkRequest: " + workStatus.state.name + "\n")
-//                        }
-//
-//                        if (workStatus != null && workStatus.state.isFinished) {
-//                            val message = workStatus.outputData.getString(MyWorker.EXTRA_OUTPUT_MESSAGE)//, "Default message");
-//                            mTextView.append("SimpleWorkRequest (Data): " + message!!)
-//                        }
-//                    }
-//                })
+        // TODO - Begin periodic work request here ??
     }
 
     private lateinit var navController: NavController

@@ -97,8 +97,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             R.id.id_btn_save -> {
                 val race: Race
                 when(editType) {
-                    resources.getInteger(R.integer.edit_race_existing) -> {
-                        race = collateValues(R.integer.edit_race_existing)
+                    resources.getInteger(R.integer.edit_race_update) -> {
+                        race = collateValues(R.integer.edit_race_update)
                         raceViewModel.update(race)
                     }
                     resources.getInteger(R.integer.edit_race_new) -> {
@@ -157,7 +157,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
         when(action) {
             // Update.
-            R.integer.edit_race_existing -> {
+            R.integer.edit_race_update -> {
                 race.id = raceId
                 race.raceDate = raceDate
             }
@@ -259,10 +259,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Get the Race object id and setup ViewModel details.
      */
     private fun setupViewModel(view: View) {
+        // Get the edit type (new, copy or update).
         editType = arguments?.getInt(getString(R.string.key_edit_type))
 
+        // Get Race id if update or copy.
         when(editType) {
-            resources.getInteger(R.integer.edit_race_existing) -> {
+            resources.getInteger(R.integer.edit_race_update) -> {
                 raceId = arguments?.getLong(getString(R.string.key_edit_existing))
             }
             resources.getInteger(R.integer.edit_race_copy) -> {
@@ -272,8 +274,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
         // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
+
+        // If not a new Race object (it's id wouldn't exist yet), observe changes.
         if(editType != resources.getInteger(R.integer.edit_race_new)) {
-            // not a new Race object (it's id wouldn't exist yet).
             val race = raceViewModel.getRace(raceId!!)
             race.observe(viewLifecycleOwner, RaceObserver(race, view))
         }
@@ -285,7 +288,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      */
     private fun setupForEditType() {
         when(editType) {
-            resources.getInteger(R.integer.edit_race_existing) -> {
+            resources.getInteger(R.integer.edit_race_update) -> {
                 toolBar.title = getString(R.string.edit_race)
                 btnSave.text = getString(R.string.lbl_update)
                 // save local copy of Race date.

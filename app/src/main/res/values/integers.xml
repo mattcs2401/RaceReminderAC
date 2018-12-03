@@ -3,7 +3,7 @@
     <integer name="time_pick_dialog_id">1</integer>
 
     <integer name="edit_race_new">0</integer>
-    <integer name="edit_race_existing">1</integer>
+    <integer name="edit_race_update">1</integer>
     <integer name="edit_race_copy">2</integer>
     <integer name="delete_race">3</integer>
 </resources>
