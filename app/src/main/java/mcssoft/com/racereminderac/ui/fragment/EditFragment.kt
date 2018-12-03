@@ -40,11 +40,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rootView = view
-        editType = arguments?.getInt(getString(R.string.key_edit_type))
+
         // set base UI elements.
         initialiseUI(rootView)
-        // update labels etc depending on edit type, e.g. new, or copy etc.
-        setForEditType(editType!!)
+
     }
 
 //    override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -146,31 +145,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     /**
-     * Update UI elements depending on whether editing an existing Race, or it's a new Race.
-     */
-    private fun setForEditType(editType: Int) {
-        when(editType) {
-            resources.getInteger(R.integer.edit_race_existing) -> {
-                toolBar.title = getString(R.string.edit_race)
-                btnSave.text = getString(R.string.lbl_update)
-                // save local copy of Race date.
-                getRaceDate(raceId!!)
-            }
-            resources.getInteger(R.integer.edit_race_new) -> {
-                toolBar.title = getString(R.string.new_race)
-                btnSave.text = getString(R.string.lbl_save)
-                btnTime.text = RaceTime.getInstance().getFormattedDateTime(RaceTime.TIME)
-            }
-            resources.getInteger(R.integer.edit_race_copy) -> {
-                toolBar.title = getString(R.string.copy_race)
-                btnSave.text = getString(R.string.lbl_copy)
-                // save local copy of Race date.
-                getRaceDate(raceId!!)
-            }
-        }
-    }
-
-    /**
      * Get the UI values into a Race object ready for Update or Insert.
      */
     private fun collateValues(action: Int): Race {
@@ -224,6 +198,18 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Initialise UI components.
      */
     private fun initialiseUI(view: View) {
+        // setup numberpickers, buttons etc.
+        setupDisplayElements()
+        // set the view model and get the id of the Race object.
+        setupViewModel(view)
+        // update labels etc depending on edit type, e.g. new, or copy etc.
+        setupForEditType()//editType!!)
+    }
+
+    /**
+     * Setup base UI elements.
+     */
+    private fun setupDisplayElements() {
         // Hide the FAB.
         (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
 
@@ -267,8 +253,14 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         // Set the Save button and listener.
         btnSave = id_btn_save
         btnSave.setOnClickListener(this)
+    }
 
-        // Get the id.
+    /**
+     * Get the Race object id and setup ViewModel details.
+     */
+    private fun setupViewModel(view: View) {
+        editType = arguments?.getInt(getString(R.string.key_edit_type))
+
         when(editType) {
             resources.getInteger(R.integer.edit_race_existing) -> {
                 raceId = arguments?.getLong(getString(R.string.key_edit_existing))
@@ -280,8 +272,37 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
         // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
-        val race = raceViewModel.getRace(raceId!!)
-        race.observe(viewLifecycleOwner, RaceObserver(race, view))
+        if(editType != resources.getInteger(R.integer.edit_race_new)) {
+            // entering a new Race object, it's id doesn't exist yet.
+            val race = raceViewModel.getRace(raceId!!)
+            race.observe(viewLifecycleOwner, RaceObserver(race, view))
+        }
+    }
+
+    /**
+     * Update UI elements depending on whether editing an existing Race, entering a new Race, or
+     * copying a previous Race.
+     */
+    private fun setupForEditType() {
+        when(editType) {
+            resources.getInteger(R.integer.edit_race_existing) -> {
+                toolBar.title = getString(R.string.edit_race)
+                btnSave.text = getString(R.string.lbl_update)
+                // save local copy of Race date.
+                getRaceDate(raceId!!)
+            }
+            resources.getInteger(R.integer.edit_race_new) -> {
+                toolBar.title = getString(R.string.new_race)
+                btnSave.text = getString(R.string.lbl_save)
+                btnTime.text = RaceTime.getInstance().getFormattedDateTime(RaceTime.TIME)
+            }
+            resources.getInteger(R.integer.edit_race_copy) -> {
+                toolBar.title = getString(R.string.copy_race)
+                btnSave.text = getString(R.string.lbl_copy)
+                // save local copy of Race date.
+                getRaceDate(raceId!!)
+            }
+        }
     }
     //</editor-fold>
 
