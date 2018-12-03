@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.background
+package mcssoft.com.racereminderac.background.async
 
 import android.os.AsyncTask
 import mcssoft.com.racereminderac.dao.RaceDAO
@@ -9,7 +9,7 @@ import mcssoft.com.racereminderac.entity.Race
  * to work properly. An AsyncTask will take an object as a parameter, e.g. Race, while Workers only
  * take primitives, e.g. Int, String etc
  */
-class TaskAsyncLD(type: Int, dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
+class AsyncLD(type: Int, dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
 
     private var type: Int
     private var dao: RaceDAO

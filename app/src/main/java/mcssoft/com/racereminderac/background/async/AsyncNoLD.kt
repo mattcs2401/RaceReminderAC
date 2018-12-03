@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.background
+package mcssoft.com.racereminderac.background.async
 
 import android.os.AsyncTask
 import mcssoft.com.racereminderac.dao.RaceDAO
@@ -13,7 +13,7 @@ import org.greenrobot.eventbus.EventBus
  * @param dao: The Room data access object.
  * @note: Uses EventBus instead of an interface to return the result (a Race object).
  */
-class TaskAsyncNoLD(dao: RaceDAO) : AsyncTask<Long, Void, Race>() {
+class AsyncNoLD(dao: RaceDAO) : AsyncTask<Long, Void, Race>() {
 
     private var dao: RaceDAO
 

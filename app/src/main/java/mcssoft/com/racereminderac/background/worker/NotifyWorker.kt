@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.background
+package mcssoft.com.racereminderac.background.worker
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

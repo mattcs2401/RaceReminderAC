@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.dao.RaceDAO
 import mcssoft.com.racereminderac.database.RaceDatabase
-import mcssoft.com.racereminderac.background.TaskAsyncLD
-import mcssoft.com.racereminderac.background.TaskAsyncNoLD
+import mcssoft.com.racereminderac.background.async.AsyncLD
+import mcssoft.com.racereminderac.background.async.AsyncNoLD
 
 class RaceRepository(application: Application) {
 
@@ -33,17 +33,17 @@ class RaceRepository(application: Application) {
     internal fun getRaceLD(id: Long): LiveData<Race> = raceDao.getRaceLD(id)
 
     internal fun getRaceNoLD(id: Long) {
-        val taskAsync = TaskAsyncNoLD(raceDao)
+        val taskAsync = AsyncNoLD(raceDao)
         taskAsync.execute(id)
     }
 
     /**
      * Do a database operation.
-     * @param type: The operation type, one of TaskAsyncLD.UPDATE / DELETE / INSERT.
+     * @param type: The operation type, one of AsyncLD.UPDATE / DELETE / INSERT.
      * @param race: The Race object.
      */
     internal fun doDatabaseOperation(type: Int, race: Race) {
-        val taskAsync = TaskAsyncLD(type, raceDao)
+        val taskAsync = AsyncLD(type, raceDao)
         taskAsync.execute(race)
     }
 
