@@ -17,7 +17,7 @@ class TimeCheckWorker(context: Context, workerParams: WorkerParameters) : Worker
         this.workerParams = workerParams
         raceDao = RaceDatabase.getInstance(context)!!.raceDao()
     }
-    
+
     override fun doWork(): Result {
 
         return Result.SUCCESS
