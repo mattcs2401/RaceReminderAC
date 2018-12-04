@@ -63,10 +63,16 @@ class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<Rac
                 "1" -> {
                     holder.tvRaceTime.setTextColor(getColor(context, R.color.colorPrimary))
                 }
+                "2" -> {
+                    val bp = "TBA"
+                }
+                "3" -> {
+                    holder.tvRaceTime.setTextColor(getColor(context, R.color.colorAccent))
+                }
             }
         }
     }
-
+    
     override fun getItemCount() : Int {
         if(isEmptyView) {
             return 1         // need this to still trigger the onCreateViewHolder.
@@ -87,11 +93,19 @@ class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<Rac
         Toast.makeText(anchorView.context, "Race re-instated.", Toast.LENGTH_SHORT).show()
     }
 
-    internal fun setClickListener(itemSelect : ISelect.ItemSelect) {
+    /**
+     * Set the interface ISelect.ItemSelect (when an item in the adapter's listing is selected).
+     * @param itemSelect: The interface.
+     */
+    internal fun setClickListener(itemSelect: ISelect.ItemSelect) {
         this.itemSelect = itemSelect
     }
 
-    internal fun setLongClickListener(itemLongSelect : ISelect.ItemLongSelect) {
+    /**
+     * Set the interface ISelect.ItemLongSelect.
+     * @param itemLongSelect: The interface.
+     */
+    internal fun setLongClickListener(itemLongSelect: ISelect.ItemLongSelect) {
         this.itemLongSelect = itemLongSelect
     }
 
@@ -169,16 +183,16 @@ class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<Rac
 
     private var viewType: Int = -1                         // either EMPTY_VIEW or RACE_VIEW.
     private var isEmptyView: Boolean = false               // flag, view is empty.
-    private var lRaces = ArrayList<Race>(0)   // listing backing data.
+    private var lRaces = ArrayList<Race>(0)   // backing data.
 
-    private lateinit var itemSelect: ISelect.ItemSelect     //
-    private lateinit var itemLongSelect: ISelect.ItemLongSelect     //
+    private lateinit var itemSelect: ISelect.ItemSelect              //
+    private lateinit var itemLongSelect: ISelect.ItemLongSelect      //
 
     private lateinit var raceViewHolder: RaceViewHolder    //
     private lateinit var itemTouchHelper: ItemTouchHelper  //
 
-    private val EMPTY_VIEW = 0
-    private val RACE_VIEW = 1
+    private val EMPTY_VIEW = 0    //
+    private val RACE_VIEW = 1     //
 
     var raceUndo: Race? = null      // local copy for any UNDO action.
     private var posUndo: Int = -1   // "     "    "   "   "    "
