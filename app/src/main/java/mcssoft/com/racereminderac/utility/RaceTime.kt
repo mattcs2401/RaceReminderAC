@@ -50,7 +50,29 @@ class RaceTime {
         calendar.set(Calendar.HOUR_OF_DAY, timeVals[0].toInt());
         calendar.set(Calendar.MINUTE, timeVals[1].toInt());
 
-        return calendar.getTimeInMillis();
+        return calendar.getTimeInMillis()
+    }
+
+    internal fun compareTo(time: String) : Int {
+        val givenTime = timeToMillis(time)
+        val currentTime = Calendar.getInstance(Locale.getDefault()).timeInMillis
+        return currentTime.compareTo(givenTime)
+    }
+
+    /**
+     * Check if the given time is a time from today.
+     * @param givenInMillis The given time in mSec.
+     * @return A value 0 if the given time is equal to the current time.
+     *         A value < 0 if the current time is before the given time.
+     *         A value > 0 if the current time is after the given time.
+     */
+    internal fun compareTo(givenInMillis: Long): Int {
+        val now = Calendar.getInstance(Locale.getDefault())
+        val given = Calendar.getInstance(Locale.getDefault())
+        given.time = Date(givenInMillis)
+
+        // TODO - check the comparison direction against the expected return values.
+        return given.compareTo(now)
     }
 
     // Local constants.

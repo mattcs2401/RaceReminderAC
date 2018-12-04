@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.utility.RaceTime
 
 class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter: RaceAdapter) : Observer<MutableList<Race>> {
 
@@ -12,12 +13,28 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
             lRaces.sort()
         }
 
+        raceTime = RaceTime.getInstance()
+
         for(race in lRaces!!) {
             // TODO - check Race.raceTime against current time and set Race.metaColur as applicable.
-            val time = race.raceTime
-            val bp = ""
+
+            // the time as per the Race object.
+            val checkTime = raceTime.timeToMillis(race.raceTime)
+            val compare = raceTime.compareTo(checkTime)
+
+            if(compare == 0) {
+                // TBA
+                val bp = ""
+            } else if(compare < 0) {
+                // TBA
+                val bp = ""
+            } else if(compare > 0) {
+                race.metaColour = "3"
+            }
         }
 
         adapter.swapData(lRaces as ArrayList<Race>)
     }
+
+    private lateinit var raceTime: RaceTime
 }
