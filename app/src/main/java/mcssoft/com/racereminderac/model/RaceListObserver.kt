@@ -4,24 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.entity.Race
-import java.util.Collections
 
-class RaceListObserver(lRaces: LiveData<MutableList<Race>>, adapter: RaceAdapter) : Observer<MutableList<Race>> {
-
-    private var adapter: RaceAdapter
-
-    init {
-        this.adapter = adapter
-    }
+class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter: RaceAdapter) : Observer<MutableList<Race>> {
 
     override fun onChanged(lRaces: MutableList<Race>?) {
-        if((lRaces != null) && (lRaces.size > 1)) {
-            Collections.sort(lRaces)
+        if(lRaces != null && (lRaces.size > 1)) {
+            lRaces.sort()
         }
-
         adapter.swapData(lRaces as ArrayList<Race>)
     }
-
-    // TODO - Begin periodic work request here ??
-
 }

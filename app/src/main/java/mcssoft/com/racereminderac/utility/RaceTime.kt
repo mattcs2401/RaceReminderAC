@@ -36,6 +36,23 @@ class RaceTime {
         return sdFormat.format(calendar.getTime())
     }
 
+    /**
+     * Get the time in milli seconds.
+     * @param time: The time formatted as "HH:MM" (String).
+     * @return The time in milli seconds.
+     */
+    internal fun timeToMillis(@NonNull time: String) : Long {
+        // Get hour/minute values.
+        val timeVals = time.split(":")
+        // Get local calendar.
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        // Set calendar values.
+        calendar.set(Calendar.HOUR_OF_DAY, timeVals[0].toInt());
+        calendar.set(Calendar.MINUTE, timeVals[1].toInt());
+
+        return calendar.getTimeInMillis();
+    }
+
     // Local constants.
     private val timeFormat24 = "kk:mm"
     private val dateFormat = "dd/MM/yyyy"
