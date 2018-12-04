@@ -11,6 +11,13 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
         if(lRaces != null && (lRaces.size > 1)) {
             lRaces.sort()
         }
+
+        for(race in lRaces!!) {
+            // TODO - check Race.raceTime against current time and set Race.metaColur as applicable.
+            val time = race.raceTime
+            val bp = ""
+        }
+
         adapter.swapData(lRaces as ArrayList<Race>)
     }
 }

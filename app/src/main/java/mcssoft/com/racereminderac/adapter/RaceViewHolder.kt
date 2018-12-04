@@ -1,7 +1,11 @@
 package mcssoft.com.racereminderac.adapter
 
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.ISelect
@@ -37,12 +41,10 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
      * Call back through the ISelect.ItemSelect interface with View and adapter position info.
      */
     override fun onClick(view : View) {
-//        itemSelect.onItemSelect(view, adapterPosition)
         itemSelect.onItemSelect(adapterPosition)
     }
 
     override fun onLongClick(view: View): Boolean {
-//        itemLongSelect.onItemLongSelect(view, adapterPosition)
         itemLongSelect.onItemLongSelect(adapterPosition)
         return true
     }

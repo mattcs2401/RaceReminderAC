@@ -40,7 +40,7 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
         super.onViewCreated(view, savedInstanceState)
         val context = this.context
 
-        raceAdapter = RaceAdapter(activity!!.id_container)
+        raceAdapter = RaceAdapter(activity!!.id_container, activity!!)
         raceAdapter.setClickListener(this)
         raceAdapter.setLongClickListener(this)
 

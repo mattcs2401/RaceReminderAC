@@ -12,10 +12,11 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
                 @ColumnInfo(name = "RaceTime") var raceTime: String) : Comparable<Race> {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "_id") var id: Long? = null
+    @ColumnInfo(name = "_id") var id: Long? = null    // value inserted by Room.
 
-    @ColumnInfo(name = "RaceDate") var raceDate: String = "01/01/2019"
-    @ColumnInfo(name = "ArchvRace") var archvRace: String = "N"
+    @ColumnInfo(name = "RaceDate") var raceDate: String = "01/01/2019"    // default value.
+    @ColumnInfo(name = "ArchvRace") var archvRace: String = "N"           // TBA
+    @ColumnInfo(name = "MetaColour") var metaColour: String = "1"         // TBA
 
     /**
      * Simple compare on RaceTime. Used in, e.g.,  Collections.sort(List<Race>)
@@ -29,5 +30,4 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
         }
         return result
     }
-    // TODO - this compareTo will likely need tweaking.
 }

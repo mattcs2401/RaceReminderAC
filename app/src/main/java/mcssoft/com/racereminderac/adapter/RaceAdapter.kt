@@ -1,9 +1,12 @@
 package mcssoft.com.racereminderac.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -15,13 +18,15 @@ import mcssoft.com.racereminderac.utility.SnackBarCB
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import org.greenrobot.eventbus.EventBus
 
-class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
+class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
 
     private var anchorView: View
+    private var context: Context
 
     init {
         // the view that the 'UNDO' SnackBar is anchored to.
         this.anchorView = anchorView
+        this.context = context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
@@ -53,11 +58,21 @@ class RaceAdapter(anchorView: View) : RecyclerView.Adapter<RaceViewHolder>(), Vi
             holder.tvRaceSel.text = race.raceSel
             holder.tvRaceTime.text = race.raceTime
             holder.tvRaceDate.text = race.raceDate
+
+            when(race.metaColour) {
+                "1" -> {
+                    holder.tvRaceTime.setTextColor(getColor(context, R.color.colorPrimary))
+                }
+            }
         }
     }
 
     override fun getItemCount() : Int {
-        return lRaces.size
+        if(isEmptyView) {
+            return 1         // need this to still trigger the onCreateViewHolder.
+        } else {
+            return lRaces.size
+        }
     }
 
     override fun getItemViewType(position : Int) : Int {
