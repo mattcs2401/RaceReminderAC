@@ -19,5 +19,8 @@ Usability:
 ----------
 1) Periodic check (15 mins) on Race start time compared to current time.
 
+2} Preferences, what ?
+    - Maybe just start with a Preference screen and simply add.
+
 
 
