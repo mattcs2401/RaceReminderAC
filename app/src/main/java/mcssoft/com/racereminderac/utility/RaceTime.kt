@@ -53,26 +53,44 @@ class RaceTime {
         return calendar.getTimeInMillis()
     }
 
-    internal fun compareTo(time: String) : Int {
-        val givenTime = timeToMillis(time)
-        val currentTime = Calendar.getInstance(Locale.getDefault()).timeInMillis
-        return currentTime.compareTo(givenTime)
-    }
-
     /**
-     * Check if the given time is a time from today.
+     * Compare the given time to the current time.
      * @param givenInMillis The given time in mSec.
      * @return A value 0 if the given time is equal to the current time.
-     *         A value < 0 if the current time is before the given time.
-     *         A value > 0 if the current time is after the given time.
+     *         A value < 0 if the current time is before the given time, i.e. the given time is in the future.
+     *         A value > 0 if the current time is after the given time, i.e. the given time is in the past.
      */
-    internal fun compareTo(givenInMillis: Long): Int {
+    internal fun compareToCurrent(givenInMillis: Long): Int {
         val now = Calendar.getInstance(Locale.getDefault())
         val given = Calendar.getInstance(Locale.getDefault())
-        given.time = Date(givenInMillis)
+        given.timeInMillis = givenInMillis
 
-        // TODO - check the comparison direction against the expected return values.
-        return given.compareTo(now)
+        return now.compareTo(given)
+    }
+    // https://developer.android.com/reference/java/util/Calendar.html#compareTo(java.util.Calendar)
+
+    /**
+     * Get a time value in mSec that is the given time, minus the prior time.
+     * Example: given 08:00, prior 5 (minutes), result 07:55 (in mSec).
+     * @param givenTime A time value in milli mSec.
+     * @param priorTime A time value in minutes.
+     * @return A time value that is the given time minus the prior time.
+     */
+    internal fun getTimePrior(givenTime: Long, priorTime: Int): Long {
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        calendar.time = Date(givenTime)
+        calendar.add(Calendar.MINUTE, -priorTime)
+        return calendar.timeInMillis
+    }
+
+    internal fun getCurrentTime() : Long {
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        return calendar.timeInMillis
+    }
+
+    internal fun getWithinTimeWindow(priorTime: Long) : Boolean {
+
+        return false
     }
 
     // Local constants.

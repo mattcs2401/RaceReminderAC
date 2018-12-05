@@ -9,32 +9,59 @@ import mcssoft.com.racereminderac.utility.RaceTime
 class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter: RaceAdapter) : Observer<MutableList<Race>> {
 
     override fun onChanged(lRaces: MutableList<Race>?) {
-        if(lRaces != null && (lRaces.size > 1)) {
-            lRaces.sort()
+        if(lRaces != null) {
+
+            if (lRaces.size > 1) { lRaces.sort() }
+            raceTime = RaceTime.getInstance()
+            timeCheck(lRaces)
+
+            adapter.swapData(lRaces as ArrayList<Race>)
         }
+    }
 
-        raceTime = RaceTime.getInstance()
-
-        for(race in lRaces!!) {
-            // TODO - check Race.raceTime against current time and set Race.metaColur as applicable.
-
-            // the time as per the Race object.
-            val checkTime = raceTime.timeToMillis(race.raceTime)
-            val compare = raceTime.compareTo(checkTime)
+    private fun timeCheck(lRaces: MutableList<Race>) {
+        // Check the race time against the current time.
+        for(race in lRaces) {
+            // TODO - seems to work for the time value, but, need to check both date and time.
+            // The time as per the Race object.
+            val raceTimeMillis = raceTime.timeToMillis(race.raceTime)
+            // The value of the comparison.
+            val compare = raceTime.compareToCurrent(raceTimeMillis)
 
             if(compare == 0) {
-                // TBA
-                val bp = ""
+                // TBA - the current time is equal the race time.
+                val TBA = ""
             } else if(compare < 0) {
-                // TBA
-                val bp = ""
+                // The current time is before the race time, i.e. Race time still to occur.
+                // Check if we are within 5 minutes.
+                val windowTimeMillis = raceTime.getTimePrior(raceTimeMillis, 5)
+                val currentTimeMillis = raceTime.getCurrentTime()
+
+                if(currentTimeMillis < windowTimeMillis) {
+                    // We are > five minutes before the Race time.
+                    race.metaColour = "1"
+                } else if((currentTimeMillis > windowTimeMillis) && (currentTimeMillis < raceTimeMillis)) {
+                    // We are < five minutes before the Race time.
+                    race.metaColour = "2"
+                }
+                val TBA = ""
             } else if(compare > 0) {
+                // The current time is after the Race time, i.e. Race time has passed.
                 race.metaColour = "3"
             }
         }
-
-        adapter.swapData(lRaces as ArrayList<Race>)
     }
 
     private lateinit var raceTime: RaceTime
+
 }
+/*
+Example:
+--------
+Race time = 08:00
+Window = race time - 5 minutes = 07:55
+
+Current time < window - green
+Current time > window, and, < race time - amber
+Current time > window, and, > race time - red
+*/

@@ -64,7 +64,7 @@ class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<Rac
                     holder.tvRaceTime.setTextColor(getColor(context, R.color.colorPrimary))
                 }
                 "2" -> {
-                    val bp = "TBA"
+                    holder.tvRaceTime.setTextColor(getColor(context, R.color.colorOrange))
                 }
                 "3" -> {
                     holder.tvRaceTime.setTextColor(getColor(context, R.color.colorAccent))
