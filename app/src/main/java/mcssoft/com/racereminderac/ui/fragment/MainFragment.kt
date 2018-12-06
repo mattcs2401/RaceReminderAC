@@ -65,6 +65,7 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
 
         val lRaces = raceViewModel.getAllRaces()
         lRaces.observe(viewLifecycleOwner, RaceListObserver(lRaces, raceAdapter))
+
     }
 
     override fun onStart() {

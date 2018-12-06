@@ -164,7 +164,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             }
             // Insert as New.
             Constants.EDIT_RACE_NEW -> {
-                race.raceDate = RaceTime.getInstance().getFormattedDateTime(RaceTime.DATE)
+                race.raceDate = RaceTime.getInstance().getFormattedDateTime(Constants.DATE)
             }
             // Insert as Copy.
             Constants.EDIT_RACE_COPY -> {
@@ -298,7 +298,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             Constants.EDIT_RACE_NEW -> {
                 toolBar.title = getString(R.string.new_race)
                 btnSave.text = getString(R.string.lbl_save)
-                btnTime.text = RaceTime.getInstance().getFormattedDateTime(RaceTime.TIME)
+                btnTime.text = RaceTime.getInstance().getFormattedDateTime(Constants.TIME)
             }
             Constants.EDIT_RACE_COPY -> {
                 toolBar.title = getString(R.string.copy_race)

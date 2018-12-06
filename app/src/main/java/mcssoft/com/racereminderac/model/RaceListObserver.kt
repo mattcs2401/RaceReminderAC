@@ -21,10 +21,10 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
         }
     }
 
-/*
--1: the current time is before that given - the race time is in the future.
- 0: the current time is equal that given.
- 1: the current time is after that given - the race time is in the past.
+/* Compare notes, for a result of:
+   -1: the current time is before that given - the race time is in the future.
+    0: the current time is equal that given.
+    1: the current time is after that given - the race time is in the past.
  */
     private fun timeCheck(lRaces: MutableList<Race>) {
         // Check the race time against the current time.
@@ -56,15 +56,4 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
     }
 
     private lateinit var raceTime: RaceTime
-
 }
-/*
-Example:
---------
-Race time = 08:00
-Window = race time - 5 minutes = 07:55
-
-Current time < window - green
-Current time > window, and, < race time - amber
-Current time > window, and, > race time - red
-*/

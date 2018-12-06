@@ -6,12 +6,12 @@ import java.util.Locale
 import java.util.Calendar
 import java.util.Date
 
+/**
+ * Utility class to manipulate date and time values.
+ */
 class RaceTime {
 
     companion object {
-        val TIME: Int = 1
-        val DATE: Int = 2
-
         fun getInstance(): RaceTime = RaceTime()
     }
 
@@ -26,11 +26,11 @@ class RaceTime {
         calendar.setTime(Date(calendar.getTimeInMillis()))
 
         when(which) {
-            TIME -> {
-                sdFormat = SimpleDateFormat(timeFormat24, locale)
+            Constants.TIME -> {
+                sdFormat = SimpleDateFormat(Constants.TIME_FORMAT_24, locale)
             }
-            DATE -> {
-                sdFormat = SimpleDateFormat(dateFormat, locale)
+            Constants.DATE -> {
+                sdFormat = SimpleDateFormat(Constants.DATE_FORMAT, locale)
             }
         }
         return sdFormat.format(calendar.getTime())
@@ -52,18 +52,11 @@ class RaceTime {
         return calendar.getTimeInMillis()
     }
 
-    internal fun timeToMillis(time: String) : Long {
-        // Get time hour/minute values.
-        val sTime = time.split(":")
-        // Get local calendar.
-        val calendar = Calendar.getInstance(Locale.getDefault())
-        // Set calendar values.
-        calendar.set(Calendar.HOUR_OF_DAY, sTime[0].toInt());
-        calendar.set(Calendar.MINUTE, sTime[1].toInt());
-
-        return calendar.getTimeInMillis()
-    }
-
+    /**
+     * Get the time from the parameter.
+     * @param timeInMillis: The time value in mSec.
+     * @return The time as HH:MM.
+     */
     internal fun timeFromMillis(timeInMillis: Long): String {
         val calendar = Calendar.getInstance(Locale.getDefault())
         calendar.timeInMillis = timeInMillis
@@ -74,25 +67,6 @@ class RaceTime {
         if(minute.length < 2) minute = "0$minute"
 
         return "$hour:$minute"
-    }
-
-    /**
-     * Get a time value in mSec that is the given time, minus the prior time.
-     * Example: given 08:00, prior 5 (minutes), result 07:55 (in mSec).
-     * @param givenTime A time value in milli mSec.
-     * @param priorTime A time value in minutes.
-     * @return A time value that is the given time minus the prior time.
-     */
-    internal fun getTimePrior(givenTime: Long, priorTime: Int): Long {
-        val calendar = Calendar.getInstance(Locale.getDefault())
-        calendar.time = Date(givenTime)
-        calendar.add(Calendar.MINUTE, -priorTime)
-        return calendar.timeInMillis
-    }
-
-    internal fun getCurrentTime(): Long {
-        val calendar = Calendar.getInstance(Locale.getDefault())
-        return calendar.timeInMillis
     }
 
     /**
@@ -109,32 +83,35 @@ class RaceTime {
 
         if(isBefore(calendar)) {
             retVar = Constants.CURRENT_TIME_BEFORE
-        } else if(isEqual(calendar)) {
-            retVar = Constants.CURRENT_TIME_SAME
         } else if(isAfter(calendar)) {
             retVar = Constants.CURRENT_TIME_AFTER
+        } else if(isEqual(calendar)) {
+            retVar = Constants.CURRENT_TIME_SAME
         }
         return retVar
     }
 
+    /**
+     * Wrapper for Calendar.isBefore()
+     * @param cal: The calendar to compare.
+     */
     private fun isBefore(cal: Calendar) : Boolean {
-        val calendar = Calendar.getInstance(Locale.getDefault())
-        var t = calendar.timeInMillis
-        return calendar.before(cal)
+        return Calendar.getInstance(Locale.getDefault()).before(cal)
     }
 
+    /**
+     * Wrapper for Calendar.isAfter()
+     * @param cal: The calendar to compare.
+     */
     private fun isAfter(cal: Calendar) : Boolean {
-        val calendar = Calendar.getInstance(Locale.getDefault())
-        return calendar.after(cal)
+        return Calendar.getInstance(Locale.getDefault()).after(cal)
     }
 
+    /**
+     * Wrapper for Calendar.isEqual()
+     * @param cal: The calendar to compare.
+     */
     private fun isEqual(cal: Calendar): Boolean {
-        val calendar = Calendar.getInstance(Locale.getDefault())
-        var t = calendar.timeInMillis
-        return calendar.equals(cal)
+        return Calendar.getInstance(Locale.getDefault()).equals(cal)
     }
-
-    // Local constants.
-    private val timeFormat24 = "kk:mm"
-    private val dateFormat = "dd/MM/yyyy"
 }
