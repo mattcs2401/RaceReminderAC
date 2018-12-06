@@ -73,9 +73,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(time: TimeMessage) {
-        if(!time.message.isBlank()) {
-            btnTime.text = time.msg
-        }
+        raceTimeL = time.time  // keep local copy.
+        btnTime.text = RaceTime.getInstance().timeFromMillis(raceTimeL)
     }
 
     /**
@@ -154,6 +153,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 rnVals.get(npRaceNo.value),
                 rsVals.get(npRaceSel.value),
                 btnTime.text.toString())
+        race.raceTimeL = raceTimeL
 
         when(action) {
             // Update.
@@ -316,6 +316,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private lateinit var npRaceNo: NumberPicker
     private lateinit var npRaceSel: NumberPicker
     private var raceId: Long? = null
+    private var raceTimeL: Long = 0
     private lateinit var raceDate: String
     private var editType: Int? = null
     private lateinit var btnSave: Button

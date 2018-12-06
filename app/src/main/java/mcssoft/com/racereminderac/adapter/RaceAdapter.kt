@@ -56,7 +56,7 @@ class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<Rac
             holder.tvRaceCode.text = race.raceCode
             holder.tvRaceNo.text = race.raceNum
             holder.tvRaceSel.text = race.raceSel
-            holder.tvRaceTime.text = race.raceTime
+            holder.tvRaceTime.text = race.raceTimeS
             holder.tvRaceDate.text = race.raceDate
 
             when(race.metaColour) {

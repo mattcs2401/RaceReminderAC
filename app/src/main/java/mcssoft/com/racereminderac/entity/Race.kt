@@ -9,14 +9,19 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
                 @ColumnInfo(name = "RaceCode") var raceCode: String,
                 @ColumnInfo(name = "RaceNum")  var raceNum: String,
                 @ColumnInfo(name = "RaceSel")  var raceSel: String,
-                @ColumnInfo(name = "RaceTime") var raceTime: String) : Comparable<Race> {
+                @ColumnInfo(name = "RaceTimeS") var raceTimeS: String) : Comparable<Race> {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "_id") var id: Long? = null    // value inserted by Room.
 
-    @ColumnInfo(name = "RaceDate") var raceDate: String = "01/01/2019"    // default value.
-    @ColumnInfo(name = "ArchvRace") var archvRace: String = "N"           // TBA
-    @ColumnInfo(name = "MetaColour") var metaColour: String = "1"         // TBA
+    // Default date value.
+    @ColumnInfo(name = "RaceDate") var raceDate: String = "01/01/1970"
+    // Arbitrary default value (01/01/1970 10:00:00).
+    @ColumnInfo(name = "RaceTimeL") var raceTimeL: Long = 0
+    // TBA
+    @ColumnInfo(name = "ArchvRace") var archvRace: String = "N"
+    // TBA
+    @ColumnInfo(name = "MetaColour") var metaColour: String = "1"
 
     /**
      * Simple compare on RaceTime. Used in, e.g.,  Collections.sort(List<Race>)
@@ -26,7 +31,7 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
         var result = raceDate.compareTo(other.raceDate)
         if(result == 0) {
             // dates are equal, so compare time.
-            result = raceTime.compareTo(other.raceTime)
+            result = raceTimeS.compareTo(other.raceTimeS)
         }
         return result
     }

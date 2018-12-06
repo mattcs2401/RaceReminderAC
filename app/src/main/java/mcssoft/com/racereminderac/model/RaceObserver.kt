@@ -21,7 +21,7 @@ class RaceObserver(race: LiveData<Race>, view: View) : Observer<Race> {
             view.id_np_race_code.value = findInArray(view.id_np_race_code.displayedValues,race.raceCode)
             view.id_np_race_num.value = findInArray(view.id_np_race_num.displayedValues,race.raceNum)
             view.id_np_race_sel.value = findInArray(view.id_np_race_sel.displayedValues,race.raceSel)
-            view.id_btn_time.setText(race.raceTime)
+            view.id_btn_time.setText(race.raceTimeS)
         }
     }
 

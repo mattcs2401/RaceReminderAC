@@ -38,36 +38,43 @@ class RaceTime {
 
     /**
      * Get the time in milli seconds.
-     * @param time: The time formatted as "HH:MM" (String).
+     * @param hourOfDay: The hour of the day (24hr clock).
+     * @param minute: The minute of the hour.
      * @return The time in milli seconds.
      */
-    internal fun timeToMillis(@NonNull time: String) : Long {
-        // Get hour/minute values.
-        val timeVals = time.split(":")
+    internal fun timeToMillis(hourOfDay: Int, minute: Int) : Long {
         // Get local calendar.
         val calendar = Calendar.getInstance(Locale.getDefault())
         // Set calendar values.
-        calendar.set(Calendar.HOUR_OF_DAY, timeVals[0].toInt());
-        calendar.set(Calendar.MINUTE, timeVals[1].toInt());
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendar.set(Calendar.MINUTE, minute);
 
         return calendar.getTimeInMillis()
     }
 
-    /**
-     * Compare the given time to the current time.
-     * @param givenInMillis The given time in mSec.
-     * @return A value 0 if the given time is equal to the current time.
-     *         A value < 0 if the current time is before the given time, i.e. the given time is in the future.
-     *         A value > 0 if the current time is after the given time, i.e. the given time is in the past.
-     */
-    internal fun compareToCurrent(givenInMillis: Long): Int {
-        val now = Calendar.getInstance(Locale.getDefault())
-        val given = Calendar.getInstance(Locale.getDefault())
-        given.timeInMillis = givenInMillis
+    internal fun timeToMillis(time: String) : Long {
+        // Get time hour/minute values.
+        val sTime = time.split(":")
+        // Get local calendar.
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        // Set calendar values.
+        calendar.set(Calendar.HOUR_OF_DAY, sTime[0].toInt());
+        calendar.set(Calendar.MINUTE, sTime[1].toInt());
 
-        return now.compareTo(given)
+        return calendar.getTimeInMillis()
     }
-    // https://developer.android.com/reference/java/util/Calendar.html#compareTo(java.util.Calendar)
+
+    internal fun timeFromMillis(timeInMillis: Long): String {
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        calendar.timeInMillis = timeInMillis
+        var hour = calendar.get(Calendar.HOUR_OF_DAY).toString()
+        var minute = calendar.get(Calendar.MINUTE).toString()
+
+        if(hour.length < 2) hour = "0$hour"
+        if(minute.length < 2) minute = "0$minute"
+
+        return hour + ":" + minute
+    }
 
     /**
      * Get a time value in mSec that is the given time, minus the prior time.
@@ -83,14 +90,48 @@ class RaceTime {
         return calendar.timeInMillis
     }
 
-    internal fun getCurrentTime() : Long {
+    internal fun getCurrentTime(): Long {
         val calendar = Calendar.getInstance(Locale.getDefault())
         return calendar.timeInMillis
     }
 
-    internal fun getWithinTimeWindow(priorTime: Long) : Boolean {
+    /**
+     * Compare the current time to that given.
+     * @param givenTime: The time (in mSec) to compare against the current time.
+     * @return -1: the current time is before that given.
+     *          0: the current time is equal that given.
+     *          1: the current time is after that given.
+     */
+    internal fun compareTo(givenTime: Long) : Int {
+        var retVar: Int = 99
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        calendar.timeInMillis = givenTime
 
-        return false
+        if(isBefore(calendar)) {
+            retVar = -1
+        } else if(isEqual(calendar)) {
+            retVar = 0
+        } else if(isAfter(calendar)) {
+            retVar = 1
+        }
+        return retVar
+    }
+
+    private fun isBefore(cal: Calendar) : Boolean {
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        var t = calendar.timeInMillis
+        return calendar.before(cal)
+    }
+
+    private fun isAfter(cal: Calendar) : Boolean {
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        return calendar.after(cal)
+    }
+
+    private fun isEqual(cal: Calendar): Boolean {
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        var t = calendar.timeInMillis
+        return calendar.equals(cal)
     }
 
     // Local constants.

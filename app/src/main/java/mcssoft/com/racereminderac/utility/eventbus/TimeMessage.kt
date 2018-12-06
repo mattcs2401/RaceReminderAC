@@ -6,11 +6,11 @@ package mcssoft.com.racereminderac.utility.eventbus
  * @param dId - The id of the originating dialog.
  * @param ctx - A value to give "context" to the message.
  */
-class TimeMessage(var msg: String, var dId: Int, val ctx: Int) {
+class TimeMessage(var msg: Long) { //}, var dId: Int, val ctx: Int) {
 
-    val message: String get() = msg
+    val time: Long get() = msg
 
-    val ident: Int get() = dId
+//    val ident: Int get() = dId
 
-    val contxt: Int get() = ctx
+//    val contxt: Int get() = ctx
 }

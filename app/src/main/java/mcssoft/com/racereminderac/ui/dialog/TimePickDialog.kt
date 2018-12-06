@@ -2,12 +2,11 @@ package mcssoft.com.racereminderac.ui.dialog
 
 import android.app.Dialog
 import android.app.TimePickerDialog
-import android.content.DialogInterface
 import android.os.Bundle
-import android.text.format.DateFormat
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
 import mcssoft.com.racereminderac.R
+import mcssoft.com.racereminderac.utility.RaceTime
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
 import org.greenrobot.eventbus.EventBus
 import java.util.*
@@ -37,24 +36,8 @@ class TimePickDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
      * TimePickerDialog.OnTimeSetListener
      */
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
-        var sHour = ""
-        var sMinute = ""
-
-        // pad values for display as applicable.
-        if(hourOfDay < 10) {
-            sHour = "0" + hourOfDay.toString()
-        } else {
-            sHour = hourOfDay.toString()
-        }
-        if(minute < 10) {
-            sMinute = "0" + minute.toString()
-        } else {
-            sMinute = minute.toString()
-        }
-
-        val sTime = sHour + ":" + sMinute
-
-        EventBus.getDefault().post(TimeMessage(sTime, R.integer.time_pick_dialog_id, -1))
+        val raceTime = RaceTime.getInstance().timeToMillis(hourOfDay, minute)
+        EventBus.getDefault().post(TimeMessage(raceTime)) //, R.integer.time_pick_dialog_id, -1))
         this.dialog.cancel()
     }
 

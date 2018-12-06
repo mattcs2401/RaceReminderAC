@@ -19,35 +19,29 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
         }
     }
 
+/*
+-1: the current time is before that given - the race time is in the future.
+ 0: the current time is equal that given.
+ 1: the current time is after that given - the race time is in the past.
+ */
     private fun timeCheck(lRaces: MutableList<Race>) {
         // Check the race time against the current time.
         for(race in lRaces) {
-            // TODO - seems to work for the time value, but, need to check both date and time.
             // The time as per the Race object.
-            val raceTimeMillis = raceTime.timeToMillis(race.raceTime)
+            val raceTimeMillis = race.raceTimeL
             // The value of the comparison.
-            val compare = raceTime.compareToCurrent(raceTimeMillis)
+            val compare = raceTime.compareTo(raceTimeMillis)
 
-            if(compare == 0) {
-                // TBA - the current time is equal the race time.
-                val TBA = ""
-            } else if(compare < 0) {
-                // The current time is before the race time, i.e. Race time still to occur.
-                // Check if we are within 5 minutes.
-                val windowTimeMillis = raceTime.getTimePrior(raceTimeMillis, 5)
-                val currentTimeMillis = raceTime.getCurrentTime()
-
-                if(currentTimeMillis < windowTimeMillis) {
-                    // We are > five minutes before the Race time.
+            when(compare) {
+                -1 -> {
                     race.metaColour = "1"
-                } else if((currentTimeMillis > windowTimeMillis) && (currentTimeMillis < raceTimeMillis)) {
-                    // We are < five minutes before the Race time.
-                    race.metaColour = "2"
                 }
-                val TBA = ""
-            } else if(compare > 0) {
-                // The current time is after the Race time, i.e. Race time has passed.
-                race.metaColour = "3"
+                0 -> {
+                    race.metaColour = "3"
+                }
+                1 -> {
+                    race.metaColour = "3"
+                }
             }
         }
     }
