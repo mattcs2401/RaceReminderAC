@@ -62,12 +62,15 @@ class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<Rac
             when(race.metaColour) {
                 "1" -> {
                     holder.tvRaceTime.setTextColor(getColor(context, R.color.colorPrimary))
+                    holder.tvRaceDate.setTextColor(getColor(context, R.color.colorPrimary))
                 }
                 "2" -> {
                     holder.tvRaceTime.setTextColor(getColor(context, R.color.colorOrange))
+                    holder.tvRaceDate.setTextColor(getColor(context, R.color.colorOrange))
                 }
                 "3" -> {
                     holder.tvRaceTime.setTextColor(getColor(context, R.color.colorAccent))
+                    holder.tvRaceDate.setTextColor(getColor(context, R.color.colorAccent))
                 }
             }
         }
