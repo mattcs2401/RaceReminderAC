@@ -34,6 +34,7 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
 
             when(compare) {
                 -1 -> {
+                    // TODO - 5 minutes prior time window.
                     race.metaColour = "1"
                 }
                 0 -> {

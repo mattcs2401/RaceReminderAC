@@ -7,7 +7,7 @@
 ------
 Views:
 ------
-1) Update recycler view items (background ?) based on time to Race time.
+1) Update recycler view items (time ?) based on time to Race time.
 
 ------
 Other:

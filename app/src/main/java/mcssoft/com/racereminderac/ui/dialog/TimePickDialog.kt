@@ -15,12 +15,14 @@ class TimePickDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        time = arguments?.getString("key")?.split(":")
+        var hour: Int = -1
+        var minute: Int = -1
+        val time = arguments?.getString("key")?.split(":")
 
         if(time != null) {
             // Use the values passed in the arguments.
-            hour = time!![0].toInt()
-            minute = time!![1].toInt()
+            hour = time[0].toInt()
+            minute = time[1].toInt()
         } else {
             // Use the current time as the default values for the picker
             val calendar = Calendar.getInstance()
@@ -28,7 +30,7 @@ class TimePickDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
             minute = calendar.get(Calendar.MINUTE)
         }
 
-        // a time picker with 24 hour format.
+        // A time picker with 24 hour format.
         return TimePickerDialog(activity, this, hour, minute, true)
     }
 
@@ -37,12 +39,7 @@ class TimePickDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
      */
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
         val raceTime = RaceTime.getInstance().timeToMillis(hourOfDay, minute)
-        EventBus.getDefault().post(TimeMessage(raceTime)) //, R.integer.time_pick_dialog_id, -1))
+        EventBus.getDefault().post(TimeMessage(raceTime))
         this.dialog.cancel()
     }
-
-    var time: List<String>? = null
-    var hour: Int = -1
-    var minute: Int = -1
-
 }
