@@ -1,16 +1,19 @@
 <resources>
     <string name="app_name">RaceReminderAC</string>
 
+    <!-- Component labels. -->
     <string name="city_code">City Code</string>
     <string name="race_no">Race No</string>
     <string name="race_sel">Race Sel</string>
     <string name="race_time">Race Time</string>
     <string name="race_code">Race Code</string>
 
+    <!-- Activity/action labels. -->
     <string name="edit_race">Edit Race</string>
     <string name="new_race">New Race</string>
     <string name="copy_race">Copy Race</string>
 
+    <!-- ActionBar title. -->
     <string name="title_race_reminder">Race Reminder</string>
 
     <!-- Button labels. -->
@@ -30,6 +33,10 @@
     <!-- Snackbar. -->
     <string name="sb_show">Show</string>
 
+    <!-- Recycler view empty message.-->
+    <string name="nothing_to_show">Nothing to show.</string>
+
+    <!-- CityCodes array. -->
     <string-array name="cityCodes">
         <item>A</item>
         <item>B</item>
@@ -51,6 +58,7 @@
         <item>Z</item>
     </string-array>
 
+    <!-- RaceCodes array. -->
     <string-array name="raceCodes">
         <item>R</item>
         <item>T</item>
@@ -58,6 +66,7 @@
         <item>S</item>
     </string-array>
 
+    <!-- RaceNum array. -->
     <string-array name="raceNum">
         <item>1</item>
         <item>2</item>
@@ -73,6 +82,7 @@
         <item>12</item>
     </string-array>
 
+    <!-- RaceSel array. -->
     <string-array name="raceSel">
         <item>1</item>
         <item>2</item>
@@ -100,7 +110,7 @@
         <item>24</item>
     </string-array>
 
-    <!-- Time picker. -->
+    <!-- Time picker dialog tag. -->
     <string name="tp_tag">time_pick_dialog</string>
 
     <!-- EditText layout default values. -->

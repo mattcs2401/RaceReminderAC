@@ -14,20 +14,12 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.interfaces.ISwipe
+import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.SnackBarCB
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import org.greenrobot.eventbus.EventBus
 
-class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
-
-    private var anchorView: View
-    private var context: Context
-
-    init {
-        // the view that the 'UNDO' SnackBar is anchored to.
-        this.anchorView = anchorView
-        this.context = context
-    }
+class RaceAdapter(private var anchorView: View, private var context: Context) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
         val view: View?
@@ -36,11 +28,11 @@ class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<Rac
         val inflater = LayoutInflater.from(parent.context)
 
         when (viewType) {
-            EMPTY_VIEW -> {
+            Constants.EMPTY_VIEW -> {
                 view = inflater.inflate(R.layout.row_empty, parent, false)
-                raceViewHolder = RaceViewHolder(view, "Nothing to show.")
+                raceViewHolder = RaceViewHolder(view, context.resources.getString(R.string.nothing_to_show))
             }
-            RACE_VIEW -> {
+            Constants.RACE_VIEW -> {
                 view = inflater.inflate(R.layout.row_race, parent, false)
                 raceViewHolder = RaceViewHolder(view, "", itemSelect, itemLongSelect)
             }
@@ -85,7 +77,7 @@ class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<Rac
     }
 
     override fun getItemViewType(position : Int) : Int {
-        return if (isEmptyView) EMPTY_VIEW else RACE_VIEW
+        return if (isEmptyView) Constants.EMPTY_VIEW else Constants.RACE_VIEW
     }
 
     /**
@@ -184,6 +176,7 @@ class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<Rac
         isEmptyView = lRaces.isEmpty()
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private var viewType: Int = -1                         // either EMPTY_VIEW or RACE_VIEW.
     private var isEmptyView: Boolean = false               // flag, view is empty.
     private var lRaces = ArrayList<Race>(0)   // backing data.
@@ -194,9 +187,7 @@ class RaceAdapter(anchorView: View, context: Context) : RecyclerView.Adapter<Rac
     private lateinit var raceViewHolder: RaceViewHolder    //
     private lateinit var itemTouchHelper: ItemTouchHelper  //
 
-    private val EMPTY_VIEW = 0    //
-    private val RACE_VIEW = 1     //
-
     var raceUndo: Race? = null      // local copy for any UNDO action.
     private var posUndo: Int = -1   // "     "    "   "   "    "
+    //</editor-fold>
 }

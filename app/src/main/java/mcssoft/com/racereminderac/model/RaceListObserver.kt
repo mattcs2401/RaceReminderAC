@@ -13,7 +13,6 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
 
     override fun onChanged(lRaces: MutableList<Race>?) {
         if(lRaces != null) {
-
             if (lRaces.size > 1) { lRaces.sort() }
             raceTime = RaceTime.getInstance()
             timeCheck(lRaces)
@@ -37,8 +36,14 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
 
             when(compare) {
                 Constants.CURRENT_TIME_BEFORE -> {
-                    // TODO - 5 minutes prior time window.
-                    race.metaColour = "1"
+                    // 5 minutes prior time window.
+                    val comp = raceTime.compareTo(raceTimeMillis - Constants.FIVE_MINUTES)
+                    if(comp == Constants.CURRENT_TIME_SAME ||
+                            comp == Constants.CURRENT_TIME_AFTER) {
+                        race.metaColour = "2"
+                    } else {
+                        race.metaColour = "1"
+                    }
                 }
                 Constants.CURRENT_TIME_SAME -> {
                     race.metaColour = "3"
