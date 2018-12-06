@@ -2,6 +2,7 @@ package mcssoft.com.racereminderac.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.SyncStateContract
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -11,6 +12,7 @@ import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IRace
+import mcssoft.com.racereminderac.utility.Constants
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelect, IRace.IRaceLongSelect {
 
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelec
         when(view.id) {
             R.id.id_fab -> {
                 val bundle = Bundle()
-                bundle.putInt(getString(R.string.key_edit_type), resources.getInteger(R.integer.edit_race_new))
+                bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_NEW)
                 navController.navigate(R.id.id_edit_fragment, bundle)
             }
         }
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelec
      */
     override fun onRaceSelect(id: Long ) {
         val bundle = Bundle()
-        bundle.putInt(getString(R.string.key_edit_type), resources.getInteger(R.integer.edit_race_update))
+        bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_UPDATE)
         bundle.putLong(getString(R.string.key_edit_existing), id)
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
@@ -51,7 +53,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelec
      */
     override fun onRaceLongSelect(id: Long) {
         val bundle = Bundle()
-        bundle.putInt(getString(R.string.key_edit_type), resources.getInteger(R.integer.edit_race_copy))
+        bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_COPY)
         bundle.putLong(getString(R.string.key_edit_copy), id)
         navController.navigate(R.id.id_edit_fragment, bundle)
     }

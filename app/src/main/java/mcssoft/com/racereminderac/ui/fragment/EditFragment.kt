@@ -22,6 +22,7 @@ import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.model.RaceObserver
 import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
+import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceTime
 import mcssoft.com.racereminderac.utility.eventbus.RaceMessage
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
@@ -96,16 +97,16 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             R.id.id_btn_save -> {
                 val race: Race
                 when(editType) {
-                    resources.getInteger(R.integer.edit_race_update) -> {
-                        race = collateValues(R.integer.edit_race_update)
+                    Constants.EDIT_RACE_UPDATE -> {
+                        race = collateValues(Constants.EDIT_RACE_UPDATE)
                         raceViewModel.update(race)
                     }
-                    resources.getInteger(R.integer.edit_race_new) -> {
-                        race = collateValues(R.integer.edit_race_new)
+                    Constants.EDIT_RACE_NEW -> {
+                        race = collateValues(Constants.EDIT_RACE_NEW)
                         raceViewModel.insert(race)
                     }
-                    resources.getInteger(R.integer.edit_race_copy) -> {
-                        race = collateValues(R.integer.edit_race_copy)
+                    Constants.EDIT_RACE_COPY -> {
+                        race = collateValues(Constants.EDIT_RACE_COPY)
                         raceViewModel.insert(race)
                     }
                 }
@@ -157,16 +158,16 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
         when(action) {
             // Update.
-            R.integer.edit_race_update -> {
+            Constants.EDIT_RACE_UPDATE -> {
                 race.id = raceId
                 race.raceDate = raceDate
             }
             // Insert as New.
-            R.integer.edit_race_new -> {
+            Constants.EDIT_RACE_NEW -> {
                 race.raceDate = RaceTime.getInstance().getFormattedDateTime(RaceTime.DATE)
             }
             // Insert as Copy.
-            R.integer.edit_race_copy -> {
+            Constants.EDIT_RACE_COPY -> {
                 race.raceDate = raceDate
             }
         }
@@ -264,10 +265,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
         // Get Race id if update or copy.
         when(editType) {
-            resources.getInteger(R.integer.edit_race_update) -> {
+            Constants.EDIT_RACE_UPDATE -> {
                 raceId = arguments?.getLong(getString(R.string.key_edit_existing))
             }
-            resources.getInteger(R.integer.edit_race_copy) -> {
+            Constants.EDIT_RACE_COPY -> {
                 raceId = arguments?.getLong(getString(R.string.key_edit_copy))
             }
         }
@@ -276,7 +277,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
         // If not a new Race object (it's id wouldn't exist yet), observe changes.
-        if(editType != resources.getInteger(R.integer.edit_race_new)) {
+        if(editType != Constants.EDIT_RACE_NEW) {
             val race = raceViewModel.getRace(raceId!!)
             race.observe(viewLifecycleOwner, RaceObserver(race, view))
         }
@@ -288,18 +289,18 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      */
     private fun setupForEditType() {
         when(editType) {
-            resources.getInteger(R.integer.edit_race_update) -> {
+            Constants.EDIT_RACE_UPDATE -> {
                 toolBar.title = getString(R.string.edit_race)
                 btnSave.text = getString(R.string.lbl_update)
                 // save local copy of Race date.
                 getRaceDate(raceId!!)
             }
-            resources.getInteger(R.integer.edit_race_new) -> {
+            Constants.EDIT_RACE_NEW -> {
                 toolBar.title = getString(R.string.new_race)
                 btnSave.text = getString(R.string.lbl_save)
                 btnTime.text = RaceTime.getInstance().getFormattedDateTime(RaceTime.TIME)
             }
-            resources.getInteger(R.integer.edit_race_copy) -> {
+            Constants.EDIT_RACE_COPY -> {
                 toolBar.title = getString(R.string.copy_race)
                 btnSave.text = getString(R.string.lbl_copy)
                 // save local copy of Race date.
