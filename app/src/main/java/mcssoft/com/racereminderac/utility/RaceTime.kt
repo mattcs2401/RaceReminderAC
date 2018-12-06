@@ -108,11 +108,11 @@ class RaceTime {
         calendar.timeInMillis = givenTime
 
         if(isBefore(calendar)) {
-            retVar = -1
+            retVar = Constants.BEFORE
         } else if(isEqual(calendar)) {
-            retVar = 0
+            retVar = Constants.SAME
         } else if(isAfter(calendar)) {
-            retVar = 1
+            retVar = Constants.AFTER
         }
         return retVar
     }
