@@ -1,8 +1,6 @@
 package mcssoft.com.racereminderac.model
 
 import androidx.lifecycle.LiveData
-
-
 import androidx.lifecycle.Observer
 import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.entity.Race
@@ -14,7 +12,9 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
     override fun onChanged(lRaces: MutableList<Race>?) {
         if(lRaces != null) {
             if (lRaces.size > 1) { lRaces.sort() }
+
             raceTime = RaceTime.getInstance()
+
             timeCheck(lRaces)
 
             adapter.swapData(lRaces as ArrayList<Race>)

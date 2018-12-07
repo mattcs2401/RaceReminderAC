@@ -24,8 +24,8 @@ interface RaceDAO {
     @Query("delete from race_details where _id = :id")
     fun deleteRace(id: Long): Int
 
-    @Query("select count(*) from race_details")
-    fun getCountRaces(): Int
+//    @Query("select count(*) from race_details")
+//    fun getCountRaces(): Int
 
     @Query("select * from race_details where _id = :id")
     fun getRaceLD(id: Long): LiveData<Race>
@@ -33,7 +33,7 @@ interface RaceDAO {
     @Query("select * from race_details where _id = :id")
     fun getRaceNoLD(id: Long): Race
 
-    @Query("select * from race_details")
+    @Query("select * from race_details where archvRace = 'N'")
     fun getAllRaces(): LiveData<MutableList<Race>> // Room doesn't know how to construct an ArrayList
 
     @Query("delete from race_details")

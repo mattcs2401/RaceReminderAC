@@ -1,13 +1,11 @@
 package mcssoft.com.racereminderac.model
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import mcssoft.com.racereminderac.background.async.AsyncLD
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.repository.RaceRepository
+import mcssoft.com.racereminderac.utility.Constants
 
 class RaceViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -25,10 +23,10 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getAllRaces(): LiveData<MutableList<Race>> = allRaces
 
-    fun insert(race: Race) = raceRepository.doDatabaseOperation(AsyncLD.INSERT, race)
+    fun insert(race: Race) = raceRepository.doDatabaseOperation(Constants.INSERT, race)
 
-    fun update(race: Race) = raceRepository.doDatabaseOperation(AsyncLD.UPDATE, race)
+    fun update(race: Race) = raceRepository.doDatabaseOperation(Constants.UPDATE, race)
 
-    fun delete(race: Race) = raceRepository.doDatabaseOperation(AsyncLD.DELETE, race)
+    fun delete(race: Race) = raceRepository.doDatabaseOperation(Constants.DELETE, race)
 
 }

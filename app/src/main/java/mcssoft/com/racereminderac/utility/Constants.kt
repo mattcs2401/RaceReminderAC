@@ -23,4 +23,8 @@ object Constants {
     const val DATE: Int = 2                 // get date/time as date only.
     const val TIME_FORMAT_24 = "kk:mm"      // time value is displayed in 24 hour format.
     const val DATE_FORMAT = "dd/MM/yyyy"    // date value display format.
+
+    const val INSERT = 1                    //
+    const val UPDATE = 2                    //
+    const val DELETE = 3                    //
 }

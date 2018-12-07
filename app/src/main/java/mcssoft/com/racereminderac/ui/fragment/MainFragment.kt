@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.main_fragment.view.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
+import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.model.RaceListObserver
@@ -66,7 +67,6 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
 
         val lRaces = raceViewModel.getAllRaces()
         lRaces.observe(viewLifecycleOwner, RaceListObserver(lRaces, raceAdapter))
-
     }
 
     override fun onStart() {
@@ -85,9 +85,7 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        //return super.onOptionsItemSelected(item)
-        Toast.makeText(activity, "Refresh selected", Toast.LENGTH_SHORT).show()
-        raceAdapter.notifyDataSetChanged()
+        klunkyForceChange()
         return true
     }
 
@@ -114,6 +112,13 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
         (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
     }
     //</editor-fold>
+
+    private fun klunkyForceChange() {
+        val race: Race = Race("B","R","1","1","00:00")
+        race.archvRace = "Y"
+        raceViewModel.insert(race)
+        raceViewModel.delete(race)
+    }
 
     private lateinit var rootView: View
     private lateinit var raceAdapter: RaceAdapter
