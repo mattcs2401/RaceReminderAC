@@ -3,6 +3,7 @@ package mcssoft.com.racereminderac.ui.fragment
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +31,6 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         rootView = inflater.inflate(R.layout.main_fragment, container, false)
-
         recyclerView = rootView.id_recyclerView
 
         return rootView
@@ -38,7 +38,8 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val context = this.context
+        //val context = this.context
+        setHasOptionsMenu(true)
 
         raceAdapter = RaceAdapter(activity!!.id_container, activity!!)
         raceAdapter.setClickListener(this)
@@ -77,6 +78,19 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
         super.onStop()
         EventBus.getDefault().unregister(this)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        //super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_refresh, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        //return super.onOptionsItemSelected(item)
+        Toast.makeText(activity, "Refresh selected", Toast.LENGTH_SHORT).show()
+        raceAdapter.notifyDataSetChanged()
+        return true
+    }
+
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: EventBus">

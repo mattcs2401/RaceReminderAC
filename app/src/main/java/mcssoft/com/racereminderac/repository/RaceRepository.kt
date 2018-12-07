@@ -1,6 +1,7 @@
 package mcssoft.com.racereminderac.repository
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.LiveData
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.dao.RaceDAO
@@ -10,11 +11,10 @@ import mcssoft.com.racereminderac.background.async.AsyncNoLD
 
 class RaceRepository(application: Application) {
 
-    private var raceDao: RaceDAO
+    private var raceDao: RaceDAO = RaceDatabase.getInstance(application)!!.raceDao()
     private var allRaces: LiveData<MutableList<Race>>
 
     init {
-        raceDao = RaceDatabase.getInstance(application)!!.raceDao()
         allRaces = raceDao.getAllRaces()
     }
 
