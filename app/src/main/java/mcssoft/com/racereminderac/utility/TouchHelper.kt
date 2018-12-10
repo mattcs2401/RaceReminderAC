@@ -63,7 +63,7 @@ class TouchHelper(context: Context, swipeAction: ISwipe) : ItemTouchHelper.Callb
             return
         }
 
-        background.setColor(backgroundColour)
+        background.color = backgroundColour
         background.setBounds((itemView.right  + dX).toInt(), itemView.top, itemView.right, itemView.bottom)
         background.draw(canvas)
 

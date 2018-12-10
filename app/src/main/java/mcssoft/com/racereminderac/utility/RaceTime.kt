@@ -23,7 +23,7 @@ class RaceTime {
         lateinit var sdFormat: SimpleDateFormat
         val locale = Locale.getDefault()
         val calendar = Calendar.getInstance(locale)
-        calendar.time = Date(calendar.getTimeInMillis())
+        calendar.time = Date(calendar.timeInMillis)
 
         when(which) {
             Constants.TIME -> {
@@ -49,7 +49,7 @@ class RaceTime {
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
         calendar.set(Calendar.MINUTE, minute)
 
-        return calendar.getTimeInMillis()
+        return calendar.timeInMillis
     }
 
     /**
