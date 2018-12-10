@@ -5,7 +5,6 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
-import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.RaceTime
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
 import org.greenrobot.eventbus.EventBus

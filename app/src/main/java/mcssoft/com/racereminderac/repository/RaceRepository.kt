@@ -1,13 +1,12 @@
 package mcssoft.com.racereminderac.repository
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.LiveData
-import mcssoft.com.racereminderac.entity.Race
-import mcssoft.com.racereminderac.dao.RaceDAO
-import mcssoft.com.racereminderac.database.RaceDatabase
 import mcssoft.com.racereminderac.background.async.AsyncLD
 import mcssoft.com.racereminderac.background.async.AsyncNoLD
+import mcssoft.com.racereminderac.dao.RaceDAO
+import mcssoft.com.racereminderac.database.RaceDatabase
+import mcssoft.com.racereminderac.entity.Race
 
 class RaceRepository(application: Application) {
 

@@ -41,6 +41,7 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
                     if(comp == Constants.CURRENT_TIME_SAME ||
                             comp == Constants.CURRENT_TIME_AFTER) {
                         race.metaColour = "2"
+                        postNotification(race)
                     } else {
                         race.metaColour = "1"
                     }
@@ -53,6 +54,16 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
                 }
             }
         }
+    }
+
+    /**
+     * Post a notificatiion that the Race is nearing race time.
+     * @param race: Used to derive notification values.
+     */
+    private fun postNotification(race: Race) {
+        // Race objevct values to WorkerParams.
+
+        val bp = ""
     }
 
     private lateinit var raceTime: RaceTime

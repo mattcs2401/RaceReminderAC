@@ -31,14 +31,14 @@ class TouchHelper(context: Context, swipeAction: ISwipe) : ItemTouchHelper.Callb
         background = ColorDrawable()
         backgroundColour = Color.parseColor("#b80f0a")
         clearPaint = Paint()
-        clearPaint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.CLEAR))
+        clearPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
         deleteDrawable = ContextCompat.getDrawable(context, R.drawable.ic_delete)!!
         intrinsicWidth = deleteDrawable.intrinsicWidth
         intrinsicHeight = deleteDrawable.intrinsicHeight
     }
 
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-        return makeMovementFlags(0, ItemTouchHelper.LEFT);
+        return makeMovementFlags(0, ItemTouchHelper.LEFT)
     }
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {

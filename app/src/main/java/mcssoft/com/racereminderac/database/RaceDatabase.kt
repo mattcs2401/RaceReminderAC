@@ -20,7 +20,7 @@ abstract class RaceDatabase : RoomDatabase() {
         fun getInstance(context: Context): RaceDatabase? {
             if (instance == null) {
                 synchronized(RaceDatabase::class) {
-                    instance = Room.databaseBuilder(context.getApplicationContext(),
+                    instance = Room.databaseBuilder(context.applicationContext,
                             RaceDatabase::class.java, "Races.db")
                             .build()
                 }
