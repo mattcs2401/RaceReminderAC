@@ -4,7 +4,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import androidx.core.app.NotificationCompat
-import androidx.work.Operation
 import androidx.work.Result
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -21,8 +20,15 @@ class NotifyWorker(context: Context, workerParams: WorkerParameters) : Worker(co
     }
 
     override fun doWork(): Result {
+        val map = inputData.keyValueMap
+        val cc = map.get("key_cc").toString()
+        val rc  = map.get("key_rc").toString()
+        val rn  = map.get("key_rn").toString()
+        val rs  = map.get("key_rs").toString()
+        val rt  = map.get("key_rt").toString()
+
         try {
-            sendNotification("Testing", "A testing message.")
+            sendNotification("Nearing Race time.", "$cc$rc $rn $rs $rt")
             return Result.success()
         } catch (ex: Exception) {
             return Result.failure()

@@ -2,7 +2,12 @@ package mcssoft.com.racereminderac.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkerParameters
 import mcssoft.com.racereminderac.adapter.RaceAdapter
+import mcssoft.com.racereminderac.background.worker.NotifyWorker
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceTime
@@ -57,13 +62,21 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
     }
 
     /**
-     * Post a notificatiion that the Race is nearing race time.
+     * Post a notification that the Race is nearing race time.
      * @param race: Used to derive notification values.
      */
     private fun postNotification(race: Race) {
-        // Race objevct values to WorkerParams.
+        val data = Data.Builder()
+                .putAll(mapOf("key_cc" to race.cityCode,
+                        "key_rc" to race.raceCode,
+                        "key_rn" to race.raceNum,
+                        "key_rs" to race.raceSel,
+                        "key_rt" to race.raceTimeS)).build()
 
-        val bp = ""
+        val notifyWork = OneTimeWorkRequestBuilder<NotifyWorker>()
+                .setInputData(data)
+                .build()
+        WorkManager.getInstance().enqueue(notifyWork)
     }
 
     private lateinit var raceTime: RaceTime
