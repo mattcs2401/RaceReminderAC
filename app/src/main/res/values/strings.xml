@@ -24,6 +24,9 @@
     <string name="lbl_copy">Copy</string>
     <string name="lbl_update">Update</string>
 
+    <!-- Menu labels. -->
+    <string name="lbl_refresh">Refresh</string>
+
     <!-- Keys. -->
     <string name="key_general">key</string>
     <string name="key_edit_type">edit_type</string>

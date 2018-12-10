@@ -1,6 +1,5 @@
 package mcssoft.com.racereminderac.background.worker
 
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Bundle
@@ -13,7 +12,7 @@ import androidx.work.WorkerParameters
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
 
-class NotifyWorker(private val context: Context, private val workerParams: WorkerParameters) : Worker(context, workerParams) {
+class NotifyWorker(private val context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 // TODO - "fancy" up the notification.
 
     override fun doWork(): Result {

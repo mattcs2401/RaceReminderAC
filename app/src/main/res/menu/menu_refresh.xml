@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ui.MainFragment">
     <item android:id="@+id/id_refresh"
-        android:title="Refresh"
+        android:title="@string/lbl_refresh"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"/>
 </menu>

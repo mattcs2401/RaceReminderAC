@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import androidx.work.WorkerParameters
 import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.background.worker.NotifyWorker
 import mcssoft.com.racereminderac.entity.Race
@@ -13,6 +12,12 @@ import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceTime
 
 class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter: RaceAdapter) : Observer<MutableList<Race>> {
+
+    private var lIds: ArrayList<Long>
+
+    init {
+        lIds = ArrayList()
+    }
 
     override fun onChanged(lRaces: MutableList<Race>?) {
         if(lRaces != null) {
@@ -66,18 +71,25 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
      * @param race: Used to derive notification values.
      */
     private fun postNotification(race: Race) {
-        val data = Data.Builder()
-                .putAll(mapOf("key_id" to race.id,
-                        "key_cc" to race.cityCode,
-                        "key_rc" to race.raceCode,
-                        "key_rn" to race.raceNum,
-                        "key_rs" to race.raceSel,
-                        "key_rt" to race.raceTimeS)).build()
+        // Notes: add the object id to a list, so we don't process again.
+        val id = race.id
+//        if(!lIds.contains(id)) {
 
-        val notifyWork = OneTimeWorkRequestBuilder<NotifyWorker>()
-                .setInputData(data)
-                .build()
-        WorkManager.getInstance().enqueue(notifyWork)
+//            lIds.add(id!!)
+
+            val data = Data.Builder()
+                    .putAll(mapOf("key_id" to id,
+                            "key_cc" to race.cityCode,
+                            "key_rc" to race.raceCode,
+                            "key_rn" to race.raceNum,
+                            "key_rs" to race.raceSel,
+                            "key_rt" to race.raceTimeS)).build()
+
+            val notifyWork = OneTimeWorkRequestBuilder<NotifyWorker>()
+                    .setInputData(data)
+                    .build()
+            WorkManager.getInstance().enqueue(notifyWork)
+//        }
     }
 
     private lateinit var raceTime: RaceTime

@@ -124,7 +124,5 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var recyclerView: RecyclerView
 
-    private lateinit var notifyWork: PeriodicWorkRequest
-
 }
 
