@@ -58,18 +58,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, IRace.IRaceSelec
     }
     //</editor-fold>
 
-    private fun setupBottomNavMenu(navController: NavController) {
-        // TBA.
+//    private fun setupBottomNavMenu(navController: NavController) {
+//        // TBA.
 //        findViewById<BottomNavigationView>(R.id.bottom_nav_view)?.let { bottomNavView ->
 //            NavigationUI.setupWithNavController(bottomNavView, navController)
 //        }
-    }
+//    }
 
     private fun initialise() {
         // Toolbar.
         setSupportActionBar(id_toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // FAB
         id_fab.setOnClickListener(this)

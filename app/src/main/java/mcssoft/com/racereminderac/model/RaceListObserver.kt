@@ -67,7 +67,8 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
      */
     private fun postNotification(race: Race) {
         val data = Data.Builder()
-                .putAll(mapOf("key_cc" to race.cityCode,
+                .putAll(mapOf("key_id" to race.id,
+                        "key_cc" to race.cityCode,
                         "key_rc" to race.raceCode,
                         "key_rn" to race.raceNum,
                         "key_rs" to race.raceSel,
