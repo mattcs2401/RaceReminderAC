@@ -13,11 +13,11 @@ import mcssoft.com.racereminderac.utility.RaceTime
 
 class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter: RaceAdapter) : Observer<MutableList<Race>> {
 
-    private var lIds: ArrayList<Long>
-
-    init {
-        lIds = ArrayList()
-    }
+//    private var lIds: ArrayList<Long>
+//
+//    init {
+//        lIds = ArrayList()
+//    }
 
     override fun onChanged(lRaces: MutableList<Race>?) {
         if(lRaces != null) {
