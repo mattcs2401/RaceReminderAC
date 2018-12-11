@@ -17,21 +17,22 @@ class NotifyWorker(private val context: Context, workerParams: WorkerParameters)
 
     override fun doWork(): Result {
         val map = inputData.keyValueMap
-        val id = map.get("key_id") as Long       // object id passed in the arguments to the fragment.
-        val cc = map.get("key_cc") as String    // city code, notification display purposes.
-        val rc  = map.get("key_rc") as String   // race code, notification display purposes.
-        val rn  = map.get("key_rn") as String   // race num, notification display purposes.
-        val rs  = map.get("key_rs") as String   // race set, notification display purposes.
-        val rt  = map.get("key_rt") as String   // race time, notification display purposes.
+        val id = map["key_id"] as Long       // object id passed in the arguments to the fragment.
+        val cc = map["key_cc"] as String    // city code, notification display purposes.
+        val rc  = map["key_rc"] as String   // race code, notification display purposes.
+        val rn  = map["key_rn"] as String   // race num, notification display purposes.
+        val rs  = map["key_rs"] as String   // race set, notification display purposes.
+        val rt  = map["key_rt"] as String   // race time, notification display purposes.
 
         try {
             sendNotification("Nearing Race time.", "$cc$rc $rn $rs $rt", id)
-            return Result.success()
+//            return Result.success()
         } catch (ex: Exception) {
             return Result.failure()
         } finally {
             // TBA
         }
+        return Result.success()
     }
 
     private fun sendNotification(title: String, message: String, id: Long) {

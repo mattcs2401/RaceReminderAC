@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.work.PeriodicWorkRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_fragment.view.*
@@ -113,7 +112,7 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
     //</editor-fold>
 
     private fun klunkyForceChange() {
-        val race: Race = Race("B","R","1","1","00:00")
+        val race = Race("B","R","1","1","00:00")
         race.archvRace = "Y"
         raceViewModel.insert(race)
         raceViewModel.delete(race)

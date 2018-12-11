@@ -49,7 +49,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
 //    override fun onActivityCreated(savedInstanceState: Bundle?) {
 //        super.onActivityCreated(savedInstanceState)
-//        // Get the argumnets (if exist).
+//        // Get the arguments (if exist).
 //        if(arguments != null) {
 //            editType = arguments?.getInt(getString(R.string.key_edit_type))
 //            setForEditType(editType!!)
@@ -134,7 +134,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     override fun onValueChange(picker: NumberPicker, oldVal: Int, newVal: Int) {
         if(picker.id == R.id.id_np_race_code) {
             // greyhound race only has 8 runners.
-            if (picker.displayedValues[newVal].equals("G")) {
+            if (picker.displayedValues[newVal] == "G") {
                 npRaceSel.maxValue = rsVals.size - 17
             } else {
                 npRaceSel.maxValue = rsVals.size - 1
@@ -149,10 +149,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      */
     private fun collateValues(action: Int): Race {
         // Get the base values.
-        val race = Race(ccVals.get(npCityCode.value),
-                rcVals.get(npRaceCode.value),
-                rnVals.get(npRaceNo.value),
-                rsVals.get(npRaceSel.value),
+        val race = Race(ccVals[npCityCode.value],
+                rcVals[npRaceCode.value],
+                rnVals[npRaceNo.value],
+                rsVals[npRaceSel.value],
                 btnTime.text.toString())
         race.raceTimeL = raceTimeL
 
@@ -190,7 +190,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         timePickDialog.show(fragTrans, getString(R.string.tp_tag))
     }
 
-    fun getRaceDate(id: Long) {
+    private fun getRaceDate(id: Long) {
         // Note: "returns" via EventBus.
         raceViewModel.getRaceNoLD(id)
     }

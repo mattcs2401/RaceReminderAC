@@ -77,7 +77,7 @@ class RaceTime {
      *          1: the current time is after that given.
      */
     internal fun compareTo(givenTime: Long) : Int {
-        var retVar: Int = 99
+        var retVar = 99
         val calendar = Calendar.getInstance(Locale.getDefault())
         calendar.timeInMillis = givenTime
 
@@ -112,6 +112,6 @@ class RaceTime {
      * @param cal: The calendar to compare.
      */
     private fun isEqual(cal: Calendar): Boolean {
-        return Calendar.getInstance(Locale.getDefault()).equals(cal)
+        return Calendar.getInstance(Locale.getDefault()) == cal
     }
 }

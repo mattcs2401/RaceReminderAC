@@ -41,7 +41,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
 
     override fun onBindViewHolder(holder : RaceViewHolder, position : Int) {
         if (!isEmptyView) {
-            val race = lRaces.get(position)
+            val race = lRaces[position]
 
             holder.tvCityCode.text = race.cityCode
             holder.tvRaceCode.text = race.raceCode
@@ -118,13 +118,13 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
      * @param lPos: The adapter position (0 based).
      * @return The Race object.
      */
-    internal fun getRace(lPos : Int) : Race = lRaces.get(lPos)
+    internal fun getRace(lPos : Int) : Race = lRaces[lPos]
 
     /**
      * Remove a Race from the listing.
      * @param lPos: The position in the listing.
      */
-    internal fun deleteRace(lPos: Int) {
+    private fun deleteRace(lPos: Int) {
         // keep backup in case of UNDO.
         posUndo = lPos
         raceUndo = lRaces.removeAt(lPos)
@@ -139,7 +139,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
      * @param race: The Race object at time of last UNDO.
      * @param lPos: The position in the list at time of last UNDO.
      */
-    internal fun reinstateRace(race: Race, lPos: Int) {
+    private fun reinstateRace(race: Race, lPos: Int) {
         // put Race back into the list.
         lRaces.add(lPos, race)
         // quick check, last Race removed might have been only one.
@@ -186,7 +186,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
     private lateinit var raceViewHolder: RaceViewHolder    //
     private lateinit var itemTouchHelper: ItemTouchHelper  //
 
-    var raceUndo: Race? = null      // local copy for any UNDO action.
+    private var raceUndo: Race? = null      // local copy for any UNDO action.
     private var posUndo: Int = -1   // "     "    "   "   "    "
     //</editor-fold>
 }

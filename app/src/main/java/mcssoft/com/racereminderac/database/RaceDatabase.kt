@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.dao.RaceDAO
 
-@Database(entities = arrayOf(Race::class), version = 1, exportSchema = false)
+@Database(entities = [Race::class], version = 1, exportSchema = false)
 abstract class RaceDatabase : RoomDatabase() {
 
     internal abstract fun raceDao(): RaceDAO

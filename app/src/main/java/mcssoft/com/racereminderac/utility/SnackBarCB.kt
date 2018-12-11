@@ -29,6 +29,9 @@ class SnackBarCB(race: Race) : Snackbar.Callback() {
         }
     }
 
+    /**
+     * Post the delete message on EventBus.
+     */
     private fun deleteRace() {
         EventBus.getDefault().post(DeleteMessage(race))
     }
