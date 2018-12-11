@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.work.Result
 import androidx.work.Worker
@@ -41,6 +42,7 @@ class NotifyWorker(private val context: Context, workerParams: WorkerParameters)
          * "Compat" methods used primarily as this project has min SDK version of 22.
          * The key is the NavDeepLinkBuilder method to create the pending intent.
          * See: https://proandroiddev.com/android-jetpack-navigation-to-the-rescue-fe588271d36
+         *      https://developer.android.com/training/notify-user/build-notification
          */
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -65,6 +67,8 @@ class NotifyWorker(private val context: Context, workerParams: WorkerParameters)
 
         // Create the notification instance.
         val notification = NotificationCompat.Builder(context, "default")
+//                .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+                .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(message)
