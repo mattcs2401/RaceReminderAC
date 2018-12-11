@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:key="key_maint"
+        app:title="Maintenance">
+
+        <Preference
+            app:key="key_maint_del_archived"
+            app:summary="Delete archived Race records."
+            app:title="Delete Archived"/>
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

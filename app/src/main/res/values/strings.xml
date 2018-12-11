@@ -26,6 +26,7 @@
 
     <!-- Menu labels. -->
     <string name="lbl_refresh">Refresh</string>
+    <string name="lbl_settings">Settings</string>
 
     <!-- Keys. -->
     <string name="key_general">key</string>
