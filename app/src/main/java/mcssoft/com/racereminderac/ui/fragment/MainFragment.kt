@@ -115,7 +115,6 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
         val race = Race("B","R","1","1","00:00")
         race.archvRace = "Y"
         raceViewModel.insert(race)
-        raceViewModel.delete(race)
     }
 
     private lateinit var rootView: View
