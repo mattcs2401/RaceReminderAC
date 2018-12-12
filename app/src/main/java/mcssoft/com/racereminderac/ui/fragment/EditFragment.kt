@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.edit_fragment.*
 import kotlinx.android.synthetic.main.toolbar_base.*
@@ -46,15 +47,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         initialiseUI(rootView)
 
     }
-
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        // Get the arguments (if exist).
-//        if(arguments != null) {
-//            editType = arguments?.getInt(getString(R.string.key_edit_type))
-//            setForEditType(editType!!)
-//        }
-//    }
 
      override fun onStart() {
         super.onStart()
@@ -211,8 +203,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Setup base UI elements.
      */
     private fun setupDisplayElements() {
-        // Hide the FAB.
-        (activity?.findViewById(R.id.id_fab) as FloatingActionButton).hide()
+        // Hide the bottom nav view.
+        (activity?.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.GONE
 
         // Get the toolbar.
         toolBar = activity?.id_toolbar as Toolbar

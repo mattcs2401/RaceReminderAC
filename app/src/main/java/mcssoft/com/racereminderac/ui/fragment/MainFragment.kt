@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.android.synthetic.main.main_fragment.view.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
@@ -37,8 +41,6 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val context = this.context
-        setHasOptionsMenu(true)
 
         raceAdapter = RaceAdapter(activity!!.id_container, activity!!)
         raceAdapter.setClickListener(this)
@@ -55,11 +57,12 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
 
         (activity?.id_toolbar)?.title = getString(R.string.title_race_reminder)
 
-        // If FAB was previously hidden by a New or Edit etc, then show again.
-        val fab = activity?.id_fab as FloatingActionButton
-        if(fab.isOrWillBeHidden) {
-            fab.show()
+        // If bottom nav view was previously hidden by a New or Edit etc, then show again.
+        val bnv = activity?.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView
+        if(bnv.visibility == View.GONE) {
+            bnv.visibility = View.VISIBLE
         }
+
         // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
@@ -76,17 +79,6 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
         super.onStop()
         EventBus.getDefault().unregister(this)
     }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        //super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_refresh, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        klunkyForceChange()
-        return true
-    }
-
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
@@ -117,10 +109,11 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
         raceViewModel.insert(race)
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Private vars.">
     private lateinit var rootView: View
     private lateinit var raceAdapter: RaceAdapter
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var recyclerView: RecyclerView
-
+    //</editor-fold>
 }
 

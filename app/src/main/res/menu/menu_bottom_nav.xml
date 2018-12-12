@@ -5,13 +5,14 @@
     tools:context="ui.MainFragment">
 
     <item android:id="@+id/id_refresh"
-        android:title="@string/lbl_refresh"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/ic_refresh_24px"
+        android:title="@string/lbl_refresh"/>
 
     <item android:id="@+id/id_settings"
-        android:title="@string/lbl_settings"
-        android:orderInCategory="101"
-        app:showAsAction="never"/>
+        android:icon="@drawable/ic_settings_24px"
+        android:title="@string/lbl_settings"/>
 
+    <item android:id="@+id/id_add"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="@string/lbl_add" />
 </menu>

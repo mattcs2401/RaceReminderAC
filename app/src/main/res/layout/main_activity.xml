@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/id_container"
     android:layout_width="match_parent"
@@ -16,20 +17,13 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation" />
 
-    <!-- BottomNavigationView here will co-exist with the FAB. -->
-    <!--<com.google.android.material.bottomnavigation.BottomNavigationView-->
-        <!--android:id="@+id/id_bottom_nav_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/id_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_margin="16dp"
-        app:fabSize="normal"
-        app:rippleColor="@color/colorAccent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/id_bottom_nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:menu="@menu/menu_bottom_nav" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
