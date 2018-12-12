@@ -39,6 +39,6 @@ class TimePickDialog : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
         val raceTime = RaceTime.getInstance().timeToMillis(hourOfDay, minute)
         EventBus.getDefault().post(TimeMessage(raceTime))
-        this.dialog.cancel()
+        this.dialog!!.cancel()
     }
 }

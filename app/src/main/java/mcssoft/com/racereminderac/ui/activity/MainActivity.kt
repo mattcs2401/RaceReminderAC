@@ -55,7 +55,8 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
 
             }
             R.id.id_settings -> {
-
+//                val bundle = Bundle()
+                navController.navigate(R.id.id_settings_fragment) //, bundle)
             }
             R.id.id_add -> {
                 val bundle = Bundle()

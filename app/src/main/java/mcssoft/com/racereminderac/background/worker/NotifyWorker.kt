@@ -1,5 +1,7 @@
 package mcssoft.com.racereminderac.background.worker
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
@@ -43,13 +45,13 @@ class NotifyWorker(private val context: Context, workerParams: WorkerParameters)
          * See: https://proandroiddev.com/android-jetpack-navigation-to-the-rescue-fe588271d36
          *      https://developer.android.com/training/notify-user/build-notification
          */
-//        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
 //        //If on Oreo then notification requires a notification channel.
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-//            val channel = NotificationChannel("default", "Default", NotificationManager.IMPORTANCE_DEFAULT)
-//            notificationManager.createNotificationChannel(channel)
-//        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val channel = NotificationChannel("default", "Default", NotificationManager.IMPORTANCE_DEFAULT)
+            notificationManager.createNotificationChannel(channel)
+        }
 
         // Prepare the arguments to pass in the notification.
         val arguments = Bundle().apply {
@@ -65,7 +67,7 @@ class NotifyWorker(private val context: Context, workerParams: WorkerParameters)
                 .createPendingIntent()
 
         // Create the notification instance.
-        val notification = NotificationCompat.Builder(context, "1")
+        val notification = NotificationCompat.Builder(context, "default")
 //                .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -76,7 +78,7 @@ class NotifyWorker(private val context: Context, workerParams: WorkerParameters)
                 .build()
 
         // Display the notification.
-        NotificationManagerCompat.from(context).notify(10, notification)
-//        notificationManager.notify(1, notification.build())
+//        NotificationManagerCompat.from(context).notify(10, notification)
+        notificationManager.notify(1, notification)//.build())
     }
 }
