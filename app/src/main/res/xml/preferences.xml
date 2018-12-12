@@ -8,8 +8,8 @@
 
         <Preference
             app:key="key_maint_del_archived"
-            app:summary="Delete archived Race records."
-            app:title="Delete Archived"/>
+            app:title="Delete Archived"
+            app:summary="Delete archived Race records."/>
 
     </PreferenceCategory>
 

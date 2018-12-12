@@ -39,4 +39,6 @@ interface RaceDAO {
     @Query("delete from race_details")
     fun deleteAll()
 
+    @Query("delete from race_details where archvRace = 'Y'")
+    fun deleteAllArchived()
 }

@@ -84,11 +84,11 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
                             "key_rn" to race.raceNum,
                             "key_rs" to race.raceSel,
                             "key_rt" to race.raceTimeS)).build()
+        val notifyWork = OneTimeWorkRequestBuilder<NotifyWorker>()
+                .setInputData(data)
+                .build()
+        WorkManager.getInstance().enqueue(notifyWork)
 
-            val notifyWork = OneTimeWorkRequestBuilder<NotifyWorker>()
-                    .setInputData(data)
-                    .build()
-            WorkManager.getInstance().enqueue(notifyWork)
 //        }
     }
 

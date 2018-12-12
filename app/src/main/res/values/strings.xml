@@ -12,6 +12,7 @@
     <string name="edit_race">Edit Race</string>
     <string name="new_race">New Race</string>
     <string name="copy_race">Copy Race</string>
+    <string name="preferences">Preferences</string>
 
     <!-- ActionBar title. -->
     <string name="title_race_reminder">Race Reminder</string>
