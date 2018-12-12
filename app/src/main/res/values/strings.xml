@@ -41,6 +41,9 @@
     <!-- Recycler view empty message.-->
     <string name="nothing_to_show">Nothing to show.</string>
 
+    <!-- Notification. -->
+    <string name="nearing_race_time">Nearing race time</string>
+
     <!-- CityCodes array. -->
     <string-array name="cityCodes">
         <item>A</item>
