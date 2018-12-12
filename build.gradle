@@ -9,7 +9,7 @@ buildscript {
         workVer = "1.0.0-alpha12"
         xCycleVer = "2.0.0"
         xAnnotVer = "1.0.0"
-        xAppComVer = "1.0.2"
+        xAppComVer = "1.1.0-alpha01"
         xConstLayVer = "1.1.3"
     }
 
