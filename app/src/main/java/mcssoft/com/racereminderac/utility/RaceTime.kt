@@ -81,12 +81,10 @@ class RaceTime {
         val calendar = Calendar.getInstance(Locale.getDefault())
         calendar.timeInMillis = givenTime
 
-        if(isBefore(calendar)) {
-            retVar = Constants.CURRENT_TIME_BEFORE
-        } else if(isAfter(calendar)) {
-            retVar = Constants.CURRENT_TIME_AFTER
-        } else if(isEqual(calendar)) {
-            retVar = Constants.CURRENT_TIME_SAME
+        when {
+            isBefore(calendar) -> retVar = Constants.CURRENT_TIME_BEFORE
+            isAfter(calendar) -> retVar = Constants.CURRENT_TIME_AFTER
+            isEqual(calendar) -> retVar = Constants.CURRENT_TIME_SAME
         }
         return retVar
     }
