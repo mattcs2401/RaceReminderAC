@@ -91,25 +91,25 @@ class RaceTime {
 
     /**
      * Wrapper for Calendar.isBefore()
-     * @param cal: The calendar to compare.
+     * @param calendar: The calendar to compare.
      */
-    private fun isBefore(cal: Calendar) : Boolean {
-        return Calendar.getInstance(Locale.getDefault()).before(cal)
+    private fun isBefore(calendar: Calendar) : Boolean {
+        return Calendar.getInstance(Locale.getDefault()).before(calendar)
     }
 
     /**
      * Wrapper for Calendar.isAfter()
-     * @param cal: The calendar to compare.
+     * @param calendar: The calendar to compare.
      */
-    private fun isAfter(cal: Calendar) : Boolean {
-        return Calendar.getInstance(Locale.getDefault()).after(cal)
+    private fun isAfter(calendar: Calendar) : Boolean {
+        return Calendar.getInstance(Locale.getDefault()).after(calendar)
     }
 
     /**
      * Wrapper for Calendar.isEqual()
-     * @param cal: The calendar to compare.
+     * @param calendar: The calendar to compare.
      */
-    private fun isEqual(cal: Calendar): Boolean {
-        return Calendar.getInstance(Locale.getDefault()) == cal
+    private fun isEqual(calendar: Calendar): Boolean {
+        return Calendar.getInstance(Locale.getDefault()) == calendar
     }
 }

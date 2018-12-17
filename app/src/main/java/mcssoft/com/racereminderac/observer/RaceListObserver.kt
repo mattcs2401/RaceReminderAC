@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.model
+package mcssoft.com.racereminderac.observer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer

@@ -3,6 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
+        app:key="key_defaults"
+        app:title="Defaults">
+
+        <ListPreference
+            app:key="key_race_code_pref"
+            app:title="Default Race Code" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         app:key="key_maint"
         app:title="Maintenance">
 

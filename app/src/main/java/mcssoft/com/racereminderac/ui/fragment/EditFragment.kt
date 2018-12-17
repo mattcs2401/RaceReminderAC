@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.edit_fragment.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
-import mcssoft.com.racereminderac.model.RaceObserver
+import mcssoft.com.racereminderac.observer.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import mcssoft.com.racereminderac.utility.Constants

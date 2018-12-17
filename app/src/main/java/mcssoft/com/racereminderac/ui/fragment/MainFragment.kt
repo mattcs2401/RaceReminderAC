@@ -18,7 +18,7 @@ import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.interfaces.ISelect
-import mcssoft.com.racereminderac.model.RaceListObserver
+import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.utility.TouchHelper
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage

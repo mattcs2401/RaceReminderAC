@@ -12,7 +12,7 @@
         android:id="@+id/id_tv_city_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/city_code"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
