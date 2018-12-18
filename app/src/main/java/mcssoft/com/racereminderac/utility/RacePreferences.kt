@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
+/**
+ * Utility wrapper class for the SharedPreferences.
+ */
 class RacePreferences {
 
     companion object {
