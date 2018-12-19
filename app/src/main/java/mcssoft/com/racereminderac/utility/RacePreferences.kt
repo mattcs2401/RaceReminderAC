@@ -2,6 +2,7 @@ package mcssoft.com.racereminderac.utility
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import mcssoft.com.racereminderac.R
 
 /**
  * Utility wrapper class for the SharedPreferences.
@@ -25,11 +26,13 @@ class RacePreferences {
     }
 
     fun getDefaultRaceCode(context: Context): String? {
-        return PreferenceManager.getDefaultSharedPreferences(context).getString("key_race_code_pref", "R")
+        val key = context.resources.getString(R.string.key_race_code_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null) //"R")
     }
 
     fun getDefaultCityCode(context: Context): String? {
-        return PreferenceManager.getDefaultSharedPreferences(context).getString("key_city_code_pref", "B")
+        val key = context.resources.getString(R.string.key_city_code_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null) //"B")
     }
 
     /**
@@ -37,15 +40,18 @@ class RacePreferences {
      * @param context: Activity context.
      */
     fun preferencesCheck(context: Context) {
+        val keyRaceCode = context.resources.getString(R.string.key_race_code_pref)
+        val keyCityCode = context.resources.getString(R.string.key_city_code_pref)
+
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
 
-        if(!map.contains("key_race_code_pref")) {
-            sharedPrefs.edit().putString("key_race_code_pref", "R").apply()
+        if(!map.contains(keyRaceCode)) {
+            sharedPrefs.edit().putString(keyRaceCode, "R").apply()
         }
 
-        if(!map.contains("key_city_code_pref")) {
-            sharedPrefs.edit().putString("key_city_code_pref", "B").apply()
+        if(!map.contains(keyCityCode)) {
+            sharedPrefs.edit().putString(keyCityCode, "B").apply()
         }
     }
 

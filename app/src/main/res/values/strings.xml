@@ -35,12 +35,20 @@
     <string name="key_edit_type">edit_type</string>
     <string name="key_edit_existing">edit_existing</string>
     <string name="key_edit_copy">edit_copy</string>
+    <string name="key_maint_del_archv">key_maint_del_archived</string>
+    <string name="key_race_code_pref">key_race_code_pref</string>
+    <string name="key_city_code_pref">key_city_code_pref</string>
 
     <!-- Snackbar. -->
     <string name="sb_show">Show</string>
 
     <!-- Recycler view empty message.-->
     <string name="nothing_to_show">Nothing to show.</string>
+
+    <!-- Preferences Toast messages. -->
+    <string name="race_code_msg">Default Race Code changed to</string>
+    <string name="city_code_msg">Default City Code changed to</string>
+    <string name="arch_removal_msg">Archived records removed.</string>
 
     <!-- Notification. -->
     <string name="nearing_race_time">Nearing race time</string>
