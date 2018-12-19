@@ -1,7 +1,6 @@
 package mcssoft.com.racereminderac.utility
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 /**
@@ -10,16 +9,24 @@ import android.preference.PreferenceManager
 class RacePreferences {
 
     companion object {
+        @Volatile private var instance: RacePreferences? = null
 
-        @Volatile private var instance: SharedPreferences? = null
-
-        fun getInstance(context: Context): SharedPreferences? {
+        fun getInstance(): RacePreferences? {
             if (instance == null) {
                 synchronized(RacePreferences::class) {
-                    instance = PreferenceManager.getDefaultSharedPreferences(context)
+                    instance = RacePreferences()
                 }
             }
             return instance
+        }
+    }
+
+    fun preferencesCheck(context: Context) {
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val map = sharedPrefs.all
+
+        if(!map.contains("key_race_code_pref")) {
+            sharedPrefs.edit().putString("key_race_code_pref", "R").apply()
         }
     }
 

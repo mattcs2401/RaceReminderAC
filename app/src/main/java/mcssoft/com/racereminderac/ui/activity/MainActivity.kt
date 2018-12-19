@@ -12,12 +12,15 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.RacePreferences
 
 class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSelect, BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
+        RacePreferences.getInstance()!!.preferencesCheck(this)
 
         initialise()
     }

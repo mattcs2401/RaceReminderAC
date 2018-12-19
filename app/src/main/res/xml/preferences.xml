@@ -8,7 +8,10 @@
 
         <ListPreference
             app:key="key_race_code_pref"
-            app:title="Default Race Code" />
+            app:title="Default Race Code"
+            app:summary="Select default Race Code."
+            app:entries="@array/raceCodes"
+            app:entryValues="@array/raceCodesVals" />
 
     </PreferenceCategory>
 
