@@ -23,6 +23,7 @@ import mcssoft.com.racereminderac.observer.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.RaceTime
 import mcssoft.com.racereminderac.utility.eventbus.RaceMessage
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
@@ -215,6 +216,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         npCityCode.maxValue = ccVals.size - 1
         npCityCode.displayedValues = ccVals
         npCityCode.wrapSelectorWheel = true
+        npCityCode.value = ccVals.indexOf(RacePreferences.getInstance()?.getDefaultCityCode(activity!!))
 
         npRaceCode = id_np_race_code
         rcVals = resources.getStringArray(R.array.raceCodes)
@@ -223,6 +225,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         npRaceCode.displayedValues = rcVals
         npRaceCode.wrapSelectorWheel = true
         npRaceCode.setOnValueChangedListener(this)
+        npRaceCode.value = rcVals.indexOf(RacePreferences.getInstance()?.getDefaultRaceCode(activity!!))
 
         npRaceNo = id_np_race_num
         rnVals = resources.getStringArray(R.array.raceNum)
