@@ -12,7 +12,16 @@ import java.util.Date
 class RaceTime {
 
     companion object {
-        fun getInstance(): RaceTime = RaceTime()
+        @Volatile private var instance: RaceTime? = null
+
+        fun getInstance(): RaceTime? {
+            if (instance == null) {
+                synchronized(RaceTime::class) {
+                    instance = RaceTime()
+                }
+            }
+            return instance
+        }
     }
 
     /**

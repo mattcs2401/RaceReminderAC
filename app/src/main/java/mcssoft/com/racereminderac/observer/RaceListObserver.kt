@@ -23,7 +23,7 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
         if(lRaces != null) {
             if (lRaces.size > 1) { lRaces.sort() }
 
-            raceTime = RaceTime.getInstance()
+            raceTime = RaceTime.getInstance()!!
 
             timeCheck(lRaces)
 

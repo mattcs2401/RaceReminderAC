@@ -25,18 +25,26 @@ class RacePreferences {
         }
     }
 
+    /**
+     * Get the default Race Code from the preferences.
+     * @param context: Activity context.
+     */
     fun getDefaultRaceCode(context: Context): String? {
         val key = context.resources.getString(R.string.key_race_code_pref)
         return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null) //"R")
     }
 
+    /**
+     * Get the default City Code from the preferences.
+     * @param context: Activity context.
+     */
     fun getDefaultCityCode(context: Context): String? {
         val key = context.resources.getString(R.string.key_city_code_pref)
         return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null) //"B")
     }
 
     /**
-     * Check that default preference values exist.
+     * Check that default preference values exist, and if not, then set them.
      * @param context: Activity context.
      */
     fun preferencesCheck(context: Context) {
