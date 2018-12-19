@@ -21,6 +21,14 @@ class RacePreferences {
         }
     }
 
+    fun getDefaultRaceCode(context: Context): String {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString("key_race_code_pref", "R")
+    }
+
+    /**
+     * Check that default preference values exist.
+     * @param context: Activity context.
+     */
     fun preferencesCheck(context: Context) {
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
