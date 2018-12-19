@@ -13,6 +13,13 @@
             app:entries="@array/raceCodes"
             app:entryValues="@array/raceCodesVals" />
 
+        <ListPreference
+            app:key="key_city_code_pref"
+            app:title="Default Race City"
+            app:summary="Select default Race City Code."
+            app:entries="@array/cityCodes"
+            app:entryValues="@array/cityCodesVals" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

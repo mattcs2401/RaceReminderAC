@@ -67,6 +67,28 @@
         <item>Z</item>
     </string-array>
 
+    <!-- Requirement for ListPreference. -->
+    <string-array name="cityCodesVals">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>I</item>
+        <item>L</item>
+        <item>M</item>
+        <item>N</item>
+        <item>O</item>
+        <item>P</item>
+        <item>Q</item>
+        <item>S</item>
+        <item>T</item>
+        <item>V</item>
+        <item>X</item>
+        <item>Z</item>
+    </string-array>
+
     <!-- RaceCodes array. -->
     <string-array name="raceCodes">
         <item>R</item>

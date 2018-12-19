@@ -1,13 +1,16 @@
 package mcssoft.com.racereminderac.utility
 
 import android.content.Context
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 
 /**
  * Utility wrapper class for the SharedPreferences.
  */
 class RacePreferences {
-
+    /**
+     * For Singleton instance.
+     * @Note: Can't use Context here, so context passed into the respective methods.
+     */
     companion object {
         @Volatile private var instance: RacePreferences? = null
 
@@ -21,8 +24,12 @@ class RacePreferences {
         }
     }
 
-    fun getDefaultRaceCode(context: Context): String {
+    fun getDefaultRaceCode(context: Context): String? {
         return PreferenceManager.getDefaultSharedPreferences(context).getString("key_race_code_pref", "R")
+    }
+
+    fun getDefaultCityCode(context: Context): String? {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString("key_city_code_pref", "B")
     }
 
     /**
@@ -35,6 +42,10 @@ class RacePreferences {
 
         if(!map.contains("key_race_code_pref")) {
             sharedPrefs.edit().putString("key_race_code_pref", "R").apply()
+        }
+
+        if(!map.contains("key_city_code_pref")) {
+            sharedPrefs.edit().putString("key_city_code_pref", "B").apply()
         }
     }
 
