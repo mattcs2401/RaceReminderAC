@@ -4,23 +4,31 @@
 
 ** Project notes/comments/etc in no particular order. **
 
-------
-Views:
-------
-1) Update recycler view items (time ?) based on time to Race time.
+-----------
+UNDO issue:
+-----------
+Scenario (1)
+- Insert a new record (R1).
+- Swipe to delete, then Undo.
+- Insert a new record (R2).
 
-------
-Other:
-------
-1) xxx
+Result: When recycler displays, only the most recently added record shows.
 
-----------
-Usability:
-----------
-1) Periodic check (15 mins) on Race start time compared to current time.
+Scenario (2)
+- Insert a new record (R1).
+- Swipe to delete, then Undo.
+  Note: If skip this step, then like scenario (1) above.
+- Insert another record (R2).
+- Swipe to delete R2, then Undo.
 
-2} Preferences, what ?
-    - Maybe just start with a Preference screen and simply add.
+Result: App crashes with array index out of bounds.
 
+-----------------------
+Recycler display issue:
+-----------------------
+When amend record/s from prior days.
 
-
+---------------
+Custom Toolbar:
+---------------
+To display count of items in the recycler.

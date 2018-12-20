@@ -123,9 +123,9 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
         // Put Race back into the list.
         lRaces.add(lPos, race)
         // Quick check, last Race removed might have been only one.
-        if(isEmptyView) {
+//        if(isEmptyView) {
             isEmptyView = false
-        }
+//        }
         // Notify the adapter.
         notifyItemInserted(lPos)
         // Reset values.
