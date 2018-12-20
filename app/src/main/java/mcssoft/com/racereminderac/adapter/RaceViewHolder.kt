@@ -6,24 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.ISelect
 
-class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
+class RaceViewHolder(view : View) : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
 
-    init {
-        if(message != "") {
-            (view.findViewById<View>(R.id.id_tv_empty) as TextView).text = message
-        }
-    }
-
-    constructor(view: View, message: String, itemSelect: ISelect.ItemSelect, itemLongSelect: ISelect.ItemLongSelect) : this(view, message) {
-
+    constructor(view: View, itemSelect: ISelect.ItemSelect, itemLongSelect: ISelect.ItemLongSelect) : this(view) {
         // Set the interface callbacks for select and long select.
         this.itemSelect = itemSelect
         this.itemLongSelect = itemLongSelect
-
         // Set the listener for the View.
         view.setOnClickListener(this)
         view.setOnLongClickListener(this)
-
         // Set the components of the View.
         tvCityCode = view.findViewById(R.id.id_tv_city_code)
         tvRaceCode = view.findViewById(R.id.id_tv_race_code)
@@ -45,6 +36,7 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
         return true
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private lateinit var itemSelect: ISelect.ItemSelect
     private lateinit var itemLongSelect: ISelect.ItemLongSelect
 
@@ -54,4 +46,5 @@ class RaceViewHolder(view : View, message : String) : RecyclerView.ViewHolder(vi
     lateinit var tvRaceSel: TextView
     lateinit var tvRaceTime: TextView
     lateinit var tvRaceDate: TextView
+    //</editor-fold>
 }

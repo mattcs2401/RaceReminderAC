@@ -39,12 +39,6 @@
     <string name="key_race_code_pref">key_race_code_pref</string>
     <string name="key_city_code_pref">key_city_code_pref</string>
 
-    <!-- Snackbar. -->
-    <string name="sb_show">Show</string>
-
-    <!-- Recycler view empty message.-->
-    <string name="nothing_to_show">Nothing to show.</string>
-
     <!-- Preferences Toast messages. -->
     <string name="race_code_msg">Default Race Code changed to</string>
     <string name="city_code_msg">Default City Code changed to</string>

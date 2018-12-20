@@ -1,19 +1,16 @@
 package mcssoft.com.racereminderac.utility
 
 import android.annotation.SuppressLint
+import android.view.View
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import org.greenrobot.eventbus.EventBus
 
-class SnackBarCB(race: Race) : Snackbar.Callback() {
-
-    private var race: Race
-
-    init {
-        this.race = race
-    }
+class SnackBarCB(private val view: View, private val race: Race) : Snackbar.Callback() {
 
     @SuppressLint("SwitchIntDef") // <<-- this because not all events considered.
     override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
@@ -27,6 +24,7 @@ class SnackBarCB(race: Race) : Snackbar.Callback() {
                 deleteRace()
             }
         }
+        reinstateBottomNavView()
     }
 
     /**
@@ -34,5 +32,9 @@ class SnackBarCB(race: Race) : Snackbar.Callback() {
      */
     private fun deleteRace() {
         EventBus.getDefault().post(DeleteMessage(race))
+    }
+
+    private fun reinstateBottomNavView() {
+        (view.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.VISIBLE
     }
 }

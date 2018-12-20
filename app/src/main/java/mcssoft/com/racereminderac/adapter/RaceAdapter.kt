@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
@@ -22,61 +23,40 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
         val view: View?
-        this.viewType = viewType
-
         val inflater = LayoutInflater.from(parent.context)
-
-        when (viewType) {
-            Constants.EMPTY_VIEW -> {
-                view = inflater.inflate(R.layout.row_empty, parent, false)
-                raceViewHolder = RaceViewHolder(view, context.resources.getString(R.string.nothing_to_show))
-            }
-            Constants.RACE_VIEW -> {
-                view = inflater.inflate(R.layout.row_race, parent, false)
-                raceViewHolder = RaceViewHolder(view, "", itemSelect, itemLongSelect)
-            }
-        }
+        view = inflater.inflate(R.layout.row_race, parent, false)
+        raceViewHolder = RaceViewHolder(view, itemSelect, itemLongSelect)
         return raceViewHolder
     }
 
     override fun onBindViewHolder(holder : RaceViewHolder, position : Int) {
-        if (!isEmptyView) {
-            val race = lRaces[position]
+        val race = lRaces[position]
 
-            holder.tvCityCode.text = race.cityCode
-            holder.tvRaceCode.text = race.raceCode
-            holder.tvRaceNo.text = race.raceNum
-            holder.tvRaceSel.text = race.raceSel
-            holder.tvRaceTime.text = race.raceTimeS
-            holder.tvRaceDate.text = race.raceDate
+        holder.tvCityCode.text = race.cityCode
+        holder.tvRaceCode.text = race.raceCode
+        holder.tvRaceNo.text = race.raceNum
+        holder.tvRaceSel.text = race.raceSel
+        holder.tvRaceTime.text = race.raceTimeS
+        holder.tvRaceDate.text = race.raceDate
 
-            when(race.metaColour) {
-                "1" -> {
-                    holder.tvRaceTime.setTextColor(getColor(context, R.color.colorPrimary))
-                    holder.tvRaceDate.setTextColor(getColor(context, R.color.colorPrimary))
-                }
-                "2" -> {
-                    holder.tvRaceTime.setTextColor(getColor(context, R.color.colorOrange))
-                    holder.tvRaceDate.setTextColor(getColor(context, R.color.colorOrange))
-                }
-                "3" -> {
-                    holder.tvRaceTime.setTextColor(getColor(context, R.color.colorAccent))
-                    holder.tvRaceDate.setTextColor(getColor(context, R.color.colorAccent))
-                }
+        when(race.metaColour) {
+            "1" -> {
+                holder.tvRaceTime.setTextColor(getColor(context, R.color.colorPrimary))
+                holder.tvRaceDate.setTextColor(getColor(context, R.color.colorPrimary))
+            }
+            "2" -> {
+                holder.tvRaceTime.setTextColor(getColor(context, R.color.colorOrange))
+                holder.tvRaceDate.setTextColor(getColor(context, R.color.colorOrange))
+            }
+            "3" -> {
+                holder.tvRaceTime.setTextColor(getColor(context, R.color.colorAccent))
+                holder.tvRaceDate.setTextColor(getColor(context, R.color.colorAccent))
             }
         }
     }
     
     override fun getItemCount() : Int {
-        if(isEmptyView) {
-            return 1         // need this to still trigger the onCreateViewHolder.
-        } else {
-            return lRaces.size
-        }
-    }
-
-    override fun getItemViewType(position : Int) : Int {
-        return if (isEmptyView) Constants.EMPTY_VIEW else Constants.RACE_VIEW
+        return lRaces.size
     }
 
     /**
@@ -84,7 +64,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
      */
     override fun onClick(view: View) {
         reinstateRace(raceUndo!!, posUndo)
-        Toast.makeText(anchorView.context, "Race re-instated.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Race re-instated.", Toast.LENGTH_SHORT).show()
     }
 
     /**
@@ -140,13 +120,17 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
      * @param lPos: The position in the list at time of last UNDO.
      */
     private fun reinstateRace(race: Race, lPos: Int) {
-        // put Race back into the list.
+        // Put Race back into the list.
         lRaces.add(lPos, race)
-        // quick check, last Race removed might have been only one.
+        // Quick check, last Race removed might have been only one.
         if(isEmptyView) {
-            isEmptyView = false }
-        // notify the adapter.
+            isEmptyView = false
+        }
+        // Notify the adapter.
         notifyItemInserted(lPos)
+        // Reset values.
+        raceUndo = null
+        posUndo = -1
     }
 
     /**
@@ -160,11 +144,15 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
      * Interface ISwipe.
      */
     override fun onViewSwiped(pos: Int) {
+        // Hide the bottom navigation view, as it hides the SnackBar.
+        (anchorView.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.GONE
+        // Delete from backing data.
         deleteRace(pos)
+        // Do SnackBar.
         EventBus.getDefault().post(DeleteMessage(raceUndo!!))
         val snackBar = Snackbar.make(anchorView, "Item removed.", Snackbar.LENGTH_LONG)
         snackBar.setAction("UNDO", this)
-        snackBar.addCallback(SnackBarCB(raceUndo!!))
+        snackBar.addCallback(SnackBarCB(anchorView, raceUndo!!))
         snackBar.show()
     }
 
@@ -176,7 +164,6 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
     }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
-    private var viewType: Int = -1                         // either EMPTY_VIEW or RACE_VIEW.
     private var isEmptyView: Boolean = false               // flag, view is empty.
     private var lRaces = ArrayList<Race>(0)   // backing data.
 
@@ -187,6 +174,6 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
     private lateinit var itemTouchHelper: ItemTouchHelper  //
 
     private var raceUndo: Race? = null      // local copy for any UNDO action.
-    private var posUndo: Int = -1   // "     "    "   "   "    "
+    private var posUndo: Int = -1           // "     "    "   "   "    "
     //</editor-fold>
 }
