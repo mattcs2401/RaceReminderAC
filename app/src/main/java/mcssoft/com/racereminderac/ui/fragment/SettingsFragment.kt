@@ -65,9 +65,9 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         keyRaceCodePref = activity!!.resources.getString(R.string.key_race_code_pref)
         keyCityCodePref = activity!!.resources.getString(R.string.key_city_code_pref)
         // Set the preferences listeners.
-        findPreference(keyMaintDelArchived).onPreferenceClickListener = this
-        findPreference(keyCityCodePref).onPreferenceChangeListener = this
-        findPreference(keyRaceCodePref).onPreferenceChangeListener = this
+        (findPreference(keyMaintDelArchived) as Preference).onPreferenceClickListener = this
+        (findPreference(keyCityCodePref) as Preference).onPreferenceChangeListener = this
+        (findPreference(keyRaceCodePref) as Preference).onPreferenceChangeListener = this
     }
 
     private lateinit var keyMaintDelArchived: String

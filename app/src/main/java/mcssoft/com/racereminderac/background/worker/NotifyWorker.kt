@@ -10,7 +10,6 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavDeepLinkBuilder
-import androidx.work.Result
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import mcssoft.com.racereminderac.R

@@ -1,7 +1,6 @@
 package mcssoft.com.racereminderac.background.worker
 
 import android.content.Context
-import androidx.work.Result
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import mcssoft.com.racereminderac.database.RaceDatabase
