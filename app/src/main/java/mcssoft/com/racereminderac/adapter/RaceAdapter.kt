@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -14,12 +15,18 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.interfaces.ISwipe
-import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.SnackBarCB
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import org.greenrobot.eventbus.EventBus
 
-class RaceAdapter(private var anchorView: View, private var context: Context) : RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
+/**
+ * The RaceAdapter (for the recycler view in the MainFragment).
+ * @param anchorView: The view to anchor a SnackBar for Undo functionality.
+ * @param countView: A toolbar view to display the count of items in the recycler view.
+ * @param context: Activity level context for general use.
+ */
+class RaceAdapter(private var anchorView: View, private var countView: TextView, private var context: Context) :
+        RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
         val view: View?
@@ -55,12 +62,10 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
         }
     }
     
-    override fun getItemCount() : Int {
-        return lRaces.size
-    }
+    override fun getItemCount() : Int = lRaces.size
 
     /**
-     * OnClick for the Snackbar UNDO.
+     * OnClick for the Snackbar Undo.
      */
     override fun onClick(view: View) {
         reinstateRace(raceUndo!!, posUndo)
@@ -90,6 +95,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
     internal fun swapData(lRaces: ArrayList<Race>) {
         this.lRaces = lRaces
         emptyViewCheck()
+        setCount(lRaces.size)
         notifyDataSetChanged()
     }
 
@@ -123,9 +129,9 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
         // Put Race back into the list.
         lRaces.add(lPos, race)
         // Quick check, last Race removed might have been only one.
-//        if(isEmptyView) {
+        if(isEmptyView) {
             isEmptyView = false
-//        }
+        }
         // Notify the adapter.
         notifyItemInserted(lPos)
         // Reset values.
@@ -161,6 +167,13 @@ class RaceAdapter(private var anchorView: View, private var context: Context) : 
      */
     private fun emptyViewCheck() {
         isEmptyView = lRaces.isEmpty()
+    }
+
+    private fun setCount(count: Int) {
+        if(count == 0) countView.text = "No items"
+        else if(count == 1) countView.text = "1 item"
+        else if (count > 1) countView.text = "$count items"
+        else countView.text = "No items"
     }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
