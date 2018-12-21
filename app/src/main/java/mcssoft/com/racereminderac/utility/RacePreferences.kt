@@ -50,6 +50,7 @@ class RacePreferences {
     fun preferencesCheck(context: Context) {
         val keyRaceCode = context.resources.getString(R.string.key_race_code_pref)
         val keyCityCode = context.resources.getString(R.string.key_city_code_pref)
+        val keyRaceMulti = context.resources.getString(R.string.key_race_multi_pref)
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
@@ -60,6 +61,10 @@ class RacePreferences {
 
         if(!map.contains(keyCityCode)) {
             sharedPrefs.edit().putString(keyCityCode, "B").apply()
+        }
+
+        if(!map.contains(keyRaceMulti)) {
+
         }
     }
 

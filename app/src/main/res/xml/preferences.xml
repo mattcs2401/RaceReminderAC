@@ -23,6 +23,18 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        app:key="key_notif"
+        app:title="Notification">
+
+        <SwitchPreferenceCompat
+            app:key="key_notif_multi"
+            app:defaultValue="false"
+            app:summary="Allow multiple notifications for the same Race."/>
+        <!--app:title="Allow multiple notifications."-->
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         app:key="key_maint"
         app:title="Maintenance">
 
