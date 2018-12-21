@@ -28,7 +28,3 @@ Recycler display issue:
 -----------------------
 When amend record/s from prior days.
 
----------------
-Custom Toolbar:
----------------
-To display count of items in the recycler.

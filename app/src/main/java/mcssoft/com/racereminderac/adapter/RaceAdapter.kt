@@ -65,30 +65,6 @@ class RaceAdapter(private var anchorView: View, private var countView: TextView,
     override fun getItemCount() : Int = lRaces.size
 
     /**
-     * OnClick for the Snackbar Undo.
-     */
-    override fun onClick(view: View) {
-        reinstateRace(raceUndo!!, posUndo)
-        Toast.makeText(context, "Race re-instated.", Toast.LENGTH_SHORT).show()
-    }
-
-    /**
-     * Set the interface ISelect.ItemSelect (when an item in the adapter's listing is selected).
-     * @param itemSelect: The interface.
-     */
-    internal fun setClickListener(itemSelect: ISelect.ItemSelect) {
-        this.itemSelect = itemSelect
-    }
-
-    /**
-     * Set the interface ISelect.ItemLongSelect.
-     * @param itemLongSelect: The interface.
-     */
-    internal fun setLongClickListener(itemLongSelect: ISelect.ItemLongSelect) {
-        this.itemLongSelect = itemLongSelect
-    }
-
-    /**
      * Refresh the backing data.
      * @param lRaces: The list of Race objects that comprise the data.
      */
@@ -107,6 +83,48 @@ class RaceAdapter(private var anchorView: View, private var countView: TextView,
     internal fun getRace(lPos : Int) : Race = lRaces[lPos]
 
     /**
+     * Set the TouchHelper associated with the adapter.
+     */
+    internal fun setTouchHelper(itemTouchHelper: ItemTouchHelper) {
+        this.itemTouchHelper = itemTouchHelper
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="Region: Interface - ISelect">
+    /**
+     * Set the interface ISelect.ItemSelect (when an item in the adapter's listing is selected).
+     * @param itemSelect: The interface.
+     */
+    internal fun setClickListener(itemSelect: ISelect.ItemSelect) {
+        this.itemSelect = itemSelect
+    }
+
+    /**
+     * Set the interface ISelect.ItemLongSelect.
+     * @param itemLongSelect: The interface.
+     */
+    internal fun setLongClickListener(itemLongSelect: ISelect.ItemLongSelect) {
+        this.itemLongSelect = itemLongSelect
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Region: Interface - ISwipe">
+    /**
+     * Interface ISwipe.
+     */
+    override fun onViewSwiped(pos: Int) {
+        // Hide the bottom navigation view, as it hides the SnackBar.
+        (anchorView.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.GONE
+        // Delete from backing data.
+        deleteRace(pos)
+        // Post delete message.
+        EventBus.getDefault().post(DeleteMessage(raceUndo!!))
+        // Do SnackBar.
+        doSnackBar()
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
+    /**
      * Remove a Race from the listing.
      * @param lPos: The position in the listing.
      */
@@ -121,6 +139,30 @@ class RaceAdapter(private var anchorView: View, private var countView: TextView,
     }
 
     /**
+     * Set flag for view is empty of Races to display.
+     */
+    private fun emptyViewCheck() {
+        isEmptyView = lRaces.isEmpty()
+    }
+
+    private fun setCount(count: Int) {
+        if(count == 0) countView.text = "No items"
+        else if(count == 1) countView.text = "1 item"
+        else if (count > 1) countView.text = "$count items"
+        else countView.text = "No items"
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Region: SnackBar and related">
+    /**
+     * OnClick for the Snackbar Undo.
+     */
+    override fun onClick(view: View) {
+        reinstateRace(raceUndo!!, posUndo)
+        Toast.makeText(context, "Race re-instated.", Toast.LENGTH_SHORT).show()
+    }
+
+     /**
      * Re-instate a previously removed Race.
      * @param race: The Race object at time of last UNDO.
      * @param lPos: The position in the list at time of last UNDO.
@@ -139,42 +181,13 @@ class RaceAdapter(private var anchorView: View, private var countView: TextView,
         posUndo = -1
     }
 
-    /**
-     * Set the TouchHelper associated with the adapter.
-     */
-    internal fun setTouchHelper(itemTouchHelper: ItemTouchHelper) {
-        this.itemTouchHelper = itemTouchHelper
-    }
-
-    /**
-     * Interface ISwipe.
-     */
-    override fun onViewSwiped(pos: Int) {
-        // Hide the bottom navigation view, as it hides the SnackBar.
-        (anchorView.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.GONE
-        // Delete from backing data.
-        deleteRace(pos)
-        // Do SnackBar.
-        EventBus.getDefault().post(DeleteMessage(raceUndo!!))
+    private fun doSnackBar() {
         val snackBar = Snackbar.make(anchorView, "Item removed.", Snackbar.LENGTH_LONG)
         snackBar.setAction("UNDO", this)
         snackBar.addCallback(SnackBarCB(anchorView, raceUndo!!))
         snackBar.show()
     }
-
-    /**
-     * Set flag for view is empty of Races to display.
-     */
-    private fun emptyViewCheck() {
-        isEmptyView = lRaces.isEmpty()
-    }
-
-    private fun setCount(count: Int) {
-        if(count == 0) countView.text = "No items"
-        else if(count == 1) countView.text = "1 item"
-        else if (count > 1) countView.text = "$count items"
-        else countView.text = "No items"
-    }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private var isEmptyView: Boolean = false               // flag, view is empty.
