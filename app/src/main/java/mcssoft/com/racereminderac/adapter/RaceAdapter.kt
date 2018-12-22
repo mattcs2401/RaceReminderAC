@@ -47,15 +47,15 @@ class RaceAdapter(private var anchorView: View, private var countView: TextView,
         holder.tvRaceDate.text = race.raceDate
 
         when(race.metaColour) {
-            "1" -> {
+            Constants.META_COLOUR_1 -> {
                 holder.tvRaceTime.setTextColor(getColor(context, R.color.colorPrimary))
                 holder.tvRaceDate.setTextColor(getColor(context, R.color.colorPrimary))
             }
-            "2" -> {
+            Constants.META_COLOUR_2 -> {
                 holder.tvRaceTime.setTextColor(getColor(context, R.color.colorOrange))
                 holder.tvRaceDate.setTextColor(getColor(context, R.color.colorOrange))
             }
-            "3" -> {
+            Constants.META_COLOUR_3 -> {
                 holder.tvRaceTime.setTextColor(getColor(context, R.color.colorAccent))
                 holder.tvRaceDate.setTextColor(getColor(context, R.color.colorAccent))
             }
