@@ -27,7 +27,8 @@ class SnackBarCB(private val view: View, private val race: Race) : Snackbar.Call
                 // TBA
             }
         }
-        reinstateBottomNavView()
+        // Re-instate bottom nav view.
+        (view.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.VISIBLE
     }
 
     /**
@@ -37,7 +38,4 @@ class SnackBarCB(private val view: View, private val race: Race) : Snackbar.Call
         EventBus.getDefault().post(DeleteMessage(race))
     }
 
-    private fun reinstateBottomNavView() {
-        (view.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.VISIBLE
-    }
 }

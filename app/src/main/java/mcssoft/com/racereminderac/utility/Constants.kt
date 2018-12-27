@@ -11,21 +11,20 @@ object Constants {
     const val EDIT_RACE_NEW: Int = 0        // Edit action is for a new Race.
     const val EDIT_RACE_UPDATE: Int = 1     // Edit action is to update/amend a Race.
     const val EDIT_RACE_COPY: Int = 2       // Edit action is to copy a Race.
-    const val EDIT_RACE_DELETE: Int = 3     // TBA
 
-    const val FIVE_MINUTES: Int = 300000    // for a 5 minute window before race time.
-    const val FIFTEEN_MINUTES: Int = 900000 // periodic work request limitation, can't be less.
+    const val FIVE_MINUTES: Int = 300000    // For a 5 minute window before race time.
+    const val FIFTEEN_MINUTES: Int = 900000 // Periodic work request limitation (can't be less).
 
-    const val TIME: Int = 1                 // get date/time as time only.
-    const val DATE: Int = 2                 // get date/time as date only.
-    const val TIME_FORMAT_24 = "kk:mm"      // time value is displayed in 24 hour format.
-    const val DATE_FORMAT = "dd/MM/yyyy"    // date value display format.
+    const val TIME: Int = 1                 // Get date/time as time only.
+    const val DATE: Int = 2                 // Get date/time as date only.
+    const val TIME_FORMAT_24 = "kk:mm"      // Time value is displayed in 24 hour format.
+    const val DATE_FORMAT = "dd/MM/yyyy"    // Date value display format.
 
-    const val INSERT = 1                    //
-    const val UPDATE = 2                    //
-    const val DELETE = 3                    //
+    const val INSERT = 1                    // Signify a Race insert.
+    const val UPDATE = 2                    // Signify a Race update.
+    const val DELETE = 3                    // Signify a Race delete.
 
-    const val META_COLOUR_1 = "1"           //
-    const val META_COLOUR_2 = "2"           //
-    const val META_COLOUR_3 = "3"           //
+    const val META_COLOUR_1 = "1"           // Current time is before Race time.
+    const val META_COLOUR_2 = "2"           // Current time is nearing Race time.
+    const val META_COLOUR_3 = "3"           // Current time is after Race time.
 }

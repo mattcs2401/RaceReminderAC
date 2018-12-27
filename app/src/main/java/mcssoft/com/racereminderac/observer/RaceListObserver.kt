@@ -26,6 +26,7 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
             }
             // time check, even if only one race entry exists.
             timeCheck(lRaces)
+            // set adapter backing data.
             adapter.swapData(lRaces as ArrayList<Race>)
         }
     }

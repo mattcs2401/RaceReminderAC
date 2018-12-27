@@ -116,8 +116,6 @@ class RaceAdapter(private var anchorView: View, private var countView: TextView,
         (anchorView.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.GONE
         // Delete from backing data.
         deleteRace(pos)
-        // Post delete message.
-        EventBus.getDefault().post(DeleteMessage(raceUndo!!))
         // Do SnackBar.
         doSnackBar()
     }

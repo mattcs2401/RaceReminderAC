@@ -27,10 +27,15 @@
         app:title="Notification">
 
         <SwitchPreferenceCompat
-            app:key="key_notif_multi"
+            app:key="key_notif_send"
             app:defaultValue="false"
-            app:summary="Allow multiple notifications for the same Race."/>
-        <!--app:title="Allow multiple notifications."-->
+            app:summary="Send notifications for nearing the Race time." />
+
+        <SwitchPreferenceCompat
+            app:key="key_notif_multi"
+            app:enabled="false"
+            app:defaultValue="false"
+            app:summary="Allow multiple notifications for the same Race." />
 
     </PreferenceCategory>
 
