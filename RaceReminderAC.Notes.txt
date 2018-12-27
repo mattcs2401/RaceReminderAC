@@ -4,25 +4,6 @@
 
 ** Project notes/comments/etc in no particular order. **
 
------------
-UNDO issue:
------------
-Scenario (1)
-- Insert a new record (R1).
-- Swipe to delete, then Undo.
-- Insert a new record (R2).
-
-Result: When recycler displays, only the most recently added record shows.
-
-Scenario (2)
-- Insert a new record (R1).
-- Swipe to delete, then Undo.
-  Note: If skip this step, then like scenario (1) above.
-- Insert another record (R2).
-- Swipe to delete R2, then Undo.
-
-Result: App crashes with array index out of bounds.
-
 -----------------------
 Recycler display issue:
 -----------------------
