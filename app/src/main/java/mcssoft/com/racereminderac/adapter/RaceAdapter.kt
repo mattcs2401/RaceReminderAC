@@ -15,6 +15,7 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.interfaces.ISwipe
+import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.SnackBarCB
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import org.greenrobot.eventbus.EventBus
@@ -29,9 +30,8 @@ class RaceAdapter(private var anchorView: View, private var countView: TextView,
         RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
-        val view: View?
         val inflater = LayoutInflater.from(parent.context)
-        view = inflater.inflate(R.layout.row_race, parent, false)
+        val view = inflater.inflate(R.layout.row_race, parent, false)
         raceViewHolder = RaceViewHolder(view, itemSelect, itemLongSelect)
         return raceViewHolder
     }

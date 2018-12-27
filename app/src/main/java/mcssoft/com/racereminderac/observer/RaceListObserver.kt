@@ -20,11 +20,12 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
 //    }
 
     override fun onChanged(lRaces: MutableList<Race>?) {
-        if(lRaces != null) {
+        if((lRaces != null) && (!lRaces.isEmpty())) {
             if (lRaces.size > 1) {
                 lRaces.sort()
-                timeCheck(lRaces)
             }
+            // time check, even if only one race entry exists.
+            timeCheck(lRaces)
             adapter.swapData(lRaces as ArrayList<Race>)
         }
     }

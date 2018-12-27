@@ -23,6 +23,9 @@ class SnackBarCB(private val view: View, private val race: Race) : Snackbar.Call
             BaseTransientBottomBar.BaseCallback.DISMISS_EVENT_SWIPE -> {
                 deleteRace()
             }
+            BaseTransientBottomBar.BaseCallback.DISMISS_EVENT_ACTION -> {
+                // TBA
+            }
         }
         reinstateBottomNavView()
     }
