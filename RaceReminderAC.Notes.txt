@@ -4,8 +4,5 @@
 
 ** Project notes/comments/etc in no particular order. **
 
------------------------
-Recycler display issue:
------------------------
-When amend record/s from prior days.
+
 

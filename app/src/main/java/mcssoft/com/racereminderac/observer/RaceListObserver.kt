@@ -9,6 +9,7 @@ import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.background.worker.NotifyWorker
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.RaceTime
 
 class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter: RaceAdapter) : Observer<MutableList<Race>> {
@@ -52,7 +53,9 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
                     if(comp == Constants.CURRENT_TIME_SAME ||
                             comp == Constants.CURRENT_TIME_AFTER) {
                         race.metaColour = "2"
-                        postNotification(race)
+                        if(preferenceCheck()) {
+                            postNotification(race)
+                        }
                     } else {
                         race.metaColour = "1"
                     }
@@ -93,4 +96,8 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
 //        }
     }
 
+    private fun preferenceCheck() : Boolean {
+// TBA        RacePreferences.getInstance()
+        return true
+    }
 }

@@ -29,7 +29,7 @@
         <SwitchPreferenceCompat
             app:key="key_notif_send"
             app:defaultValue="false"
-            app:summary="Send notifications for nearing the Race time." />
+            app:summary="Post notifications when nearing Race time." />
 
         <SwitchPreferenceCompat
             app:key="key_notif_multi"

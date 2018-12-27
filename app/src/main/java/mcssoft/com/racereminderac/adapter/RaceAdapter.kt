@@ -89,6 +89,13 @@ class RaceAdapter(private var anchorView: View, private var countView: TextView,
         this.itemTouchHelper = itemTouchHelper
     }
 
+    /**
+     * TBA
+     */
+    internal fun getContext(): Context {
+        return context
+    }
+
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - ISelect">
     /**
      * Set the interface ISelect.ItemSelect (when an item in the adapter's listing is selected).

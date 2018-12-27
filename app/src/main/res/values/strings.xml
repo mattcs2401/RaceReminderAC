@@ -38,7 +38,8 @@
     <string name="key_maint_del_archv">key_maint_del_archived</string>
     <string name="key_race_code_pref">key_race_code_pref</string>
     <string name="key_city_code_pref">key_city_code_pref</string>
-    <string name="key_race_multi_pref">key_race_multi_pref</string>
+    <string name="key_race_notif_send_pref">key_race_notif_send_pref</string>
+    <string name="key_race_notif_multi_pref">key_race_notif_multi_pref</string>
 
     <!-- Preferences Toast messages. -->
     <string name="race_code_msg">Default Race Code changed to</string>

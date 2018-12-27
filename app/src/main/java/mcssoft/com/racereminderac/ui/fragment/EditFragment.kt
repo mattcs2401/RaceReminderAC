@@ -216,7 +216,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         npCityCode.maxValue = ccVals.size - 1
         npCityCode.displayedValues = ccVals
         npCityCode.wrapSelectorWheel = true
-        npCityCode.value = ccVals.indexOf(RacePreferences.getInstance()?.getDefaultCityCode(activity!!))
+        npCityCode.value = ccVals.indexOf(RacePreferences.getInstance()?.getCityCode(activity!!))
 
         npRaceCode = id_np_race_code
         rcVals = resources.getStringArray(R.array.raceCodes)
@@ -225,7 +225,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         npRaceCode.displayedValues = rcVals
         npRaceCode.wrapSelectorWheel = true
         npRaceCode.setOnValueChangedListener(this)
-        npRaceCode.value = rcVals.indexOf(RacePreferences.getInstance()?.getDefaultRaceCode(activity!!))
+        npRaceCode.value = rcVals.indexOf(RacePreferences.getInstance()?.getRaceCode(activity!!))
 
         npRaceNo = id_np_race_num
         rnVals = resources.getStringArray(R.array.raceNum)

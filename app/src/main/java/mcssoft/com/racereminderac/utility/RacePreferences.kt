@@ -29,18 +29,28 @@ class RacePreferences {
      * Get the default Race Code from the preferences.
      * @param context: Activity context.
      */
-    fun getDefaultRaceCode(context: Context): String? {
+    fun getRaceCode(context: Context): String? {
         val key = context.resources.getString(R.string.key_race_code_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null) //"R")
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null)
     }
 
     /**
      * Get the default City Code from the preferences.
      * @param context: Activity context.
      */
-    fun getDefaultCityCode(context: Context): String? {
+    fun getCityCode(context: Context): String? {
         val key = context.resources.getString(R.string.key_city_code_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null) //"B")
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null)
+    }
+
+    fun getRaceNotifSend(context: Context) : Boolean {
+        val key = context.resources.getString(R.string.key_race_notif_send_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+    }
+
+    fun getRaceNotifMulti(context: Context) : Boolean {
+        val key = context.resources.getString(R.string.key_race_notif_multi_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
     }
 
     /**
@@ -50,7 +60,8 @@ class RacePreferences {
     fun preferencesCheck(context: Context) {
         val keyRaceCode = context.resources.getString(R.string.key_race_code_pref)
         val keyCityCode = context.resources.getString(R.string.key_city_code_pref)
-        val keyRaceMulti = context.resources.getString(R.string.key_race_multi_pref)
+        val keyRaceNotifSend = context.resources.getString(R.string.key_race_notif_send_pref)
+        val keyRaceNotifMulti = context.resources.getString(R.string.key_race_notif_multi_pref)
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
@@ -63,8 +74,12 @@ class RacePreferences {
             sharedPrefs.edit().putString(keyCityCode, "B").apply()
         }
 
-        if(!map.contains(keyRaceMulti)) {
+        if(!map.contains(keyRaceNotifSend)) {
+            sharedPrefs.edit().putBoolean(keyRaceNotifSend, false).apply()
+        }
 
+        if(!map.contains(keyRaceNotifMulti)) {
+            sharedPrefs.edit().putBoolean(keyRaceNotifMulti, false).apply()
         }
     }
 
