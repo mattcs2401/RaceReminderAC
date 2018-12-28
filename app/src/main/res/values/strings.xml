@@ -31,13 +31,24 @@
     <string name="lbl_add">New</string>
 
     <!-- Keys. -->
-    <string name="key_general">key</string>
     <string name="key_edit_type">edit_type</string>
     <string name="key_edit_existing">edit_existing</string>
     <string name="key_edit_copy">edit_copy</string>
-    <string name="key_maint_del_archv">key_maint_del_archived</string>
+
+    <!-- Preferences. -->
+    <string name="key_defaults">key_defaults</string>
+    <string name="defaults_title">Defaults</string>
+
     <string name="key_race_code_pref">key_race_code_pref</string>
+    <string name="race_code_pref_title">Default Race Code</string>
+    <string name="race_code_pref_summary">Select default Race Code.</string>
+
     <string name="key_city_code_pref">key_city_code_pref</string>
+    <string name="city_code_pref_title">Default Race City</string>
+    <string name="city_code_pref_summary">Select default Race City Code.</string>
+
+    <string name="key_maint_del_archv">key_maint_del_archived</string>
+
     <string name="key_race_notif_send_pref">key_race_notif_send_pref</string>
     <string name="key_race_notif_multi_pref">key_race_notif_multi_pref</string>
 

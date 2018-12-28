@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        app:key="key_defaults"
-        app:title="Defaults">
+        app:key="@string/key_defaults"
+        app:title="@string/defaults_title">
 
         <ListPreference
-            app:key="key_race_code_pref"
-            app:title="Default Race Code"
-            app:summary="Select default Race Code."
+            app:key="@string/key_race_code_pref"
+            app:title="@string/race_code_pref_title"
+            app:summary="@string/race_code_pref_summary"
             app:entries="@array/raceCodes"
             app:entryValues="@array/raceCodesVals" />
 
         <ListPreference
-            app:key="key_city_code_pref"
-            app:title="Default Race City"
-            app:summary="Select default Race City Code."
+            app:key="@string/key_city_code_pref"
+            app:title="@string/city_code_pref_title"
+            app:summary="@string/city_code_pref_summary"
             app:entries="@array/cityCodes"
             app:entryValues="@array/cityCodesVals" />
 

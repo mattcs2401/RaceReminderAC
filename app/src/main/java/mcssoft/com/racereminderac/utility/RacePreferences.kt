@@ -26,7 +26,7 @@ class RacePreferences {
     }
 
     /**
-     * Get the default Race Code from the preferences.
+     * Get the (default) Race Code from the preferences.
      * @param context: Activity context.
      */
     fun getRaceCode(context: Context): String? {
@@ -35,7 +35,7 @@ class RacePreferences {
     }
 
     /**
-     * Get the default City Code from the preferences.
+     * Get the (default) City Code from the preferences.
      * @param context: Activity context.
      */
     fun getCityCode(context: Context): String? {
@@ -43,11 +43,25 @@ class RacePreferences {
         return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null)
     }
 
-    fun getRaceNotifSend(context: Context) : Boolean {
+    /**
+     * Get the (allowed to) post notifications from the preferences.
+     * @param context: Activity context.
+     */
+    fun getRaceNotifPost(context: Context) : Boolean {
         val key = context.resources.getString(R.string.key_race_notif_send_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+        val state = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+        if(state) {
+
+        } else {
+
+        }
+        return state
     }
 
+    /**
+     * Get the (allowed to) post multiple notifications for the same Race from the preferences.
+     * @param context: Activity context.
+     */
     fun getRaceNotifMulti(context: Context) : Boolean {
         val key = context.resources.getString(R.string.key_race_notif_multi_pref)
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)

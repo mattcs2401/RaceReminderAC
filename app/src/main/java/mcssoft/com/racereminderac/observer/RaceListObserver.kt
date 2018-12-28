@@ -97,7 +97,9 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
     }
 
     private fun preferenceCheck() : Boolean {
-// TBA        RacePreferences.getInstance()
-        return true
+        if(RacePreferences.getInstance()?.getRaceNotifPost(adapter.getContext())!!) {
+            return true
+        }
+        return false
     }
 }
