@@ -17,8 +17,6 @@ import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.SnackBarCB
-import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
-import org.greenrobot.eventbus.EventBus
 
 /**
  * The RaceAdapter (for the recycler view in the MainFragment).
@@ -26,7 +24,7 @@ import org.greenrobot.eventbus.EventBus
  * @param countView: A toolbar view to display the count of items in the recycler view.
  * @param context: Activity level context for general use.
  */
-class RaceAdapter(private var anchorView: View, private var countView: TextView, private var context: Context) :
+class RaceAdapter(private var anchorView: View, private var context: Context) :
         RecyclerView.Adapter<RaceViewHolder>(), View.OnClickListener, ISwipe {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
@@ -71,7 +69,6 @@ class RaceAdapter(private var anchorView: View, private var countView: TextView,
     internal fun swapData(lRaces: ArrayList<Race>) {
         this.lRaces = lRaces
         emptyViewCheck()
-        setCount(lRaces.size)
         notifyDataSetChanged()
     }
 
@@ -148,13 +145,6 @@ class RaceAdapter(private var anchorView: View, private var countView: TextView,
      */
     private fun emptyViewCheck() {
         isEmptyView = lRaces.isEmpty()
-    }
-
-    private fun setCount(count: Int) {
-        if(count == 0) countView.text = "No items"
-        else if(count == 1) countView.text = "1 item"
-        else if (count > 1) countView.text = "$count items"
-        else countView.text = "No items"
     }
     //</editor-fold>
 

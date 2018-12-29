@@ -9,12 +9,12 @@
     android:background="?attr/colorPrimary"
     android:theme="?attr/actionBarTheme">
 
-    <TextView
-        android:id="@+id/id_toolbar_count"
-        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="8dp" />
+    <!--<TextView-->
+        <!--android:id="@+id/id_toolbar_count"-->
+        <!--style="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="end"-->
+        <!--android:layout_marginEnd="8dp" />-->
 
 </androidx.appcompat.widget.Toolbar>

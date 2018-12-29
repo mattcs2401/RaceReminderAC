@@ -40,7 +40,7 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        raceAdapter = RaceAdapter(activity!!.id_container, activity!!.id_toolbar_count, activity!!)
+        raceAdapter = RaceAdapter(activity!!.id_container, activity!!)
         raceAdapter.setClickListener(this)
         raceAdapter.setLongClickListener(this)
 
