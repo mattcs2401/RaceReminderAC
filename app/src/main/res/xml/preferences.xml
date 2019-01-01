@@ -23,19 +23,19 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:key="key_notif"
-        app:title="Notification">
+        app:key="@string/key_notif"
+        app:title="@string/notif_title">
 
         <SwitchPreferenceCompat
-            app:key="key_notif_send"
+            app:key="@string/key_race_notif_send_pref"
             app:defaultValue="false"
-            app:summary="Post notifications when nearing Race time." />
+            app:summary="@string/race_notif_send_pref_summary"/>
 
         <SwitchPreferenceCompat
-            app:key="key_notif_multi"
+            app:key="@string/key_notif_send_multi_pref"
             app:enabled="false"
             app:defaultValue="false"
-            app:summary="Allow multiple notifications for the same Race." />
+            app:summary="@string/notif_send_multi_pref_summary" />
 
     </PreferenceCategory>
 

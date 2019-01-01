@@ -63,7 +63,7 @@ class RacePreferences {
      * @param context: Activity context.
      */
     fun getRaceNotifMulti(context: Context) : Boolean {
-        val key = context.resources.getString(R.string.key_race_notif_multi_pref)
+        val key = context.resources.getString(R.string.key_notif_send_multi_pref)
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
     }
 
@@ -75,7 +75,7 @@ class RacePreferences {
         val keyRaceCode = context.resources.getString(R.string.key_race_code_pref)
         val keyCityCode = context.resources.getString(R.string.key_city_code_pref)
         val keyRaceNotifSend = context.resources.getString(R.string.key_race_notif_send_pref)
-        val keyRaceNotifMulti = context.resources.getString(R.string.key_race_notif_multi_pref)
+        val keyRaceNotifMulti = context.resources.getString(R.string.key_notif_send_multi_pref)
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all

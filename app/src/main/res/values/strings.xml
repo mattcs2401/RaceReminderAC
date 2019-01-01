@@ -49,8 +49,14 @@
 
     <string name="key_maint_del_archv">key_maint_del_archived</string>
 
+    <string name="key_notif">key_notif</string>
+    <string name="notif_title">Notifications</string>
+
     <string name="key_race_notif_send_pref">key_race_notif_send_pref</string>
-    <string name="key_race_notif_multi_pref">key_race_notif_multi_pref</string>
+    <string name="race_notif_send_pref_summary">Post notifications when nearing Race time.</string>
+
+    <string name="key_notif_send_multi_pref">key_notif_send_multi_pref</string>
+    <string name="notif_send_multi_pref_summary">Allow multiple notifications for the same Race.</string>
 
     <!-- Preferences Toast messages. -->
     <string name="race_code_msg">Default Race Code changed to</string>
