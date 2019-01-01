@@ -13,6 +13,8 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
+import mcssoft.com.racereminderac.utility.eventbus.RefreshMessage
+import org.greenrobot.eventbus.EventBus
 
 class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSelect, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -55,11 +57,10 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when(menuItem.itemId) {
             R.id.id_refresh -> {
-
+                EventBus.getDefault().post(RefreshMessage())
             }
             R.id.id_settings -> {
-//                val bundle = Bundle()
-                navController.navigate(R.id.id_settings_fragment) //, bundle)
+                navController.navigate(R.id.id_settings_fragment)
             }
             R.id.id_add -> {
                 val bundle = Bundle()

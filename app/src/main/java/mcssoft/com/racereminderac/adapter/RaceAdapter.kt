@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -21,7 +20,6 @@ import mcssoft.com.racereminderac.utility.SnackBarCB
 /**
  * The RaceAdapter (for the recycler view in the MainFragment).
  * @param anchorView: The view to anchor a SnackBar for Undo functionality.
- * @param countView: A toolbar view to display the count of items in the recycler view.
  * @param context: Activity level context for general use.
  */
 class RaceAdapter(private var anchorView: View, private var context: Context) :
