@@ -89,7 +89,7 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(refresh: RefreshMessage) {
         // Note: the down side to this is the observer will react twice.
-        if(raceAdapter != null && raceAdapter.itemCount > 0) {
+        if(raceAdapter.itemCount > 0) {
            // Get arbitary 1st Race from backing data.
             val race = raceAdapter.getRace(0)
             val oldCc = race.cityCode
