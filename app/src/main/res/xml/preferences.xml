@@ -40,13 +40,14 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:key="key_maint"
-        app:title="Maintenance">
+        app:key="@string/key_maint"
+        app:title="@string/maint_title">
 
+        <!-- TBA as to required ? -->
         <Preference
-            app:key="key_maint_del_archived"
-            app:title="Delete Archived"
-            app:summary="Delete archived Race records."/>
+            app:key="@string/key_maint_del_archv"
+            app:title="@string/maint_del_archv_title"
+            app:summary="@string/maint_del_archv_summary"/>
 
     </PreferenceCategory>
 

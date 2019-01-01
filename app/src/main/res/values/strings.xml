@@ -35,7 +35,7 @@
     <string name="key_edit_existing">edit_existing</string>
     <string name="key_edit_copy">edit_copy</string>
 
-    <!-- Preferences. -->
+    <!-- Preferences keys and title/summary values. -->
     <string name="key_defaults">key_defaults</string>
     <string name="defaults_title">Defaults</string>
 
@@ -47,8 +47,6 @@
     <string name="city_code_pref_title">Default Race City</string>
     <string name="city_code_pref_summary">Select default Race City Code.</string>
 
-    <string name="key_maint_del_archv">key_maint_del_archived</string>
-
     <string name="key_notif">key_notif</string>
     <string name="notif_title">Notifications</string>
 
@@ -57,6 +55,13 @@
 
     <string name="key_notif_send_multi_pref">key_notif_send_multi_pref</string>
     <string name="notif_send_multi_pref_summary">Allow multiple notifications for the same Race.</string>
+
+    <string name="key_maint">key_maint</string>
+    <string name="maint_title">Maintenance</string>
+
+    <string name="key_maint_del_archv">key_maint_del_archv</string>
+    <string name="maint_del_archv_title">Delete Archived</string>
+    <string name="maint_del_archv_summary">Delete archived Race records.</string>
 
     <!-- Preferences Toast messages. -->
     <string name="race_code_msg">Default Race Code changed to</string>
