@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -36,6 +37,9 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
                 Toast.makeText(activity, archRemvlMsg, Toast.LENGTH_SHORT).show()
                 return true
             }
+//            keyNotifSendPref -> {
+//                val bp = ""
+//            }
         }
         return false
     }
@@ -48,6 +52,15 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
             }
             keyCityCodePref -> {
                 Toast.makeText(activity, "$cityCodeMsg '$newValue'", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            keyNotifSendPref -> {
+                if((findPreference(keyNotifSendPref) as SwitchPreferenceCompat).isChecked) {
+                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = true
+                } else {
+                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isChecked = false
+                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = false
+                }
                 return true
             }
         }
@@ -64,15 +77,20 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         keyMaintDelArchived = activity!!.resources.getString(R.string.key_maint_del_archv)
         keyRaceCodePref = activity!!.resources.getString(R.string.key_race_code_pref)
         keyCityCodePref = activity!!.resources.getString(R.string.key_city_code_pref)
+        keyNotifSendPref = activity!!.resources.getString(R.string.key_race_notif_send_pref)
+        keyNotifMultiPref = activity!!.resources.getString(R.string.key_notif_send_multi_pref)
         // Set the preferences listeners.
         (findPreference(keyMaintDelArchived) as Preference).onPreferenceClickListener = this
         (findPreference(keyCityCodePref) as Preference).onPreferenceChangeListener = this
         (findPreference(keyRaceCodePref) as Preference).onPreferenceChangeListener = this
+        (findPreference(keyNotifSendPref) as SwitchPreferenceCompat).onPreferenceChangeListener = this
     }
 
     private lateinit var keyMaintDelArchived: String
     private lateinit var keyRaceCodePref: String
     private lateinit var keyCityCodePref: String
+    private lateinit var keyNotifSendPref: String
+    private lateinit var keyNotifMultiPref: String
     private lateinit var raceCodeMsg: String
     private lateinit var cityCodeMsg: String
     private lateinit var archRemvlMsg: String
