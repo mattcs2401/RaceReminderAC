@@ -37,9 +37,15 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
                 Toast.makeText(activity, archRemvlMsg, Toast.LENGTH_SHORT).show()
                 return true
             }
-//            keyNotifSendPref -> {
-//                val bp = ""
-//            }
+            keyNotifSendPref -> {
+                if((findPreference(keyNotifSendPref) as SwitchPreferenceCompat).isChecked) {
+                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = true
+                } else {
+                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isChecked = false
+                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = false
+                }
+                return true
+            }
         }
         return false
     }
@@ -54,15 +60,15 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
                 Toast.makeText(activity, "$cityCodeMsg '$newValue'", Toast.LENGTH_SHORT).show()
                 return true
             }
-            keyNotifSendPref -> {
-                if((findPreference(keyNotifSendPref) as SwitchPreferenceCompat).isChecked) {
-                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = true
-                } else {
-                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isChecked = false
-                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = false
-                }
-                return true
-            }
+//            keyNotifSendPref -> {
+//                if((findPreference(keyNotifSendPref) as SwitchPreferenceCompat).isChecked) {
+//                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = true
+//                } else {
+//                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isChecked = false
+//                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = false
+//                }
+//                return true
+//            }
         }
         return false
     }
@@ -83,7 +89,8 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         (findPreference(keyMaintDelArchived) as Preference).onPreferenceClickListener = this
         (findPreference(keyCityCodePref) as Preference).onPreferenceChangeListener = this
         (findPreference(keyRaceCodePref) as Preference).onPreferenceChangeListener = this
-        (findPreference(keyNotifSendPref) as SwitchPreferenceCompat).onPreferenceChangeListener = this
+        (findPreference(keyNotifSendPref) as SwitchPreferenceCompat).onPreferenceClickListener = this
+//        (findPreference(keyNotifSendPref) as SwitchPreferenceCompat).onPreferenceChangeListener = this
     }
 
     private lateinit var keyMaintDelArchived: String
