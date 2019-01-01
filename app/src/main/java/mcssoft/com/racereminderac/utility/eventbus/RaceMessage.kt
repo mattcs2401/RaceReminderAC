@@ -5,5 +5,4 @@ import mcssoft.com.racereminderac.entity.Race
 class RaceMessage(var race: Race) {
 
     val theRace: Race get() = race
-
 }
