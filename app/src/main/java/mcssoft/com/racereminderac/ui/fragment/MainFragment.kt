@@ -88,7 +88,17 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(refresh: RefreshMessage) {
-        //
+        if(raceAdapter != null && raceAdapter.itemCount > 0) {
+
+            val race = raceAdapter.getRace(0)
+            var id = race.id
+            var oldCc = race.cityCode
+            val newCc = "ZZ"
+            race.cityCode = newCc
+            raceViewModel.update(race)
+            race.cityCode = oldCc
+            raceViewModel.update(race)
+        }
     }
     //</editor-fold>
 
