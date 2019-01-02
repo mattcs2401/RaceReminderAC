@@ -10,27 +10,20 @@ import androidx.core.content.ContextCompat
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.ISwipe
 
-/** https://www.journaldev.com/23164/android-recyclerview-swipe-to-delete-undo
-    https://therubberduckdev.wordpress.com/2017/10/24/android-recyclerview-drag-and-drop-and-swipe-to-dismiss/
+/**
+ *  https://www.journaldev.com/23164/android-recyclerview-swipe-to-delete-undo
+  * https://therubberduckdev.wordpress.com/2017/10/24/android-recyclerview-drag-and-drop-and-swipe-to-dismiss/
  **/
-class TouchHelper(context: Context, swipeAction: ISwipe) : ItemTouchHelper.Callback() {
+class TouchHelper(private val context: Context, private val swipeAction: ISwipe) : ItemTouchHelper.Callback() {
 
-    private val swipeAction: ISwipe
-    private val context: Context
-    private val background: ColorDrawable
-    private val backgroundColour: Int
-    private val clearPaint: Paint
+    private val background: ColorDrawable = ColorDrawable()
+    private val backgroundColour: Int = Color.parseColor("#b80f0a")
+    private val clearPaint: Paint = Paint()
     private val deleteDrawable: Drawable
     private val intrinsicWidth: Int
     private val intrinsicHeight: Int
 
     init {
-        this.swipeAction = swipeAction
-        this.context = context
-
-        background = ColorDrawable()
-        backgroundColour = Color.parseColor("#b80f0a")
-        clearPaint = Paint()
         clearPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
         deleteDrawable = ContextCompat.getDrawable(context, R.drawable.ic_delete)!!
         intrinsicWidth = deleteDrawable.intrinsicWidth

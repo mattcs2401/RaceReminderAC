@@ -23,11 +23,11 @@ class NotifyWorker(private val context: Context, workerParams: WorkerParameters)
         val id = inputData.keyValueMap["key_id"] as Long
         val title = context.resources.getString(R.string.nearing_race_time)
 
-        try {
+        return try {
             displayNotification(title, message, id)
-            return Result.success()
+            Result.success()
         } catch (ex: Exception) {
-            return Result.failure()
+            Result.failure()
         } finally {
             // TBA
         }
