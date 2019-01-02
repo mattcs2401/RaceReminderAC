@@ -32,6 +32,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         initialise()
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Preference listeners.">
     override fun onPreferenceClick(preference: Preference): Boolean {
         when(preference.key) {
            keyMaintDelArchvPref -> {
@@ -48,14 +49,17 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         /** Note: This fires before onPreferenceClick. **/
         when(preference.key) {
+            // Race Code preference.
             keyRaceCodePref -> {
                 Toast.makeText(activity, "$raceCodeMsg '$newValue'", Toast.LENGTH_SHORT).show()
                 return true
             }
+            // City Code preference.
             keyCityCodePref -> {
                 Toast.makeText(activity, "$cityCodeMsg '$newValue'", Toast.LENGTH_SHORT).show()
                 return true
             }
+            // Notification send preference.
             keyNotifSendPref -> {
                 val switch = findPreference<SwitchPreferenceCompat>(keyNotifMultiPref)
                 if(newValue == true) {
@@ -69,6 +73,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         }
         return false
     }
+    //</editor-fold>
 
     private fun initialise() {
         /** Note:  Strings just for code readability. **/
@@ -92,12 +97,14 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         (findPreference<SwitchPreferenceCompat>(keyNotifSendPref)).onPreferenceChangeListener = this
     }
 
-    private lateinit var keyMaintDelArchvPref: String
+    //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
+    private lateinit var raceCodeMsg: String
+    private lateinit var cityCodeMsg: String
+    private lateinit var archRemvlMsg: String
     private lateinit var keyRaceCodePref: String
     private lateinit var keyCityCodePref: String
     private lateinit var keyNotifSendPref: String
     private lateinit var keyNotifMultiPref: String
-    private lateinit var raceCodeMsg: String
-    private lateinit var cityCodeMsg: String
-    private lateinit var archRemvlMsg: String
+    private lateinit var keyMaintDelArchvPref: String
+    //</editor-fold>
 }

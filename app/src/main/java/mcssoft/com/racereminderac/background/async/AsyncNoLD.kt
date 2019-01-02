@@ -13,13 +13,7 @@ import org.greenrobot.eventbus.EventBus
  * @param dao: The Room data access object.
  * @note: Uses EventBus instead of an interface to return the result (a Race object).
  */
-class AsyncNoLD(dao: RaceDAO) : AsyncTask<Long, Void, Race>() {
-
-    private var dao: RaceDAO
-
-    init {
-        this.dao = dao
-    }
+class AsyncNoLD(private var dao: RaceDAO) : AsyncTask<Long, Void, Race>() {
 
     override fun doInBackground(vararg params: Long?) : Race {
         return dao.getRaceNoLD(params[0]!!)

@@ -6,13 +6,7 @@ import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.edit_fragment.view.*
 import mcssoft.com.racereminderac.entity.Race
 
-class RaceObserver(race: LiveData<Race>, view: View) : Observer<Race> {
-
-    var view: View
-
-    init {
-        this.view = view
-    }
+class RaceObserver(race: LiveData<Race>, var view: View) : Observer<Race> {
 
     override fun onChanged(race: Race?) {
         if(race != null) {

@@ -1,10 +1,7 @@
 package mcssoft.com.racereminderac.utility
 
 import android.content.Context
-import android.os.Bundle
-import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
-import androidx.preference.SwitchPreference
 import mcssoft.com.racereminderac.R
 
 /**
@@ -52,8 +49,7 @@ class RacePreferences {
      */
     fun getRaceNotifPost(context: Context) : Boolean {
         val keyNotif = context.resources.getString(R.string.key_race_notif_send_pref)
-        val state = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(keyNotif, false)
-        return state
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(keyNotif, false)
     }
 
     /**

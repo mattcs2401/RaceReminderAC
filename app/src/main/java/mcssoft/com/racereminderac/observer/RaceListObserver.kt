@@ -22,7 +22,7 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
 
     /**
      * The observer's onChange method.
-     * @param lRace: The list of mutable Race objects.
+     * @param lRaces: The list of mutable Race objects.
      */
     override fun onChanged(lRaces: MutableList<Race>?) {
         if((lRaces != null) && (!lRaces.isEmpty())) {

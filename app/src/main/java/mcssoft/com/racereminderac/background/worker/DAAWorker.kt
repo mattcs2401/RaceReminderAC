@@ -11,11 +11,11 @@ import mcssoft.com.racereminderac.database.RaceDatabase
 class DAAWorker(private val context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
     override fun doWork(): Result {
-        try {
+        return try {
             RaceDatabase.getInstance(context)?.raceDao()?.deleteAllArchived()
-            return Result.success()
+            Result.success()
         } catch(ex: Exception) {
-            return Result.failure()
+            Result.failure()
         }
     }
 }
