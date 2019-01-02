@@ -20,6 +20,10 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
 //        lIds = ArrayList()
 //    }
 
+    /**
+     * The observer's onChange method.
+     * @param lRace: The list of mutable Race objects.
+     */
     override fun onChanged(lRaces: MutableList<Race>?) {
         if((lRaces != null) && (!lRaces.isEmpty())) {
             if (lRaces.size > 1) {
@@ -33,9 +37,9 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
     }
 
 /* Compare notes, for a result of:
-   -1: the current time is before that given - the race time is in the future.
+   -1: the current time is before that given - i.e. the race time is in the future.
     0: the current time is equal that given.
-    1: the current time is after that given - the race time is in the past.
+    1: the current time is after that given - i.e. the race time is in the past.
  */
     private fun timeCheck(lRaces: MutableList<Race>) {
         val raceTime = RaceTime.getInstance()!!
@@ -52,19 +56,19 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
                     val comp = raceTime.compareTo(raceTimeMillis - Constants.FIVE_MINUTES)
                     if(comp == Constants.CURRENT_TIME_SAME ||
                             comp == Constants.CURRENT_TIME_AFTER) {
-                        race.metaColour = "2"
+                        race.metaColour = Constants.META_COLOUR_2
                         if(preferenceCheck()) {
                             postNotification(race)
                         }
                     } else {
-                        race.metaColour = "1"
+                        race.metaColour = Constants.META_COLOUR_1
                     }
                 }
                 Constants.CURRENT_TIME_SAME -> {
-                    race.metaColour = "3"
+                    race.metaColour = Constants.META_COLOUR_3
                 }
                 Constants.CURRENT_TIME_AFTER -> {
-                    race.metaColour = "3"
+                    race.metaColour = Constants.META_COLOUR_3
                 }
             }
         }
