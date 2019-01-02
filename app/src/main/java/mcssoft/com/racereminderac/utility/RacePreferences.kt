@@ -74,12 +74,12 @@ class RacePreferences {
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
 
-        if(!map.contains(keyRaceCode)) {
-            sharedPrefs.edit().putString(keyRaceCode, "R").apply()
-        }
-
         if(!map.contains(keyCityCode)) {
             sharedPrefs.edit().putString(keyCityCode, "B").apply()
+        }
+
+        if(!map.contains(keyRaceCode)) {
+            sharedPrefs.edit().putString(keyRaceCode, "R").apply()
         }
 
         if(!map.contains(keyRaceNotifSend)) {
