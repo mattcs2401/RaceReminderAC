@@ -45,7 +45,7 @@
 
         <!-- TBA as to required ? -->
         <Preference
-            app:key="@string/key_maint_del_archv"
+            app:key="@string/key_maint_del_archv_pref"
             app:title="@string/maint_del_archv_title"
             app:summary="@string/maint_del_archv_summary"/>
 

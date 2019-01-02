@@ -59,7 +59,7 @@
     <string name="key_maint">key_maint</string>
     <string name="maint_title">Maintenance</string>
 
-    <string name="key_maint_del_archv">key_maint_del_archv</string>
+    <string name="key_maint_del_archv_pref">key_maint_del_archv_pref</string>
     <string name="maint_del_archv_title">Delete Archived</string>
     <string name="maint_del_archv_summary">Delete archived Race records.</string>
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
@@ -20,38 +21,33 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         // Set toolbar title.
         (activity?.id_toolbar as Toolbar).title = activity?.resources?.getString(R.string.preferences)
-        // Hide the bottom nav view.
+
+        // Hide the bottom navigation view.
         (activity?.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.GONE
+
         // Load the preferences from the XML resource.
         addPreferencesFromResource(R.xml.preferences)
-        // Initialise.
+
+        // Initialise (local variables).
         initialise()
     }
 
-    override fun onPreferenceClick(preference: Preference?): Boolean {
-        when(preference!!.key) {
-           keyMaintDelArchived -> {
+    override fun onPreferenceClick(preference: Preference): Boolean {
+        when(preference.key) {
+           keyMaintDelArchvPref -> {
                 val daaWork = OneTimeWorkRequestBuilder<DAAWorker>().build()
                 WorkManager.getInstance().enqueue(daaWork)
 
                 Toast.makeText(activity, archRemvlMsg, Toast.LENGTH_SHORT).show()
                 return true
             }
-            keyNotifSendPref -> {
-                if((findPreference(keyNotifSendPref) as SwitchPreferenceCompat).isChecked) {
-                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = true
-                } else {
-                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isChecked = false
-                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = false
-                }
-                return true
-            }
         }
         return false
     }
 
-    override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
-        when(preference!!.key) {
+    override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
+        /** Note: This fires before onPreferenceClick. **/
+        when(preference.key) {
             keyRaceCodePref -> {
                 Toast.makeText(activity, "$raceCodeMsg '$newValue'", Toast.LENGTH_SHORT).show()
                 return true
@@ -60,40 +56,43 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
                 Toast.makeText(activity, "$cityCodeMsg '$newValue'", Toast.LENGTH_SHORT).show()
                 return true
             }
-//            keyNotifSendPref -> {
-//                if((findPreference(keyNotifSendPref) as SwitchPreferenceCompat).isChecked) {
-//                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = true
-//                } else {
-//                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isChecked = false
-//                    findPreference<SwitchPreferenceCompat>(keyNotifMultiPref).isEnabled = false
-//                }
-//                return true
-//            }
+            keyNotifSendPref -> {
+                val switch = findPreference<SwitchPreferenceCompat>(keyNotifMultiPref)
+                if(newValue == true) {
+                    switch.isEnabled = true
+                } else {
+                    switch.isChecked = false
+                    switch.isEnabled = false
+                }
+                return true
+            }
         }
         return false
     }
 
     private fun initialise() {
-        // Strings mainly for code readability.
-        // Get Toast message text.
+        /** Note:  Strings just for code readability. **/
+        // Get the Toast message text.
         raceCodeMsg = activity!!.resources.getString(R.string.race_code_msg)
         cityCodeMsg = activity!!.resources.getString(R.string.city_code_msg)
         archRemvlMsg = activity!!.resources.getString(R.string.arch_removal_msg)
+
         // Get the keys to action preferences.
-        keyMaintDelArchived = activity!!.resources.getString(R.string.key_maint_del_archv)
         keyRaceCodePref = activity!!.resources.getString(R.string.key_race_code_pref)
         keyCityCodePref = activity!!.resources.getString(R.string.key_city_code_pref)
         keyNotifSendPref = activity!!.resources.getString(R.string.key_race_notif_send_pref)
         keyNotifMultiPref = activity!!.resources.getString(R.string.key_notif_send_multi_pref)
+        keyMaintDelArchvPref = activity!!.resources.getString(R.string.key_maint_del_archv_pref)
+
         // Set the preferences listeners.
-        (findPreference(keyMaintDelArchived) as Preference).onPreferenceClickListener = this
-        (findPreference(keyCityCodePref) as Preference).onPreferenceChangeListener = this
-        (findPreference(keyRaceCodePref) as Preference).onPreferenceChangeListener = this
-        (findPreference(keyNotifSendPref) as SwitchPreferenceCompat).onPreferenceClickListener = this
-//        (findPreference(keyNotifSendPref) as SwitchPreferenceCompat).onPreferenceChangeListener = this
+        (findPreference<Preference>(keyMaintDelArchvPref)).onPreferenceClickListener = this
+        (findPreference<ListPreference>(keyCityCodePref)).onPreferenceChangeListener = this
+        (findPreference<ListPreference>(keyRaceCodePref)).onPreferenceChangeListener = this
+        (findPreference<SwitchPreferenceCompat>(keyNotifSendPref)).onPreferenceClickListener = this
+        (findPreference<SwitchPreferenceCompat>(keyNotifSendPref)).onPreferenceChangeListener = this
     }
 
-    private lateinit var keyMaintDelArchived: String
+    private lateinit var keyMaintDelArchvPref: String
     private lateinit var keyRaceCodePref: String
     private lateinit var keyCityCodePref: String
     private lateinit var keyNotifSendPref: String
