@@ -20,14 +20,14 @@ object Constants {
     const val TIME_FORMAT_24 = "kk:mm"      // Time value is displayed in 24 hour format.
     const val DATE_FORMAT = "dd/MM/yyyy"    // Date value display format.
 
-    const val INSERT = 1                    // Signify a Race insert.
-    const val UPDATE = 2                    // Signify a Race update.
-    const val DELETE = 3                    // Signify a Race delete.
+    const val INSERT = 1                    // Signifies a Race insert.
+    const val UPDATE = 2                    // Signifies a Race update.
+    const val DELETE = 3                    // Signifies a Race delete.
 
-    const val META_COLOUR_1 = "1"           // Current time is before Race time.
-    const val META_COLOUR_2 = "2"           // Current time is nearing Race time.
-    const val META_COLOUR_3 = "3"           // Current time is after Race time.
+    const val META_COLOUR_1 = "1"           // The current time is before the Race time.
+    const val META_COLOUR_2 = "2"           // The current time is nearing the Race time.
+    const val META_COLOUR_3 = "3"           // The current time is after the Race time.
 
-    const val DAY_BEFORE = 0
-    const val DAY_TODAY = 1
+    const val DAY_BEFORE = 0                // The given day is before today.
+    const val DAY_TODAY = 1                 // The given day is the same as today.
 }

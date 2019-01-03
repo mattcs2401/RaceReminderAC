@@ -41,34 +41,42 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
     0: the current time is equal that given.
     1: the current time is after that given - i.e. the race time is in the past.
  */
+    /**
+     * Check Race date/time and set colours accordingly.
+     * @param lRaces: The list of current Races.
+     */
     private fun timeCheck(lRaces: MutableList<Race>) {
         val raceTime = RaceTime.getInstance()!!
         // Check the race time against the current time.
         for(race in lRaces) {
             // The time as per the Race object.
             val raceTimeMillis = race.raceTimeL
-            // The value of the comparison.
-            val compare = raceTime.compareToTime(raceTimeMillis)
 
-            when(compare) {
-                Constants.CURRENT_TIME_BEFORE -> {
-                    // 5 minutes prior time window.
-                    val comp = raceTime.compareToTime(raceTimeMillis - Constants.FIVE_MINUTES)
-                    if(comp == Constants.CURRENT_TIME_SAME ||
-                            comp == Constants.CURRENT_TIME_AFTER) {
-                        race.metaColour = Constants.META_COLOUR_2
-                        if(preferenceCheck()) {
-                            postNotification(race)
+            // If the Race day is today, then process, else ignore.
+            if (raceTime.compareToDay(raceTimeMillis) == Constants.DAY_TODAY) {
+                // The value of the comparison.
+                val compare = raceTime.compareToTime(raceTimeMillis)
+
+                when (compare) {
+                    Constants.CURRENT_TIME_BEFORE -> {
+                        // 5 minutes prior time window.
+                        val comp = raceTime.compareToTime(raceTimeMillis - Constants.FIVE_MINUTES)
+                        if (comp == Constants.CURRENT_TIME_SAME ||
+                                comp == Constants.CURRENT_TIME_AFTER) {
+                            race.metaColour = Constants.META_COLOUR_2
+                            if (preferenceCheck()) {
+                                postNotification(race)
+                            }
+                        } else {
+                            race.metaColour = Constants.META_COLOUR_1
                         }
-                    } else {
-                        race.metaColour = Constants.META_COLOUR_1
                     }
-                }
-                Constants.CURRENT_TIME_SAME -> {
-                    race.metaColour = Constants.META_COLOUR_3
-                }
-                Constants.CURRENT_TIME_AFTER -> {
-                    race.metaColour = Constants.META_COLOUR_3
+                    Constants.CURRENT_TIME_SAME -> {
+                        race.metaColour = Constants.META_COLOUR_3
+                    }
+                    Constants.CURRENT_TIME_AFTER -> {
+                        race.metaColour = Constants.META_COLOUR_3
+                    }
                 }
             }
         }
