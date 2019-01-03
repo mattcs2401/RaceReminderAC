@@ -92,15 +92,17 @@
         android:layout_marginTop="256dp"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:drawableRight="@drawable/ic_clock_outline"/>
+        <!--android:contentDescription="TODO" />-->
 
     <Button
         android:id="@+id/id_btn_save"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
         android:text="@string/lbl_save"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         app:layout_constraintEnd_toEndOf="parent"
