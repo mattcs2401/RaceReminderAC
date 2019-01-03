@@ -20,7 +20,7 @@
     <!-- Button labels. -->
     <string name="lbl_cancel">Cancel</string>
     <string name="lbl_ok">OK</string>
-    <string name="lbl_time">Set time</string>
+    <string name="lbl_time">Race Time</string>
     <string name="lbl_save">Save</string>
     <string name="lbl_copy">Copy</string>
     <string name="lbl_update">Update</string>
