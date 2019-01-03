@@ -78,6 +78,26 @@ class RaceTime {
         return "$hour:$minute"
     }
 
+    internal fun compareToDay(givenTime: Long) : Int {
+        // Establish calendars (initially the same).
+        val calendarToday = Calendar.getInstance(Locale.getDefault())
+        val calendarGiven = calendarToday
+
+        // Get the Day associated with the given time.
+        calendarGiven.timeInMillis = givenTime
+        val givenDay = calendarGiven.get(Calendar.DAY_OF_YEAR)
+
+        // Get the Day associated with today, i.e. the current time.
+        val today = calendarToday.get(Calendar.DAY_OF_YEAR)
+
+        //
+        if(givenDay < today) {
+            return Constants.DAY_BEFORE
+        } else {
+            return Constants.DAY_TODAY
+        }
+    }
+
     /**
      * Compare the current time to that given.
      * @param givenTime: The time (in mSec) to compare against the current time.
@@ -85,7 +105,7 @@ class RaceTime {
      *          0: the current time is equal that given.
      *          1: the current time is after that given.
      */
-    internal fun compareTo(givenTime: Long) : Int {
+    internal fun compareToTime(givenTime: Long) : Int {
         var retVar = 99
         val calendar = Calendar.getInstance(Locale.getDefault())
         calendar.timeInMillis = givenTime

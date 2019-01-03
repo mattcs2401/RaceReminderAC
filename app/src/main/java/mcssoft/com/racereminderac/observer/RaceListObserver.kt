@@ -48,12 +48,12 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
             // The time as per the Race object.
             val raceTimeMillis = race.raceTimeL
             // The value of the comparison.
-            val compare = raceTime.compareTo(raceTimeMillis)
+            val compare = raceTime.compareToTime(raceTimeMillis)
 
             when(compare) {
                 Constants.CURRENT_TIME_BEFORE -> {
                     // 5 minutes prior time window.
-                    val comp = raceTime.compareTo(raceTimeMillis - Constants.FIVE_MINUTES)
+                    val comp = raceTime.compareToTime(raceTimeMillis - Constants.FIVE_MINUTES)
                     if(comp == Constants.CURRENT_TIME_SAME ||
                             comp == Constants.CURRENT_TIME_AFTER) {
                         race.metaColour = Constants.META_COLOUR_2
