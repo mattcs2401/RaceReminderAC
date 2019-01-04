@@ -53,7 +53,7 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
             val raceTimeMillis = race.raceTimeL
 
             // If the Race day is today, then process, else ignore.
-            if (raceTime.compareToDay(raceTimeMillis) == Constants.DAY_TODAY) {
+            if (raceTime.compareToDay(raceTimeMillis) == Constants.DAY_CURRENT) {
                 // The value of the comparison.
                 val compare = raceTime.compareToTime(raceTimeMillis)
 

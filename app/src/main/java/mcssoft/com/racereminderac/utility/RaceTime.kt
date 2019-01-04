@@ -98,9 +98,9 @@ class RaceTime {
 
         // Compare the day of the given day with today.
         if(givenDay < today) {
-            return Constants.DAY_BEFORE
+            return Constants.DAY_PRIOR
         } else {
-            return Constants.DAY_TODAY
+            return Constants.DAY_CURRENT
         }
     }
 
