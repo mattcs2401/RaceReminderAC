@@ -4,5 +4,13 @@
 
 ** Project notes/comments/etc in no particular order. **
 
+-------
+Issues:
+-------
+1. Copy function.
+   Wrong colour on new inserted Race record.
 
+2. Multiple swipe to deletes.
+   Quickly swiping to delete multiple entries causes display issue.
+   Note: If wait till after SnackBar, then all OK.
 
