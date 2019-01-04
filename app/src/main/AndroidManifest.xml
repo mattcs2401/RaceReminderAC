@@ -16,10 +16,13 @@
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".utility.RaceService"
+            android:enabled="true">
+        </service>
     </application>
 
 </manifest> <!-- android.permission.VIBRATE -->
