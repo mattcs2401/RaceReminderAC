@@ -118,7 +118,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      */
     override fun onViewSwiped(pos: Int) {
         // Delete from the backing data. Also sets an "undo" race object == that removed from the
-        // recycler view backing data, for a Room delete statement.
+        // backing data, and used in a Room delete statement.
         deleteRace(pos)
         // Do SnackBar (if Preference is set).
         if(RacePreferences.getInstance()!!.getRecoveryUndoLast(context)) {
@@ -131,8 +131,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
             EventBus.getDefault().post(DeleteMessage(raceUndo!!))
         }
         // Clear, now old, data.
-        raceUndo = null
-        posUndo = -1
+        clearUndo()
     }
     //</editor-fold>
 
@@ -156,6 +155,11 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      */
     private fun emptyViewCheck() {
         isEmptyView = lRaces.isEmpty()
+    }
+
+    private fun clearUndo() {
+        raceUndo = null
+        posUndo = -1
     }
     //</editor-fold>
 
@@ -183,8 +187,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
         // Notify the adapter.
         notifyItemInserted(lPos)
         // Reset values.
-        raceUndo = null
-        posUndo = -1
+        clearUndo()
     }
 
     private fun doSnackBar() {
