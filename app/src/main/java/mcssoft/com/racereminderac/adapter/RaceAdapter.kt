@@ -15,6 +15,7 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.SnackBarCB
 
 /**
@@ -118,8 +119,10 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
         (anchorView.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.GONE
         // Delete from backing data.
         deleteRace(pos)
-        // Do SnackBar.
-        doSnackBar()
+        // Do SnackBar (if Preference is set).
+        if(RacePreferences.getInstance()!!.getRecoveryUndoLast(context)) {
+            doSnackBar()
+        }
     }
     //</editor-fold>
 

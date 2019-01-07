@@ -40,6 +40,16 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        app:key="@string/key_recovery"
+        app:title="@string/recovery_title">
+
+        <SwitchPreferenceCompat
+            app:key="@string/key_recovery_undo_last_pref"
+            app:defaultValue="false"
+            app:summary="@string/recovery_undo_last_summary"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         app:key="@string/key_maint"
         app:title="@string/maint_title">
 

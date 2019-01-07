@@ -71,12 +71,15 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     }
 
     /**
-     * EventBus return from getting the Race date.
+     * EventBus return from getting the Race date (from AsyncNoLD).
      * @param race: The Race object.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(race: RaceMessage) {
+        // The Race date.
         this.raceDate = race.theRace.raceDate
+        // Additional, get the Race time in mSec (for copy function).
+        this.raceTimeL = race.theRace.raceTimeL
     }
     //</editor-fold>
 
@@ -146,7 +149,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 rnVals[npRaceNo.value],
                 rsVals[npRaceSel.value],
                 btnTime.text.toString())
-        race.raceTimeL = raceTimeL
+            race.raceTimeL = raceTimeL
 
         when(action) {
             // Update.

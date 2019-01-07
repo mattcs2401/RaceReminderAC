@@ -7,10 +7,15 @@
 -------
 Issues:
 -------
-1. Copy function.
-   Wrong colour on new inserted Race record.
-
-2. Multiple swipe to deletes.
+1. Multiple swipe to deletes.
    Quickly swiping to delete multiple entries causes display issue.
-   Note: If wait till after SnackBar, then all OK.
 
+   Note: If wait till after SnackBar, then all OK.
+         Likely a timing issue as deletes are done on a background thread.
+
+2. If have say two records:
+   - swipe delete the 2nd record, and
+   - before the SnackBar disappears, edit the 1st record and update, then
+   - 2nd record re-appears.
+
+3. No BottomNavView when Undo preference is turned off and last (only) item deleted.

@@ -63,6 +63,13 @@
     <string name="maint_del_archv_title">Delete Archived</string>
     <string name="maint_del_archv_summary">Delete archived Race records.</string>
 
+    <string name="key_recovery">key_recovery</string>
+    <string name="recovery_title">Recovery</string>
+
+    <string name="key_recovery_undo_last_pref">key_recovery_undo_last_pref</string>
+    <string name="recovery_undo_last_title">Undo Last Delete</string>
+    <string name="recovery_undo_last_summary">Undo (recover) the last item deleted.</string>
+
     <!-- Preferences Toast messages. -->
     <string name="race_code_msg">Default Race Code changed to</string>
     <string name="city_code_msg">Default City Code changed to</string>

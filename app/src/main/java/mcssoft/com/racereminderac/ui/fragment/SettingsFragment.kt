@@ -88,6 +88,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         keyNotifSendPref = activity!!.resources.getString(R.string.key_race_notif_send_pref)
         keyNotifMultiPref = activity!!.resources.getString(R.string.key_notif_send_multi_pref)
         keyMaintDelArchvPref = activity!!.resources.getString(R.string.key_maint_del_archv_pref)
+        keyRecoveryUndo = activity!!.resources.getString(R.string.key_recovery_undo_last_pref)
 
         // Set the preferences listeners.
         (findPreference<Preference>(keyMaintDelArchvPref)).onPreferenceClickListener = this
@@ -95,6 +96,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         (findPreference<ListPreference>(keyRaceCodePref)).onPreferenceChangeListener = this
         (findPreference<SwitchPreferenceCompat>(keyNotifSendPref)).onPreferenceClickListener = this
         (findPreference<SwitchPreferenceCompat>(keyNotifSendPref)).onPreferenceChangeListener = this
+        (findPreference<Preference>(keyRecoveryUndo)).onPreferenceClickListener = this
     }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
@@ -106,5 +108,6 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
     private lateinit var keyNotifSendPref: String
     private lateinit var keyNotifMultiPref: String
     private lateinit var keyMaintDelArchvPref: String
+    private lateinit var keyRecoveryUndo: String
     //</editor-fold>
 }

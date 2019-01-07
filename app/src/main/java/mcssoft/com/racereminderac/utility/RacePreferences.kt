@@ -62,6 +62,15 @@ class RacePreferences {
     }
 
     /**
+     * Allow recovery (Undo) of the last item deleted.
+     *
+     */
+    fun getRecoveryUndoLast(context: Context) : Boolean {
+        val key = context.resources.getString(R.string.key_recovery_undo_last_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+    }
+
+    /**
      * Check that default preference values exist, and if not, then set them.
      * @param context: Activity context.
      */
@@ -70,6 +79,7 @@ class RacePreferences {
         val keyCityCode = context.resources.getString(R.string.key_city_code_pref)
         val keyRaceNotifSend = context.resources.getString(R.string.key_race_notif_send_pref)
         val keyRaceNotifMulti = context.resources.getString(R.string.key_notif_send_multi_pref)
+        val keyRecoveryUndoLast = context.resources.getString(R.string.key_recovery_undo_last_pref)
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
@@ -89,6 +99,11 @@ class RacePreferences {
         if(!map.contains(keyRaceNotifMulti)) {
             sharedPrefs.edit().putBoolean(keyRaceNotifMulti, false).apply()
         }
+
+        if(!map.contains(keyRecoveryUndoLast)) {
+            sharedPrefs.edit().putBoolean(keyRecoveryUndoLast, false).apply()
+        }
+
     }
 
 }
