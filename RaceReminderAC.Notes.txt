@@ -17,5 +17,3 @@ Issues:
    - swipe delete the 2nd record, and
    - before the SnackBar disappears, edit the 1st record and update, then
    - 2nd record re-appears.
-
-3. No BottomNavView when Undo preference is turned off and last (only) item deleted.

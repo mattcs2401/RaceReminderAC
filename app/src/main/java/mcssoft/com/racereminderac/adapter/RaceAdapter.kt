@@ -17,6 +17,8 @@ import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.SnackBarCB
+import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
+import org.greenrobot.eventbus.EventBus
 
 /**
  * The RaceAdapter (for the recycler view in the MainFragment).
@@ -115,14 +117,22 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      * Interface ISwipe.
      */
     override fun onViewSwiped(pos: Int) {
-        // Hide the bottom navigation view, as it hides the SnackBar.
-        (anchorView.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.GONE
-        // Delete from backing data.
+        // Delete from the backing data. Also sets an "undo" race object == that removed from the
+        // recycler view backing data, for a Room delete statement.
         deleteRace(pos)
         // Do SnackBar (if Preference is set).
         if(RacePreferences.getInstance()!!.getRecoveryUndoLast(context)) {
+            // Hide the bottom navigation view, as it hides the SnackBar.
+            (anchorView.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.GONE
+            // Show the SnackBar.
             doSnackBar()
+        } else {
+            // Delete from the database. The SnackBar does this as well.
+            EventBus.getDefault().post(DeleteMessage(raceUndo!!))
         }
+        // Clear, now old, data.
+        raceUndo = null
+        posUndo = -1
     }
     //</editor-fold>
 
