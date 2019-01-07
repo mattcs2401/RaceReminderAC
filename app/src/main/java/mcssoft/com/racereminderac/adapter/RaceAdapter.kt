@@ -69,7 +69,6 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      */
     internal fun swapData(lRaces: ArrayList<Race>) {
         this.lRaces = lRaces
-        emptyViewCheck()
         notifyDataSetChanged()
     }
 
@@ -127,11 +126,11 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
             // Show the SnackBar.
             doSnackBar()
         } else {
-            // Delete from the database. The SnackBar does this as well.
+            // Delete from the database (the "UNDO" SnackBar does this as well if enabled in preferences).
             EventBus.getDefault().post(DeleteMessage(raceUndo!!))
+            // Clear, now old, data.
+            clearUndo()
         }
-        // Clear, now old, data.
-        clearUndo()
     }
     //</editor-fold>
 
@@ -141,25 +140,19 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      * @param lPos: The position in the listing.
      */
     private fun deleteRace(lPos: Int) {
-        // keep backup in case of UNDO.
+        // Keep backup in case of UNDO.
         posUndo = lPos
         raceUndo = lRaces.removeAt(lPos)
-        // check list size.
-        emptyViewCheck()
-        // notify the adapter.
+        // Notify the adapter.
         notifyItemRemoved(lPos)
     }
 
     /**
-     * Set flag for view is empty of Races to display.
+     * Reset the Undo data.
      */
-    private fun emptyViewCheck() {
-        isEmptyView = lRaces.isEmpty()
-    }
-
     private fun clearUndo() {
         raceUndo = null
-        posUndo = -1
+        posUndo = Constants.MINUS_ONE
     }
     //</editor-fold>
 
@@ -180,10 +173,6 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     private fun reinstateRace(race: Race, lPos: Int) {
         // Put Race back into the list.
         lRaces.add(lPos, race)
-        // Quick check, last Race removed might have been only one.
-        if(isEmptyView) {
-            isEmptyView = false
-        }
         // Notify the adapter.
         notifyItemInserted(lPos)
         // Reset values.
@@ -199,7 +188,6 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
-    private var isEmptyView: Boolean = false               // flag, view is empty.
     private var lRaces = ArrayList<Race>(0)   // backing data.
 
     private lateinit var itemSelect: ISelect.ItemSelect              //
@@ -208,7 +196,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     private lateinit var raceViewHolder: RaceViewHolder    //
     private lateinit var itemTouchHelper: ItemTouchHelper  //
 
-    private var raceUndo: Race? = null      // local copy for any UNDO action.
-    private var posUndo: Int = -1           // "     "    "   "   "    "
+    private var raceUndo: Race? = null                // local copy for any UNDO action.
+    private var posUndo: Int = Constants.MINUS_ONE    // "     "    "   "   "    "
     //</editor-fold>
 }

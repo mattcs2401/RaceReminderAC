@@ -30,4 +30,6 @@ object Constants {
 
     const val DAY_PRIOR = 0                 // The given day is before today.
     const val DAY_CURRENT = 1               // The given day is the same as today.
+
+    const val MINUS_ONE = -1                // Initialiser value.
 }
