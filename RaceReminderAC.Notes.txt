@@ -7,13 +7,16 @@
 -------
 Issues:
 -------
-1. Multiple swipe to deletes.
-   Quickly swiping to delete multiple entries causes display issue.
+(1) Multiple swipe to deletes.
+    Quickly swiping to delete multiple entries causes display issue.
 
-   Note: If wait till after SnackBar, then all OK.
-         Likely a timing issue as deletes are done on a background thread.
+    Note: If wait till after SnackBar, then all OK.
+          Likely a timing issue as deletes are done on a background thread.
 
-2. If have say two records:
-   - swipe delete the 2nd record, and
-   - before the SnackBar disappears, edit the 1st record and update, then
-   - 2nd record re-appears.
+(2) If have say two records:
+    - swipe delete the 2nd record, and
+    - before the SnackBar disappears, edit the 1st record and update, then
+    - 2nd record re-appears.
+
+    Note: If don't update, just press back, than all OK.
+
