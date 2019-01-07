@@ -20,3 +20,10 @@ Issues:
 
     Note: If don't update, just press back, than all OK.
 
+--------
+Updates:
+--------
+(1) Five minutes after race time, record auto deletes.
+
+(2) Service to update UI accordingly at preference set interval.
+
