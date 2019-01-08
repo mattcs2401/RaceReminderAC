@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.RaceAlarm
 import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.eventbus.RefreshMessage
 import org.greenrobot.eventbus.EventBus
@@ -25,6 +26,16 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         RacePreferences.getInstance()!!.preferencesCheck(this)
 
         initialise()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        RaceAlarm.getInstance()?.setAlarm(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        RaceAlarm.getInstance()?.cancelAlarm()
     }
 
     override fun onSupportNavigateUp(): Boolean {

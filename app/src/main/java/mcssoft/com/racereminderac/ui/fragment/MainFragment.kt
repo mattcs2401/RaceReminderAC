@@ -1,9 +1,14 @@
 package mcssoft.com.racereminderac.ui.fragment
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -20,6 +25,7 @@ import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
+import mcssoft.com.racereminderac.utility.RaceReceiver
 import mcssoft.com.racereminderac.utility.TouchHelper
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import mcssoft.com.racereminderac.utility.eventbus.RefreshMessage
@@ -117,12 +123,6 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
         (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
     }
     //</editor-fold>
-
-    private fun klunkyForceChange() {
-        val race = Race("B","R","1","1","00:00")
-        race.archvRace = "Y"
-        raceViewModel.insert(race)
-    }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars.">
     private lateinit var rootView: View

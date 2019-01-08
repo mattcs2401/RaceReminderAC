@@ -19,10 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
-            android:name=".utility.RaceService"
-            android:enabled="true">
-        </service>
+        <receiver android:name=".utility.RaceReceiver"
+            android:enabled="true" />
     </application>
 
 </manifest> <!-- android.permission.VIBRATE -->
