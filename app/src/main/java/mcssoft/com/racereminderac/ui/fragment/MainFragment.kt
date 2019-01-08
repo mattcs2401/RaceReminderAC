@@ -1,14 +1,9 @@
 package mcssoft.com.racereminderac.ui.fragment
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -20,15 +15,16 @@ import kotlinx.android.synthetic.main.main_fragment.view.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
-import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
-import mcssoft.com.racereminderac.utility.RaceReceiver
+import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.RaceAlarm
 import mcssoft.com.racereminderac.utility.TouchHelper
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import mcssoft.com.racereminderac.utility.eventbus.RefreshMessage
+import mcssoft.com.racereminderac.utility.eventbus.SelectMessage
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -77,11 +73,13 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
 
     override fun onStart() {
         super.onStart()
+        RaceAlarm.getInstance()?.setAlarm(activity!!)
         EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
         super.onStop()
+        RaceAlarm.getInstance()?.cancelAlarm()
         EventBus.getDefault().unregister(this)
     }
     //</editor-fold>
@@ -94,16 +92,18 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(refresh: RefreshMessage) {
-        // Note: the down side to this is the observer will react twice.
+        /** Note: The down side to this is the observer will react twice. **/
         if(raceAdapter.itemCount > 0) {
            // Get arbitary 1st Race from backing data.
             val race = raceAdapter.getRace(0)
-            val oldCc = race.cityCode
+            val oldCC = race.cityCode
+
             // Set new temporary city code and update Race.
-            race.cityCode = "ZZ"
+            race.cityCode = Constants.CITY_CODE_DUMMY
             raceViewModel.update(race)
+
             // Reset city code back to original.
-            race.cityCode = oldCc
+            race.cityCode = oldCC
             raceViewModel.update(race)
         }
     }
@@ -114,13 +114,20 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
      * Interface ISelect.ItemSelect
      */
     override fun onItemSelect(lPos: Int) {
-        // callback to the Activity with the selected Race object's id.
+        // Callback to the Activity with the selected Race object's id.
         // TBA - use EventBus ?
         (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
+//        EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, id))
     }
 
+    /**
+     * Interface ISelect.ItemLongSelect
+     */
     override fun onItemLongSelect(lPos: Int) {
+        // Callback to the Activity with the selected Race object's id.
+        // TBA - use EventBus ?
         (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
+//        EventBus.getDefault().post(SelectMessage(Constants.ITEM_LONG_SELECT, id))
     }
     //</editor-fold>
 

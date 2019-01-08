@@ -33,8 +33,13 @@ object Constants {
     const val DAY_PRIOR = 0                 // The given day is before today.
     const val DAY_CURRENT = 1               // The given day is the same as today.
 
+    const val CITY_CODE_DUMMY = "ZZ"        // dummy city code value.
+
     const val MINUS_ONE = -1                // Initialiser value.
 
     const val NO_FLAGS = 0                  // PendingIntent related (RaceAlarm).
     const val REQ_CODE = 0                  // "             "       "
+
+    const val ITEM_SELECT = 0               //
+    const val ITEM_LONG_SELECT = 1          //
 }

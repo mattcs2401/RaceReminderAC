@@ -17,25 +17,16 @@ import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.eventbus.RefreshMessage
 import org.greenrobot.eventbus.EventBus
 
-class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSelect, BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSelect,
+        BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        RacePreferences.getInstance()!!.preferencesCheck(this)
+        RacePreferences.getInstance()?.preferencesCheck(this)
 
         initialise()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        RaceAlarm.getInstance()?.setAlarm(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        RaceAlarm.getInstance()?.cancelAlarm()
     }
 
     override fun onSupportNavigateUp(): Boolean {
