@@ -31,7 +31,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.row_race, parent, false)
-        raceViewHolder = RaceViewHolder(view, itemSelect, itemLongSelect)
+        raceViewHolder = RaceViewHolder(view) //, itemSelect, itemLongSelect)
         return raceViewHolder
     }
 

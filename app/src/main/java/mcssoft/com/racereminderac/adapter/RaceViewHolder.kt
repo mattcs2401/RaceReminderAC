@@ -5,13 +5,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.ISelect
+import mcssoft.com.racereminderac.utility.eventbus.SelectMessage
 
-class RaceViewHolder(view : View) : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
-
-    constructor(view: View, itemSelect: ISelect.ItemSelect, itemLongSelect: ISelect.ItemLongSelect) : this(view) {
+class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
+init {
+//    constructor(view: View/*, itemSelect: ISelect.ItemSelect, itemLongSelect: ISelect.ItemLongSelect*/) : this(view) {
         // Set the interface callbacks for select and long select.
-        this.itemSelect = itemSelect
-        this.itemLongSelect = itemLongSelect
+//        this.itemSelect = itemSelect
+//        this.itemLongSelect = itemLongSelect
         // Set the listener for the View.
         view.setOnClickListener(this)
         view.setOnLongClickListener(this)
@@ -28,7 +29,9 @@ class RaceViewHolder(view : View) : RecyclerView.ViewHolder(view), View.OnClickL
      * Call back through the ISelect.ItemSelect interface with View and adapter position info.
      */
     override fun onClick(view : View) {
-        itemSelect.onItemSelect(adapterPosition)
+//        itemSelect.onItemSelect(adapterPosition)
+
+        EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, id))
     }
 
     override fun onLongClick(view: View): Boolean {
@@ -40,11 +43,11 @@ class RaceViewHolder(view : View) : RecyclerView.ViewHolder(view), View.OnClickL
     private lateinit var itemSelect: ISelect.ItemSelect
     private lateinit var itemLongSelect: ISelect.ItemLongSelect
 
-    lateinit var tvCityCode: TextView
-    lateinit var tvRaceCode: TextView
-    lateinit var tvRaceNo: TextView
-    lateinit var tvRaceSel: TextView
-    lateinit var tvRaceTime: TextView
-    lateinit var tvRaceDate: TextView
+    var tvCityCode: TextView? = null
+    var tvRaceCode: TextView? = null
+    var tvRaceNo: TextView? = null
+    var tvRaceSel: TextView? = null
+    var tvRaceTime: TextView? = null
+    var tvRaceDate: TextView? = null
     //</editor-fold>
 }

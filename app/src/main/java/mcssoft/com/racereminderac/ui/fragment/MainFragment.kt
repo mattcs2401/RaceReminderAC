@@ -29,7 +29,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
+class MainFragment : Fragment() { //), ISelect.ItemSelect, ISelect.ItemLongSelect {
 
     //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +44,8 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
         super.onViewCreated(view, savedInstanceState)
 
         raceAdapter = RaceAdapter(activity!!.id_container, activity!!)
-        raceAdapter.setClickListener(this)
-        raceAdapter.setLongClickListener(this)
+//        raceAdapter.setClickListener(this)
+//        raceAdapter.setLongClickListener(this)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = raceAdapter
@@ -109,27 +109,27 @@ class MainFragment : Fragment(), ISelect.ItemSelect, ISelect.ItemLongSelect {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Interface ISelect.ItemSelect">
-    /**
-     * Interface ISelect.ItemSelect
-     */
-    override fun onItemSelect(lPos: Int) {
-        // Callback to the Activity with the selected Race object's id.
-        // TBA - use EventBus ?
-        (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
-//        EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, id))
-    }
-
-    /**
-     * Interface ISelect.ItemLongSelect
-     */
-    override fun onItemLongSelect(lPos: Int) {
-        // Callback to the Activity with the selected Race object's id.
-        // TBA - use EventBus ?
-        (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
-//        EventBus.getDefault().post(SelectMessage(Constants.ITEM_LONG_SELECT, id))
-    }
-    //</editor-fold>
+//    //<editor-fold defaultstate="collapsed" desc="Region: Interface ISelect.ItemSelect">
+//    /**
+//     * Interface ISelect.ItemSelect
+//     */
+//    override fun onItemSelect(lPos: Int) {
+//        // Callback to the Activity with the selected Race object's id.
+//        // TBA - use EventBus ?
+//        (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
+////        EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, id))
+//    }
+//
+//    /**
+//     * Interface ISelect.ItemLongSelect
+//     */
+//    override fun onItemLongSelect(lPos: Int) {
+//        // Callback to the Activity with the selected Race object's id.
+//        // TBA - use EventBus ?
+//        (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
+////        EventBus.getDefault().post(SelectMessage(Constants.ITEM_LONG_SELECT, id))
+//    }
+//    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars.">
     private lateinit var rootView: View
