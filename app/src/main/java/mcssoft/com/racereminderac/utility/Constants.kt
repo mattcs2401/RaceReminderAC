@@ -12,8 +12,10 @@ object Constants {
     const val EDIT_RACE_UPDATE: Int = 1     // Edit action is to update/amend a Race.
     const val EDIT_RACE_COPY: Int = 2       // Edit action is to copy a Race.
 
-    const val FIVE_MINUTES: Int = 300000    // For a 5 minute window before race time.
-    const val FIFTEEN_MINUTES: Int = 900000 // Periodic work request limitation (can't be less).
+    const val ONE_MINUTE: Long = 60000       // Alarm 1 minute interval.
+    const val THREE_MINUTES: Long = 180000   // Alarm 3 minute interval.
+    const val FIVE_MINUTES: Long = 300000    // For a 5 minute window before race time.
+    const val FIFTEEN_MINUTES: Long = 900000 // Periodic work request limitation (can't be less).
 
     const val TIME: Int = 1                 // Get date/time as time only.
     const val DATE: Int = 2                 // Get date/time as date only.
@@ -32,4 +34,7 @@ object Constants {
     const val DAY_CURRENT = 1               // The given day is the same as today.
 
     const val MINUS_ONE = -1                // Initialiser value.
+
+    const val NO_FLAGS = 0                  // PendingIntent related (RaceAlarm).
+    const val REQ_CODE = 0                  // "             "       "
 }

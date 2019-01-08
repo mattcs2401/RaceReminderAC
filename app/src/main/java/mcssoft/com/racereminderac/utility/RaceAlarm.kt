@@ -27,10 +27,10 @@ class RaceAlarm {
     internal fun setAlarm(context: Context) {
         val intent = Intent(context, RaceReceiver::class.java)
         alarmIntent = PendingIntent.getBroadcast(
-                context, 123, intent, 0)
+                context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
 
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 60000, alarmIntent)
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), Constants.ONE_MINUTE, alarmIntent)
     }
 
     internal fun cancelAlarm() {
