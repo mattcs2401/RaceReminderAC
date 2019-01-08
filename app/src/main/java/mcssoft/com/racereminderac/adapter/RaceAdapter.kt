@@ -93,24 +93,6 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
         return context
     }
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Interface - ISelect">
-    /**
-     * Set the interface ISelect.ItemSelect (when an item in the adapter's listing is selected).
-     * @param itemSelect: The interface.
-     */
-    internal fun setClickListener(itemSelect: ISelect.ItemSelect) {
-        this.itemSelect = itemSelect
-    }
-
-    /**
-     * Set the interface ISelect.ItemLongSelect.
-     * @param itemLongSelect: The interface.
-     */
-    internal fun setLongClickListener(itemLongSelect: ISelect.ItemLongSelect) {
-        this.itemLongSelect = itemLongSelect
-    }
-    //</editor-fold>
-
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - ISwipe">
     /**
      * Interface ISwipe.
@@ -156,7 +138,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: SnackBar and related">
+    //<editor-fold defaultstate="collapsed" desc="Region: SnackBar Undo and related">
     /**
      * OnClick for the Snackbar Undo.
      */
@@ -189,9 +171,6 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private var lRaces = ArrayList<Race>(0)   // backing data.
-
-    private lateinit var itemSelect: ISelect.ItemSelect              //
-    private lateinit var itemLongSelect: ISelect.ItemLongSelect      //
 
     private lateinit var raceViewHolder: RaceViewHolder    //
     private lateinit var itemTouchHelper: ItemTouchHelper  //

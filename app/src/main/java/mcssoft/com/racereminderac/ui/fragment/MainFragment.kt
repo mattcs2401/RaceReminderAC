@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.interfaces.IRace
-import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.utility.Constants
@@ -29,23 +28,21 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class MainFragment : Fragment() { //), ISelect.ItemSelect, ISelect.ItemLongSelect {
+class MainFragment : Fragment() {
 
     //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        rootView = inflater.inflate(R.layout.main_fragment, container, false)
-        recyclerView = rootView.id_recyclerView
-
-        return rootView
+        return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity?.id_toolbar)?.title = getString(R.string.title_race_reminder)
+
         raceAdapter = RaceAdapter(activity!!.id_container, activity!!)
-//        raceAdapter.setClickListener(this)
-//        raceAdapter.setLongClickListener(this)
+        recyclerView = view.id_recyclerView
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = raceAdapter
@@ -55,8 +52,6 @@ class MainFragment : Fragment() { //), ISelect.ItemSelect, ISelect.ItemLongSelec
 
         raceAdapter.setTouchHelper(itemTouchHelper)
         itemTouchHelper.attachToRecyclerView(recyclerView)
-
-        (activity?.id_toolbar)?.title = getString(R.string.title_race_reminder)
 
         // If bottom nav view was previously hidden by a New or Edit etc, then show again.
         val bnv = activity?.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView
@@ -107,32 +102,22 @@ class MainFragment : Fragment() { //), ISelect.ItemSelect, ISelect.ItemLongSelec
             raceViewModel.update(race)
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    fun onMessageEvent(select: SelectMessage) {
+        val lPos = select.getPos
+        when(select.getSelType) {
+            Constants.ITEM_SELECT -> {
+                (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
+            }
+            Constants.ITEM_LONG_SELECT -> {
+                (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
+            }
+        }
+    }
     //</editor-fold>
 
-//    //<editor-fold defaultstate="collapsed" desc="Region: Interface ISelect.ItemSelect">
-//    /**
-//     * Interface ISelect.ItemSelect
-//     */
-//    override fun onItemSelect(lPos: Int) {
-//        // Callback to the Activity with the selected Race object's id.
-//        // TBA - use EventBus ?
-//        (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
-////        EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, id))
-//    }
-//
-//    /**
-//     * Interface ISelect.ItemLongSelect
-//     */
-//    override fun onItemLongSelect(lPos: Int) {
-//        // Callback to the Activity with the selected Race object's id.
-//        // TBA - use EventBus ?
-//        (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
-////        EventBus.getDefault().post(SelectMessage(Constants.ITEM_LONG_SELECT, id))
-//    }
-//    //</editor-fold>
-
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars.">
-    private lateinit var rootView: View
     private lateinit var raceAdapter: RaceAdapter
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var recyclerView: RecyclerView
