@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         app:key="@string/key_defaults"
@@ -19,7 +20,6 @@
             app:summary="@string/city_code_pref_summary"
             app:entries="@array/cityCodes"
             app:entryValues="@array/cityCodesVals" />
-
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -36,7 +36,23 @@
             app:enabled="false"
             app:defaultValue="false"
             app:summary="@string/notif_send_multi_pref_summary" />
+    </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="key_refresh"
+        app:title="Refresh Interval">
+
+        <SwitchPreferenceCompat
+            app:key="key_refresh_pref"
+            app:defaultValue="false"
+            app:summary="Enable a screen refresh interval."/>
+
+        <SeekBarPreference
+            app:key="key_refresh_seek_pref"
+            app:summary="Set the Refresh interval in minutes."
+            app:defaultValue="3"
+            app:enabled="false"
+            android:max="5"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -58,7 +74,6 @@
             app:key="@string/key_maint_del_archv_pref"
             app:title="@string/maint_del_archv_title"
             app:summary="@string/maint_del_archv_summary"/>
-
     </PreferenceCategory>
 
 </androidx.preference.PreferenceScreen>
