@@ -40,6 +40,8 @@ object Constants {
     const val NO_FLAGS = 0                  // PendingIntent related (RaceAlarm).
     const val REQ_CODE = 0                  // "             "       "
 
-    const val ITEM_SELECT = 0               //
-    const val ITEM_LONG_SELECT = 1          //
+    const val ITEM_SELECT = 0               // Represents the click (press) on a list item.
+    const val ITEM_LONG_SELECT = 1          // Represents the long click (long press) on a list item.
+
+    const val DELETE_COLOUR = "#b80f0a"     // Swipe to delete background colour.
 }

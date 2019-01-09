@@ -17,7 +17,7 @@ import mcssoft.com.racereminderac.interfaces.ISwipe
 class TouchHelper(private val context: Context, private val swipeAction: ISwipe) : ItemTouchHelper.Callback() {
 
     private val background: ColorDrawable = ColorDrawable()
-    private val backgroundColour: Int = Color.parseColor("#b80f0a")
+    private val backgroundColour: Int = Color.parseColor(Constants.DELETE_COLOUR)
     private val clearPaint: Paint = Paint()
     private val deleteDrawable: Drawable
     private val intrinsicWidth: Int
@@ -39,7 +39,11 @@ class TouchHelper(private val context: Context, private val swipeAction: ISwipe)
         return false
     }
 
+    /**
+     * ItemTouchHelper.Callback()
+     */
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        /** Note: Can't seem to get EventBus to work here. Likely something with the callback. **/
         swipeAction.onViewSwiped(viewHolder.adapterPosition)
     }
 

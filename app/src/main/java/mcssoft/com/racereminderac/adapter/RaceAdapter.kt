@@ -12,7 +12,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
-import mcssoft.com.racereminderac.interfaces.ISelect
 import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
@@ -31,7 +30,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RaceViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.row_race, parent, false)
-        raceViewHolder = RaceViewHolder(view) //, itemSelect, itemLongSelect)
+        raceViewHolder = RaceViewHolder(view)
         return raceViewHolder
     }
 
@@ -87,15 +86,14 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     }
 
     /**
-     * TBA
+     * Primarily for the list observer.
      */
-    internal fun getContext(): Context {
-        return context
-    }
+    internal fun getContext(): Context = context
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - ISwipe">
     /**
      * Interface ISwipe.
+     * Note: Tried to use EventBus instead of this interface, but seem to get it to work.
      */
     override fun onViewSwiped(pos: Int) {
         // Delete from the backing data. Also sets an "undo" race object == that removed from the
