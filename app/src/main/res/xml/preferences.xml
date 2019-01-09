@@ -39,17 +39,17 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:key="key_refresh"
-        app:title="Refresh Interval">
+        app:key="@string/key_refresh_interval"
+        app:title="@string/refresh_interval_title">
 
         <SwitchPreferenceCompat
-            app:key="key_refresh_pref"
+            app:key="@string/key_refresh_interval_pref"
             app:defaultValue="false"
-            app:summary="Enable a screen refresh interval."/>
+            app:summary="@string/refresh_interval_summary"/>
 
         <SeekBarPreference
-            app:key="key_refresh_seek_pref"
-            app:summary="Set the Refresh interval in minutes."
+            app:key="@string/key_refresh_interval_seek_pref"
+            app:summary="@string/refresh_interval_seek_summary"
             app:defaultValue="3"
             app:enabled="false"
             android:max="5"/>

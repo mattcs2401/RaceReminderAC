@@ -10,7 +10,7 @@ import mcssoft.com.racereminderac.R
 class RacePreferences {
     /**
      * For Singleton instance.
-     * @Note: Can't use Context here, so context passed into the respective methods.
+     * @Note: Can't use Context here, so context passed into the respective methods as required.
      */
     companion object {
         @Volatile private var instance: RacePreferences? = null
@@ -63,11 +63,25 @@ class RacePreferences {
 
     /**
      * Allow recovery (Undo) of the last item deleted.
-     *
+     * @param context: Activity context.
      */
     fun getRecoveryUndoLast(context: Context) : Boolean {
         val key = context.resources.getString(R.string.key_recovery_undo_last_pref)
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+    }
+
+    /**
+     * Get the Refresh interval preference. If true, enables the Refresh interval seek bar.
+     * @param context: Activity context.
+     */
+    fun getRefreshInterval(context: Context) : Boolean {
+        val key = context.resources.getString(R.string.key_refresh_interval_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+    }
+
+    fun getRefreshIntervalVal(context: Context) : Int {
+        val key = context.resources.getString(R.string.key_refresh_interval_seek_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getInt(key, 3)
     }
 
     /**
@@ -80,10 +94,12 @@ class RacePreferences {
         val keyRaceNotifSend = context.resources.getString(R.string.key_race_notif_send_pref)
         val keyRaceNotifMulti = context.resources.getString(R.string.key_notif_send_multi_pref)
         val keyRecoveryUndoLast = context.resources.getString(R.string.key_recovery_undo_last_pref)
+        val keyRefreshInterval = context.resources.getString(R.string.key_refresh_interval_pref)
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
 
+        // If SharedPreferences don't exist, then set them with their defaults.
         if(!map.contains(keyCityCode)) {
             sharedPrefs.edit().putString(keyCityCode, "B").apply()
         }
@@ -104,6 +120,9 @@ class RacePreferences {
             sharedPrefs.edit().putBoolean(keyRecoveryUndoLast, false).apply()
         }
 
+        if(!map.contains(keyRefreshInterval)) {
+            sharedPrefs.edit().putBoolean(keyRefreshInterval, false).apply()
+        }
     }
 
 }

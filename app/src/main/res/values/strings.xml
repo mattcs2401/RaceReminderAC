@@ -70,6 +70,13 @@
     <string name="recovery_undo_last_title">Undo Last Delete</string>
     <string name="recovery_undo_last_summary">Undo (recover) the last item deleted.</string>
 
+    <string name="key_refresh_interval">key_refresh_interval</string>
+    <string name="refresh_interval_title">Refresh Interval</string>
+    <string name="key_refresh_interval_pref">key_refresh_interval_pref</string>
+    <string name="refresh_interval_summary">Enable a screen refresh interval.</string>
+    <string name="key_refresh_interval_seek_pref">key_refresh_interval_seek_pref</string>
+    <string name="refresh_interval_seek_summary">Set the Refresh interval in minutes.</string>
+
     <!-- Preferences Toast messages. -->
     <string name="race_code_msg">Default Race Code changed to</string>
     <string name="city_code_msg">Default City Code changed to</string>

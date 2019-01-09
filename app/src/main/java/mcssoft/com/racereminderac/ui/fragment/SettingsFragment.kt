@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.preference.ListPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreferenceCompat
+import androidx.preference.*
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -70,6 +67,11 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
                 }
                 return true
             }
+            keyRefreshInterval -> {
+                val seek = findPreference<SeekBarPreference>(keyRefreshSeek)
+                seek.isEnabled = newValue == true
+                return true
+            }
         }
         return false
     }
@@ -89,6 +91,8 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         keyNotifMultiPref = activity!!.resources.getString(R.string.key_notif_send_multi_pref)
         keyMaintDelArchvPref = activity!!.resources.getString(R.string.key_maint_del_archv_pref)
         keyRecoveryUndo = activity!!.resources.getString(R.string.key_recovery_undo_last_pref)
+        keyRefreshInterval = activity!!.resources.getString(R.string.key_refresh_interval_pref)
+        keyRefreshSeek = activity!!.resources.getString(R.string.key_refresh_interval_seek_pref)
 
         // Set the preferences listeners.
         (findPreference<Preference>(keyMaintDelArchvPref)).onPreferenceClickListener = this
@@ -97,6 +101,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         (findPreference<SwitchPreferenceCompat>(keyNotifSendPref)).onPreferenceClickListener = this
         (findPreference<SwitchPreferenceCompat>(keyNotifSendPref)).onPreferenceChangeListener = this
         (findPreference<Preference>(keyRecoveryUndo)).onPreferenceClickListener = this
+        (findPreference<SwitchPreferenceCompat>(keyRefreshInterval)).onPreferenceChangeListener = this
     }
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars">
@@ -109,5 +114,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
     private lateinit var keyNotifMultiPref: String
     private lateinit var keyMaintDelArchvPref: String
     private lateinit var keyRecoveryUndo: String
+    private lateinit var keyRefreshInterval: String
+    private lateinit var keyRefreshSeek: String
     //</editor-fold>
 }
