@@ -20,10 +20,17 @@ Issues:
 
     Note: If don't update, just press back, than all OK.
 
---------
-Updates:
---------
-(1) Five minutes after race time, record auto deletes.
+(3) Preference screen values are over typing the toolbar.
 
-(2) Service to update UI accordingly at preference set interval.
+(4) Lifecycle issue with refresh slider:
+    - If enabled, and activity sent to background/not in view, then when activity in view again,
+      the preference shows as disabled.
+
+------
+TO DO:
+------
+(1) XX minutes after race time, record auto deletes ?
+
+(2) Update/Refresh UI accordingly, at preference controlled interval.
+
 
