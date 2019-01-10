@@ -5,6 +5,10 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 
+/**
+ * Utility class as wrapper for AlarmManager.
+ * @Note: Listens for changes in the Refresh Interval preference.
+ */
 class RaceAlarm {
 
     /**
@@ -25,20 +29,28 @@ class RaceAlarm {
     }
 
     internal fun setAlarm(context: Context) {
-        val intent = Intent(context, RaceReceiver::class.java)
-        alarmIntent = PendingIntent.getBroadcast(
-                context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
+        // Get the switch preference that enables the seek slider.
+        if(RacePreferences.getInstance()!!.getRefreshInterval(context)) {
+            var interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(context).toLong()
+            if(interval > 0) {
+                interval *= 60 * 1000
+                val intent = Intent(context, RaceReceiver::class.java)
+                alarmIntent = PendingIntent.getBroadcast(
+                        context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
 
-        alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), Constants.ONE_MINUTE, alarmIntent)
+                alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                alarmManager!!.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, alarmIntent)
+            }
+        }
     }
 
     internal fun cancelAlarm() {
-//        if(alarmManager != null) {
-            alarmManager.cancel(alarmIntent)
-//        }
+        // Alarm manager may not have been initialsied depending on the conditions in setAlarm().
+        if(alarmManager != null) {
+            alarmManager!!.cancel(alarmIntent)
+        }
     }
 
-    private lateinit var alarmIntent: PendingIntent
-    private lateinit var alarmManager: AlarmManager
+    private var alarmIntent: PendingIntent? = null
+    private var alarmManager: AlarmManager? = null
 }

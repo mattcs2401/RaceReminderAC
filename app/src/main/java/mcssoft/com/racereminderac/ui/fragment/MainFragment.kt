@@ -22,7 +22,7 @@ import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceAlarm
 import mcssoft.com.racereminderac.utility.TouchHelper
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
-import mcssoft.com.racereminderac.utility.eventbus.RefreshMessage
+import mcssoft.com.racereminderac.utility.eventbus.ManualRefreshMessage
 import mcssoft.com.racereminderac.utility.eventbus.SelectMessage
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -86,7 +86,7 @@ class MainFragment : Fragment() {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(refresh: RefreshMessage) {
+    fun onMessageEvent(refresh: ManualRefreshMessage) {
         /** Note: The down side to this is the observer will react twice. **/
         if(raceAdapter.itemCount > 0) {
            // Get arbitary 1st Race from backing data.

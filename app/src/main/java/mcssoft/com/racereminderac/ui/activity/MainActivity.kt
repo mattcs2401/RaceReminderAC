@@ -12,9 +12,8 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.utility.Constants
-import mcssoft.com.racereminderac.utility.RaceAlarm
 import mcssoft.com.racereminderac.utility.RacePreferences
-import mcssoft.com.racereminderac.utility.eventbus.RefreshMessage
+import mcssoft.com.racereminderac.utility.eventbus.ManualRefreshMessage
 import org.greenrobot.eventbus.EventBus
 
 class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSelect,
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when(menuItem.itemId) {
             R.id.id_refresh -> {
-                EventBus.getDefault().post(RefreshMessage())
+                EventBus.getDefault().post(ManualRefreshMessage())
             }
             R.id.id_settings -> {
                 navController.navigate(R.id.id_settings_fragment)

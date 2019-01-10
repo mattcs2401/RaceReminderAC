@@ -93,7 +93,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - ISwipe">
     /**
      * Interface ISwipe.
-     * Note: Tried to use EventBus instead of this interface, but seem to get it to work.
+     * Note: Tried to use EventBus instead of this interface, but couldn't seem to get it to work.
      */
     override fun onViewSwiped(pos: Int) {
         // Delete from the backing data. Also sets an "undo" race object == that removed from the
