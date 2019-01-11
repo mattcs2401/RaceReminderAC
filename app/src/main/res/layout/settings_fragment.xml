@@ -2,25 +2,13 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/id_settings_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <!--android:layout_marginTop="112dp">-->
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/id_settings_fragment"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="?android:attr/actionBarSize"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="?android:attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-    </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 <!-- Notes:
-     Tried adding the FrameLayout as the settings container but still not working.
+     Tried adding a FrameLayout (and other containers) as the settings container but still not working.
      Something about the Nav controller perhaps ?
 -->
