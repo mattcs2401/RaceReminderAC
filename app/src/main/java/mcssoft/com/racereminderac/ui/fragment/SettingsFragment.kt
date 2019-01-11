@@ -11,7 +11,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.background.worker.DAAWorker
-import org.greenrobot.eventbus.EventBus
 
 class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClickListener,
         Preference.OnPreferenceChangeListener {

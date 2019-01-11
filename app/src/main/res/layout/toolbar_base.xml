@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.ActionBarContainer
+<androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-    <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+    android:minHeight="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:theme="?attr/actionBarTheme">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/id_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="?attr/actionBarTheme" />
+</androidx.appcompat.widget.Toolbar>
+<!--<androidx.appcompat.widget.ActionBarContainer-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto">-->
+    <!--&lt;!&ndash;app:layout_behavior="@string/appbar_scrolling_view_behavior"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:theme="@style/AppTheme.AppBarOverlay">&ndash;&gt;-->
 
-</androidx.appcompat.widget.ActionBarContainer>
+    <!--<androidx.appcompat.widget.Toolbar-->
+        <!--android:id="@+id/id_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--android:theme="?attr/actionBarTheme" />-->
+
+<!--</androidx.appcompat.widget.ActionBarContainer>-->

@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/id_settings_fragment"
         android:name="mcssoft.com.racereminderac.ui.fragment.SettingsFragment"
-        android:label="Settings" >
+        android:label="Settings">
         <action
             android:id="@+id/settingsFragment_to_mainFragment"
             app:destination="@id/id_main_fragment" />
