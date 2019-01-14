@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
@@ -61,6 +62,10 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
                 EventBus.getDefault().post(ManualRefreshMessage())
             }
             R.id.id_settings -> {
+                var navDeepLinkBuilder = NavDeepLinkBuilder(this)
+                        .setGraph(R.navigation.navigation)
+                        .setDestination(R.id.id_settings_fragment)
+
                 navController.navigate(R.id.id_settings_fragment)
             }
             R.id.id_add -> {

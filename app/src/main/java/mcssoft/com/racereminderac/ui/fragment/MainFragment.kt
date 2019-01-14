@@ -20,6 +20,7 @@ import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceAlarm
+import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.TouchHelper
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import mcssoft.com.racereminderac.utility.eventbus.ManualRefreshMessage
@@ -68,7 +69,9 @@ class MainFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        RaceAlarm.getInstance()?.setAlarm(activity!!)
+        if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
+            RaceAlarm.getInstance()?.setAlarm(activity!!)
+        }
         EventBus.getDefault().register(this)
     }
 
