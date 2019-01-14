@@ -9,6 +9,13 @@
     tools:context=".ui.fragment.SettingsFragment">
     <!--android:layout_marginTop="56dp">-->
 
+    <ListView
+        android:id="@+id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+    <!--android:layout_marginTop="48dp"/>-->
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 <!-- Notes:
      Tried adding a FrameLayout (and other containers) as the settings container but still not working.

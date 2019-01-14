@@ -62,9 +62,9 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
                 EventBus.getDefault().post(ManualRefreshMessage())
             }
             R.id.id_settings -> {
-                var navDeepLinkBuilder = NavDeepLinkBuilder(this)
-                        .setGraph(R.navigation.navigation)
-                        .setDestination(R.id.id_settings_fragment)
+//                var navDeepLinkBuilder = NavDeepLinkBuilder(this)
+//                        .setGraph(R.navigation.navigation)
+//                        .setDestination(R.id.id_settings_fragment)
 
                 navController.navigate(R.id.id_settings_fragment)
             }
