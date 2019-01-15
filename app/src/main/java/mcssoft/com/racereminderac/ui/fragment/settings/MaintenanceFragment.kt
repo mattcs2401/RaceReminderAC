@@ -1,4 +1,11 @@
 package mcssoft.com.racereminderac.ui.fragment.settings
 
-class MaintenanceFragment {
+import android.os.Bundle
+import androidx.preference.PreferenceFragmentCompat
+
+class MaintenanceFragment : PreferenceFragmentCompat() {
+
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+
+    }
 }

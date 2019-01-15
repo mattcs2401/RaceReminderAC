@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:key="@string/key_recovery"
+        app:title="@string/recovery_title">
+
+        <SwitchPreferenceCompat
+            app:key="@string/key_recovery_undo_last_pref"
+            app:defaultValue="false"
+            app:summary="@string/recovery_undo_last_summary"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="@string/key_maint"
+        app:title="@string/maint_title">
+
+        <!-- TBA as to required ? -->
+        <Preference
+            app:key="@string/key_maint_del_archv_pref"
+            app:title="@string/maint_del_archv_title"
+            app:summary="@string/maint_del_archv_summary"/>
+    </PreferenceCategory>
+</PreferenceScreen>

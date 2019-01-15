@@ -25,9 +25,14 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        RacePreferences.getInstance()?.preferencesCheck(this)
+//        RacePreferences.getInstance()?.preferencesCheck(this)
 
         initialise()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        // TBA (don't need super if used).
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -63,11 +68,8 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
                 EventBus.getDefault().post(ManualRefreshMessage())
             }
             R.id.id_settings -> {
-                var settingsIntent = Intent(this, SettingsActivity::class.java)
-
-                startActivity(settingsIntent)
-
-//                navController.navigate(R.id.id_settings_fragment)
+                val settingsIntent = Intent(this, SettingsActivity::class.java)
+                startActivityForResult(settingsIntent, 0)
             }
             R.id.id_add -> {
                 val bundle = Bundle()
