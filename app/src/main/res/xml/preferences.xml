@@ -4,9 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        app:key="@string/key_defaults"
-        app:title="@string/defaults_title">
-
+        app:title="@string/defaults_title"
+        app:key="@string/key_defaults">
         <ListPreference
             app:key="@string/key_race_code_pref"
             app:title="@string/race_code_pref_title"
@@ -23,9 +22,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:key="@string/key_notif"
-        app:title="@string/notif_title">
-
+        app:title="@string/notif_title"
+        app:key="@string/key_notif">
         <SwitchPreferenceCompat
             app:key="@string/key_race_notif_send_pref"
             app:defaultValue="false"

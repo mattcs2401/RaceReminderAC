@@ -1,5 +1,6 @@
 package mcssoft.com.racereminderac.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -62,11 +63,11 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
                 EventBus.getDefault().post(ManualRefreshMessage())
             }
             R.id.id_settings -> {
-//                var navDeepLinkBuilder = NavDeepLinkBuilder(this)
-//                        .setGraph(R.navigation.navigation)
-//                        .setDestination(R.id.id_settings_fragment)
+                var settingsIntent = Intent(this, SettingsActivity::class.java)
 
-                navController.navigate(R.id.id_settings_fragment)
+                startActivity(settingsIntent)
+
+//                navController.navigate(R.id.id_settings_fragment)
             }
             R.id.id_add -> {
                 val bundle = Bundle()
