@@ -8,11 +8,19 @@
 
     <include layout="@layout/toolbar_base" />
 
-    <ListView
-        android:id="@android:id/list"
+    <fragment
+        android:id="@+id/id_nav_host_settings_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="56dp">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/settings_navigation" />
+
+    <!--<ListView-->
+        <!--android:id="@android:id/list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:paddingTop="56dp" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
