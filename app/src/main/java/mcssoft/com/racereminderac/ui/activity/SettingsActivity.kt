@@ -3,6 +3,10 @@ package mcssoft.com.racereminderac.ui.activity
 import android.os.Bundle
 import android.preference.PreferenceActivity
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
+import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 
 class SettingsActivity : AppCompatActivity() {
@@ -11,18 +15,26 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_activity)
 
+        initialise()
     }
 
-//    /**
-//     * Populate the activity with the top-level headers.
-//     */
-//    override fun onBuildHeaders(target: List<PreferenceActivity.Header>) {
-//        loadHeadersFromResource(R.xml.preference_headers, target)
-//    }
+    fun getNavController() : NavController {
+        return navController
+    }
 
-//    override fun isValidFragment(fragmentName: String?): Boolean {
-//        return true //super.isValidFragment(fragmentName)
-//    }
-    // mcssoft.com.racereminderac.ui.fragment.settings.DefaultsFragment
+    private fun initialise() {
+        // Toolbar.
+        setSupportActionBar(id_toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        // Navigation.
+        navController = Navigation.findNavController(this, R.id.id_nav_host_settings_fragment)
+
+        // Back Navigation.
+        NavigationUI.setupActionBarWithNavController(this, navController)
+
+    }
+
+    private lateinit var navController: NavController
 
 }

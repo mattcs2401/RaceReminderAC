@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/id_settings_navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_settings_navigation"
+    app:startDestination="@id/id_header_fragment">
 
+    <fragment
+        android:id="@+id/id_header_fragment"
+        android:name="mcssoft.com.racereminderac.ui.fragment.settings.HeaderFragment"
+        android:label="Home"
+        tools:layout="@layout/header_fragment">
+
+        <action
+            android:id="@+id/action_id_header_fragment_to_defaultsFragment"
+            app:destination="@id/defaultsFragment" />
+        <action
+            android:id="@+id/action_id_header_fragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_id_header_fragment_to_refreshFragment"
+            app:destination="@id/refreshFragment" />
+        <action
+            android:id="@+id/action_id_header_fragment_to_maintenanceFragment"
+            app:destination="@id/maintenanceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/defaultsFragment"
+        android:name="mcssoft.com.racereminderac.ui.fragment.settings.DefaultsFragment"
+        android:label="DefaultsFragment" >
+        <action
+            android:id="@+id/action_defaultsFragment_to_id_header_fragment"
+            app:destination="@id/id_header_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="mcssoft.com.racereminderac.ui.fragment.settings.NotificationFragment"
+        android:label="NotificationFragment" >
+        <action
+            android:id="@+id/action_notificationFragment_to_id_header_fragment"
+            app:destination="@id/id_header_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/refreshFragment"
+        android:name="mcssoft.com.racereminderac.ui.fragment.settings.RefreshFragment"
+        android:label="RefreshFragment" >
+        <action
+            android:id="@+id/action_refreshFragment_to_id_header_fragment"
+            app:destination="@id/id_header_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/maintenanceFragment"
+        android:name="mcssoft.com.racereminderac.ui.fragment.settings.MaintenanceFragment"
+        android:label="MaintenanceFragment" >
+        <action
+            android:id="@+id/action_maintenanceFragment_to_id_header_fragment"
+            app:destination="@id/id_header_fragment" />
+    </fragment>
 </navigation>
