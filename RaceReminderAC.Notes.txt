@@ -20,9 +20,7 @@ Issues:
 
     Note: If don't update, just press back, than all OK.
 
-(3) Preference screen values are over typing the toolbar.
-
-(4) Lifecycle issue with refresh slider:
+(3) Lifecycle issue with refresh slider:
     - If enabled, and activity sent to background/not in view, then when activity in view again,
       the preference shows as disabled.
 
