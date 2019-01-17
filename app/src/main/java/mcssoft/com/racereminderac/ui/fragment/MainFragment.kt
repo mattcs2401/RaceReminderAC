@@ -69,15 +69,15 @@ class MainFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-//        if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
-//            RaceAlarm.getInstance()?.setAlarm(activity!!)
-//        }
+        if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
+            RaceAlarm.getInstance()?.setAlarm(activity!!)
+        }
         EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
         super.onStop()
-//        RaceAlarm.getInstance()?.cancelAlarm()
+        RaceAlarm.getInstance()?.cancelAlarm()
         EventBus.getDefault().unregister(this)
     }
     //</editor-fold>

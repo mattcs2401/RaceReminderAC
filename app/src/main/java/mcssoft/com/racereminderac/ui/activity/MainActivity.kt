@@ -25,14 +25,9 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-//        RacePreferences.getInstance()?.preferencesCheck(this)
+        RacePreferences.getInstance()?.preferencesCheck(this)
 
         initialise()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        // TBA (don't need super if used).
     }
 
     override fun onSupportNavigateUp(): Boolean {
