@@ -12,6 +12,7 @@ import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
+
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences

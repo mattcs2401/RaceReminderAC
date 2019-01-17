@@ -16,20 +16,29 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Hide the bottom nav view.
-        activity?.findViewById<BottomNavigationView>(R.id.id_bottom_nav_view)?.visibility = View.GONE
-        (activity?.id_toolbar)?.title = getString(R.string.preferences)
+
+        initialise()
     }
 
     override fun onPreferenceClick(preference: Preference?): Boolean {
         // TODO - onPreferenceClick
+        val bp = ""
         return true
     }
 
     override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
         // TODO - onPreferenceChange
+        val bp = ""
         return true
     }
 
+    private fun initialise() {
+        // Hide the bottom nav view and set the title.
+        activity?.id_bottom_nav_view.visibility = View.GONE
+                //findViewById<BottomNavigationView>(R.id.id_bottom_nav_view)?.visibility = View.GONE
+        activity?.id_toolbar?.title = getString(R.string.preferences)
 
+        // Set listeners.
+
+    }
 }
