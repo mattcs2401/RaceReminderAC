@@ -68,8 +68,7 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
                 EventBus.getDefault().post(ManualRefreshMessage())
             }
             R.id.id_settings -> {
-                val settingsIntent = Intent(this, SettingsActivity::class.java)
-                startActivityForResult(settingsIntent, 0)
+                navController.navigate(R.id.preferencesFragment)
             }
             R.id.id_add -> {
                 val bundle = Bundle()
