@@ -31,4 +31,5 @@ TO DO:
 
 (2) Update/Refresh UI accordingly, at preference controlled interval.
 
+(3) Preference on clock and change listeners in preference fragment.
 
