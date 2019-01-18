@@ -33,7 +33,7 @@
             app:key="@string/key_notif_send_multi_pref"
             app:enabled="false"
             app:defaultValue="false"
-            app:summary="@string/notif_send_multi_pref_summary" />
+            app:summary="@string/notif_send_multi_pref_summary"/>
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -33,9 +33,9 @@ object Constants {
     const val DAY_PRIOR = 0                 // The given day is before today.
     const val DAY_CURRENT = 1               // The given day is the same as today.
 
-    const val CITY_CODE_DUMMY = "ZZ"        // dummy city code value.
+    const val CITY_CODE_DUMMY = "ZZ"        // Dummy city code value.
 
-    const val MINUS_ONE = -1                // Initialiser value.
+    const val MINUS_ONE = -1                // General initialiser value (Int or Long).
 
     const val NO_FLAGS = 0                  // PendingIntent related (RaceAlarm).
     const val REQ_CODE = 0                  // "             "       "
@@ -44,4 +44,7 @@ object Constants {
     const val ITEM_LONG_SELECT = 1          // Represents the long click (long press) on a list item.
 
     const val DELETE_COLOUR = "#b80f0a"     // Swipe to delete background colour.
+
+    const val REFRESH_MIN = 1               // Refresh interval minimum value (equates to 1 minute).
+    const val REFRESH_DEFAULT = 3           // Refresh interval default value (equates to 3 minutes).
 }
