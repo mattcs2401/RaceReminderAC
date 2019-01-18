@@ -43,13 +43,15 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
                 if(newValue == false) {
                     refreshSeek.value = Constants.REFRESH_DEFAULT
                     refreshSeek.isEnabled = false
+//                    RaceAlarm.getInstance()?.cancelAlarm()
                 } else {
                     refreshSeek.isEnabled = true
+//                    RaceAlarm.getInstance()?.setAlarm(activity!!.applicationContext)
                 }
             }
             activity?.resources?.getString(R.string.key_refresh_interval_seek_pref) -> {
-                RaceAlarm.getInstance()?.cancelAlarm()
-                RaceAlarm.getInstance()?.setAlarm(activity!!.applicationContext, newValue as Long)
+//                RaceAlarm.getInstance()?.cancelAlarm()
+//                RaceAlarm.getInstance()?.setAlarm(activity!!.applicationContext, newValue as Long)
             }
         }
         return true
