@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 import kotlinx.android.synthetic.main.main_activity.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.RaceAlarm
 
 class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
@@ -46,6 +47,10 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
                     refreshSeek.isEnabled = true
                 }
             }
+            activity?.resources?.getString(R.string.key_refresh_interval_seek_pref) -> {
+                RaceAlarm.getInstance()?.cancelAlarm()
+                RaceAlarm.getInstance()?.setAlarm(activity!!.applicationContext, newValue as Long)
+            }
         }
         return true
     }
@@ -65,6 +70,7 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         // Set listeners.
         notify.onPreferenceChangeListener = this
         refresh.onPreferenceChangeListener = this
+        refreshSeek.onPreferenceChangeListener = this
     }
 
     private lateinit var notify: SwitchPreferenceCompat

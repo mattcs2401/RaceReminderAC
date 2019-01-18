@@ -28,6 +28,7 @@ class RacePreferences {
     /**
      * Get the (default) Race Code from the preferences.
      * @param context: Activity context.
+     * @return The Race Code value which is the default value for any Race entry.
      */
     fun getRaceCode(context: Context): String? {
         val key = context.resources.getString(R.string.key_race_code_pref)
@@ -37,6 +38,7 @@ class RacePreferences {
     /**
      * Get the (default) City Code from the preferences.
      * @param context: Activity context.
+     * @return The City Code value which is the default value for any Race entry.
      */
     fun getCityCode(context: Context): String? {
         val key = context.resources.getString(R.string.key_city_code_pref)
@@ -46,6 +48,7 @@ class RacePreferences {
     /**
      * Get the (allowed to) post notifications from the preferences.
      * @param context: Activity context.
+     * @return True if preference is enabled, else false
      */
     fun getRaceNotifPost(context: Context) : Boolean {
         val keyNotif = context.resources.getString(R.string.key_race_notif_send_pref)
@@ -64,6 +67,7 @@ class RacePreferences {
     /**
      * Allow recovery (Undo) of the last item deleted.
      * @param context: Activity context.
+     * @return True if preference is enabled, else false
      */
     fun getRecoveryUndoLast(context: Context) : Boolean {
         val key = context.resources.getString(R.string.key_recovery_undo_last_pref)
@@ -71,14 +75,20 @@ class RacePreferences {
     }
 
     /**
-     * Get the Refresh interval preference. If true, enables the Refresh interval seek bar.
+     * Get the Refresh interval preference.
      * @param context: Activity context.
+     * @return True if preference is enabled, else false
      */
     fun getRefreshInterval(context: Context) : Boolean {
         val key = context.resources.getString(R.string.key_refresh_interval_pref)
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
     }
 
+    /**
+     * Get the value to be used as the refresh interval.
+     * @param context: Activity context.
+     * @return Refresh interval value.
+     */
     fun getRefreshIntervalVal(context: Context) : Int {
         val key = context.resources.getString(R.string.key_refresh_interval_seek_pref)
         return PreferenceManager.getDefaultSharedPreferences(context).getInt(key, 3)
