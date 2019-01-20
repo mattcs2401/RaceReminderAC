@@ -8,8 +8,7 @@ import android.widget.Toast
 class RaceReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-
-        Toast.makeText(context, "Don't panic, but your time is up!",
-                Toast.LENGTH_LONG).show()
+        // TODO - action the alarm.
+        Toast.makeText(context, "TODO - action the alarm.", Toast.LENGTH_SHORT).show()
     }
 }

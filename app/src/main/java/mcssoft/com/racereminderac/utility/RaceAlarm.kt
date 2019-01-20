@@ -38,9 +38,11 @@ class RaceAlarm {
         // Get the switch preference that enables the seek slider.
         if(RacePreferences.getInstance()!!.getRefreshInterval(context)) {
             var interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(context).toLong()
-            // Set the interval equivalent in mSec and establish the alarm.
+            // Cancel any previously set alarm.
+            cancelAlarm()
+            // Set the interval equivalent in mSec.
             interval *= 60 * 1000
-            // Set alarm manager.
+            // Set the alarm manager.
             val intent = Intent(context, RaceReceiver::class.java)
             alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmIntent = PendingIntent.getBroadcast(context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
@@ -51,17 +53,19 @@ class RaceAlarm {
     /**
      * Set the UI refresh alarm.
      * @param context: Activity context.
-     * @param interval: The alarm time interval (value represents time in minutes).
+     * @param minutes: The alarm time in minutes.
      */
-    internal fun setAlarm(context: Context, interval: Long) {
+    internal fun setAlarm(context: Context, minutes: Long) {
         if(RacePreferences.getInstance()!!.getRefreshInterval(context)) {
-            // Set the interval equivalent in mSec and establish the alarm.
-            val intervalMSec = interval * 60 * 1000
-            // Set alarm manager.
+            // Cancel any previously set alarm.
+            cancelAlarm()
+            // Set the interval equivalent in mSec.
+            val interval = minutes * 60 * 1000
+            // Set the alarm manager.
             val intent = Intent(context, RaceReceiver::class.java)
             alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmIntent = PendingIntent.getBroadcast(context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
-            alarmManager!!.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), intervalMSec, alarmIntent)
+            alarmManager!!.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, alarmIntent)
         }
     }
 
@@ -72,6 +76,8 @@ class RaceAlarm {
         // Alarm manager may not have been initialsied depending on the conditions in setAlarm().
         if(alarmManager != null) {
             alarmManager!!.cancel(alarmIntent)
+            alarmManager = null
+            alarmIntent = null
         }
     }
 
