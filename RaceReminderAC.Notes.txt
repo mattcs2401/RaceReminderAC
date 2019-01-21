@@ -21,8 +21,8 @@ Issues:
     Note: If don't update, just press back, than all OK.
 
 (3) Lifecycle issue with refresh slider:
-    - If enabled, and activity sent to background/not in view, then when activity in view again,
-      the preference shows as disabled.
+    - If enabled, and navigate from preferences back to activity, then activity sent to
+      background/not in view, then when activity in view again, the preference shows as disabled.
 
 ------
 TO DO:

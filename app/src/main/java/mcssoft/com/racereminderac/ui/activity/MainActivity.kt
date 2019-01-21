@@ -1,6 +1,7 @@
 package mcssoft.com.racereminderac.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         RacePreferences.getInstance()?.preferencesCheck(this)
 
         initialise()
+
+        Log.d("tag","MainActivity.onCreate()")
     }
 
     override fun onSupportNavigateUp(): Boolean {

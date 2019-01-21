@@ -1,6 +1,7 @@
 package mcssoft.com.racereminderac.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -22,6 +23,8 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         super.onViewCreated(view, savedInstanceState)
 
         initialise()
+
+        Log.d("tag","PreferenceFragment.onViewCreated")
     }
 
     override fun onPreferenceClick(preference: Preference?): Boolean {

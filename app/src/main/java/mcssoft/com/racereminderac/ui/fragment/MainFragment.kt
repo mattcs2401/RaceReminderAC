@@ -1,6 +1,7 @@
 package mcssoft.com.racereminderac.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,6 +66,8 @@ class MainFragment : Fragment() {
 
         val lRaces = raceViewModel.getAllRaces()
         lRaces.observe(viewLifecycleOwner, RaceListObserver(lRaces, raceAdapter))
+
+        Log.d("tag","MainFragment.onViewCreated")
     }
 
     override fun onStart() {
@@ -73,12 +76,16 @@ class MainFragment : Fragment() {
             RaceAlarm.getInstance()?.setAlarm(activity!!)
         }
         EventBus.getDefault().register(this)
+
+        Log.d("tag","MainFragment.onStart")
     }
 
     override fun onStop() {
         super.onStop()
         RaceAlarm.getInstance()?.cancelAlarm()
         EventBus.getDefault().unregister(this)
+
+        Log.d("tag","MainFragment.onStop")
     }
     //</editor-fold>
 

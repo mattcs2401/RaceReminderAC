@@ -1,6 +1,7 @@
 package mcssoft.com.racereminderac.utility
 
 import android.content.Context
+import android.util.Log
 import androidx.preference.PreferenceManager
 import mcssoft.com.racereminderac.R
 
@@ -133,6 +134,8 @@ class RacePreferences {
         if(!map.contains(keyRefreshInterval)) {
             sharedPrefs.edit().putBoolean(keyRefreshInterval, false).apply()
         }
+
+        Log.d("tag","RacePreferences.preferenceCheck")
     }
 
 }
