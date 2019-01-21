@@ -31,6 +31,18 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         Log.d("tag","MainActivity.onCreate()")
     }
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+        Log.d("tag","MainActivity.onStart()")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+        Log.d("tag","MainActivity.onStop()")
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
