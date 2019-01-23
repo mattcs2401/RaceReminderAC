@@ -33,13 +33,13 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
 
     override fun onStart() {
         super.onStart()
-        EventBus.getDefault().register(this)
+//        EventBus.getDefault().register(this)
         Log.d("tag","MainActivity.onStart()")
     }
 
     override fun onStop() {
         super.onStop()
-        EventBus.getDefault().unregister(this)
+//        EventBus.getDefault().unregister(this)
         Log.d("tag","MainActivity.onStop()")
     }
 

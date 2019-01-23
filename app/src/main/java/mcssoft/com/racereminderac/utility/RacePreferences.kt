@@ -100,6 +100,7 @@ class RacePreferences {
      * @param context: Activity context.
      */
     fun preferencesCheck(context: Context) {
+        // String values mainly just for readability.
         val keyRaceCode = context.resources.getString(R.string.key_race_code_pref)
         val keyCityCode = context.resources.getString(R.string.key_city_code_pref)
         val keyRaceNotifSend = context.resources.getString(R.string.key_race_notif_send_pref)

@@ -75,7 +75,7 @@ class MainFragment : Fragment() {
         if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
             RaceAlarm.getInstance()?.setAlarm(activity!!)
         }
-//        EventBus.getDefault().register(this)
+        EventBus.getDefault().register(this)
 
         Log.d("tag","MainFragment.onStart")
     }
@@ -83,7 +83,7 @@ class MainFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         RaceAlarm.getInstance()?.cancelAlarm()
-//        EventBus.getDefault().unregister(this)
+        EventBus.getDefault().unregister(this)
 
         Log.d("tag","MainFragment.onStop")
     }
