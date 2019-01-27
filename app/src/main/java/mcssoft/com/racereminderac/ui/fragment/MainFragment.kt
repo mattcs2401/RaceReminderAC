@@ -61,17 +61,31 @@ class MainFragment : Fragment() {
             bnv.visibility = View.VISIBLE
         }
 
-        // Set the view model.
+//        // Set the view model.
+//        raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
+//
+//        val lRaces = raceViewModel.getAllRaces()
+//        lRaces.observe(viewLifecycleOwner, RaceListObserver(lRaces, raceAdapter))
+
+        Log.d("tag","MainFragment.onViewCreated")
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        // Set the view model and observe.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
         val lRaces = raceViewModel.getAllRaces()
         lRaces.observe(viewLifecycleOwner, RaceListObserver(lRaces, raceAdapter))
 
-        Log.d("tag","MainFragment.onViewCreated")
+        Log.d("tag","MainFragment.onActivityCreated")
     }
 
     override fun onStart() {
         super.onStart()
+//        recyclerView.scrollToPosition(0)
+
         if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
             RaceAlarm.getInstance()?.setAlarm(activity!!)
         }
@@ -82,7 +96,9 @@ class MainFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        RaceAlarm.getInstance()?.cancelAlarm()
+        if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
+            RaceAlarm.getInstance()?.cancelAlarm()
+        }
         EventBus.getDefault().unregister(this)
 
         Log.d("tag","MainFragment.onStop")
