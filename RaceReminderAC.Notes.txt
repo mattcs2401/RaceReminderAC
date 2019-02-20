@@ -30,10 +30,13 @@ Issues:
 ------
 TO DO:
 ------
-(1) XX minutes after race time, record auto removes from view ?
-    - what if race is late starting ?
+ --> Consider using the Anko library
+     https://github.com/Kotlin/anko/wiki
 
-(2) Update/Refresh UI accordingly, at preference controlled interval.
-    - in progress.
+ -->  XX minutes after race time, record auto removes from view ?
+      - what if race is late starting ?
+
+ --> Update/Refresh UI accordingly, at preference controlled interval.
+     - in progress.
 
 
