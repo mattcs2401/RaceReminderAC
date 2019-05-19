@@ -36,19 +36,19 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         when(preference.key) {
             activity?.resources?.getString(R.string.key_race_notif_send_pref) -> {
                 if(newValue == false) {
-                    notifyMulti.isChecked = false
-                    notifyMulti.isEnabled = false
+                    notifyMulti?.isChecked = false
+                    notifyMulti?.isEnabled = false
                 } else {
-                    notifyMulti.isEnabled = true
+                    notifyMulti?.isEnabled = true
                 }
             }
             activity?.resources?.getString(R.string.key_refresh_interval_pref) -> {
                 if(newValue == false) {
-                    refreshSeek.value = Constants.REFRESH_DEFAULT
-                    refreshSeek.isEnabled = false
+                    refreshSeek?.value = Constants.REFRESH_DEFAULT
+                    refreshSeek?.isEnabled = false
 //                    RaceAlarm.getInstance()?.cancelAlarm()
                 } else {
-                    refreshSeek.isEnabled = true
+                    refreshSeek?.isEnabled = true
 //                    RaceAlarm.getInstance()?.setAlarm(activity!!.applicationContext)
                 }
             }
@@ -66,20 +66,20 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         activity?.id_toolbar?.title = getString(R.string.preferences)
 
         // Get preferences.
-        notify = findPreference(activity?.resources?.getString(R.string.key_race_notif_send_pref))
-        notifyMulti = findPreference(activity?.resources?.getString(R.string.key_notif_send_multi_pref))
-        refresh = findPreference(activity?.resources?.getString(R.string.key_refresh_interval_pref))
-        refreshSeek = findPreference(activity?.resources?.getString(R.string.key_refresh_interval_seek_pref))
-        refreshSeek.min = Constants.REFRESH_MIN
+        notify = findPreference(activity!!.resources.getString(R.string.key_race_notif_send_pref))
+        notifyMulti = findPreference(activity!!.resources.getString(R.string.key_notif_send_multi_pref))
+        refresh = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_pref))
+        refreshSeek = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_seek_pref))
+        refreshSeek?.min = Constants.REFRESH_MIN
 
         // Set listeners.
-        notify.onPreferenceChangeListener = this
-        refresh.onPreferenceChangeListener = this
-        refreshSeek.onPreferenceChangeListener = this
+        notify?.onPreferenceChangeListener = this
+        refresh?.onPreferenceChangeListener = this
+        refreshSeek?.onPreferenceChangeListener = this
     }
 
-    private lateinit var notify: SwitchPreferenceCompat
-    private lateinit var notifyMulti: SwitchPreferenceCompat
-    private lateinit var refresh: SwitchPreferenceCompat
-    private lateinit var refreshSeek: SeekBarPreference
+    private var notify: SwitchPreferenceCompat? = null
+    private var notifyMulti: SwitchPreferenceCompat? = null
+    private var refresh: SwitchPreferenceCompat? = null
+    private var refreshSeek: SeekBarPreference? = null
 }
