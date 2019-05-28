@@ -7,36 +7,41 @@
 -------
 Issues:
 -------
-(1) Multiple swipe to deletes.
-    Quickly swiping to delete multiple entries causes display issue when SnackBar based UNDO
-    function is enabled.
+>> When Home screen comes to the foreground (from the background):
+   Refresh/update the UI time related information.
 
-    Note: If wait till after SnackBar, then all OK.
-          Likely a timing issue as deletes are done on a background thread.
+>> Lifecycle issue with refresh slider:
+   - If enabled, and navigate from preferences back to activity, then
+   - activity sent to background (not in view), then
+   - when activity in view again, the preference shows as disabled.
 
-(2) If have say two records:
-    - Swipe delete the 2nd record, and
-    - before the SnackBar disappears, edit the 1st record and update, then
-    - 2nd record re-appears.
+>> Multiple swipe to deletes:
+   Quickly swiping to delete multiple entries causes display issue when SnackBar based UNDO
+   function is enabled.
 
-    Note: If don't update, just press back, then all OK.
-          Likely a timing issue as edits are done on a background thread (similar point 1 above).
+   Note: If wait till after SnackBar, then all OK.
+         Likely a timing issue as deletes are done on a background thread.
 
-(3) Lifecycle issue with refresh slider:
-    - If enabled, and navigate from preferences back to activity, then
-    - activity sent to background (not in view), then
-    - when activity in view again, the preference shows as disabled.
+>> If have say two records:
+   - Swipe delete the 2nd record, and
+   - before the SnackBar disappears, edit the 1st record and update, then
+   - 2nd record re-appears.
+
+   Note: If don't update, just press back, then all OK.
+         Likely a timing issue as edits are done on a background thread (similar point 1 above).
 
 ------
 TO DO:
 ------
- --> Consider using the Anko library
-     https://github.com/Kotlin/anko/wiki
+-> Make the number picker values bigger.
 
- -->  XX minutes after race time, record auto removes from view ?
-      - what if race is late starting ?
+-> Consider using the Anko library
+   https://github.com/Kotlin/anko/wiki
 
- --> Update/Refresh UI accordingly, at preference controlled interval.
-     - in progress.
+->  XX minutes after race time, record auto removes from view ?
+    - what if race is late starting ?
+
+-> Update/Refresh UI accordingly, at preference controlled interval.
+   - in progress.
 
 
