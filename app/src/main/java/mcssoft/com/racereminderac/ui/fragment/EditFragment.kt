@@ -2,6 +2,7 @@ package mcssoft.com.racereminderac.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -46,16 +47,21 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         // set base UI elements.
         initialiseUI(rootView)
 
+        Log.d("tag","EditFragment.onViewCreated")
     }
 
      override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
+
+         Log.d("tag","EditFragment.onStart")
     }
 
     override fun onStop() {
         super.onStop()
         EventBus.getDefault().unregister(this)
+
+        Log.d("tag","EditFragment.onStop")
     }
     //</editor-fold>
 

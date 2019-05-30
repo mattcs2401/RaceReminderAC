@@ -47,13 +47,6 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        // Note: Pressing the back button from home screen sends the activity to the background,
-        //       instead to last add/edit etc.
-        Log.d("tag","MainActivity.onBackPressed()")
-    }
-
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IRace">
     /**
      * From interface IRace.IRaceSelect

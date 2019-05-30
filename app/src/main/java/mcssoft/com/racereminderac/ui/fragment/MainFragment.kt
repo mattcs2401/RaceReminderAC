@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -27,11 +26,14 @@ import mcssoft.com.racereminderac.utility.TouchHelper
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import mcssoft.com.racereminderac.utility.eventbus.ManualRefreshMessage
 import mcssoft.com.racereminderac.utility.eventbus.SelectMessage
+import mcssoft.com.racereminderac.utility.BackPressCB
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 class MainFragment : Fragment() {
+
+//    val backPressCallback = BackPressCB(true)
 
     //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -62,12 +64,6 @@ class MainFragment : Fragment() {
             bnv.visibility = View.VISIBLE
         }
 
-//        // Set the view model.
-//        raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
-//
-//        val lRaces = raceViewModel.getAllRaces()
-//        lRaces.observe(viewLifecycleOwner, RaceListObserver(lRaces, raceAdapter))
-
         Log.d("tag","MainFragment.onViewCreated")
     }
 
@@ -93,6 +89,8 @@ class MainFragment : Fragment() {
         EventBus.getDefault().register(this)
         EventBus.getDefault().post(ManualRefreshMessage())
 
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressCallback)
+
         Log.d("tag","MainFragment.onStart")
     }
 
@@ -102,6 +100,8 @@ class MainFragment : Fragment() {
             RaceAlarm.getInstance()?.cancelAlarm()
         }
         EventBus.getDefault().unregister(this)
+
+        backPressCallback.removeCallback()
 
         Log.d("tag","MainFragment.onStop")
     }
@@ -149,6 +149,8 @@ class MainFragment : Fragment() {
     private lateinit var raceAdapter: RaceAdapter
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var recyclerView: RecyclerView
+
+    private var backPressCallback = BackPressCB(true)
     //</editor-fold>
 }
 
