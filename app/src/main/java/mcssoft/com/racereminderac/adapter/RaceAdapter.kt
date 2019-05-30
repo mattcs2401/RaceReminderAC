@@ -15,7 +15,7 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
-import mcssoft.com.racereminderac.utility.SnackBarCB
+import mcssoft.com.racereminderac.utility.callback.SnackBarCB
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import org.greenrobot.eventbus.EventBus
 

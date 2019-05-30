@@ -26,7 +26,7 @@ import mcssoft.com.racereminderac.utility.TouchHelper
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import mcssoft.com.racereminderac.utility.eventbus.ManualRefreshMessage
 import mcssoft.com.racereminderac.utility.eventbus.SelectMessage
-import mcssoft.com.racereminderac.utility.BackPressCB
+import mcssoft.com.racereminderac.utility.callback.BackPressCB
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
