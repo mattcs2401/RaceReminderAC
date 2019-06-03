@@ -14,12 +14,6 @@ import mcssoft.com.racereminderac.utility.RaceTime
 
 class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter: RaceAdapter) : Observer<MutableList<Race>> {
 
-//    private var lIds: ArrayList<Long>
-//
-//    init {
-//        lIds = ArrayList()
-//    }
-
     /**
      * The observer's onChange method.
      * @param lRaces: The list of mutable Race objects.

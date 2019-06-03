@@ -71,7 +71,11 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         // Set the view model and observe.
+        /*
+        This causes issues, won't update 1st entry in list.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
+        */
+        raceViewModel = ViewModelProviders.of(this).get(RaceViewModel::class.java)
 
         val lRaces = raceViewModel.getAllRaces()
         lRaces.observe(viewLifecycleOwner, RaceListObserver(lRaces, raceAdapter))

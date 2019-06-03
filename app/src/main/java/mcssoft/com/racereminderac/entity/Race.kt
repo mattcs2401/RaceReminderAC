@@ -14,13 +14,10 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "_id") var id: Long? = null    // value inserted by Room.
 
-    // Default date value.
+    // Arbitrary default values.
     @ColumnInfo(name = "RaceDate") var raceDate: String = "01/01/1970"
-    // Arbitrary default value (01/01/1970 10:00:00).
     @ColumnInfo(name = "RaceTimeL") var raceTimeL: Long = 0
-    // TBA
     @ColumnInfo(name = "ArchvRace") var archvRace: String = "N"
-    // TBA
     @ColumnInfo(name = "MetaColour") var metaColour: String = "1"
 
     /**

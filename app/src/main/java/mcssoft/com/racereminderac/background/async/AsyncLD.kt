@@ -6,9 +6,10 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.utility.Constants
 
 /**
- * Utility class for database operations. Mainly because couldn't seem to get Android's Worker(s)
- * to work properly. An AsyncTask will take an object as a parameter, e.g. Race, while Workers only
- * take primitives, e.g. Int, String etc
+ * Utility class for database operations. An AsyncTask will take an object as a parameter,
+ * e.g. a Race object, while Workers (by design) only take primitives and their array variants.
+ *
+ * The Insert/Update etc statements in the DAO will take an object.
  */
 class AsyncLD(private var type: Int, private var dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
 
