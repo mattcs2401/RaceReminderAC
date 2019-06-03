@@ -7,9 +7,6 @@
 -------
 Issues:
 -------
->> When Home screen comes to the foreground (from the background):
-   Refresh/update the UI time related information.
-
 >> Lifecycle issue with refresh slider:
    - If enabled, and navigate from preferences back to activity, then
    - activity sent to background (not in view), then
