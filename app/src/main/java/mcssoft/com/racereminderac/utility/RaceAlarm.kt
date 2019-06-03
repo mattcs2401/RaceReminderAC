@@ -81,6 +81,13 @@ class RaceAlarm {
         }
     }
 
+    /**
+     * Quick and dirty check alarm is cancelled.
+     */
+    internal fun isCancelled(): Boolean {
+        return this.alarmManager == null
+    }
+
     private var alarmIntent: PendingIntent? = null
     private var alarmManager: AlarmManager? = null
 }

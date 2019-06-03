@@ -87,12 +87,15 @@ class MainFragment : Fragment() {
         super.onStart()
 //        recyclerView.scrollToPosition(0)
 
+        // Set alarm if set in Preferences.
         if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
             RaceAlarm.getInstance()?.setAlarm(activity!!)
         }
+        // Eventbus registration.
         EventBus.getDefault().register(this)
+        // Refresh main UI colours.
         EventBus.getDefault().post(ManualRefreshMessage())
-
+        // Add on back pressed handler.
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressCallback)
 
         Log.d("tag","MainFragment.onStart")
@@ -101,10 +104,15 @@ class MainFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
+            // Alarm preference is set.
+            RaceAlarm.getInstance()?.cancelAlarm()
+        } else if(!RaceAlarm.getInstance()?.isCancelled()!!) {
+            // Preference now not set, but was previously.
             RaceAlarm.getInstance()?.cancelAlarm()
         }
+        // Eventbus unregister.
         EventBus.getDefault().unregister(this)
-
+        // Remove back press handler callback.
         backPressCallback.removeCallback()
 
         Log.d("tag","MainFragment.onStop")
