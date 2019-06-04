@@ -30,15 +30,17 @@ Issues:
 ------
 TO DO:
 ------
+-> Update/Refresh UI accordingly, at preference controlled interval.
+   - In progress.
+
 -> Make the number picker values bigger.
+   - Addd/Edit screen design ?
 
 -> Consider using the Anko library
    https://github.com/Kotlin/anko/wiki
 
 ->  XX minutes after race time, record auto removes from view ?
-    - what if race is late starting ?
-
--> Update/Refresh UI accordingly, at preference controlled interval.
-   - in progress.
-
+    - Prferences controlled ?
+    - What if the race is late starting ?
+    - What about a screen that shows those removed ?
 
