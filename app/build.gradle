@@ -21,7 +21,7 @@ android {
         }
     }
 
-    buildToolsVersion '29.0.0-rc2'
+    buildToolsVersion '29.0.0'
 
 //    packagingOptions {
 //        exclude 'META-INF/proguard/androidx-annotations.pro'
@@ -39,10 +39,10 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-extensions:$xCycleVer"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.preference:preference:1.1.0-alpha05'
-    implementation 'com.google.android.material:material:1.1.0-alpha06'
+    implementation 'androidx.preference:preference:1.1.0-beta01'
+    implementation 'com.google.android.material:material:1.1.0-alpha07'
 
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha05'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha06'
     kapt "androidx.lifecycle:lifecycle-compiler:$xCycleVer"
 
     implementation "android.arch.navigation:navigation-fragment-ktx:$navVer"
