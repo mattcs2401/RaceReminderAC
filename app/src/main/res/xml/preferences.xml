@@ -55,11 +55,12 @@
 
     <PreferenceCategory
         app:key="@string/key_recovery"
-        app:title="@string/recovery_title">
+        app:title="@string/recovery_title"
+        app:summary="@string/recovery_undo_last_title">
 
         <SwitchPreferenceCompat
             app:key="@string/key_recovery_undo_last_pref"
-            app:defaultValue="false"
+            app:defaultValue="true"
             app:summary="@string/recovery_undo_last_summary"/>
     </PreferenceCategory>
 

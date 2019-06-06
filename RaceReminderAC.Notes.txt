@@ -7,11 +7,6 @@
 -------
 Issues:
 -------
->> Lifecycle issue with refresh slider:
-   - If enabled, and navigate from preferences back to activity, then
-   - activity sent to background (not in view), then
-   - when activity in view again, the preference shows as disabled.
-
 >> Multiple swipe to deletes:
    Quickly swiping to delete multiple entries causes display issue when SnackBar based UNDO
    function is enabled.
@@ -32,6 +27,10 @@ TO DO:
 ------
 -> Update/Refresh UI accordingly, at preference controlled interval.
    - In progress.
+
+-> Toolbar indicator to show:
+   - Alarm manager based UI refresh interval is set (maybe a number ?).
+   - Notifications are set (maybe letter N ?).
 
 -> Make the number picker values bigger.
    - Addd/Edit screen design ?

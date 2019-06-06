@@ -44,17 +44,17 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
             }
             activity?.resources?.getString(R.string.key_refresh_interval_pref) -> {
                 if(newValue == false) {
-                    refreshSeek?.value = Constants.REFRESH_DEFAULT
                     refreshSeek?.isEnabled = false
-//                    RaceAlarm.getInstance()?.cancelAlarm()
+                    RaceAlarm.getInstance()?.cancelAlarm()
                 } else {
                     refreshSeek?.isEnabled = true
-//                    RaceAlarm.getInstance()?.setAlarm(activity!!.applicationContext)
+                    RaceAlarm.getInstance()?.setAlarm(activity!!)
                 }
             }
             activity?.resources?.getString(R.string.key_refresh_interval_seek_pref) -> {
-//                RaceAlarm.getInstance()?.cancelAlarm()
-//                RaceAlarm.getInstance()?.setAlarm(activity!!.applicationContext, newValue as Long)
+                refreshVal = refreshSeek?.value!!
+                RaceAlarm.getInstance()?.cancelAlarm()
+                RaceAlarm.getInstance()?.setAlarm(activity!!, refreshVal.toLong())
             }
         }
         return true
@@ -70,7 +70,10 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         notifyMulti = findPreference(activity!!.resources.getString(R.string.key_notif_send_multi_pref))
         refresh = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_pref))
         refreshSeek = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_seek_pref))
-        refreshSeek?.min = Constants.REFRESH_MIN
+
+        if(refresh?.isChecked!!) {
+            refreshSeek?.isEnabled = true
+        }
 
         // Set listeners.
         notify?.onPreferenceChangeListener = this
@@ -78,8 +81,10 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         refreshSeek?.onPreferenceChangeListener = this
     }
 
-    private var notify: SwitchPreferenceCompat? = null
-    private var notifyMulti: SwitchPreferenceCompat? = null
-    private var refresh: SwitchPreferenceCompat? = null
-    private var refreshSeek: SeekBarPreference? = null
+    private var notify: SwitchPreferenceCompat? = null          // post notifications.
+    private var notifyMulti: SwitchPreferenceCompat? = null     // allow multi notify same race.
+    private var refresh: SwitchPreferenceCompat? = null         // refresh interval.
+    private var refreshSeek: SeekBarPreference? = null          // refresh interval ammount.
+
+    private var refreshVal: Int = Constants.REFRESH_MIN    // simply an initial value no lateinit.
 }

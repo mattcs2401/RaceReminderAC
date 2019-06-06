@@ -4,6 +4,9 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.view.View
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.main_activity.*
 
 /**
  * Utility class as wrapper for AlarmManager.
@@ -54,6 +57,8 @@ class RaceAlarm {
      * Set the UI refresh alarm.
      * @param context: Activity context.
      * @param minutes: The alarm time in minutes.
+     * @Notes: The switch preference, that enables the refresh interval slider preference must be
+     *         set/enabled.
      */
     internal fun setAlarm(context: Context, minutes: Long) {
         if(RacePreferences.getInstance()!!.getRefreshInterval(context)) {

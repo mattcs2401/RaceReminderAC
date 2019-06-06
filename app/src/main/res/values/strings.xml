@@ -68,7 +68,7 @@
 
     <string name="key_recovery_undo_last_pref">key_recovery_undo_last_pref</string>
     <string name="recovery_undo_last_title">Undo Last Delete</string>
-    <string name="recovery_undo_last_summary">Undo (recover) the last item deleted.</string>
+    <string name="recovery_undo_last_summary">Undo the last item deleted.</string>
 
     <string name="key_refresh_interval">key_refresh_interval</string>
     <string name="refresh_interval_title">Refresh Interval</string>
