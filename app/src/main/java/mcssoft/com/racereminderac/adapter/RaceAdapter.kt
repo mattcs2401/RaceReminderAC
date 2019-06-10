@@ -72,6 +72,14 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     }
 
     /**
+     * Clear out the backing data (primarily used when delete all).
+     */
+    internal fun clear() {
+        lRaces.clear()
+        notifyDataSetChanged()
+    }
+
+    /**
      * Return the Race object at the adapter position.
      * @param lPos: The adapter position (0 based).
      * @return The Race object.
