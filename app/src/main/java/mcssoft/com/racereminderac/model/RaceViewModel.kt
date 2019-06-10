@@ -29,4 +29,6 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
 
     fun delete(race: Race) = raceRepository.doDatabaseOperation(Constants.DELETE, race)
 
+    fun deleteAll() = raceRepository.doDatabaseOperation(Constants.DELETE_ALL, null)
+
 }

@@ -24,6 +24,9 @@ class AsyncLD(private var type: Int, private var dao: RaceDAO) : AsyncTask<Race,
             Constants.DELETE -> {
                 dao.deleteRace(params[0])
             }
+            Constants.DELETE_ALL -> {
+                dao.deleteAll()
+            }
         }
         return null
     }

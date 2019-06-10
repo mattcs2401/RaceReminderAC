@@ -12,10 +12,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IRace
+import mcssoft.com.racereminderac.ui.dialog.DeleteAllDialog
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
+import mcssoft.com.racereminderac.utility.eventbus.DeleteAllMessage
 import mcssoft.com.racereminderac.utility.eventbus.ManualRefreshMessage
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSelect,
         BottomNavigationView.OnNavigationItemSelectedListener {
@@ -72,6 +76,9 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
     //<editor-fold defaultstate="collapsed" desc="Region: Bottom navigation listener">
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when(menuItem.itemId) {
+//            R.id.id_delete -> {
+//                doDelete()
+//            }
             R.id.id_refresh -> {
                 EventBus.getDefault().post(ManualRefreshMessage())
             }
@@ -79,15 +86,17 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
                 navController.navigate(R.id.preferencesFragment)
             }
             R.id.id_add -> {
-                val bundle = Bundle()
-                bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_NEW)
-                navController.navigate(R.id.id_edit_fragment, bundle)
+                doAdd()
             }
         }
         return false
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
+    /**
+     * Setup the UI components.
+     */
     private fun initialise() {
         // Toolbar.
         setSupportActionBar(id_toolbar)
@@ -102,6 +111,30 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         // Back Navigation.
         setupActionBarWithNavController(this, navController)
     }
+
+    /**
+     * Bottom nav menu New (Add).
+     */
+    private fun doAdd() {
+        val bundle = Bundle()
+        bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_NEW)
+        navController.navigate(R.id.id_edit_fragment, bundle)
+    }
+
+    /**
+     * Bottom nav menu Delete.
+     */
+    private fun doDelete() {
+        val dialog = DeleteAllDialog(this)
+        dialog.show(supportFragmentManager, "delete_all_dialog")
+    }
+    //</editor-fold>
+
+//    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+//    fun onMessageEvent(select: DeleteAllMessage) {
+//        val bp = ""
+//        //raceViewModel.deleteAll()
+//    }
 
     private lateinit var navController: NavController
     private lateinit var bottomNavView: BottomNavigationView

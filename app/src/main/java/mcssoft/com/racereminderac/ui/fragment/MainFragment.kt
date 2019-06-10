@@ -2,9 +2,7 @@ package mcssoft.com.racereminderac.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -19,6 +17,7 @@ import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
+import mcssoft.com.racereminderac.ui.dialog.DeleteAllDialog
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceAlarm
 import mcssoft.com.racereminderac.utility.RacePreferences
@@ -27,6 +26,7 @@ import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import mcssoft.com.racereminderac.utility.eventbus.ManualRefreshMessage
 import mcssoft.com.racereminderac.utility.eventbus.SelectMessage
 import mcssoft.com.racereminderac.utility.callback.BackPressCB
+import mcssoft.com.racereminderac.utility.eventbus.DeleteAllMessage
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -38,6 +38,7 @@ class MainFragment : Fragment() {
     //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
@@ -117,6 +118,25 @@ class MainFragment : Fragment() {
 
         Log.d("tag","MainFragment.onStop")
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.options_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.id_delete_all -> {
+                val dialog = DeleteAllDialog(activity!!)
+                dialog.show(activity!!.supportFragmentManager, "delete_all_dialog")
+//                EventBus.getDefault().post(DeleteAllMessage())
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+        return true
+        //return super.onOptionsItemSelected(item)
+    }
+
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
@@ -154,6 +174,11 @@ class MainFragment : Fragment() {
                 (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
             }
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    fun onMessageEvent(select: DeleteAllMessage) {
+        raceViewModel.deleteAll()
     }
     //</editor-fold>
 

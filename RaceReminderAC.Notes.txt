@@ -28,6 +28,10 @@ TO DO:
 -> Update/Refresh UI accordingly, at preference controlled interval.
    - In progress.
 
+-> If refresh set in preferences, grey out menu item ?
+
+-> Option to delete all ?
+
 -> Toolbar indicator to show:
    - Alarm manager based UI refresh interval is set (maybe a number ?).
    - Notifications are set (maybe letter N ?).
