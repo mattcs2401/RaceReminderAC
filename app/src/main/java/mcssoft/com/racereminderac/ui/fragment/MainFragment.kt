@@ -33,8 +33,6 @@ import org.greenrobot.eventbus.ThreadMode
 
 class MainFragment : Fragment() {
 
-//    val backPressCallback = BackPressCB(true)
-
     //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -86,11 +84,18 @@ class MainFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-//        recyclerView.scrollToPosition(0)
-
         // Set alarm if set in Preferences.
+        // TODO: This needs work WRT colours that display.
+        val menuItem = activity?.id_bottom_nav_view?.menu?.findItem(R.id.id_refresh)
         if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
+            // alarm is set in preferences.
             RaceAlarm.getInstance()?.setAlarm(activity!!)
+            menuItem?.setEnabled(false)
+            menuItem?.setChecked(false)
+        } else {
+            RaceAlarm.getInstance()?.cancelAlarm()
+            menuItem?.setEnabled(true)
+            menuItem?.setChecked(true)
         }
         // Eventbus registration.
         EventBus.getDefault().register(this)
@@ -129,14 +134,11 @@ class MainFragment : Fragment() {
             R.id.id_delete_all -> {
                 val dialog = DeleteAllDialog(activity!!)
                 dialog.show(activity!!.supportFragmentManager, "delete_all_dialog")
-//                EventBus.getDefault().post(DeleteAllMessage())
             }
             else -> super.onOptionsItemSelected(item)
         }
         return true
-        //return super.onOptionsItemSelected(item)
     }
-
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
