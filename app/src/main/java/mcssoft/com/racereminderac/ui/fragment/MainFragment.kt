@@ -22,11 +22,8 @@ import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceAlarm
 import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.TouchHelper
-import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
-import mcssoft.com.racereminderac.utility.eventbus.ManualRefreshMessage
-import mcssoft.com.racereminderac.utility.eventbus.SelectMessage
 import mcssoft.com.racereminderac.utility.callback.BackPressCB
-import mcssoft.com.racereminderac.utility.eventbus.DeleteAllMessage
+import mcssoft.com.racereminderac.utility.eventbus.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -90,12 +87,14 @@ class MainFragment : Fragment() {
         if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
             // alarm is set in preferences.
             RaceAlarm.getInstance()?.setAlarm(activity!!)
-            menuItem?.setEnabled(false)
-            menuItem?.setChecked(false)
+            menuItem?.setVisible(false)
+//            menuItem?.setEnabled(false)
+//            menuItem?.setChecked(false)
         } else {
             RaceAlarm.getInstance()?.cancelAlarm()
-            menuItem?.setEnabled(true)
-            menuItem?.setChecked(true)
+            menuItem?.setVisible(true)
+//            menuItem?.setEnabled(true)
+//            menuItem?.setChecked(true)
         }
         // Eventbus registration.
         EventBus.getDefault().register(this)
@@ -124,19 +123,27 @@ class MainFragment : Fragment() {
         Log.d("tag","MainFragment.onStop")
     }
 
+//    override fun onPrepareOptionsMenu(menu: Menu) {
+//        super.onPrepareOptionsMenu(menu)
+//        Log.d("tag","MainFragment.onPrepareOptionsMenu")
+//    }
+
+    /* Example: https://stablekernel.com/using-custom-views-as-menu-items/  ??*/
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.options_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.options_menu, menu)
+
+        Log.d("tag","MainFragment.onCreateOptionsMenu")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.id_delete_all -> {
-                val dialog = DeleteAllDialog(activity!!)
-                dialog.show(activity!!.supportFragmentManager, "delete_all_dialog")
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+//        when(item.itemId) {
+//            R.id.id_delete_all -> {
+//                val dialog = DeleteAllDialog(activity!!)
+//                dialog.show(activity!!.supportFragmentManager, "delete_all_dialog")
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
         return true
     }
     //</editor-fold>

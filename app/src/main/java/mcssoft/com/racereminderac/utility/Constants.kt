@@ -26,6 +26,9 @@ object Constants {
     const val UPDATE = 2                    // Signifies a Race update.
     const val DELETE = 3                    // Signifies a Race delete.
     const val DELETE_ALL = 4                // Signifies delete all Race entries.
+    const val COUNT = 5                     // Signifies count all Race entries.
+
+    const val NO_VALUE = -1                 // Generic signify no value returned.
 
     const val META_COLOUR_1 = "1"           // The current time is before the Race time.
     const val META_COLOUR_2 = "2"           // The current time is nearing the Race time.

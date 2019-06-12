@@ -24,7 +24,7 @@ interface RaceDAO {
     @Query("delete from race_details where _id = :id")
     fun deleteRace(id: Long): Int
 
-    @Query("select count(*) from race_details")
+    @Query("select count(*) from race_details where archvRace = 'N'")
     fun getCountRaces(): Int
 
     @Query("select * from race_details where _id = :id")

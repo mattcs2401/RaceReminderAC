@@ -11,15 +11,16 @@ import mcssoft.com.racereminderac.utility.Constants
  *
  * The Insert/Update etc statements in the DAO will take an object.
  */
-class AsyncLD(private var type: Int, private var dao: RaceDAO) : AsyncTask<Race, Void, Void>() {
+class AsyncLD(private var type: Int, private var dao: RaceDAO) : AsyncTask<Race, Void, Int>() {
 
-    override fun doInBackground(vararg params: Race) : Void? {
+    override fun doInBackground(vararg params: Race) : Int? {
+        var value: Int = Constants.NO_VALUE
         when(type) {
             Constants.INSERT -> {
                 dao.insertRace(params[0])
             }
             Constants.UPDATE -> {
-                dao.updateRace(params[0])
+                value = dao.updateRace(params[0])
             }
             Constants.DELETE -> {
                 dao.deleteRace(params[0])
@@ -28,7 +29,11 @@ class AsyncLD(private var type: Int, private var dao: RaceDAO) : AsyncTask<Race,
                 dao.deleteAll()
             }
         }
-        return null
+        return value
     }
 
+    override fun onPostExecute(result: Int) {
+        super.onPostExecute(result)
+        // TBA
+    }
 }

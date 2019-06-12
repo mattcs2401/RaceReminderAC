@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/id_delete_all"
-        android:enabled="true"
-        android:icon="@drawable/ic_delete_24px"
-        android:title="@string/lbl_delete_all" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--<item android:id="@+id/id_delete_all"-->
+        <!--android:enabled="true"-->
+        <!--android:icon="@drawable/ic_delete_24px"-->
+        <!--android:title="@string/lbl_delete_all"-->
+        <!--app:showAsAction="ifRoom"/>-->
+
+    <item android:id="@+id/id_notify_and_refresh"
+        android:title="N&amp;R"
+        app:actionLayout="@layout/notify_and_refresh"
+        app:showAsAction="ifRoom" />
 </menu>
