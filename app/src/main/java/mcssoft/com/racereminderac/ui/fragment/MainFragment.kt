@@ -3,6 +3,9 @@ package mcssoft.com.racereminderac.ui.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.View.VISIBLE
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -132,6 +135,13 @@ class MainFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.options_menu, menu)
+
+        // TODO - this is all dependant on whether the refresh option is set in the Preferences.
+        val alertMenuItem = menu.findItem(R.id.id_notify_and_refresh)
+        val rootView = alertMenuItem.actionView as FrameLayout
+        val redCircle = rootView.findViewById(R.id.id_view_refresh_red_circle) as FrameLayout
+        //val countTextView = rootView.findViewById(R.id.id_view_refresh_period_textview) as TextView
+        redCircle.visibility = VISIBLE
 
         Log.d("tag","MainFragment.onCreateOptionsMenu")
     }
