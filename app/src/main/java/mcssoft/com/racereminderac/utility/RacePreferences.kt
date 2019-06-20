@@ -76,7 +76,7 @@ class RacePreferences {
     }
 
     /**
-     * Get the Refresh interval preference.
+     * Get the Refresh interval Switch preference.
      * @param context: Activity context.
      * @return True if preference is enabled, else false
      */
@@ -92,7 +92,7 @@ class RacePreferences {
      */
     fun getRefreshIntervalVal(context: Context) : Int {
         val key = context.resources.getString(R.string.key_refresh_interval_seek_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getInt(key, 3)
+        return PreferenceManager.getDefaultSharedPreferences(context).getInt(key, 0)
     }
 
     /**

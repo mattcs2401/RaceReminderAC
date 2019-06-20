@@ -47,7 +47,7 @@ object Constants {
     const val ITEM_SELECT = 0               // Represents the click (press) on a list item.
     const val ITEM_LONG_SELECT = 1          // Represents the long click (long press) on a list item.
 
-    const val DELETE_COLOUR = "#b80f0a"     // Swipe to delete background colour.
+    const val DELETE_COLOUR = "#b80f0a"     // Swipe to delete background colour (red).
 
     const val REFRESH_MIN = 1               // Refresh interval minimum value (equates to 1 minute).
     const val REFRESH_DEFAULT = 3           // Refresh interval default value (equates to 3 minutes).

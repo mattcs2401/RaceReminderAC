@@ -78,6 +78,7 @@
     <string name="refresh_interval_summary">Enable a screen refresh interval.</string>
     <string name="key_refresh_interval_seek_pref">key_refresh_interval_seek_pref</string>
     <string name="refresh_interval_seek_summary">Set the Refresh interval in minutes.</string>
+    <string name="key_refresh_interval_seek_pref_val">key_refresh_interval_seek_pref_val</string>
 
     <!-- Preferences Toast messages. -->
     <string name="race_code_msg">Default Race Code changed to</string>

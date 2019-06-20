@@ -3,6 +3,7 @@ package mcssoft.com.racereminderac.ui.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -89,7 +90,8 @@ class MainFragment : Fragment() {
         val menuItem = activity?.id_bottom_nav_view?.menu?.findItem(R.id.id_refresh)
         if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
             // alarm is set in preferences.
-            RaceAlarm.getInstance()?.setAlarm(activity!!)
+            val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!).toLong()
+            RaceAlarm.getInstance()?.setAlarm(activity!!, interval)
             menuItem?.setVisible(false)
 //            menuItem?.setEnabled(false)
 //            menuItem?.setChecked(false)
@@ -136,24 +138,33 @@ class MainFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.options_menu, menu)
 
-        // TODO - this is all dependant on whether the refresh option is set in the Preferences.
-        val alertMenuItem = menu.findItem(R.id.id_notify_and_refresh)
-        val rootView = alertMenuItem.actionView as FrameLayout
-        val redCircle = rootView.findViewById(R.id.id_view_refresh_red_circle) as FrameLayout
-        //val countTextView = rootView.findViewById(R.id.id_view_refresh_period_textview) as TextView
-        redCircle.visibility = VISIBLE
+        val rootView: FrameLayout
+        val menuItem= menu.findItem(R.id.id_notify_and_refresh)
+        val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
+
+        if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!) && (interval > 0)) {
+//            if(interval > 0) {
+                rootView = menuItem.actionView as FrameLayout
+                val redCircle = rootView.findViewById<FrameLayout>(R.id.id_view_refresh_red_circle)
+                val intervalTextView = rootView.findViewById<TextView>(R.id.id_view_refresh_period_textview)
+                intervalTextView.text = interval.toString()
+                redCircle.visibility = VISIBLE
+//            }
+        } else {
+            menuItem.isVisible = false
+        }
 
         Log.d("tag","MainFragment.onCreateOptionsMenu")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when(item.itemId) {
-//            R.id.id_delete_all -> {
-//                val dialog = DeleteAllDialog(activity!!)
-//                dialog.show(activity!!.supportFragmentManager, "delete_all_dialog")
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
+        when(item.itemId) {
+            R.id.id_delete_all -> {
+                val dialog = DeleteAllDialog(activity!!)
+                dialog.show(activity!!.supportFragmentManager, "delete_all_dialog")
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
         return true
     }
     //</editor-fold>

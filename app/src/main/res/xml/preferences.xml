@@ -50,6 +50,7 @@
             app:summary="@string/refresh_interval_seek_summary"
             app:defaultValue="3"
             app:enabled="false"
+            android:min="1"
             android:max="5"/>
     </PreferenceCategory>
 

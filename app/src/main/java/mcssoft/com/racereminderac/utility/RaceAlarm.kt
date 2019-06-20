@@ -4,9 +4,6 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.view.View
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.main_activity.*
 
 /**
  * Utility class as wrapper for AlarmManager.
@@ -31,47 +28,47 @@ class RaceAlarm {
         }
     }
 
-    /**
-     * Set the UI refresh alarm.
-     * @param context: Activity context.
-     * @Notes: The switch preference, that enables the refresh interval slider preference must be
-     *         set/enabled.
-     */
-    internal fun setAlarm(context: Context) {
-        // Get the switch preference that enables the seek slider.
-        if(RacePreferences.getInstance()!!.getRefreshInterval(context)) {
-            var interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(context).toLong()
-            // Cancel any previously set alarm.
-            cancelAlarm()
-            // Set the interval equivalent in mSec.
-            interval *= 60 * 1000
-            // Set the alarm manager.
-            val intent = Intent(context, RaceReceiver::class.java)
-            alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarmIntent = PendingIntent.getBroadcast(context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
-            alarmManager!!.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, alarmIntent)
-        }
-    }
+//    /**
+//     * Set the UI refresh alarm.
+//     * @param context: Activity context.
+//     * @Notes: The switch preference, that enables the refresh interval slider preference must be
+//     *         set/enabled.
+//     */
+//    internal fun setAlarm(context: Context) {
+//        // Get the switch preference that enables the seek slider.
+//        if(RacePreferences.getInstance()!!.getRefreshInterval(context)) {
+//            var interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(context).toLong()
+//            // Cancel any previously set alarm.
+//            cancelAlarm()
+//            // Set the interval equivalent in mSec.
+//            interval *= 60 * 1000
+//            // Set the alarm manager.
+//            val intent = Intent(context, RaceReceiver::class.java)
+//            alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//            alarmIntent = PendingIntent.getBroadcast(context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
+//            alarmManager!!.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, alarmIntent)
+//        }
+//    }
 
     /**
      * Set the UI refresh alarm.
      * @param context: Activity context.
-     * @param minutes: The alarm time in minutes.
+     * @param interval: The alarm time in minutes.
      * @Notes: The switch preference, that enables the refresh interval slider preference must be
      *         set/enabled.
      */
-    internal fun setAlarm(context: Context, minutes: Long) {
-        if(RacePreferences.getInstance()!!.getRefreshInterval(context)) {
+    internal fun setAlarm(context: Context, interval: Long) {
+//        if(RacePreferences.getInstance()!!.getRefreshInterval(context)) {
             // Cancel any previously set alarm.
             cancelAlarm()
             // Set the interval equivalent in mSec.
-            val interval = minutes * 60 * 1000
+            val millis = interval * 60 * 1000
             // Set the alarm manager.
             val intent = Intent(context, RaceReceiver::class.java)
             alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmIntent = PendingIntent.getBroadcast(context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
-            alarmManager!!.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, alarmIntent)
-        }
+            alarmManager!!.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), millis, alarmIntent)
+//        }
     }
 
     /**
