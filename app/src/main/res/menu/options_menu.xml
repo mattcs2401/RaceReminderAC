@@ -10,6 +10,6 @@
 
     <item android:id="@+id/id_notify_and_refresh"
         android:title="N&amp;R"
-        app:actionLayout="@layout/notify_and_refresh"
+        app:actionLayout="@layout/notify"
         app:showAsAction="ifRoom" />
 </menu>
