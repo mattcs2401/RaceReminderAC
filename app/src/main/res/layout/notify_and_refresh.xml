@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--https://materialdesignicons.com/-->
+
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -24,8 +26,9 @@
             android:layout_width="@dimen/menu_item_icon_size"
             android:layout_height="@dimen/menu_item_icon_size"
             android:layout_gravity="center"
-            android:src="@drawable/ic_refresh_24px"
+            android:src="@drawable/icon_r_24px"
             tools:ignore="ContentDescription"/>
+        <!--android:src="@drawable/ic_refresh_24px"-->
 
         <FrameLayout
             android:id="@+id/id_view_refresh_red_circle"
