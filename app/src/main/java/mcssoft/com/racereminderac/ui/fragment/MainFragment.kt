@@ -86,6 +86,7 @@ class MainFragment : Fragment() {
         super.onStart()
         // Set alarm if set in Preferences.
         // TODO: This needs work WRT colours that display.
+        // Bottom refresh menu item.
         val menuItem = activity?.id_bottom_nav_view?.menu?.findItem(R.id.id_refresh)
         if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
             // alarm is set in preferences.
@@ -103,6 +104,7 @@ class MainFragment : Fragment() {
         // Eventbus registration.
         EventBus.getDefault().register(this)
         // Refresh main UI colours.
+        // TODO - what if no races to display ?
         EventBus.getDefault().post(ManualRefreshMessage())
         // Add on back pressed handler.
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressCallback)
@@ -212,6 +214,8 @@ class MainFragment : Fragment() {
     }
 
     private fun setRefreshMenuItem(menu: Menu) {
+        // TODO - link this somehow to the number of races in the list,
+        //  i.e. if no races to display, do we need the menu item to show ?
         val rootView: FrameLayout
         val menuItem= menu.findItem(R.id.id_refresh)
         val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
