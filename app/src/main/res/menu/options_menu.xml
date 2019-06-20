@@ -8,8 +8,8 @@
         android:title="@string/lbl_delete_all"
         app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/id_notify_and_refresh"
-        android:title="N&amp;R"
-        app:actionLayout="@layout/notify"
+    <item android:id="@+id/id_refresh"
+        android:title="@string/lbl_refresh"
+        app:actionLayout="@layout/refresh"
         app:showAsAction="ifRoom" />
 </menu>

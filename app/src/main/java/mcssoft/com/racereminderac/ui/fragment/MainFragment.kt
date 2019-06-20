@@ -3,7 +3,6 @@ package mcssoft.com.racereminderac.ui.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -138,21 +137,7 @@ class MainFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.options_menu, menu)
 
-        val rootView: FrameLayout
-        val menuItem= menu.findItem(R.id.id_notify_and_refresh)
-        val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
-
-        if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!) && (interval > 0)) {
-//            if(interval > 0) {
-                rootView = menuItem.actionView as FrameLayout
-                val redCircle = rootView.findViewById<FrameLayout>(R.id.id_view_refresh_red_circle)
-                val intervalTextView = rootView.findViewById<TextView>(R.id.id_view_refresh_period_textview)
-                intervalTextView.text = interval.toString()
-                redCircle.visibility = VISIBLE
-//            }
-        } else {
-            menuItem.isVisible = false
-        }
+        setToolbarMenuItems(menu)
 
         Log.d("tag","MainFragment.onCreateOptionsMenu")
     }
@@ -209,6 +194,37 @@ class MainFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(select: DeleteAllMessage) {
         raceViewModel.deleteAll()
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility.">
+    private fun setToolbarMenuItems(menu: Menu) {
+        setDeleteMenuItem(menu)
+        setRefreshMenuItem(menu)
+    }
+
+    private fun setDeleteMenuItem(menu: Menu) {
+        // TODO - this needs a rethink, the race adapter swapData() happens after this.
+//        val menuItem= menu.findItem(R.id.id_delete_all)
+//        if(raceAdapter.isEmpty()) {
+//            menuItem.isVisible = false
+//        }
+    }
+
+    private fun setRefreshMenuItem(menu: Menu) {
+        val rootView: FrameLayout
+        val menuItem= menu.findItem(R.id.id_refresh)
+        val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
+
+        if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!) && (interval > 0)) {
+            rootView = menuItem.actionView as FrameLayout
+            val redCircle = rootView.findViewById<FrameLayout>(R.id.id_view_refresh_red_circle)
+            val intervalTextView = rootView.findViewById<TextView>(R.id.id_view_refresh_period_textview)
+            intervalTextView.text = interval.toString()
+            redCircle.visibility = VISIBLE
+        } else {
+            menuItem.isVisible = false
+        }
     }
     //</editor-fold>
 

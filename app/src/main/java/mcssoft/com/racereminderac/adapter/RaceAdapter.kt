@@ -68,6 +68,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      */
     internal fun swapData(lRaces: ArrayList<Race>) {
         this.lRaces = lRaces
+        isEmpty = this.lRaces.size <= 0
         notifyDataSetChanged()
     }
 
@@ -97,6 +98,8 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      * Primarily for the list observer.
      */
     internal fun getContext(): Context = context
+
+    internal fun isEmpty() : Boolean = isEmpty
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - ISwipe">
     /**
@@ -177,6 +180,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private var lRaces = ArrayList<Race>(0)   // backing data.
+    private var isEmpty: Boolean = true
 
     private lateinit var raceViewHolder: RaceViewHolder    //
     private lateinit var itemTouchHelper: ItemTouchHelper  //

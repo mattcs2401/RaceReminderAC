@@ -92,7 +92,7 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
     }
 
     private var notify: SwitchPreferenceCompat? = null          // post notifications.
-    private var notifyMulti: SwitchPreferenceCompat? = null     // allow multi notify same race.
+    private var notifyMulti: SwitchPreferenceCompat? = null     // allow multi refresh same race.
     private var refresh: SwitchPreferenceCompat? = null         // refresh interval.
     private var refreshSeek: SeekBarPreference? = null          // refresh interval ammount.
 
