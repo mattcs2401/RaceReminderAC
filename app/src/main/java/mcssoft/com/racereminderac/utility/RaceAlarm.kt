@@ -7,20 +7,19 @@ import android.content.Intent
 
 /**
  * Utility class as wrapper for AlarmManager.
- * @Note: Listens for changes in the Refresh Interval preference.
  */
 class RaceAlarm {
 
     /**
      * For Singleton instance.
-     * @Note: Can't use Context here, so context passed into the respective methods as required.
+     * @Note: Can't use Context here, so context passed into the setAlarm() method.
      */
     companion object {
         @Volatile private var instance: RaceAlarm? = null
 
         fun getInstance(): RaceAlarm? {
             if (instance == null) {
-                synchronized(RacePreferences::class) {
+                synchronized(RaceAlarm::class) {
                     instance = RaceAlarm()
                 }
             }
@@ -28,68 +27,41 @@ class RaceAlarm {
         }
     }
 
-//    /**
-//     * Set the UI refresh alarm.
-//     * @param context: Activity context.
-//     * @Notes: The switch preference, that enables the refresh interval slider preference must be
-//     *         set/enabled.
-//     */
-//    internal fun setAlarm(context: Context) {
-//        // Get the switch preference that enables the seek slider.
-//        if(RacePreferences.getInstance()!!.getRefreshInterval(context)) {
-//            var interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(context).toLong()
-//            // Cancel any previously set alarm.
-//            cancelAlarm()
-//            // Set the interval equivalent in mSec.
-//            interval *= 60 * 1000
-//            // Set the alarm manager.
-//            val intent = Intent(context, RaceReceiver::class.java)
-//            alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//            alarmIntent = PendingIntent.getBroadcast(context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
-//            alarmManager!!.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, alarmIntent)
-//        }
-//    }
-
     /**
      * Set the UI refresh alarm.
-     * @param context: Activity context.
+     * @param context: The context being used.
      * @param interval: The alarm time in minutes.
-     * @Notes: The switch preference, that enables the refresh interval slider preference must be
-     *         set/enabled.
      */
     internal fun setAlarm(context: Context, interval: Long) {
-//        if(RacePreferences.getInstance()!!.getRefreshInterval(context)) {
-            // Cancel any previously set alarm.
-            cancelAlarm()
-            // Set the interval equivalent in mSec.
-            val millis = interval * 60 * 1000
-            // Set the alarm manager.
-            val intent = Intent(context, RaceReceiver::class.java)
-            alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarmIntent = PendingIntent.getBroadcast(context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
-            alarmManager!!.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), millis, alarmIntent)
-//        }
+        // Cancel any previously set alarm.
+        cancelAlarm()
+        // Set the interval equivalent in mSec.
+        val millis = interval * 60 * 1000
+        // Set the alarm manager and intent.
+        val intent = Intent(context, RaceReceiver::class.java)
+        alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmIntent = PendingIntent.getBroadcast(context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), millis, alarmIntent)
+        // set cancelled flag.
+        alarmCancelled = false
     }
 
     /**
      * Cancel the previously set UI refresh alarm.
      */
     internal fun cancelAlarm() {
-        // Alarm manager may not have been initialsied depending on the conditions in setAlarm().
-        if(alarmManager != null) {
-            alarmManager!!.cancel(alarmIntent)
-            alarmManager = null
-            alarmIntent = null
+        if(!alarmCancelled) {
+            alarmManager.cancel(alarmIntent)
+            alarmCancelled = true
         }
     }
 
     /**
      * Quick and dirty check alarm is cancelled.
      */
-    internal fun isCancelled(): Boolean {
-        return this.alarmManager == null
-    }
+    internal fun isCancelled(): Boolean = alarmCancelled
 
-    private var alarmIntent: PendingIntent? = null
-    private var alarmManager: AlarmManager? = null
+    private var alarmCancelled = true
+    private lateinit var alarmIntent: PendingIntent
+    private lateinit var alarmManager: AlarmManager
 }

@@ -58,9 +58,9 @@ class MainFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
         // If bottom nav view was previously hidden by a New or Edit etc, then show again.
-        val bnv = activity?.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView
-        if(bnv.visibility == View.GONE) {
-            bnv.visibility = View.VISIBLE
+        val bottomNavView = activity?.findViewById<BottomNavigationView>(R.id.id_bottom_nav_view)
+        if(bottomNavView?.visibility == View.GONE) {
+            bottomNavView.visibility = View.VISIBLE
         }
 
         Log.d("tag","MainFragment.onViewCreated")
@@ -70,10 +70,6 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         // Set the view model and observe.
-        /*
-        This causes issues, won't update 1st entry in list.
-        raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
-        */
         raceViewModel = ViewModelProviders.of(this).get(RaceViewModel::class.java)
 
         val lRaces = raceViewModel.getAllRaces()
