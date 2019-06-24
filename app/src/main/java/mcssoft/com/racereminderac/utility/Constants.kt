@@ -51,4 +51,6 @@ object Constants {
 
     const val REFRESH_MIN = 1               // Refresh interval minimum value (equates to 1 minute).
     const val REFRESH_DEFAULT = 3           // Refresh interval default value (equates to 3 minutes).
+
+    const val CB_BET_PLACED = 1             // BetPlaced UI component (on adapter row).
 }

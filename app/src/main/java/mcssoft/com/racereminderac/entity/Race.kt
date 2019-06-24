@@ -19,7 +19,7 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
     @ColumnInfo(name = "RaceTimeL") var raceTimeL: Long = 0               // race time as Long val.
     @ColumnInfo(name = "ArchvRace") var archvRace: String = "N"           // record's archive flag.
     @ColumnInfo(name = "MetaColour") var metaColour: String = "1"         // race info display colour.
-    @ColumnInfo(name = "BetPlaces") var betPlaced: Boolean = false        // bet placed indicator.
+    @ColumnInfo(name = "BetPlaced") var betPlaced: Boolean = false        // bet placed indicator.
     @ColumnInfo(name = "RaceSel2") var raceSel2: String = ""              // 2nd race sel (multi sel).
     @ColumnInfo(name = "RaceSel3") var raceSel3: String = ""              // 3rd "    "    "
     @ColumnInfo(name = "RaceSel4") var raceSel4: String = ""              // 4th "    "    "

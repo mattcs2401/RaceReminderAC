@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.eventbus.SelectMessage
+import mcssoft.com.racereminderac.utility.eventbus.UpdateMessage
 import org.greenrobot.eventbus.EventBus
 
 class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
@@ -31,8 +32,7 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickLi
     override fun onClick(view : View) {
         when(view.id) {
             R.id.id_cb_bet_placed -> {
-                // TBA
-                Toast.makeText(view.context,"Bet placed", Toast.LENGTH_SHORT).show()
+                EventBus.getDefault().post(UpdateMessage(adapterPosition, R.id.id_cb_bet_placed, cbBetPlaced.isChecked))
             }
             else -> {
                 EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, adapterPosition))

@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.main_fragment.view.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
+import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
@@ -193,6 +194,18 @@ class MainFragment : Fragment() {
     fun onMessageEvent(select: DeleteAllMessage) {
         raceViewModel.deleteAll()
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    fun onMessageEvent(update: UpdateMessage) {
+        val race: Race = raceAdapter.getRace(update.pos)
+        when(update.update) {
+            R.id.id_cb_bet_placed -> {
+                race.betPlaced = update.value as Boolean
+            }
+        }
+        raceViewModel.update(race)
+    }
+
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility.">

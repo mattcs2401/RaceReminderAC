@@ -32,5 +32,4 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteAll() = raceRepository.doDatabaseOperation(Constants.DELETE_ALL, null)
 
 //    fun getCount() = raceRepository.doDatabaseOperation(Constants.COUNT, null)
-
 }

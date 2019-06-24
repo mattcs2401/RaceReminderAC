@@ -58,6 +58,8 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
                 holder.tvRaceDate.setTextColor(getColor(context, R.color.colorAccent))
             }
         }
+
+        holder.cbBetPlaced.isChecked = race.betPlaced
     }
     
     override fun getItemCount() : Int = lRaces.size

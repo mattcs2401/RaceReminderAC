@@ -41,4 +41,7 @@ interface RaceDAO {
 
     @Query("delete from race_details where archvRace = 'Y'")
     fun deleteAllArchived()
+
+//    @Query("update race_details set BetPlaced = :bp where _id = :id")
+//    fun updateBetPlaced(bp: Boolean, id: Long)
 }
