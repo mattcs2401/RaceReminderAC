@@ -66,6 +66,17 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        app:key="@string/key_multi_select"
+        app:title="@string/multi_select_title"
+        app:summary="@string/multi_select_summary_title">
+
+        <SwitchPreferenceCompat
+            app:key="@string/key_multi_select_pref"
+            app:defaultValue="true"
+            app:summary="@string/mult_select_summary"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         app:key="@string/key_maint"
         app:title="@string/maint_title">
 

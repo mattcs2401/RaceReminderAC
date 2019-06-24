@@ -152,8 +152,12 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      * OnClick for the Snackbar Undo.
      */
     override fun onClick(view: View) {
-        reinstateRace(raceUndo!!, posUndo)
-        Toast.makeText(context, "Race re-instated.", Toast.LENGTH_SHORT).show()
+        when (view.id) {
+            R.id.snackbar_action -> {  // this is a system default id.
+                reinstateRace(raceUndo!!, posUndo)
+                Toast.makeText(context, "Race re-instated.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
      /**

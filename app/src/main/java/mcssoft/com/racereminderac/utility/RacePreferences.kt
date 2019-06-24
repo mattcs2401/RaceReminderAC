@@ -95,6 +95,11 @@ class RacePreferences {
         return PreferenceManager.getDefaultSharedPreferences(context).getInt(key, 0)
     }
 
+    fun getRaceMultiSelect(context: Context) : Boolean {
+        val key = context.resources.getString(R.string.key_multi_select_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+    }
+
     /**
      * Check that default preference values exist, and if not, then set them.
      * @param context: Activity context.

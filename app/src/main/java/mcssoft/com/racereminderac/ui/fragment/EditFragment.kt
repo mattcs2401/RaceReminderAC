@@ -8,7 +8,9 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.NumberPicker
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -113,6 +115,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 }
                 Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
                             .navigate(R.id.id_main_fragment)
+            }
+            R.id.id_cb_multi_sel -> {
+                // TODO - implement the race selection multi select.
+                Toast.makeText(activity, "Not implemented yet", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -257,6 +263,14 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         // Set the Save button and listener.
         btnSave = id_btn_save
         btnSave.setOnClickListener(this)
+
+        multiSelect = id_cb_multi_sel
+        if(RacePreferences.getInstance()!!.getRaceMultiSelect(activity!!)) {
+            multiSelect.visibility = CheckBox.VISIBLE
+            multiSelect.setOnClickListener(this)
+        } else {
+            multiSelect.visibility = CheckBox.GONE
+        }
     }
 
     /**
@@ -332,5 +346,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private lateinit var rnVals: Array<String>
     private lateinit var rsVals: Array<String>
     private lateinit var timePickDialog: DialogFragment
+    private lateinit var multiSelect: CheckBox
     //</editor-fold>
 }

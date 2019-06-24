@@ -25,6 +25,10 @@
     <string name="lbl_copy">Copy</string>
     <string name="lbl_update">Update</string>
 
+    <!-- Checkbox labels. -->
+    <string name="lbl_bet_placed">Bet placed.</string>
+    <string name="lbl_multi_select">Multi Select</string>
+
     <!-- Menu labels. -->
     <string name="lbl_delete">Delete</string>
     <string name="lbl_delete_all">Delete All</string>
@@ -79,6 +83,12 @@
     <string name="key_refresh_interval_seek_pref">key_refresh_interval_seek_pref</string>
     <string name="refresh_interval_seek_summary">Set the Refresh interval in minutes.</string>
     <string name="key_refresh_interval_seek_pref_val">key_refresh_interval_seek_pref_val</string>
+
+    <string name="key_multi_select">key_multi_select</string>
+    <string name="multi_select_title">Multi Select</string>
+    <string name="multi_select_summary_title">Enable multi select of race selections.</string>
+    <string name="key_multi_select_pref">key_multi_select_pref</string>
+    <string name="mult_select_summary">Enable multi select</string>
 
     <!-- Preferences Toast messages. -->
     <string name="race_code_msg">Default Race Code changed to</string>

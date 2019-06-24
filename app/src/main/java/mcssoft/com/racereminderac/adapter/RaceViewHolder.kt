@@ -1,7 +1,9 @@
 package mcssoft.com.racereminderac.adapter
 
 import android.view.View
+import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
@@ -17,15 +19,25 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickLi
     var tvRaceSel: TextView = view.findViewById(R.id.id_tv_race_sel)
     var tvRaceTime: TextView = view.findViewById(R.id.id_tv_race_time)
     var tvRaceDate: TextView = view.findViewById(R.id.id_tv_race_date)
+    var cbBetPlaced: CheckBox = view.findViewById(R.id.id_cb_bet_placed)
 
     init {
         // Set the listeners for the View.
         view.setOnClickListener(this)
         view.setOnLongClickListener(this)
+        cbBetPlaced.setOnClickListener(this)
     }
 
     override fun onClick(view : View) {
-        EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, adapterPosition))
+        when(view.id) {
+            R.id.id_cb_bet_placed -> {
+                // TBA
+                Toast.makeText(view.context,"Bet placed", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, adapterPosition))
+            }
+        }
     }
 
     override fun onLongClick(view: View): Boolean {
