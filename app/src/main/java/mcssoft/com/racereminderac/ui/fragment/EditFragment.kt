@@ -7,10 +7,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.NumberPicker
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -117,9 +114,26 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                             .navigate(R.id.id_main_fragment)
             }
             R.id.id_cb_multi_sel -> {
-                // TODO - implement the race selection multi select.
-                Toast.makeText(activity, "Not implemented yet", Toast.LENGTH_SHORT).show()
+                if(cbMultiSel.isChecked) {
+                    Toast.makeText(activity, "Multi select for this race is enabled.", Toast.LENGTH_SHORT).show()
+                    tvMultiSel.visibility = View.VISIBLE
+                } else {
+                    tvMultiSel.visibility = View.GONE
+                    tvMultiSel.text = ""
+//                    arrMultiCount = 0
+                }
+                arrMultiCount = 0
             }
+//            R.id.id_np_race_sel -> {
+//                var value = tvMultiSel.text.toString()
+//                if(arrMultiCount == 0 || arrMultiCount == 4) {
+//                    tvMultiSel.text = value
+//                } else if(arrMultiCount in 1..2) {
+//                    value = value + ", " + rsVals[npRaceSel.value]
+//                    tvMultiSel.text = value
+//                }
+//                arrMultiCount += 1
+//            }
         }
     }
     //</editor-fold>
@@ -255,6 +269,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         npRaceSel.maxValue = rsVals.size - 1
         npRaceSel.displayedValues = rsVals
         npRaceSel.wrapSelectorWheel = true
+        npRaceSel.setOnClickListener(this)
 
         // Set the Time button and listener.
         btnTime = id_btn_time
@@ -264,13 +279,15 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         btnSave = id_btn_save
         btnSave.setOnClickListener(this)
 
-        multiSelect = id_cb_multi_sel
+        cbMultiSel = id_cb_multi_sel
         if(RacePreferences.getInstance()!!.getRaceMultiSelect(activity!!)) {
-            multiSelect.visibility = CheckBox.VISIBLE
-            multiSelect.setOnClickListener(this)
+            cbMultiSel.visibility = CheckBox.VISIBLE
+            cbMultiSel.setOnClickListener(this)
         } else {
-            multiSelect.visibility = CheckBox.GONE
+            cbMultiSel.visibility = CheckBox.GONE
         }
+
+        tvMultiSel = id_tv_multi_sel
     }
 
     /**
@@ -325,6 +342,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             }
         }
     }
+
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
@@ -346,6 +364,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private lateinit var rnVals: Array<String>
     private lateinit var rsVals: Array<String>
     private lateinit var timePickDialog: DialogFragment
-    private lateinit var multiSelect: CheckBox
+
+    private lateinit var cbMultiSel: CheckBox
+    private lateinit var tvMultiSel: TextView
+    private var arrMultiSel =  ArrayList<String>()
+    private var arrMultiCount: Int = 0;
     //</editor-fold>
 }
