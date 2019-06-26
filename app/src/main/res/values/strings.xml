@@ -29,6 +29,11 @@
     <string name="lbl_bet_placed">Bet placed.</string>
     <string name="lbl_multi_select">Multi Select</string>
 
+    <!-- Dialog text. -->
+    <string name="multi_sel_line_1">Make a selection, click the Add button (max 4).</string>
+    <string name="multi_sel_line_2">Uncheck the Multi Select to Save.</string>
+    <string name="line_sep">line.separator</string>
+
     <!-- Menu labels. -->
     <string name="lbl_delete">Delete</string>
     <string name="lbl_delete_all">Delete All</string>

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.edit_fragment.*
 import kotlinx.android.synthetic.main.toolbar_base.*
@@ -21,6 +22,7 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.observer.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
+import mcssoft.com.racereminderac.ui.dialog.MultiSelectDialog
 import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
@@ -95,45 +97,44 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 launchTimePickDialog()
             }
             R.id.id_btn_save -> {
-                val race: Race
-                when(editType) {
-                    Constants.EDIT_RACE_UPDATE -> {
-                        race = collateValues(Constants.EDIT_RACE_UPDATE)
-                        raceViewModel.update(race)
+//                if (cbMultiSel.isChecked) {
+//                    // multi select functionality is enabled.
+//                    val value = rsVals[npRaceSel.value]
+//                    activity?.findNavController(R.id.id_nav_host_fragment)?.navigate(R.id.id_multi_SelectDialog)
+//
+//                } else
+//                {
+                    val race: Race
+                    when (editType) {
+                        Constants.EDIT_RACE_UPDATE -> {
+                            race = collateValues(Constants.EDIT_RACE_UPDATE)
+                            raceViewModel.update(race)
+                        }
+                        Constants.EDIT_RACE_NEW -> {
+                            race = collateValues(Constants.EDIT_RACE_NEW)
+                            raceViewModel.insert(race)
+                        }
+                        Constants.EDIT_RACE_COPY -> {
+                            race = collateValues(Constants.EDIT_RACE_COPY)
+                            raceViewModel.insert(race)
+                        }
                     }
-                    Constants.EDIT_RACE_NEW -> {
-                        race = collateValues(Constants.EDIT_RACE_NEW)
-                        raceViewModel.insert(race)
-                    }
-                    Constants.EDIT_RACE_COPY -> {
-                        race = collateValues(Constants.EDIT_RACE_COPY)
-                        raceViewModel.insert(race)
-                    }
-                }
-                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+                    Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
                             .navigate(R.id.id_main_fragment)
-            }
+                }
+//            }
             R.id.id_cb_multi_sel -> {
                 if(cbMultiSel.isChecked) {
-                    Toast.makeText(activity, "Multi select for this race is enabled.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity,"TODO - Multi select dialog.",Toast.LENGTH_SHORT).show()
+                    activity?.findNavController(R.id.id_nav_host_fragment)?.navigate(R.id.id_multi_SelectDialog)
+//                    val dialog = MultiSelectDialog(activity!!)
+//                    dialog.show(activity!!.supportFragmentManager, "multi_select_dialog")
                     tvMultiSel.visibility = View.VISIBLE
                 } else {
                     tvMultiSel.visibility = View.GONE
                     tvMultiSel.text = ""
-//                    arrMultiCount = 0
                 }
-                arrMultiCount = 0
             }
-//            R.id.id_np_race_sel -> {
-//                var value = tvMultiSel.text.toString()
-//                if(arrMultiCount == 0 || arrMultiCount == 4) {
-//                    tvMultiSel.text = value
-//                } else if(arrMultiCount in 1..2) {
-//                    value = value + ", " + rsVals[npRaceSel.value]
-//                    tvMultiSel.text = value
-//                }
-//                arrMultiCount += 1
-//            }
         }
     }
     //</editor-fold>
@@ -367,7 +368,5 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     private lateinit var cbMultiSel: CheckBox
     private lateinit var tvMultiSel: TextView
-    private var arrMultiSel =  ArrayList<String>()
-    private var arrMultiCount: Int = 0;
     //</editor-fold>
 }
