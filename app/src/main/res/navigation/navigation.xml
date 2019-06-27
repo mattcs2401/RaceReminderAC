@@ -26,9 +26,6 @@
         <action
             android:id="@+id/editFragment_to_mainFragment"
             app:destination="@id/id_main_fragment" />
-        <action
-            android:id="@+id/action_id_edit_fragment_to_multiSelectDialog"
-            app:destination="@id/id_multi_SelectDialog" />
     </fragment>
     <fragment
         android:id="@+id/preferencesFragment"
@@ -37,13 +34,5 @@
         <action
             android:id="@+id/action_preferencesFragment_to_id_main_fragment"
             app:destination="@id/id_main_fragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/id_multi_SelectDialog"
-        android:name="mcssoft.com.racereminderac.ui.dialog.MultiSelectDialog"
-        android:label="MultiSelectDialog" >
-        <action
-            android:id="@+id/action_id_multi_SelectDialog_to_id_edit_fragment"
-            app:destination="@id/id_edit_fragment" />
     </fragment>
 </navigation>

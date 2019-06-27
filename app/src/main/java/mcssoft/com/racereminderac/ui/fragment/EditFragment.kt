@@ -126,9 +126,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             R.id.id_cb_multi_sel -> {
                 if(cbMultiSel.isChecked) {
                     Toast.makeText(activity,"TODO - Multi select dialog.",Toast.LENGTH_SHORT).show()
-                    activity?.findNavController(R.id.id_nav_host_fragment)?.navigate(R.id.id_multi_SelectDialog)
-//                    val dialog = MultiSelectDialog(activity!!)
-//                    dialog.show(activity!!.supportFragmentManager, "multi_select_dialog")
+                    val dialog = MultiSelectDialog(activity!!)
+                    dialog.show(activity!!.supportFragmentManager, "multi_select_dialog")
                     tvMultiSel.visibility = View.VISIBLE
                 } else {
                     tvMultiSel.visibility = View.GONE
