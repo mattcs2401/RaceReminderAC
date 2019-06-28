@@ -53,4 +53,6 @@ object Constants {
     const val REFRESH_DEFAULT = 3           // Refresh interval default value (equates to 3 minutes).
 
     const val CB_BET_PLACED = 1             // BetPlaced UI component (on adapter row).
+
+    const val SELECTS_MAX = 4               // The max number of multi selects for a race.
 }

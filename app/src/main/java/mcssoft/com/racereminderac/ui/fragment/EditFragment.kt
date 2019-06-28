@@ -27,6 +27,7 @@ import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.RaceTime
+import mcssoft.com.racereminderac.utility.eventbus.MultiSelMessage
 import mcssoft.com.racereminderac.utility.eventbus.RaceMessage
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
 import org.greenrobot.eventbus.EventBus
@@ -87,6 +88,20 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         this.raceDate = race.theRace.raceDate
         // Additional, get the Race time in mSec (for copy function).
         this.raceTimeL = race.theRace.raceTimeL
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    fun onMessageEvent(multiSelMsg: MultiSelMessage) {
+        // Note: If the OK or Cancel button was not clicked on the MultiSelectDialog, this
+        //       onMessageEvent won't happen.
+        if(multiSelMsg.values == null) {
+            // The message payload has no data, so just clear the multi select CB.
+            cbMultiSel.isChecked = false
+            listMultiSel = null             // clear any previous values.
+        } else {
+            // The message payload has 1 or more race selects.
+            listMultiSel = multiSelMsg.values
+        }
     }
     //</editor-fold>
 
@@ -169,13 +184,16 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Get the UI values into a Race object ready for Update or Insert.
      */
     private fun collateValues(action: Int): Race {
-        // Get the base values.
-        val race = Race(ccVals[npCityCode.value],
-                rcVals[npRaceCode.value],
-                rnVals[npRaceNo.value],
-                rsVals[npRaceSel.value],
-                btnTime.text.toString())
-            race.raceTimeL = raceTimeL
+        val race: Race
+        // TODO - if multi select and the message payload contains data.
+        if(cbMultiSel.isChecked && listMultiSel != null) {
+            // Use the CB checked value as a flag.
+            // Note: If the CB is unchecked before Save, then the payload is lost/ignored.
+            race = collateMultiSelect()
+        } else {
+            // Get the base values.
+            race = collate()
+        }
 
         when(action) {
             // Update.
@@ -194,6 +212,30 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         }
         return race
     }
+
+    private fun collateMultiSelect() : Race {
+        val race = Race(ccVals[npCityCode.value],
+                rcVals[npRaceCode.value],
+                rnVals[npRaceNo.value],
+                listMultiSel?.get(0)!!,
+                btnTime.text.toString())
+        race.raceTimeL = raceTimeL
+        race.raceSel2 = listMultiSel?.get(1)!!
+        race.raceSel3 = listMultiSel?.get(2)!!
+        race.raceSel4 = listMultiSel?.get(3)!!
+        return race
+    }
+
+    private fun collate() : Race {
+        val race = Race(ccVals[npCityCode.value],
+                rcVals[npRaceCode.value],
+                rnVals[npRaceNo.value],
+                rsVals[npRaceSel.value],
+                btnTime.text.toString())
+        race.raceTimeL = raceTimeL
+        return race
+    }
+
 
     /**
      * Show the TimePicker dialog.
@@ -367,5 +409,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     private lateinit var cbMultiSel: CheckBox
     private lateinit var tvMultiSel: TextView
+    private var listMultiSel: Array<String>? = null
     //</editor-fold>
 }

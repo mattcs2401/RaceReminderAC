@@ -34,7 +34,6 @@ dependencies {
 
     implementation "androidx.annotation:annotation:$xAnnotVer"
     implementation "androidx.appcompat:appcompat:$xAppComVer"
-//    implementation 'androidx.fragment:fragment:1.1.0-alpha09'
     implementation "androidx.constraintlayout:constraintlayout:$xConstLayVer"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$xCycleVer"

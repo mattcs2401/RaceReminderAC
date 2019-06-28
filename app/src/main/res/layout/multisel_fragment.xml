@@ -7,8 +7,32 @@
     android:layout_height="match_parent">
 
 
+    <TextView
+        android:id="@+id/id_tv_multi_sel_4"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/id_tv_multi_sel_3"
+        app:layout_constraintStart_toEndOf="@+id/id_tv_multi_sel_3"
+        app:layout_constraintTop_toTopOf="@+id/id_tv_multi_sel_3" />
+
+    <TextView
+        android:id="@+id/id_tv_multi_sel_3"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/id_tv_multi_sel_2"
+        app:layout_constraintStart_toEndOf="@+id/id_tv_multi_sel_2"
+        app:layout_constraintTop_toTopOf="@+id/id_tv_multi_sel_2" />
+
+    <TextView
+        android:id="@+id/id_tv_multi_sel_2"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/id_tv_multi_sel_1"
+        app:layout_constraintStart_toEndOf="@+id/id_tv_multi_sel_1"
+        app:layout_constraintTop_toTopOf="@+id/id_tv_multi_sel_1" />
+
     <NumberPicker
-        android:id="@+id/id_np_race_multi_sel"
+        android:id="@+id/id_np_multi_sel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
@@ -16,16 +40,72 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/id_btn_multi_sel_add"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
+        android:src="@drawable/ic_add_circle_24px"
+        app:layout_constraintBottom_toBottomOf="@+id/id_np_multi_sel"
+        app:layout_constraintStart_toEndOf="@+id/id_np_multi_sel"
+        app:layout_constraintTop_toTopOf="@+id/id_np_multi_sel" />
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/id_btn_multi_sel_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/lbl_cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_np_multi_sel" />
+
+    <Button
+        android:id="@+id/id_btn_multi_sel_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="Add"
-        app:layout_constraintBottom_toBottomOf="@+id/id_np_race_multi_sel"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/lbl_ok"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/id_np_race_multi_sel"
-        app:layout_constraintTop_toTopOf="@+id/id_np_race_multi_sel" />
+        app:layout_constraintStart_toEndOf="@+id/id_btn_multi_sel_cancel"
+        app:layout_constraintTop_toBottomOf="@+id/id_np_multi_sel" />
+
+    <TextView
+        android:id="@+id/id_tv_multi_sel_1"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/id_np_multi_sel"
+        app:layout_constraintStart_toEndOf="@+id/id_np_multi_sel"
+        app:layout_constraintTop_toBottomOf="@+id/id_btn_multi_sel_add" />
+
+    <TextView
+        android:id="@+id/id_tv_selections"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Selections"
+        app:layout_constraintEnd_toEndOf="@+id/id_tv_multi_sel_4"
+        app:layout_constraintStart_toStartOf="@+id/id_tv_multi_sel_1"
+        app:layout_constraintTop_toBottomOf="@+id/id_tv_multi_sel_1" />
+
+    <ImageButton
+        android:id="@+id/id_btn_multi_sel_remove"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/id_btn_multi_sel_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/id_btn_multi_sel_add"
+        app:layout_constraintTop_toTopOf="@+id/id_btn_multi_sel_add"
+        app:srcCompat="@drawable/ic_remove_circle_24px" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
