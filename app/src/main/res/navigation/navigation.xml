@@ -17,6 +17,9 @@
         <action
             android:id="@+id/mainFragment_to_preferencesFragment"
             app:destination="@id/preferencesFragment" />
+        <argument
+            android:name="multiSelectArray"
+            app:argType="string[]" />
     </fragment>
     <fragment
         android:id="@+id/id_edit_fragment"

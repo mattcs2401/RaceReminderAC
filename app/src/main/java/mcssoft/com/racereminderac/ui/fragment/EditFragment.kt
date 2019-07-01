@@ -44,10 +44,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rootView = view
-
-        // set base UI elements.
-        initialiseUI(rootView)
+        // Sset base UI elements.
+        initialiseUI(view)
 
         Log.d("tag","EditFragment.onViewCreated")
     }
@@ -84,6 +82,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(race: RaceMessage) {
+        // TODO - multi select ?
+
         // The Race date.
         this.raceDate = race.theRace.raceDate
         // Additional, get the Race time in mSec (for copy function).
@@ -265,12 +265,14 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Initialise UI components.
      */
     private fun initialiseUI(view: View) {
-        // setup numberpickers, buttons etc.
+        // setup number pickers, buttons etc.
         setupDisplayElements()
         // set the view model and get the id of the Race object.
         setupViewModel(view)
         // update labels etc depending on edit type, e.g. new, or copy etc.
-        setupForEditType()//editType!!)
+        setupForEditType()
+        // Get the selected Race object (returns via EventBus RaceMessage).
+        raceViewModel.getRaceNoLD(raceId!!)
     }
 
     /**
@@ -279,10 +281,17 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private fun setupDisplayElements() {
         // Hide the bottom nav view.
         (activity?.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.GONE
-
         // Get the toolbar.
         toolBar = activity?.id_toolbar as Toolbar
+        // Set the 'pickers'.
+        setNumberPickers()
+        // Set the Time button and listener.
+        setButtons()
+        // Set for multi select (if exists).
+        setMultiSelect()
+    }
 
+    private fun setNumberPickers() {
         // Set the 'pickers'.
         npCityCode = id_np_city_code
         ccVals = resources.getStringArray(R.array.cityCodes)
@@ -315,30 +324,26 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         npRaceSel.displayedValues = rsVals
         npRaceSel.wrapSelectorWheel = true
         npRaceSel.setOnClickListener(this)
+    }
 
-        // Set the Time button and listener.
+    private fun setButtons() {
         btnTime = id_btn_time
         btnTime.setOnClickListener(this)
 
         // Set the Save button and listener.
         btnSave = id_btn_save
         btnSave.setOnClickListener(this)
+    }
 
+    private fun setMultiSelect() {
         cbMultiSel = id_cb_multi_sel
-        if(RacePreferences.getInstance()!!.getRaceMultiSelect(activity!!)) {
-            cbMultiSel.visibility = CheckBox.VISIBLE
-            cbMultiSel.setOnClickListener(this)
-        } else {
-            cbMultiSel.visibility = CheckBox.GONE
-        }
-
         tvMultiSel0 = id_tv_multi_sel0
         tvMultiSel1 = id_tv_multi_sel1
         tvMultiSel2 = id_tv_multi_sel2
         tvMultiSel3 = id_tv_multi_sel3
     }
 
-    /**
+     /**
      * Get the Race object id and setup ViewModel details.
      */
     private fun setupViewModel(view: View) {
@@ -439,7 +444,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private lateinit var btnSave: Button
     private lateinit var btnTime: Button
     private lateinit var raceViewModel: RaceViewModel
-    private lateinit var rootView: View
     private lateinit var ccVals: Array<String>
     private lateinit var rcVals: Array<String>
     private lateinit var rnVals: Array<String>
