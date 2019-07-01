@@ -17,10 +17,14 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickLi
     var tvCityCode: TextView = view.findViewById(R.id.id_tv_city_code)
     var tvRaceCode: TextView = view.findViewById(R.id.id_tv_race_code)
     var tvRaceNo: TextView = view.findViewById(R.id.id_tv_race_no)
-    var tvRaceSel: TextView = view.findViewById(R.id.id_tv_race_sel)
+    var tvRaceSel0: TextView = view.findViewById(R.id.id_tv_race_sel0)
+    var tvRaceSel1: TextView = view.findViewById(R.id.id_tv_race_sel1)
+    var tvRaceSel2: TextView = view.findViewById(R.id.id_tv_race_sel2)
+    var tvRaceSel3: TextView = view.findViewById(R.id.id_tv_race_sel3)
     var tvRaceTime: TextView = view.findViewById(R.id.id_tv_race_time)
     var tvRaceDate: TextView = view.findViewById(R.id.id_tv_race_date)
     var cbBetPlaced: CheckBox = view.findViewById(R.id.id_cb_bet_placed)
+    var tvMultiSelsNotify: TextView = view.findViewById(R.id.id_tv_mult_sels_notify)
 
     init {
         // Set the listeners for the View.
@@ -44,4 +48,5 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickLi
         EventBus.getDefault().post(SelectMessage(Constants.ITEM_LONG_SELECT, adapterPosition))
         return true
     }
+
 }

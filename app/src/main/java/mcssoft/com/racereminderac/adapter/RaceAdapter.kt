@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -40,7 +41,10 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
         holder.tvCityCode.text = race.cityCode
         holder.tvRaceCode.text = race.raceCode
         holder.tvRaceNo.text = race.raceNum
-        holder.tvRaceSel.text = race.raceSel
+        holder.tvRaceSel0.text = race.raceSel
+        holder.tvRaceSel1.text = race.raceSel2
+        holder.tvRaceSel2.text = race.raceSel3
+        holder.tvRaceSel3.text = race.raceSel4
         holder.tvRaceTime.text = race.raceTimeS
         holder.tvRaceDate.text = race.raceDate
 
@@ -60,6 +64,8 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
         }
 
         holder.cbBetPlaced.isChecked = race.betPlaced
+
+        setMultiSelect(holder, race)
     }
     
     override fun getItemCount() : Int = lRaces.size
@@ -146,6 +152,16 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     private fun clearUndo() {
         raceUndo = null
         posUndo = Constants.MINUS_ONE
+    }
+
+    private fun setMultiSelect(holder: RaceViewHolder, race: Race) {
+        if(race.raceSel2 != "") {
+            holder.tvMultiSelsNotify.visibility = View.VISIBLE
+            holder.tvRaceSel1.text = race.raceSel2
+            holder.tvRaceSel2.text = race.raceSel3
+            holder.tvRaceSel3.text = race.raceSel4
+        }
+
     }
     //</editor-fold>
 

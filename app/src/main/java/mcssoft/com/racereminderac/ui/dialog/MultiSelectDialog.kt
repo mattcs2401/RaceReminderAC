@@ -17,13 +17,19 @@ import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.eventbus.MultiSelMessage
 import org.greenrobot.eventbus.EventBus
 
+/**
+ * Utility class to display a dialog from which the user can make more than one selection for a Race
+ * (max of 4).
+ */
 class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.OnDismissListener,
         View.OnClickListener {
 
-    // Notes: Decided not to use the dialog builder as we need to use elements of the standard
-    //        fragment lifecycle, i.e. onCreateView as we are using a custom view.
+    // Notes: (1) Decided not to use the dialog builder as we are using a custom view and need to
+    //            use elements of the standard fragment lifecycle, i.e. onCreateView.
+    //        (2) The multi select maximum of four is hard coded, perhaps some other way ?
 
     // TODO - enable/disable Add/Remove buttons depending on count.
+    // TODO - dialog styling, title, buttons etc.
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
          return inflater.inflate(R.layout.multisel_fragment, container, false)
@@ -113,12 +119,13 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
     }
 
     /**
-     * Utility method, quick and dirty check that the backing array's 1st element is null.
+     * Utility method, quick and dirty check that the backing array's 1st element is not an empty
+     * string, i.e. the backing array has at least some data.
      */
     private fun isSelectsEmpty() : Boolean = selArray[0] == ""
 
     /**
-     * Utility method, get the last element in the backing array that is not null.
+     * Utility method, get the last element in the backing array that is not an empty string.
      * @return The array index, or -1.
      */
     private fun getLast() : Int {
@@ -131,8 +138,8 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
     }
 
     /**
-     * Utility method, set the text of the select TextView to null.
-     * @param ndx: An index value corresponding to the TextView.
+     * Utility method, set the text of the select TextView to empty string.
+     * @param ndx: An index value mapped to a TextView (index 0 is TextView 0 etc).
      */
     private fun updateViewRemove(ndx: Int) {
         when(ndx) {
@@ -150,19 +157,25 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
      */
     private fun valExists(value: String) : Boolean {
         for(ndx in 0..3) {
-            if((selArray[ndx] == value)) {
+            if((selArray[ndx].equals(value))) {
                 return true
             }
         }
         return false
     }
 
+    /**
+     * Setup the UI components.
+     * @param view: The view passed in onViewCreated(), i.e. the main UI view.
+     */
     private fun initialiseUI(view: View) {
+        // Multi select text views.
         tvSel0 = view.id_tv_multi_sel_1
         tvSel1 = view.id_tv_multi_sel_2
         tvSel2 = view.id_tv_multi_sel_3
         tvSel3 = view.id_tv_multi_sel_4
 
+        // Buttons and listeners.
         btnAdd = view.id_btn_multi_sel_add
         btnAdd.setOnClickListener(this)
         btnRemove = view.id_btn_multi_sel_remove
@@ -172,8 +185,10 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
         btnCancel = view.id_btn_multi_sel_cancel
         btnCancel.setOnClickListener(this)
 
+        // Race selections number picker data.
         rsVals = resources.getStringArray(R.array.raceSel)
 
+        // Number picker.
         npRaceSel = view.id_np_multi_sel
         npRaceSel.minValue = 0
         npRaceSel.maxValue = rsVals.size - 1
@@ -185,19 +200,20 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
-    private lateinit var tvSel0: TextView
-    private lateinit var tvSel1: TextView
-    private lateinit var tvSel2: TextView
-    private lateinit var tvSel3: TextView
+    private lateinit var tvSel0: TextView        // 1st selection.
+    private lateinit var tvSel1: TextView        // 2nd selection.
+    private lateinit var tvSel2: TextView        // 3rd selection.
+    private lateinit var tvSel3: TextView        // 4th selection.
 
-    private lateinit var btnAdd: ImageButton
-    private lateinit var btnRemove: ImageButton
-    private lateinit var btnOk: Button
-    private lateinit var btnCancel: Button
-    private lateinit var npRaceSel: NumberPicker
+    private lateinit var btnAdd: ImageButton     // add a selection.
+    private lateinit var btnRemove: ImageButton  // remove a selection.
+    private lateinit var btnOk: Button           // OK (save) button.
+    private lateinit var btnCancel: Button       // Cancel button.
+    private lateinit var npRaceSel: NumberPicker // the number picker for selections.
 
-    private lateinit var rsVals: Array<String>
-    private var selArray = arrayOf<String>("","","","")
-    private var count: Int = 0
+    private lateinit var rsVals: Array<String>   // number picker data.
+    private var count: Int = 0                   // count of how many selected.
+
+    private var selArray = arrayOf<String>("","","","")    // backing data (user selections).
     //</editor-fold>
 }

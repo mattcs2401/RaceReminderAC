@@ -87,60 +87,86 @@
     <Button
         android:id="@+id/id_btn_time"
         android:layout_width="112dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="96dp"
         android:drawableStart="@drawable/ic_clock_outline"
         android:padding="8dp"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_tv_time" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
         <!--TODO android:contentDescription="" />-->
 
     <Button
         android:id="@+id/id_btn_save"
-        android:layout_width="0dp"
+        android:layout_width="96dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/lbl_save"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_btn_time" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
         android:id="@+id/id_tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
         android:text="@string/lbl_time"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         app:layout_constraintEnd_toEndOf="@+id/id_btn_time"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="@+id/id_btn_time"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/id_btn_time" />
 
     <CheckBox
         android:id="@+id/id_cb_multi_sel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/lbl_multi_select"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
-        android:id="@+id/id_tv_multi_sel"
-        android:layout_width="wrap_content"
+        android:id="@+id/id_tv_multi_sel0"
+        android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_cb_multi_sel" />
+
+    <TextView
+        android:id="@+id/id_tv_multi_sel1"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/id_tv_multi_sel0"
+        app:layout_constraintTop_toBottomOf="@+id/id_cb_multi_sel" />
+
+    <TextView
+        android:id="@+id/id_tv_multi_sel2"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/id_tv_multi_sel1"
+        app:layout_constraintTop_toBottomOf="@+id/id_cb_multi_sel" />
+
+    <TextView
+        android:id="@+id/id_tv_multi_sel3"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/id_tv_multi_sel2"
+        app:layout_constraintTop_toBottomOf="@+id/id_cb_multi_sel" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="224dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

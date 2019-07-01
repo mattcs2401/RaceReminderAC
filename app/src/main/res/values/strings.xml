@@ -13,6 +13,7 @@
     <string name="new_race">New Race</string>
     <string name="copy_race">Copy Race</string>
     <string name="preferences">Preferences</string>
+    <string name="multi_selects">Multi Selects</string>
 
     <!-- ActionBar title. -->
     <string name="title_race_reminder">Race Reminder</string>

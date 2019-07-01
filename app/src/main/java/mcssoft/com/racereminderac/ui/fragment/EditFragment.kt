@@ -98,9 +98,14 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             // The message payload has no data, so just clear the multi select CB.
             cbMultiSel.isChecked = false
             listMultiSel = null             // clear any previous values.
+            setMultiSelViews(false)
         } else {
             // The message payload has 1 or more race selects.
             listMultiSel = multiSelMsg.values
+            // set numberpicker to 1st value.
+            npRaceSel.value = rsVals.indexOf(listMultiSel!![0])
+            // set views.
+            setMultiSelViews(true)
         }
     }
     //</editor-fold>
@@ -143,10 +148,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                     Toast.makeText(activity,"TODO - Multi select dialog.",Toast.LENGTH_SHORT).show()
                     val dialog = MultiSelectDialog(activity!!)
                     dialog.show(activity!!.supportFragmentManager, "multi_select_dialog")
-                    tvMultiSel.visibility = View.VISIBLE
+                    setMultiSelVisible(true)
                 } else {
-                    tvMultiSel.visibility = View.GONE
-                    tvMultiSel.text = ""
+                    setMultiSelVisible(false)
                 }
             }
         }
@@ -235,7 +239,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         race.raceTimeL = raceTimeL
         return race
     }
-
 
     /**
      * Show the TimePicker dialog.
@@ -329,7 +332,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             cbMultiSel.visibility = CheckBox.GONE
         }
 
-        tvMultiSel = id_tv_multi_sel
+        tvMultiSel0 = id_tv_multi_sel0
+        tvMultiSel1 = id_tv_multi_sel1
+        tvMultiSel2 = id_tv_multi_sel2
+        tvMultiSel3 = id_tv_multi_sel3
     }
 
     /**
@@ -385,6 +391,39 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         }
     }
 
+    private fun setMultiSelVisible(visible: Boolean) {
+        when(visible) {
+            true -> {
+                tvMultiSel0.visibility = View.VISIBLE
+                tvMultiSel1.visibility = View.VISIBLE
+                tvMultiSel2.visibility = View.VISIBLE
+                tvMultiSel3.visibility = View.VISIBLE
+            }
+            false -> {
+                tvMultiSel0.visibility = View.GONE
+                tvMultiSel1.visibility = View.GONE
+                tvMultiSel2.visibility = View.GONE
+                tvMultiSel3.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun setMultiSelViews(setViews: Boolean) {
+        when(setViews) {
+            true -> {
+                tvMultiSel0.text = listMultiSel!![0]
+                tvMultiSel1.text = listMultiSel!![1]
+                tvMultiSel2.text = listMultiSel!![2]
+                tvMultiSel3.text = listMultiSel!![3]
+            }
+            false -> {
+                tvMultiSel0.text = ""
+                tvMultiSel1.text = ""
+                tvMultiSel2.text = ""
+                tvMultiSel3.text = ""
+            }
+        }
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
@@ -408,7 +447,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private lateinit var timePickDialog: DialogFragment
 
     private lateinit var cbMultiSel: CheckBox
-    private lateinit var tvMultiSel: TextView
+    private lateinit var tvMultiSel0: TextView
+    private lateinit var tvMultiSel1: TextView
+    private lateinit var tvMultiSel2: TextView
+    private lateinit var tvMultiSel3: TextView
     private var listMultiSel: Array<String>? = null
     //</editor-fold>
 }
