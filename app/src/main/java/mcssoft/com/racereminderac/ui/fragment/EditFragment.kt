@@ -44,7 +44,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Sset base UI elements.
+        // Set base UI elements.
         initialiseUI(view)
 
         Log.d("tag","EditFragment.onViewCreated")
@@ -265,14 +265,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Initialise UI components.
      */
     private fun initialiseUI(view: View) {
-        // setup number pickers, buttons etc.
+        // Setup number pickers, buttons etc.
         setupDisplayElements()
-        // set the view model and get the id of the Race object.
+        // Set the view model and get the id of the Race object.
         setupViewModel(view)
-        // update labels etc depending on edit type, e.g. new, or copy etc.
+        // Update labels etc depending on edit type, e.g. new, or copy etc.
         setupForEditType()
-        // Get the selected Race object (returns via EventBus RaceMessage).
-        raceViewModel.getRaceNoLD(raceId!!)
     }
 
     /**
@@ -323,7 +321,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         npRaceSel.maxValue = rsVals.size - 1
         npRaceSel.displayedValues = rsVals
         npRaceSel.wrapSelectorWheel = true
-        npRaceSel.setOnClickListener(this)
+//        npRaceSel.setOnClickListener(this)
     }
 
     private fun setButtons() {
@@ -337,6 +335,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     private fun setMultiSelect() {
         cbMultiSel = id_cb_multi_sel
+        cbMultiSel.setOnClickListener(this)
         tvMultiSel0 = id_tv_multi_sel0
         tvMultiSel1 = id_tv_multi_sel1
         tvMultiSel2 = id_tv_multi_sel2
@@ -437,13 +436,13 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private lateinit var npRaceCode: NumberPicker
     private lateinit var npRaceNo: NumberPicker
     private lateinit var npRaceSel: NumberPicker
-    private var raceId: Long? = null
+    private var raceId: Long? = null                  // set in setupViewModel()
     private var raceTimeL: Long = 0
     private lateinit var raceDate: String
     private var editType: Int? = null
     private lateinit var btnSave: Button
     private lateinit var btnTime: Button
-    private lateinit var raceViewModel: RaceViewModel
+    private lateinit var raceViewModel: RaceViewModel // set in setupViewModel()
     private lateinit var ccVals: Array<String>
     private lateinit var rcVals: Array<String>
     private lateinit var rnVals: Array<String>
