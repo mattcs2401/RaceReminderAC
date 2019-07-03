@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.edit_fragment.*
 import kotlinx.android.synthetic.main.toolbar_base.*
@@ -68,7 +67,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
     /**
      * EventBus return for TimePickDialog.
-     * @param time: The EventBus message object.
+     * @param time: The Race time (as Long).
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(time: TimeMessage) {
@@ -78,30 +77,32 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     /**
      * EventBus return from getting the Race date (from AsyncNoLD).
-     * @param race: The Race object.
+     * @param raceDT: The Race date/time fields.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(race: RaceMessage) {
-        // TODO - multi select ?
-
+    fun onMessageEvent(raceDT: RaceMessage) {
         // The Race date.
-        this.raceDate = race.theRace.raceDate
+        this.raceDate = raceDT.theRace.raceDate
         // Additional, get the Race time in mSec (for copy function).
-        this.raceTimeL = race.theRace.raceTimeL
+        this.raceTimeL = raceDT.theRace.raceTimeL
     }
 
+    /**
+     * EventBus return from the MultiSelect dialog.
+     * @param multiSel: An Array<String> of the selected values.
+     */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(multiSelMsg: MultiSelMessage) {
+    fun onMessageEvent(multiSel: MultiSelMessage) {
         // Note: If the OK or Cancel button was not clicked on the MultiSelectDialog, this
         //       onMessageEvent won't happen.
-        if(multiSelMsg.values == null) {
+        if(multiSel.values == null) {
             // The message payload has no data, so just clear the multi select CB.
             cbMultiSel.isChecked = false
             listMultiSel = null             // clear any previous values.
             setMultiSelViews(false)
         } else {
             // The message payload has 1 or more race selects.
-            listMultiSel = multiSelMsg.values
+            listMultiSel = multiSel.values
             // set numberpicker to 1st value.
             npRaceSel.value = rsVals.indexOf(listMultiSel!![0])
             // set views.
@@ -117,13 +118,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 launchTimePickDialog()
             }
             R.id.id_btn_save -> {
-//                if (cbMultiSel.isChecked) {
-//                    // multi select functionality is enabled.
-//                    val value = rsVals[npRaceSel.value]
-//                    activity?.findNavController(R.id.id_nav_host_fragment)?.navigate(R.id.id_multi_SelectDialog)
-//
-//                } else
-//                {
                     val race: Race
                     when (editType) {
                         Constants.EDIT_RACE_UPDATE -> {
@@ -142,10 +136,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                     Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
                             .navigate(R.id.id_main_fragment)
                 }
-//            }
             R.id.id_cb_multi_sel -> {
                 if(cbMultiSel.isChecked) {
-                    Toast.makeText(activity,"TODO - Multi select dialog.",Toast.LENGTH_SHORT).show()
                     val dialog = MultiSelectDialog(activity!!)
                     dialog.show(activity!!.supportFragmentManager, "multi_select_dialog")
                     setMultiSelVisible(true)
@@ -289,6 +281,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         setMultiSelect()
     }
 
+    /**
+     * Setup the selector wheel pickers.
+     */
     private fun setNumberPickers() {
         // Set the 'pickers'.
         npCityCode = id_np_city_code
@@ -297,7 +292,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         npCityCode.maxValue = ccVals.size - 1
         npCityCode.displayedValues = ccVals
         npCityCode.wrapSelectorWheel = true
-        npCityCode.value = ccVals.indexOf(RacePreferences.getInstance()?.getCityCode(activity!!))
 
         npRaceCode = id_np_race_code
         rcVals = resources.getStringArray(R.array.raceCodes)
@@ -305,8 +299,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         npRaceCode.maxValue = rcVals.size - 1
         npRaceCode.displayedValues = rcVals
         npRaceCode.wrapSelectorWheel = true
-        npRaceCode.setOnValueChangedListener(this)
-        npRaceCode.value = rcVals.indexOf(RacePreferences.getInstance()?.getRaceCode(activity!!))
+        npRaceCode.setOnValueChangedListener(this)    // when race code of 'G'.
 
         npRaceNo = id_np_race_num
         rnVals = resources.getStringArray(R.array.raceNum)
@@ -324,7 +317,11 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 //        npRaceSel.setOnClickListener(this)
     }
 
+    /**
+     * Set the Race Time and Save buttons, and listeners.
+     */
     private fun setButtons() {
+        // Set the Race Time button and listener.
         btnTime = id_btn_time
         btnTime.setOnClickListener(this)
 
@@ -333,6 +330,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         btnSave.setOnClickListener(this)
     }
 
+    /**
+     * Set the multi-select checkbox and listener, and selection text fields.
+     */
     private fun setMultiSelect() {
         cbMultiSel = id_cb_multi_sel
         cbMultiSel.setOnClickListener(this)
@@ -353,6 +353,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         when(editType) {
             Constants.EDIT_RACE_UPDATE -> {
                 raceId = arguments?.getLong(getString(R.string.key_edit_existing))
+                multiSel = arguments?.getBoolean(getString(R.string.key_edit_existing_multi))
             }
             Constants.EDIT_RACE_COPY -> {
                 raceId = arguments?.getLong(getString(R.string.key_edit_copy))
@@ -372,6 +373,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     /**
      * Update UI elements depending on whether editing an existing Race, entering a new Race, or
      * copying a previous Race.
+     * @Note: This must be called after setupViewModel().
      */
     private fun setupForEditType() {
         when(editType) {
@@ -380,11 +382,21 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 btnSave.text = getString(R.string.lbl_update)
                 // save local copy of Race date.
                 getRaceDate(raceId!!)
+                // multiple selections exist ?
+                if(multiSel!!) {
+                    cbMultiSel.isChecked = true
+                    setMultiSelVisible(true)
+                } else {
+                    cbMultiSel.isChecked = false
+                    setMultiSelVisible(false)
+                }
             }
             Constants.EDIT_RACE_NEW -> {
                 toolBar.title = getString(R.string.new_race)
                 btnSave.text = getString(R.string.lbl_save)
                 btnTime.text = RaceTime.getInstance()?.getFormattedDateTime(Constants.TIME)
+                npCityCode.value = ccVals.indexOf(RacePreferences.getInstance()?.getCityCode(activity!!))
+                npRaceCode.value = rcVals.indexOf(RacePreferences.getInstance()?.getRaceCode(activity!!))
             }
             Constants.EDIT_RACE_COPY -> {
                 toolBar.title = getString(R.string.copy_race)
@@ -395,6 +407,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         }
     }
 
+    /**
+     * Set the visibility of the multi select text fields.
+     * @param visible: True - set visible, else, not visible.
+     */
     private fun setMultiSelVisible(visible: Boolean) {
         when(visible) {
             true -> {
@@ -412,6 +428,11 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         }
     }
 
+    /**
+     * Set the values of the multi select text views.
+     * @param setViews: True - set respective values as per the backing array listMultiSel.
+     *                  False - set as empty string/text.
+     */
     private fun setMultiSelViews(setViews: Boolean) {
         when(setViews) {
             true -> {
@@ -449,6 +470,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private lateinit var rsVals: Array<String>
     private lateinit var timePickDialog: DialogFragment
 
+    private var multiSel: Boolean? = false
     private lateinit var cbMultiSel: CheckBox
     private lateinit var tvMultiSel0: TextView
     private lateinit var tvMultiSel1: TextView

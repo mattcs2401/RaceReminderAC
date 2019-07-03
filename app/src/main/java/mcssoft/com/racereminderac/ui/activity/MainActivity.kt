@@ -55,10 +55,11 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
     /**
      * From interface IRace.IRaceSelect
      */
-    override fun onRaceSelect(id: Long ) {
+    override fun onRaceSelect(id: Long, multiSel: Boolean ) {
         val bundle = Bundle()
         bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_UPDATE)
         bundle.putLong(getString(R.string.key_edit_existing), id)
+        bundle.putBoolean(getString(R.string.key_edit_existing_multi), multiSel)
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
 

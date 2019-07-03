@@ -182,7 +182,7 @@ class MainFragment : Fragment() {
         val lPos = select.getPos
         when(select.getSelType) {
             Constants.ITEM_SELECT -> {
-                (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
+                (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!, select.getMultiSel)
             }
             Constants.ITEM_LONG_SELECT -> {
                 (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
@@ -205,7 +205,6 @@ class MainFragment : Fragment() {
         }
         raceViewModel.update(race)
     }
-
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility.">
