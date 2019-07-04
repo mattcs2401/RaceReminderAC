@@ -89,7 +89,7 @@
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="112dp"
         android:drawableStart="@drawable/ic_clock_outline"
         android:padding="8dp"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
@@ -99,9 +99,9 @@
 
     <Button
         android:id="@+id/id_btn_save"
-        android:layout_width="96dp"
+        android:layout_width="112dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="112dp"
         android:layout_marginEnd="32dp"
         android:text="@string/lbl_save"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
@@ -168,5 +168,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="224dp" />
+
+    <Button
+        android:id="@+id/id_btn_multi_sel_edit"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/lbl_edit"
+        android:textAppearance="@android:style/TextAppearance.Material.Small"
+        app:layout_constraintStart_toEndOf="@+id/id_cb_multi_sel"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

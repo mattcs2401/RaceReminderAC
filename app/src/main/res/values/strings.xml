@@ -25,6 +25,7 @@
     <string name="lbl_save">Save</string>
     <string name="lbl_copy">Copy</string>
     <string name="lbl_update">Update</string>
+    <string name="lbl_edit">Edit</string>
 
     <!-- Checkbox labels. -->
     <string name="lbl_bet_placed">Bet placed.</string>

@@ -37,7 +37,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        selArray = arguments?.getStringArray("key_multi_select") as Array<String>
         initialiseUI(view)
     }
 
@@ -70,6 +70,8 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
      * Utility method, add the selected value to the list of selected items.
      */
     private fun doAdd() {
+//        count = getLast()
+//        count += 1
         if(count < Constants.SELECTS_MAX) {
 //            if(!btnAdd.isEnabled) {
 //                btnAdd.isEnabled = true
@@ -171,9 +173,15 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
     private fun initialiseUI(view: View) {
         // Multi select text views.
         tvSel0 = view.id_tv_multi_sel_1
+        tvSel0.text = selArray[0]
         tvSel1 = view.id_tv_multi_sel_2
+        tvSel1.text = selArray[1]
         tvSel2 = view.id_tv_multi_sel_3
+        tvSel2.text = selArray[2]
         tvSel3 = view.id_tv_multi_sel_4
+        tvSel3.text = selArray[3]
+
+        setArrayCount()
 
         // Buttons and listeners.
         btnAdd = view.id_btn_multi_sel_add
@@ -196,6 +204,13 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
         npRaceSel.wrapSelectorWheel = true
 //        npRaceSel.setOnClickListener(this)
 
+    }
+
+    private fun setArrayCount() {
+        val cnt = getLast()
+        if(cnt != -1) {
+            count = cnt
+        }
     }
     //</editor-fold>
 

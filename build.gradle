@@ -3,7 +3,7 @@
 buildscript {
     // refer https://developer.android.com/jetpack/docs/release-notes
     ext {
-        kotlinVer = '1.3.40'
+        kotlinVer = '1.3.41'
         navVer = '1.0.0'
         roomVer = "2.1.0-alpha02"
         workVer = "1.0.1"
