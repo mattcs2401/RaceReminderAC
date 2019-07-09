@@ -190,7 +190,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private fun collateValues(action: Int): Race {
         val race: Race
         // TODO - if multi select and the message payload contains data.
-        if(cbMultiSel.isChecked && listMultiSel != null) {
+        if(cbMultiSel.isChecked) {
             // Use the CB checked value as a flag.
             // Note: If the CB is unchecked before Save, then the payload is lost/ignored.
             race = collateMultiSelect()
@@ -221,12 +221,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         val race = Race(ccVals[npCityCode.value],
                 rcVals[npRaceCode.value],
                 rnVals[npRaceNo.value],
-                listMultiSel?.get(0)!!,
+                listMultiSel.get(0),
                 btnTime.text.toString())
         race.raceTimeL = raceTimeL
-        race.raceSel2 = listMultiSel?.get(1)!!
-        race.raceSel3 = listMultiSel?.get(2)!!
-        race.raceSel4 = listMultiSel?.get(3)!!
+        race.raceSel2 = listMultiSel.get(1)
+        race.raceSel3 = listMultiSel.get(2)
+        race.raceSel4 = listMultiSel.get(3)
         return race
     }
 
@@ -453,10 +453,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private fun setMultiSelViews(setViews: Boolean) {
         when(setViews) {
             true -> {
-                tvMultiSel0.text = listMultiSel!![0]
-                tvMultiSel1.text = listMultiSel!![1]
-                tvMultiSel2.text = listMultiSel!![2]
-                tvMultiSel3.text = listMultiSel!![3]
+                tvMultiSel0.text = listMultiSel[0]
+                tvMultiSel1.text = listMultiSel[1]
+                tvMultiSel2.text = listMultiSel[2]
+                tvMultiSel3.text = listMultiSel[3]
             }
             false -> {
                 tvMultiSel0.text = ""
