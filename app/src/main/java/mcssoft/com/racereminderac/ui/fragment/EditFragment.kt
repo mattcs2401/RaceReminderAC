@@ -53,7 +53,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         super.onStart()
         EventBus.getDefault().register(this)
 
-         Log.d("tag","EditFragment.onStart")
+        Log.d("tag","EditFragment.onStart")
     }
 
     override fun onStop() {
@@ -144,9 +144,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 }
             R.id.id_cb_multi_sel -> {
                 if(cbMultiSel.isChecked) {
-//                    val dialog = MultiSelectDialog(activity!!)
-//                    dialog.arguments = setDialogArgs()
-//                    dialog.show(activity!!.supportFragmentManager, "multi_select_dialog")
                     launchMultiSelDialog()
                     setMultiSelVisible(true)
                 } else {
@@ -271,6 +268,11 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         setupViewModel(view)
         // Update labels etc depending on edit type, e.g. new, or copy etc.
         setupForEditType()
+
+        // Create the backing data for multi select.
+        if(arguments!!.getBoolean(getString(R.string.key_edit_existing_multi))) {
+            listMultiSel = arguments?.getStringArray(getString(R.string.key_edit_existing_multi_vals)) as Array<String>
+        }
     }
 
     /**
@@ -282,17 +284,17 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         // Get the toolbar.
         toolBar = activity?.id_toolbar as Toolbar
         // Set the 'pickers'.
-        setNumberPickers()
+        setupNumberPickers()
         // Set the Time button and listener.
-        setButtons()
+        setupButtons()
         // Set for multi select (if exists).
-        setMultiSelect()
+        setupMultiSelect()
     }
 
     /**
      * Setup the selector wheel pickers.
      */
-    private fun setNumberPickers() {
+    private fun setupNumberPickers() {
         // Set the 'pickers'.
         npCityCode = id_np_city_code
         ccVals = resources.getStringArray(R.array.cityCodes)
@@ -328,7 +330,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     /**
      * Set the Race Time, Edit and Save buttons, and listeners (default values).
      */
-    private fun setButtons() {
+    private fun setupButtons() {
         // Set the Race Time button and listener.
         btnTime = id_btn_time
         btnTime.setOnClickListener(this)
@@ -346,7 +348,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     /**
      * Set the multi-select checkbox and listener, and selection text fields.
      */
-    private fun setMultiSelect() {
+    private fun setupMultiSelect() {
         cbMultiSel = id_cb_multi_sel
         cbMultiSel.setOnClickListener(this)
         tvMultiSel0 = id_tv_multi_sel0

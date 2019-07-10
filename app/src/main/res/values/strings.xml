@@ -13,7 +13,7 @@
     <string name="new_race">New Race</string>
     <string name="copy_race">Copy Race</string>
     <string name="preferences">Preferences</string>
-    <string name="multi_selects">(multiple selects)</string>
+    <string name="multi_selects">(multi)</string>
 
     <!-- ActionBar title. -->
     <string name="title_race_reminder">Race Reminder</string>
@@ -47,6 +47,7 @@
     <string name="key_edit_type">edit_type</string>
     <string name="key_edit_existing">edit_existing</string>
     <string name="key_edit_existing_multi">edit_existing_multi</string>
+    <string name="key_edit_existing_multi_vals">edit_existing_multi_vals</string>
     <string name="key_edit_copy">edit_copy</string>
 
     <!-- Preferences keys and title/summary values. -->

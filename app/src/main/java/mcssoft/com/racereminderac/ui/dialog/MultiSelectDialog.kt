@@ -70,15 +70,15 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
      * Utility method, add the selected value to the list of selected items.
      */
     private fun doAdd() {
-//        count = getLast()
+        val index = (getLast() + 1)
 //        count += 1
-        if(count < Constants.SELECTS_MAX) {
+        if(index < Constants.SELECTS_MAX) {
 //            if(!btnAdd.isEnabled) {
 //                btnAdd.isEnabled = true
 //            }
             val selValue = rsVals[npRaceSel.value]
             if (!valExists(selValue)) {
-                when (count) {
+                when (index) {
                     0 -> {
                         tvSel0.text = selValue
                         selArray[0] = selValue
@@ -96,7 +96,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
                         selArray[3] = selValue
                     }
                 }
-                count += 1
+//                index += 1
             }
         } else {
             btnAdd.isEnabled = false
@@ -109,13 +109,13 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
     private fun doRemove() {
         if(!isSelectsEmpty()) {
             // get last non-null.
-            val ndx = getLast()
-            if (ndx != -1) {
+            val index = getLast()
+            if (index != -1) {
                 // update view and backing array.
-                updateViewRemove(ndx)
-                selArray[ndx] = ""
-                // reset count.
-                count -= 1
+                updateViewRemove(index)
+                selArray[index] = ""
+//                // reset count.
+//                count -= 1
             }
         }
     }
@@ -181,7 +181,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
         tvSel3 = view.id_tv_multi_sel_4
         tvSel3.text = selArray[3]
 
-        setArrayCount()
+//        setArrayCount()
 
         // Buttons and listeners.
         btnAdd = view.id_btn_multi_sel_add
@@ -206,12 +206,12 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
 
     }
 
-    private fun setArrayCount() {
-        val cnt = getLast()
-        if(cnt != -1) {
-            count = cnt
-        }
-    }
+//    private fun setArrayCount() {
+//        val cnt = getLast()
+//        if(cnt != -1) {
+//            count = cnt
+//        }
+//    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
@@ -227,7 +227,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
     private lateinit var npRaceSel: NumberPicker // the number picker for selections.
 
     private lateinit var rsVals: Array<String>   // number picker data.
-    private var count: Int = 0                   // count of how many selected.
+//    private var count: Int = 0                   // count of how many selected.
 
     private var selArray = arrayOf<String>("","","","")    // backing data (user selections).
     //</editor-fold>

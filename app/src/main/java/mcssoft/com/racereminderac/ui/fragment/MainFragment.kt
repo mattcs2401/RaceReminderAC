@@ -182,7 +182,15 @@ class MainFragment : Fragment() {
         val lPos = select.getPos
         when(select.getSelType) {
             Constants.ITEM_SELECT -> {
-                (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!, select.getMultiSel)
+                if(select.getMultiSel) {
+                    val race = raceAdapter.getRace(lPos)
+                    (activity as IRace.IRaceSelect)
+                            .onRaceSelect(race.id!!, race.raceSel, race.raceSel2, race.raceSel3, race.raceSel4, true)
+                } else {
+                    (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
+                }
+
+
             }
             Constants.ITEM_LONG_SELECT -> {
                 (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
