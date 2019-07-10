@@ -218,12 +218,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         val race = Race(ccVals[npCityCode.value],
                 rcVals[npRaceCode.value],
                 rnVals[npRaceNo.value],
-                listMultiSel.get(0),
+                listMultiSel[0],
                 btnTime.text.toString())
         race.raceTimeL = raceTimeL
-        race.raceSel2 = listMultiSel.get(1)
-        race.raceSel3 = listMultiSel.get(2)
-        race.raceSel4 = listMultiSel.get(3)
+        race.raceSel2 = listMultiSel[1]
+        race.raceSel3 = listMultiSel[2]
+        race.raceSel4 = listMultiSel[3]
         return race
     }
 
