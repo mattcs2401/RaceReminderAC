@@ -467,7 +467,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     }
 
     private fun launchMultiSelDialog() {
-        val dialog = MultiSelectDialog(activity!!)
+        val dialog = MultiSelectDialog()
         dialog.arguments = setDialogArgs()
         dialog.show(activity!!.supportFragmentManager, "multi_select_dialog")
     }

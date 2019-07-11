@@ -126,11 +126,6 @@ class MainFragment : Fragment() {
         Log.d("tag","MainFragment.onStop")
     }
 
-//    override fun onPrepareOptionsMenu(menu: Menu) {
-//        super.onPrepareOptionsMenu(menu)
-//        Log.d("tag","MainFragment.onPrepareOptionsMenu")
-//    }
-
     /* Example: https://stablekernel.com/using-custom-views-as-menu-items/  ??*/
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

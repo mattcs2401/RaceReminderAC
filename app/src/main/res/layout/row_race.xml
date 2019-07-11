@@ -60,7 +60,6 @@
             android:layout_marginBottom="16dp"
             android:text="@string/abbrv_race_no"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            card_view:layout_constraintBaseline_toBaselineOf="@+id/id_tv_race_sel"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="@+id/id_guideline"
             card_view:layout_constraintTop_toTopOf="parent" />
@@ -166,7 +165,7 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/id_tv_mult_sels_notify"
+            android:id="@+id/id_tv_multi_sels_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

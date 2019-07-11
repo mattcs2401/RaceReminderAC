@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.NumberPicker
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.multisel_fragment.view.*
 import mcssoft.com.racereminderac.R
@@ -21,13 +18,14 @@ import org.greenrobot.eventbus.EventBus
  * Utility class to display a dialog from which the user can make more than one selection for a Race
  * (max of 4).
  */
-class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.OnDismissListener,
+class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
         View.OnClickListener {
 
-    // Notes: (1) Decided not to use the dialog builder as we are using a custom view and need to
-    //            use elements of the standard fragment lifecycle, i.e. onCreateView.
-    //        (2) The multi select maximum of four is hard coded, perhaps some other way ?
-
+    /* Notes:
+       (1) Decided not to use the dialog builder as we are using a custom view and need to use
+           elements of the standard fragment lifecycle, i.e. onCreateView et al.
+       (2) The multi select maximum of four is hard coded, perhaps some other way ?
+    */
     // TODO - enable/disable Add/Remove buttons depending on count.
     // TODO - dialog styling, title, buttons etc.
 
@@ -59,7 +57,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
                 this.dismiss()
             }
             R.id.id_btn_multi_sel_cancel -> {
-                EventBus.getDefault().post(MultiSelMessage(null))
+                // basically do nothing.
                 this.dismiss()
             }
         }
@@ -95,6 +93,8 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
                         listMultiSel[3] = selValue
                     }
                 }
+            } else {
+                Toast.makeText(activity,"Value already exists in selection.", Toast.LENGTH_SHORT).show()
             }
         } else {
             btnAdd.isEnabled = false
@@ -112,8 +112,6 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
                 // update view and backing array.
                 updateViewRemove(index)
                 listMultiSel[index] = ""
-//                // reset count.
-//                count -= 1
             }
         }
     }
@@ -122,7 +120,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
      * Utility method, quick and dirty check that the backing array's 1st element is not an empty
      * string, i.e. the backing array has at least some data.
      */
-    private fun isSelectsEmpty() : Boolean = listMultiSel[0] == ""
+    private fun isSelectsEmpty() : Boolean = listMultiSel[0].equals("")
 
     /**
      * Utility method, get the last element in the backing array that is not an empty string.
