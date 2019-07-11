@@ -2,11 +2,11 @@
 
 <!--https://materialdesignicons.com/-->
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/menu_item_size"
-    android:layout_height="@dimen/menu_item_size">
+<!--<FrameLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="@dimen/menu_item_size"-->
+    <!--android:layout_height="@dimen/menu_item_size">-->
 
     <!-- separate view to display ripple/color change when menu item is clicked -->
     <!--<FrameLayout-->
@@ -17,10 +17,11 @@
 
     <!-- Create a view larger than material_menu_icon_size so that red dot can be shifted to the right/top -->
     <!-- 32dp is still w/in spec... look at ActionMenItemView.MAX_ICON_SIZE-->
-    <FrameLayout
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_gravity="center">
+<FrameLayout android:layout_width="32dp"
+    android:layout_height="32dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--android:layout_gravity="center"-->
 
         <ImageView
             android:layout_width="@dimen/menu_item_icon_size"
@@ -49,4 +50,4 @@
                 tools:text="3" />
         </FrameLayout>
     </FrameLayout>
-</FrameLayout>
+<!--</FrameLayout>-->

@@ -1,5 +1,6 @@
 package mcssoft.com.racereminderac.background.worker
 
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -53,6 +54,7 @@ class NotifyWorker(private val context: Context, workerParams: WorkerParameters)
      * @param message: The notification's message.
      * @param id: Object's id passed in the arguments to the notification's PendingIntent.
      */
+    @SuppressLint("ObsoleteSdkInt")
     private fun displayNotification(title: String, message: String, id: Long) {
         /**
          * "Compat" methods used primarily as this project has min SDK version of 22.
