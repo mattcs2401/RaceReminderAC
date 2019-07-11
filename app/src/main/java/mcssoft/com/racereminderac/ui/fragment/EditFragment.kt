@@ -93,14 +93,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(multiSel: MultiSelMessage) {
-        // TODO - check what we are coming back from, i.e. did multi sel values exist previously.
-
         // Note: If the OK or Cancel button was not clicked on the MultiSelectDialog, this
         //       onMessageEvent won't happen.
         if(multiSel.values == null) {
             // The message payload has no data, so just clear the multi select CB.
             cbMultiSel.isChecked = false
-            listMultiSel = emptyArray()     // clear any previous values.
+            listMultiSel = arrayOf("","","","")  // clear any previous values.
             setMultiSelViews(false)
         } else {
             // The message payload has 1 or more race selects.
@@ -121,7 +119,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             }
             R.id.id_btn_multi_sel_edit -> {
                 launchMultiSelDialog()
-//                Toast.makeText(activity,"TO DO",Toast.LENGTH_SHORT).show()
             }
             R.id.id_btn_save -> {
                     val race: Race
@@ -269,7 +266,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         // Update labels etc depending on edit type, e.g. new, or copy etc.
         setupForEditType()
 
-        // Create the backing data for multi select.
+        // Create the backing data for multi select edit/copy.
         if(arguments!!.getBoolean(getString(R.string.key_edit_existing_multi))) {
             listMultiSel = arguments?.getStringArray(getString(R.string.key_edit_existing_multi_vals)) as Array<String>
         }
@@ -477,13 +474,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     private fun setDialogArgs() : Bundle {
         val bundle: Bundle = Bundle()
-        var array = arrayOf("","","","")
         if(listMultiSel[0] == "") {
-            array[0] = rsVals[npRaceSel.value]
-        } else {
-            array = listMultiSel
+            listMultiSel[0] = rsVals[npRaceSel.value]
         }
-        bundle.putStringArray("key_multi_select", array)
+        bundle.putStringArray(getString(R.string.key_multi_select_dialog_vals), listMultiSel)
         return bundle
     }
     //</editor-fold>

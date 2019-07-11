@@ -31,6 +31,9 @@
     <string name="lbl_bet_placed">Bet placed.</string>
     <string name="lbl_multi_select">Multi Select</string>
 
+    <!-- TextView labels. -->
+    <string name="lbl_selections">Selections</string>
+
     <!-- Dialog text. -->
     <string name="multi_sel_line_1">Make a selection, click the Add button (max 4).</string>
     <string name="multi_sel_line_2">Uncheck the Multi Select to Save.</string>
@@ -49,6 +52,7 @@
     <string name="key_edit_existing_multi">edit_existing_multi</string>
     <string name="key_edit_existing_multi_vals">edit_existing_multi_vals</string>
     <string name="key_edit_copy">edit_copy</string>
+    <string name="key_multi_select_dialog_vals">key_multi_select_dialog</string>
 
     <!-- Preferences keys and title/summary values. -->
     <string name="key_defaults">key_defaults</string>

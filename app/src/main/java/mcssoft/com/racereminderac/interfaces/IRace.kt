@@ -12,13 +12,9 @@ interface IRace {
 
         /**
          * @param id: The id of the Race object selected from the adapter listing.
-         * @param sel0: Multi select selection 1.
-         * @param sel1: Multi select selection 2.
-         * @param sel2: Multi select selection 3.
-         * @param sel3: Multi select selection 4.
-         * @param multiSel: Flag to indicate multi select exists.
+         * @param selects: The selections for a Race.
          */
-        fun onRaceSelect(id: Long, sel0: String, sel1: String, sel2: String, sel3: String, multiSel: Boolean)
+        fun onRaceSelect(id: Long, selects: Array<String>)
     }
 
     interface IRaceLongSelect {

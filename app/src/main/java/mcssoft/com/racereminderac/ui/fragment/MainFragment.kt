@@ -184,8 +184,9 @@ class MainFragment : Fragment() {
             Constants.ITEM_SELECT -> {
                 if(select.getMultiSel) {
                     val race = raceAdapter.getRace(lPos)
+                    val selects = arrayOf(race.raceSel, race.raceSel2, race.raceSel3, race.raceSel4)
                     (activity as IRace.IRaceSelect)
-                            .onRaceSelect(race.id!!, race.raceSel, race.raceSel2, race.raceSel3, race.raceSel4, true)
+                            .onRaceSelect(race.id!!, selects)
                 } else {
                     (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
                 }

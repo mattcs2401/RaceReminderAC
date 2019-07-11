@@ -37,7 +37,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        selArray = arguments?.getStringArray("key_multi_select") as Array<String>
+        listMultiSel = arguments?.getStringArray(getString(R.string.key_multi_select_dialog_vals)) as Array<String>
         initialiseUI(view)
     }
 
@@ -52,7 +52,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
             R.id.id_btn_multi_sel_ok -> {
                 // check something selected.
                 if(!isSelectsEmpty()) {
-                    EventBus.getDefault().post(MultiSelMessage(selArray))
+                    EventBus.getDefault().post(MultiSelMessage(listMultiSel))
                 } else {
                     EventBus.getDefault().post(MultiSelMessage(null))
                 }
@@ -71,32 +71,30 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
      */
     private fun doAdd() {
         val index = (getLast() + 1)
-//        count += 1
         if(index < Constants.SELECTS_MAX) {
-//            if(!btnAdd.isEnabled) {
-//                btnAdd.isEnabled = true
-//            }
+            if(!btnAdd.isEnabled) {
+                btnAdd.isEnabled = true
+            }
             val selValue = rsVals[npRaceSel.value]
             if (!valExists(selValue)) {
                 when (index) {
                     0 -> {
                         tvSel0.text = selValue
-                        selArray[0] = selValue
+                        listMultiSel[0] = selValue
                     }
                     1 -> {
                         tvSel1.text = selValue
-                        selArray[1] = selValue
+                        listMultiSel[1] = selValue
                     }
                     2 -> {
                         tvSel2.text = selValue
-                        selArray[2] = selValue
+                        listMultiSel[2] = selValue
                     }
                     3 -> {
                         tvSel3.text = selValue
-                        selArray[3] = selValue
+                        listMultiSel[3] = selValue
                     }
                 }
-//                index += 1
             }
         } else {
             btnAdd.isEnabled = false
@@ -113,7 +111,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
             if (index != -1) {
                 // update view and backing array.
                 updateViewRemove(index)
-                selArray[index] = ""
+                listMultiSel[index] = ""
 //                // reset count.
 //                count -= 1
             }
@@ -124,7 +122,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
      * Utility method, quick and dirty check that the backing array's 1st element is not an empty
      * string, i.e. the backing array has at least some data.
      */
-    private fun isSelectsEmpty() : Boolean = selArray[0] == ""
+    private fun isSelectsEmpty() : Boolean = listMultiSel[0] == ""
 
     /**
      * Utility method, get the last element in the backing array that is not an empty string.
@@ -132,7 +130,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
      */
     private fun getLast() : Int {
         for(ndx in 3 downTo 0) {
-            if (selArray[ndx] != "") {
+            if (listMultiSel[ndx] != "") {
                 return ndx
             }
         }
@@ -159,7 +157,7 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
      */
     private fun valExists(value: String) : Boolean {
         for(ndx in 0..3) {
-            if((selArray[ndx].equals(value))) {
+            if((listMultiSel[ndx].equals(value))) {
                 return true
             }
         }
@@ -173,15 +171,13 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
     private fun initialiseUI(view: View) {
         // Multi select text views.
         tvSel0 = view.id_tv_multi_sel_1
-        tvSel0.text = selArray[0]
+        tvSel0.text = listMultiSel[0]
         tvSel1 = view.id_tv_multi_sel_2
-        tvSel1.text = selArray[1]
+        tvSel1.text = listMultiSel[1]
         tvSel2 = view.id_tv_multi_sel_3
-        tvSel2.text = selArray[2]
+        tvSel2.text = listMultiSel[2]
         tvSel3 = view.id_tv_multi_sel_4
-        tvSel3.text = selArray[3]
-
-//        setArrayCount()
+        tvSel3.text = listMultiSel[3]
 
         // Buttons and listeners.
         btnAdd = view.id_btn_multi_sel_add
@@ -205,13 +201,6 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
 //        npRaceSel.setOnClickListener(this)
 
     }
-
-//    private fun setArrayCount() {
-//        val cnt = getLast()
-//        if(cnt != -1) {
-//            count = cnt
-//        }
-//    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
@@ -229,6 +218,6 @@ class MultiSelectDialog(context: Context) : DialogFragment(), DialogInterface.On
     private lateinit var rsVals: Array<String>   // number picker data.
 //    private var count: Int = 0                   // count of how many selected.
 
-    private var selArray = arrayOf<String>("","","","")    // backing data (user selections).
+    private var listMultiSel = arrayOf<String>("","","","")    // backing data (user selections).
     //</editor-fold>
 }
