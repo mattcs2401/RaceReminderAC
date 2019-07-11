@@ -14,17 +14,17 @@ import org.greenrobot.eventbus.EventBus
 class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
 
     // Set the components of the View.
-    var tvCityCode: TextView = view.findViewById(R.id.id_tv_city_code)
-    var tvRaceCode: TextView = view.findViewById(R.id.id_tv_race_code)
-    var tvRaceNo: TextView = view.findViewById(R.id.id_tv_race_no)
-    var tvRaceSel0: TextView = view.findViewById(R.id.id_tv_race_sel0)
-    var tvRaceSel1: TextView = view.findViewById(R.id.id_tv_race_sel1)
-    var tvRaceSel2: TextView = view.findViewById(R.id.id_tv_race_sel2)
-    var tvRaceSel3: TextView = view.findViewById(R.id.id_tv_race_sel3)
-    var tvRaceTime: TextView = view.findViewById(R.id.id_tv_race_time)
-    var tvRaceDate: TextView = view.findViewById(R.id.id_tv_race_date)
-    var cbBetPlaced: CheckBox = view.findViewById(R.id.id_cb_bet_placed)
-    var tvMultiSelsNotify: TextView = view.findViewById(R.id.id_tv_multi_sels_display)
+    var tvCityCode: TextView = view.findViewById(R.id.id_tv_city_code)    // city code.
+    var tvRaceCode: TextView = view.findViewById(R.id.id_tv_race_code)    // race code.
+    var tvRaceNo: TextView = view.findViewById(R.id.id_tv_race_no)        // race number.
+    var tvRaceSel0: TextView = view.findViewById(R.id.id_tv_race_sel0)    // 1st runner selection.
+    var tvRaceSel1: TextView = view.findViewById(R.id.id_tv_race_sel1)    // 2nd runner selection.
+    var tvRaceSel2: TextView = view.findViewById(R.id.id_tv_race_sel2)    // 3rd runner selection.
+    var tvRaceSel3: TextView = view.findViewById(R.id.id_tv_race_sel3)    // 4th runner selection.
+    var tvRaceTime: TextView = view.findViewById(R.id.id_tv_race_time)    // race time.
+    var tvRaceDate: TextView = view.findViewById(R.id.id_tv_race_date)    // race date.
+    var cbBetPlaced: CheckBox = view.findViewById(R.id.id_cb_bet_placed)  // bet placed indicator.
+    var tvMultiSelsNotify: TextView = view.findViewById(R.id.id_tv_multi) // multi sel indicator.
 
     init {
         // Set the listeners for the View.
