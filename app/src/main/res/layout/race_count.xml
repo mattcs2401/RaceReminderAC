@@ -7,28 +7,28 @@
     android:layout_height="32dp">
 
     <ImageView
-        android:layout_width="@dimen/menu_item_icon_size"
-        android:layout_height="@dimen/menu_item_icon_size"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_gravity="center"
-        android:src="@drawable/icon_r_24px"
+        android:src="@drawable/ic_outline_circle_24px"
         tools:ignore="ContentDescription"/>
 
     <FrameLayout
-        android:id="@+id/id_view_refresh_red_circle"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_gravity="start|top"
-        android:background="@drawable/circle_red"
+        android:id="@+id/id_view_race_count"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
         android:visibility="gone"
         tools:visibility="visible">
+        <!--android:background="@drawable/circle_red"-->
 
         <TextView
-            android:id="@+id/id_tv_refresh_period"
+            android:id="@+id/id_tv_race_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:textSize="12sp"
-            tools:text="3" />
+            tools:text="0" />
     </FrameLayout>
 </FrameLayout>

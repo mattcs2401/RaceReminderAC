@@ -91,13 +91,13 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
 //            R.id.id_delete -> {
 //                doDelete()
 //            }
-            R.id.id_refresh -> {
+            R.id.id_mnu_bnv_refresh -> {
                 EventBus.getDefault().post(ManualRefreshMessage())
             }
-            R.id.id_settings -> {
+            R.id.id_mnu_bnv_settings -> {
                 navController.navigate(R.id.preferencesFragment)
             }
-            R.id.id_add -> {
+            R.id.id_mnu_bnv_add -> {
                 doAdd()
             }
         }

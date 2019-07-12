@@ -45,6 +45,10 @@
     <string name="lbl_refresh">Refresh</string>
     <string name="lbl_settings">Settings</string>
     <string name="lbl_add">New</string>
+    <string name="lbl_race_count">Count</string>
+
+    <!-- Tags. -->
+    <string name="tag_delete_all_dialog">tag_delete_all_dialog</string>
 
     <!-- Keys. -->
     <string name="key_edit_type">edit_type</string>

@@ -2,14 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/id_delete_all"
+    <!-- Note: This is the only one actually selectable. -->
+    <item android:id="@+id/id_mnu_delete_all"
         android:enabled="true"
         android:icon="@drawable/ic_delete_24px"
         android:title="@string/lbl_delete_all"
         app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/id_refresh"
+    <!-- Show a refresh interval indicator. -->
+    <item android:id="@+id/id_mnu_refresh"
         android:title="@string/lbl_refresh"
         app:actionLayout="@layout/refresh"
         app:showAsAction="ifRoom" />
+
+    <!-- Show a race count indicator. -->
+    <item android:id="@+id/id_mnu_race_count"
+        android:title="@string/lbl_race_count"
+        app:actionLayout="@layout/race_count"
+        app:showAsAction="ifRoom" />
+
 </menu>
