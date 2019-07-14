@@ -13,7 +13,7 @@
     <string name="new_race">New Race</string>
     <string name="copy_race">Copy Race</string>
     <string name="preferences">Preferences</string>
-    <string name="multi_selects">(multi)</string>
+    <string name="multi_selects">[ multi ]</string>
 
     <!-- ActionBar title. -->
     <string name="title_race_reminder">Race Reminder</string>
@@ -49,6 +49,9 @@
 
     <!-- Tags. -->
     <string name="tag_delete_all_dialog">tag_delete_all_dialog</string>
+
+    <!-- Toast. -->
+    <string name="toast_nothing_to_delete">Nothing to delete.</string>
 
     <!-- Keys. -->
     <string name="key_edit_type">edit_type</string>

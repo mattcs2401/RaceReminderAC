@@ -6,6 +6,7 @@ import android.view.*
 import android.view.View.VISIBLE
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -148,8 +149,12 @@ class MainFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.id_mnu_delete_all -> {
-                val dialog = DeleteAllDialog(activity!!)
-                dialog.show(activity!!.supportFragmentManager, getString(R.string.tag_delete_all_dialog))
+                if (!raceAdapter.isEmpty()) {
+                    val dialog = DeleteAllDialog(activity!!)
+                    dialog.show(activity!!.supportFragmentManager, getString(R.string.tag_delete_all_dialog))
+                } else {
+                    Toast.makeText(activity, getString(R.string.toast_nothing_to_delete), Toast.LENGTH_SHORT).show()
+                }
             }
             else -> super.onOptionsItemSelected(item)
         }
@@ -231,10 +236,8 @@ class MainFragment : Fragment() {
      */
     private fun setDeleteMenuItem(menu: Menu) {
         // TODO - this needs a rethink, the race adapter swapData() happens after this.
-//        val menuItem= menu.findItem(R.id.id_delete_all)
-//        if(raceAdapter.isEmpty()) {
-//            menuItem.isVisible = false
-//        }
+//        val menuItem= menu.findItem(R.id.id_mnu_delete_all)
+//        menuItem.isVisible = !raceAdapter.isEmpty()
     }
 
     /**
