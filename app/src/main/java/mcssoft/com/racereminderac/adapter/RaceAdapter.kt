@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -38,34 +37,13 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     override fun onBindViewHolder(holder : RaceViewHolder, position : Int) {
         val race = lRaces[position]
 
-        holder.tvCityCode.text = race.cityCode
-        holder.tvRaceCode.text = race.raceCode
-        holder.tvRaceNo.text = race.raceNum
-        holder.tvRaceSel0.text = race.raceSel
-        holder.tvRaceSel1.text = race.raceSel2
-        holder.tvRaceSel2.text = race.raceSel3
-        holder.tvRaceSel3.text = race.raceSel4
-        holder.tvRaceTime.text = race.raceTimeS
-        holder.tvRaceDate.text = race.raceDate
+        setBaseDisplayValues(holder, race)       // set base race values to display.
 
-        when(race.metaColour) {
-            Constants.META_COLOUR_1 -> {
-                holder.tvRaceTime.setTextColor(getColor(context, R.color.colorPrimary))
-                holder.tvRaceDate.setTextColor(getColor(context, R.color.colorPrimary))
-            }
-            Constants.META_COLOUR_2 -> {
-                holder.tvRaceTime.setTextColor(getColor(context, R.color.colorOrange))
-                holder.tvRaceDate.setTextColor(getColor(context, R.color.colorOrange))
-            }
-            Constants.META_COLOUR_3 -> {
-                holder.tvRaceTime.setTextColor(getColor(context, R.color.colorAccent))
-                holder.tvRaceDate.setTextColor(getColor(context, R.color.colorAccent))
-            }
-        }
+        setDisplayColourValues(holder, race)     // set display colours.
 
-        holder.cbBetPlaced.isChecked = race.betPlaced
+        setMultiSelect(holder, race)             // set for multi select if applicable.
 
-        setMultiSelect(holder, race)
+        holder.tvRaceCount.text = (position + 1).toString()     // 1st entry is 1.
     }
     
     override fun getItemCount() : Int = lRaces.size
@@ -155,7 +133,43 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     }
 
     /**
-     * Utility method to setup when thatere are multiple selctions.
+     * Utility method to set base display values.
+     */
+    private fun setBaseDisplayValues(holder: RaceViewHolder, race: Race) {
+        holder.tvCityCode.text = race.cityCode
+        holder.tvRaceCode.text = race.raceCode
+        holder.tvRaceNo.text = race.raceNum
+        holder.tvRaceSel0.text = race.raceSel
+        holder.tvRaceSel1.text = race.raceSel2
+        holder.tvRaceSel2.text = race.raceSel3
+        holder.tvRaceSel3.text = race.raceSel4
+        holder.tvRaceTime.text = race.raceTimeS
+        holder.tvRaceDate.text = race.raceDate
+        holder.cbBetPlaced.isChecked = race.betPlaced
+    }
+
+    /**
+     * Utility method to set display colours.
+     */
+    private fun setDisplayColourValues(holder: RaceViewHolder, race: Race) {
+        when(race.metaColour) {
+            Constants.META_COLOUR_1 -> {
+                holder.tvRaceTime.setTextColor(getColor(context, R.color.colorPrimary))
+                holder.tvRaceDate.setTextColor(getColor(context, R.color.colorPrimary))
+            }
+            Constants.META_COLOUR_2 -> {
+                holder.tvRaceTime.setTextColor(getColor(context, R.color.colorOrange))
+                holder.tvRaceDate.setTextColor(getColor(context, R.color.colorOrange))
+            }
+            Constants.META_COLOUR_3 -> {
+                holder.tvRaceTime.setTextColor(getColor(context, R.color.colorAccent))
+                holder.tvRaceDate.setTextColor(getColor(context, R.color.colorAccent))
+            }
+        }
+    }
+
+    /**
+     * Utility method to setup when there are multiple selctions.
      */
     private fun setMultiSelect(holder: RaceViewHolder, race: Race) {
         if(race.raceSel2 != "") {

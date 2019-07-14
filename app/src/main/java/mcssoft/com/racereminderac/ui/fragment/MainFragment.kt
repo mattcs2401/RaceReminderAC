@@ -222,7 +222,6 @@ class MainFragment : Fragment() {
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility.">
     private fun setToolbarMenuItems(menu: Menu) {
-        setRaceCountMenuItem(menu)
         setDeleteMenuItem(menu)
         setRefreshMenuItem(menu)
     }
@@ -257,18 +256,6 @@ class MainFragment : Fragment() {
         } else {
             menuItem.isVisible = false
         }
-    }
-
-    /**
-     * ToolBar: Race count indicator.
-     */
-    private fun setRaceCountMenuItem(menu: Menu) {
-        val menuItem= menu.findItem(R.id.id_mnu_race_count)
-        val rootView = menuItem.actionView as FrameLayout
-        val childView = rootView.findViewById<FrameLayout>(R.id.id_view_race_count)
-        val intervalTextView = rootView.findViewById<TextView>(R.id.id_tv_race_count)
-        intervalTextView.text = raceAdapter.itemCount.toString()
-        childView.visibility = VISIBLE
     }
     //</editor-fold>
 

@@ -25,6 +25,7 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickLi
     var tvRaceDate: TextView = view.findViewById(R.id.id_tv_race_date)    // race date.
     var cbBetPlaced: CheckBox = view.findViewById(R.id.id_cb_bet_placed)  // bet placed indicator.
     var tvMultiSelsNotify: TextView = view.findViewById(R.id.id_tv_multi) // multi sel indicator.
+    var tvRaceCount: TextView = view.findViewById(R.id.id_tv_race_count)  // items count indicator.
 
     init {
         // Set the listeners for the View.

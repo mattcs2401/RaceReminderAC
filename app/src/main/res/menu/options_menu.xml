@@ -15,10 +15,4 @@
         app:actionLayout="@layout/refresh"
         app:showAsAction="ifRoom" />
 
-    <!-- Show a race count indicator. -->
-    <item android:id="@+id/id_mnu_race_count"
-        android:title="@string/lbl_race_count"
-        app:actionLayout="@layout/race_count"
-        app:showAsAction="ifRoom" />
-
 </menu>

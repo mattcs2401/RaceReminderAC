@@ -115,13 +115,14 @@
             card_view:layout_constraintGuide_begin="144dp" />
 
         <TextView
-            android:id="@+id/id_tv_bet_placed"
+            android:id="@+id/id_tv_race_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text=""
             android:textAppearance="@android:style/TextAppearance.Material.Small"
-            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintEnd_toEndOf="@+id/id_cb_bet_placed"
+            card_view:layout_constraintStart_toStartOf="@+id/id_cb_bet_placed"
             card_view:layout_constraintTop_toBottomOf="@+id/id_cb_bet_placed" />
 
         <TextView
