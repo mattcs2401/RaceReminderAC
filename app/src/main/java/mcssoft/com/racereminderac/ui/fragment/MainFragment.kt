@@ -13,8 +13,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.android.synthetic.main.main_fragment.view.*
+import kotlinx.android.synthetic.main.main_fragment.view.id_recyclerView
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
@@ -153,7 +156,7 @@ class MainFragment : Fragment() {
                     val dialog = DeleteAllDialog(activity!!)
                     dialog.show(activity!!.supportFragmentManager, getString(R.string.tag_delete_all_dialog))
                 } else {
-                    Toast.makeText(activity, getString(R.string.toast_nothing_to_delete), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity!!, getString(R.string.toast_nothing_to_delete), Toast.LENGTH_SHORT).show()
                 }
             }
             else -> super.onOptionsItemSelected(item)
