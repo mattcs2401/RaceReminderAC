@@ -56,8 +56,8 @@
 
     <PreferenceCategory
         app:key="@string/key_recovery"
-        app:title="@string/recovery_title"
-        app:summary="@string/recovery_undo_last_title">
+        app:title="@string/recovery_title">
+        <!--app:summary="@string/recovery_undo_last_title">-->
 
         <SwitchPreferenceCompat
             app:key="@string/key_recovery_undo_last_pref"
@@ -67,8 +67,8 @@
 
     <PreferenceCategory
         app:key="@string/key_multi_select"
-        app:title="@string/multi_select_title"
-        app:summary="@string/multi_select_summary_title">
+        app:title="@string/multi_select_title">
+        <!--app:summary="@string/multi_select_summary_title">-->
 
         <SwitchPreferenceCompat
             app:key="@string/key_multi_select_pref"
@@ -77,14 +77,25 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:key="@string/key_maint"
-        app:title="@string/maint_title">
+        app:key="@string/key_bulk_delete"
+        app:title="@string/bulk_delete_title">
+        <!--app:summary="@string/bulk_delete_summary">-->
 
-        <!-- TBA as to required ? -->
-        <Preference
-            app:key="@string/key_maint_del_archv_pref"
-            app:title="@string/maint_del_archv_title"
-            app:summary="@string/maint_del_archv_summary"/>
+        <SwitchPreferenceCompat
+            app:key="@string/key_bulk_delete_pref"
+            app:defaultValue="false"
+            app:summary="@string/delete_summary"/>
     </PreferenceCategory>
+
+    <!--<PreferenceCategory-->
+        <!--app:key="@string/key_maint"-->
+        <!--app:title="@string/maint_title">-->
+
+        <!--&lt;!&ndash; TBA as to required ? &ndash;&gt;-->
+        <!--<Preference-->
+            <!--app:key="@string/key_maint_del_archv_pref"-->
+            <!--app:title="@string/maint_del_archv_title"-->
+            <!--app:summary="@string/maint_del_archv_summary"/>-->
+    <!--</PreferenceCategory>-->
 
 </androidx.preference.PreferenceScreen>

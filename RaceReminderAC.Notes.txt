@@ -25,9 +25,9 @@ Issues:
 ------
 TO DO:
 ------
--> Update/Refresh UI accordingly, at preference controlled interval.
+-> The whole multi select needs a re-think.
 
--> Make option to delete all a preferences selection ?
+-> Update/Refresh UI accordingly, at preference controlled interval.
 
 -> Toolbar indicator to show:
    - Notifications are set (maybe letter N ?).

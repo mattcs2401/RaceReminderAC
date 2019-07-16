@@ -346,12 +346,24 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Set the multi-select checkbox and listener, and selection text fields.
      */
     private fun setupMultiSelect() {
+        // TODO - this needs a rethink, there is redundant initialisation if multi select not
+        //        enabled in preferences.
+
         cbMultiSel = id_cb_multi_sel
-        cbMultiSel.setOnClickListener(this)
         tvMultiSel0 = id_tv_multi_sel0
         tvMultiSel1 = id_tv_multi_sel1
         tvMultiSel2 = id_tv_multi_sel2
         tvMultiSel3 = id_tv_multi_sel3
+
+        val allowMulti = RacePreferences.getInstance()?.getRaceMultiSelect(activity!!)
+
+        if(allowMulti!!) {
+            cbMultiSel.isEnabled = true
+            cbMultiSel.setOnClickListener(this)
+        } else {
+            cbMultiSel.isEnabled = false
+            ///cbMultiSel.
+        }
     }
 
      /**
@@ -426,6 +438,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     /**
      * Set the visibility of the multi select text fields.
      * @param visible: True - set visible, else, not visible.
+     * Note: Called in - setupForEditType()
      */
     private fun setMultiSelVisible(visible: Boolean) {
         when(visible) {
@@ -448,6 +461,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Set the values of the multi select text views.
      * @param setViews: True - set respective values as per the backing array listMultiSel.
      *                  False - set as empty string/text.
+     * Note: Called in - onMessageEvent(multiSel: MultiSelMessage)
      */
     private fun setMultiSelViews(setViews: Boolean) {
         when(setViews) {

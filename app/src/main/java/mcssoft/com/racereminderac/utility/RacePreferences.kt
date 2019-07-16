@@ -78,7 +78,7 @@ class RacePreferences {
     /**
      * Get the Refresh interval Switch preference.
      * @param context: Activity context.
-     * @return True if preference is enabled, else false
+     * @return True if preference is enabled, else false.
      */
     fun getRefreshInterval(context: Context) : Boolean {
         val key = context.resources.getString(R.string.key_refresh_interval_pref)
@@ -95,8 +95,23 @@ class RacePreferences {
         return PreferenceManager.getDefaultSharedPreferences(context).getInt(key, 0)
     }
 
+    /**
+     * Get the Multi select Switch preference.
+     * @param context: Activity context.
+     * @return True if preference is enabled, else false.
+     */
     fun getRaceMultiSelect(context: Context) : Boolean {
         val key = context.resources.getString(R.string.key_multi_select_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+    }
+
+    /**
+     * Get the bulk delete Switch preference.
+     * @param context: Activity context.
+     * @return True if preference is enabled, else false.
+     */
+    fun getRaceBulkDelete(context: Context) : Boolean {
+        val key = context.resources.getString(R.string.key_bulk_delete_pref)
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
     }
 
@@ -112,6 +127,8 @@ class RacePreferences {
         val keyRaceNotifMulti = context.resources.getString(R.string.key_notif_send_multi_pref)
         val keyRecoveryUndoLast = context.resources.getString(R.string.key_recovery_undo_last_pref)
         val keyRefreshInterval = context.resources.getString(R.string.key_refresh_interval_pref)
+        val keyMultiSelect = context.resources.getString(R.string.key_multi_select_pref)
+        val keyBulkDelete = context.resources.getString(R.string.key_bulk_delete_pref)
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
@@ -139,6 +156,14 @@ class RacePreferences {
 
         if(!map.contains(keyRefreshInterval)) {
             sharedPrefs.edit().putBoolean(keyRefreshInterval, false).apply()
+        }
+
+        if(!map.contains(keyMultiSelect)) {
+            sharedPrefs.edit().putBoolean(keyMultiSelect, false).apply()
+        }
+
+        if(!map.contains(keyBulkDelete)) {
+            sharedPrefs.edit().putBoolean(keyBulkDelete, false).apply()
         }
 
         Log.d("tag","RacePreferences.preferenceCheck")

@@ -82,20 +82,21 @@
     <string name="key_notif_send_multi_pref">key_notif_send_multi_pref</string>
     <string name="notif_send_multi_pref_summary">Allow multiple notifications for the same Race.</string>
 
-    <string name="key_maint">key_maint</string>
-    <string name="maint_title">Maintenance</string>
+    <!--<string name="key_maint">key_maint</string>-->
+    <!--<string name="maint_title">Maintenance</string>-->
 
-    <string name="key_maint_del_archv_pref">key_maint_del_archv_pref</string>
-    <string name="maint_del_archv_title">Delete Archived</string>
-    <string name="maint_del_archv_summary">Delete archived Race records.</string>
+    <!--<string name="key_maint_del_archv_pref">key_maint_del_archv_pref</string>-->
+    <!--<string name="maint_del_archv_title">Delete Archived</string>-->
+    <!--<string name="maint_del_archv_summary">Delete archived Race records.</string>-->
 
+    <!-- Undo. -->
     <string name="key_recovery">key_recovery</string>
     <string name="recovery_title">Recovery</string>
-
     <string name="key_recovery_undo_last_pref">key_recovery_undo_last_pref</string>
     <string name="recovery_undo_last_title">Undo Last Delete</string>
     <string name="recovery_undo_last_summary">Undo the last item deleted.</string>
 
+    <!-- Refresh. -->
     <string name="key_refresh_interval">key_refresh_interval</string>
     <string name="refresh_interval_title">Refresh Interval</string>
     <string name="key_refresh_interval_pref">key_refresh_interval_pref</string>
@@ -104,11 +105,19 @@
     <string name="refresh_interval_seek_summary">Set the Refresh interval in minutes.</string>
     <string name="key_refresh_interval_seek_pref_val">key_refresh_interval_seek_pref_val</string>
 
+    <!-- Multi select. -->
     <string name="key_multi_select">key_multi_select</string>
     <string name="multi_select_title">Multi Select</string>
-    <string name="multi_select_summary_title">Enable multi select of race selections.</string>
+    <string name="multi_select_summary_title">Enable multi select</string>
     <string name="key_multi_select_pref">key_multi_select_pref</string>
-    <string name="mult_select_summary">Enable multi select</string>
+    <string name="mult_select_summary">Enable multiple Race selections.</string>
+
+    <!-- Bulk delete. -->
+    <string name="key_bulk_delete">key_bulk_delete</string>
+    <string name="bulk_delete_title">Bulk Delete</string>
+    <string name="bulk_delete_summary">Enable bulk delete</string>
+    <string name="key_bulk_delete_pref">key_bulk_delete_pref</string>
+    <string name="delete_summary">Enable bulk delete of all Races.</string>
 
     <!-- Preferences Toast messages. -->
     <string name="race_code_msg">Default Race Code changed to</string>

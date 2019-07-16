@@ -238,9 +238,9 @@ class MainFragment : Fragment() {
      * ToolBar: Delete (all) option.
      */
     private fun setDeleteMenuItem(menu: Menu) {
-        // TODO - this needs a rethink, the race adapter swapData() happens after this.
-//        val menuItem= menu.findItem(R.id.id_mnu_delete_all)
-//        menuItem.isVisible = !raceAdapter.isEmpty()
+        val menuItem= menu.findItem(R.id.id_mnu_delete_all)
+        menuItem.isVisible = RacePreferences.getInstance()!!.getRaceBulkDelete(activity!!)
+        // TODO - this needs a rethink when the adapter has no data.
     }
 
     /**
