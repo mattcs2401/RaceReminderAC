@@ -40,18 +40,19 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickLi
                 EventBus.getDefault().post(UpdateMessage(adapterPosition, R.id.id_cb_bet_placed, cbBetPlaced.isChecked))
             }
             else -> {
-                // quick and dirty check as to a multi select.
-                if(tvRaceSel1.text != "") {
-                    EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, adapterPosition, true))
-                } else {
-                    EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, adapterPosition, false))
-                }
+                EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, adapterPosition))
+//                // quick and dirty check as to a multi select.
+//                if(tvRaceSel1.text != "") {
+//                    EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, adapterPosition, true))
+//                } else {
+//                    EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, adapterPosition, false))
+//                }
             }
         }
     }
 
     override fun onLongClick(view: View): Boolean {
-        EventBus.getDefault().post(SelectMessage(Constants.ITEM_LONG_SELECT, adapterPosition, false))
+        EventBus.getDefault().post(SelectMessage(Constants.ITEM_LONG_SELECT, adapterPosition))//, false))
         return true
     }
 

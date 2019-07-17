@@ -150,6 +150,9 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        /* Note:
+           Bulk delete Preferences controls whether the delete all icon is available for selection.
+         */
         when(item.itemId) {
             R.id.id_mnu_delete_all -> {
                 if (!raceAdapter.isEmpty()) {
@@ -191,22 +194,15 @@ class MainFragment : Fragment() {
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(select: SelectMessage) {
-        val lPos = select.getPos
+        val race = raceAdapter.getRace(select.getPos)
+        val selects = arrayOf(race.raceSel, race.raceSel2, race.raceSel3, race.raceSel4)
+
         when(select.getSelType) {
             Constants.ITEM_SELECT -> {
-                if(select.getMultiSel) {
-                    val race = raceAdapter.getRace(lPos)
-                    val selects = arrayOf(race.raceSel, race.raceSel2, race.raceSel3, race.raceSel4)
-                    (activity as IRace.IRaceSelect)
-                            .onRaceSelect(race.id!!, selects)
-                } else {
-                    (activity as IRace.IRaceSelect).onRaceSelect(raceAdapter.getRace(lPos).id!!)
-                }
-
-
+                (activity as IRace.IRaceSelect).onRaceSelect(race.id!!, selects)
             }
             Constants.ITEM_LONG_SELECT -> {
-                (activity as IRace.IRaceLongSelect).onRaceLongSelect(raceAdapter.getRace(lPos).id!!)
+                (activity as IRace.IRaceLongSelect).onRaceLongSelect(race.id!!, selects)
             }
         }
     }

@@ -265,11 +265,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         setupViewModel(view)
         // Update labels etc depending on edit type, e.g. new, or copy etc.
         setupForEditType()
-
-        // Create the backing data for multi select edit/copy.
-        if(arguments!!.getBoolean(getString(R.string.key_edit_existing_multi))) {
-            listMultiSel = arguments?.getStringArray(getString(R.string.key_edit_existing_multi_vals)) as Array<String>
-        }
     }
 
     /**
@@ -346,6 +341,11 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Set the multi-select checkbox and listener, and selection text fields.
      */
     private fun setupMultiSelect() {
+
+        // Check if multi select is enabled in Preferences.
+        val allowMulti = RacePreferences.getInstance()?.getRaceMultiSelect(activity!!)
+
+
         // TODO - this needs a rethink, there is redundant initialisation if multi select not
         //        enabled in preferences.
 
@@ -355,11 +355,15 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         tvMultiSel2 = id_tv_multi_sel2
         tvMultiSel3 = id_tv_multi_sel3
 
-        val allowMulti = RacePreferences.getInstance()?.getRaceMultiSelect(activity!!)
 
         if(allowMulti!!) {
+            // Enable multi select checkbox and set listener.
             cbMultiSel.isEnabled = true
             cbMultiSel.setOnClickListener(this)
+            // Create the backing data for multi select edit/copy.
+            if(arguments!!.getBoolean(getString(R.string.key_edit_existing_multi))) {
+                listMultiSel = arguments?.getStringArray(getString(R.string.key_edit_existing_multi_vals)) as Array<String>
+            }
         } else {
             cbMultiSel.isEnabled = false
             ///cbMultiSel.
@@ -377,11 +381,11 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         when(editType) {
             Constants.EDIT_RACE_UPDATE -> {
                 raceId = arguments?.getLong(getString(R.string.key_edit_existing))
-                multiSel = arguments?.getBoolean(getString(R.string.key_edit_existing_multi))
-                if(multiSel!!) {
-                    cbMultiSel.isEnabled = false
-                    btnEdit.visibility = View.VISIBLE
-                }
+//                multiSel = arguments?.getBoolean(getString(R.string.key_edit_existing_multi))
+//                if(multiSel!!) {
+//                    cbMultiSel.isEnabled = false
+//                    btnEdit.visibility = View.VISIBLE
+//                }
             }
             Constants.EDIT_RACE_COPY -> {
                 raceId = arguments?.getLong(getString(R.string.key_edit_copy))
@@ -411,13 +415,13 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 // save local copy of Race date.
                 getRaceDate(raceId!!)
                 // multiple selections exist ?
-                if(multiSel!!) {
-                    cbMultiSel.isChecked = true
-                    setMultiSelVisible(true)
-                } else {
-                    cbMultiSel.isChecked = false
-                    setMultiSelVisible(false)
-                }
+//                if(multiSel!!) {
+//                    cbMultiSel.isChecked = true
+//                    setMultiSelVisible(true)
+//                } else {
+//                    cbMultiSel.isChecked = false
+//                    setMultiSelVisible(false)
+//                }
             }
             Constants.EDIT_RACE_NEW -> {
                 toolBar.title = getString(R.string.new_race)
@@ -520,7 +524,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private lateinit var rnVals: Array<String>        // race number values.
     private lateinit var rsVals: Array<String>        // race selection values.
 
-    private var multiSel: Boolean? = false            // multi select active, (set in setupViewModel())
+//    private var multiSel: Boolean? = false            // multi select active, (set in setupViewModel())
 
     private lateinit var cbMultiSel: CheckBox         // multi select checkbox.
     private lateinit var tvMultiSel0: TextView        // multi select - selection one (default).

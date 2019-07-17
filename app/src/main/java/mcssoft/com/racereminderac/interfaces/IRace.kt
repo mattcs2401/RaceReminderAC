@@ -6,7 +6,6 @@ interface IRace {
         /**
          * Get the database (row) id of the adapter selection.
          * @param id: The id of the Race object selected from the adapter listing.
-         * @note: Used by the EditFragment to show Race details.
          */
         fun onRaceSelect(id: Long)
 
@@ -21,9 +20,9 @@ interface IRace {
         /**
          * Get the database (row) id of the adapter selection.
          * @param id: The id of the Race object selected from the adapter listing.
-         * @note: Used by the EditFragment to show Race details.
+         * @param selects: The selections for a Race.
          */
-        fun onRaceLongSelect(id: Long)
+        fun onRaceLongSelect(id: Long, selects: Array<String>)
     }
 
 }
