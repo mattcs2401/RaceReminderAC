@@ -13,10 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.main_activity.*
-import kotlinx.android.synthetic.main.main_fragment.*
-import kotlinx.android.synthetic.main.main_fragment.view.*
 import kotlinx.android.synthetic.main.main_fragment.view.id_recyclerView
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
@@ -65,7 +62,7 @@ class MainFragment : Fragment() {
         // If bottom nav view was previously hidden by a New or Edit etc, then show again.
         val bottomNavView = activity?.findViewById<BottomNavigationView>(R.id.id_bottom_nav_view)
         if(bottomNavView?.visibility == View.GONE) {
-            bottomNavView.visibility = View.VISIBLE
+            bottomNavView.visibility = VISIBLE
         }
 
         Log.d("tag","MainFragment.onViewCreated")
@@ -93,17 +90,16 @@ class MainFragment : Fragment() {
             // alarm is set in preferences.
             val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!).toLong()
             RaceAlarm.getInstance()?.setAlarm(activity!!, interval)
-            menuItem?.setVisible(false)
+            menuItem?.isVisible = false
         } else {
             RaceAlarm.getInstance()?.cancelAlarm()
-            menuItem?.setVisible(true)
+            menuItem?.isVisible = true
         }
 
-        // Eventbus registration.
+        // EventBus registration.
         EventBus.getDefault().register(this)
 
         // Refresh main UI colours.
-        // TODO - what if no races to display ?
         EventBus.getDefault().post(ManualRefreshMessage())
 
         // Add on back pressed handler.
@@ -119,14 +115,9 @@ class MainFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
-            // Alarm preference is set.
-            RaceAlarm.getInstance()?.cancelAlarm()
-        } else if(!RaceAlarm.getInstance()?.isCancelled()!!) {
-            // Preference now not set, but was previously.
-            RaceAlarm.getInstance()?.cancelAlarm()
-        }
-        // Eventbus unregister.
+        // Cancel alarm (method checks if previously cancelled).
+        RaceAlarm.getInstance()?.cancelAlarm()
+        // EventBus unregister.
         EventBus.getDefault().unregister(this)
         // Remove back press handler callback.
         backPressCallback.removeCallback()
@@ -151,7 +142,7 @@ class MainFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         /* Note:
-           Bulk delete Preferences controls whether the delete all icon is available for selection.
+           Delete all is Preference controlled (icon may not be displayed).
          */
         when(item.itemId) {
             R.id.id_mnu_delete_all -> {
@@ -169,14 +160,25 @@ class MainFragment : Fragment() {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
+    /**
+     * The delete message.
+     * @param delete: The delete message object. Contains the Race to delete.
+     */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(delete: DeleteMessage) {
         raceViewModel.delete(delete.theRace)
     }
 
+    /**
+     * The refresh message.
+     * @param refresh: Not actually used. Message is just a signal to refresh the display.
+     */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(refresh: ManualRefreshMessage) {
-        /** Note: The down side to this is the observer will react twice. **/
+        /*
+         Note:
+         The down side to this is the observer will react twice.
+        */
         if(raceAdapter.itemCount > 0) {
            // Get arbitary 1st Race from backing data.
             val race = raceAdapter.getRace(0)
@@ -207,11 +209,19 @@ class MainFragment : Fragment() {
         }
     }
 
+    /**
+     * The delete all message.
+     * @param delete: Not actually used. Message is just a signal to delete all displayed.
+     */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(select: DeleteAllMessage) {
+    fun onMessageEvent(delete: DeleteAllMessage) {
         raceViewModel.deleteAll()
     }
 
+    /**
+     * The update message.
+     * @param update: The update message object. See the UpdateMessage notes.
+     */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(update: UpdateMessage) {
         val race: Race = raceAdapter.getRace(update.pos)
@@ -236,14 +246,14 @@ class MainFragment : Fragment() {
     private fun setDeleteMenuItem(menu: Menu) {
         val menuItem= menu.findItem(R.id.id_mnu_delete_all)
         menuItem.isVisible = RacePreferences.getInstance()!!.getRaceBulkDelete(activity!!)
-        // TODO - this needs a rethink when the adapter has no data.
+        // TODO - this needs a rethink when there are no Races to display.
     }
 
     /**
      * ToolBar: Refresh interval indicator.
      */
     private fun setRefreshMenuItem(menu: Menu) {
-        // TODO - link this to the number of races in the list, i.e. if no races to display,
+        // TODO - link this to the number of races in the list, i.e. if no Races to display,
         //        do we need the menu item to show ?
         val rootView: FrameLayout
         val menuItem= menu.findItem(R.id.id_mnu_refresh)
