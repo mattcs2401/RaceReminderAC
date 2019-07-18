@@ -82,19 +82,18 @@ class MainFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        // Bottom refresh menu item.
-        val menuItem = activity?.id_bottom_nav_view?.menu?.findItem(R.id.id_mnu_bnv_refresh)
-        // Refresh interval Preference set, or not.
+        // Refresh interval Preference (set or not).
         val doRefresh = RacePreferences.getInstance()!!.getRefreshInterval(activity!!)
 
         if(doRefresh) {
-            // Set alarm.
+            // Set alarm, remove manual refresh menu item.
             val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!).toLong()
             RaceAlarm.getInstance()?.setAlarm(activity!!, interval)
-            menuItem?.isVisible = false
+            setManualRefresh(false)
         } else {
+            // Cancel alarm, enable/disable manual refresh menu item based on adapter content.
             RaceAlarm.getInstance()?.cancelAlarm()
-            menuItem?.isVisible = true
+            setManualRefresh(raceAdapter.itemCount > 0)
         }
 
         // EventBus registration.
@@ -168,6 +167,11 @@ class MainFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(delete: DeleteMessage) {
         raceViewModel.delete(delete.theRace)
+        if(raceAdapter.isEmpty()) {
+            setManualRefresh(false)
+        } else {
+            setManualRefresh(true)
+        }
     }
 
     /**
@@ -217,6 +221,7 @@ class MainFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(delete: DeleteAllMessage) {
         raceViewModel.deleteAll()
+        setManualRefresh(false)
     }
 
     /**
@@ -233,12 +238,25 @@ class MainFragment : Fragment() {
         }
         raceViewModel.update(race)
     }
+
+    // Message from the adapter whether data exists.
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    fun onMessageEvent(data: DataMessage) = if(data.getIsEmpty) {
+        setManualRefresh(false)
+    } else {
+        setManualRefresh(true)
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility.">
+    /**
+     * Setup toolbar menu/notification items.
+     * @param menu: The menu object from onCreateOptionsMenu().
+     * @Comment: Called from onCreateOptionsMenu()
+     */
     private fun setToolbarMenuItems(menu: Menu) {
-        setDeleteMenuItem(menu)
-        setRefreshIntervalMenuItem(menu)
+        setDeleteMenuItem(menu)             // set the bulk delete menu option.
+        setRefreshIntervalMenuItem(menu)    // set the refresh interval notification (shows on right).
     }
 
     /**
@@ -254,24 +272,38 @@ class MainFragment : Fragment() {
      * ToolBar: Refresh interval indicator.
      */
     private fun setRefreshIntervalMenuItem(menu: Menu) {
+        // TODO - this needs work when used with manual refresh bottom nav option.
         val menuItem = menu.findItem(R.id.id_mnu_refresh_interval)
-        if(!raceAdapter.isEmpty()) {
+        if(raceAdapter.itemCount > 0) {
             val rootView: FrameLayout
             val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
 
-            if (RacePreferences.getInstance()!!.getRefreshInterval(activity!!) && (interval > 0)) {
+            if (RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
                 menuItem.isVisible = true
                 rootView = menuItem.actionView as FrameLayout
                 val redCircle = rootView.findViewById<FrameLayout>(R.id.id_view_refresh_red_circle)
                 val intervalTextView = rootView.findViewById<TextView>(R.id.id_tv_refresh_period)
                 intervalTextView.text = interval.toString()
                 redCircle.visibility = VISIBLE
+
+                setManualRefresh(false)
             } else {
                 menuItem.isVisible = false
             }
         } else {
             menuItem.isVisible = false
+
+            setManualRefresh(false)
         }
+    }
+
+    /**
+     * Set the manual refresh bottom nav menu option.
+     * @param setRefresh: True - set menu item visible, else false.
+     */
+    private fun setManualRefresh(setRefresh: Boolean) {
+        val menuItem = activity?.id_bottom_nav_view?.menu?.findItem(R.id.id_mnu_bnv_refresh)
+        menuItem?.isVisible = setRefresh
     }
     //</editor-fold>
 

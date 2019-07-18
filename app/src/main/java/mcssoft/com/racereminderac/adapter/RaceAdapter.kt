@@ -16,6 +16,7 @@ import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.callback.SnackBarCB
+import mcssoft.com.racereminderac.utility.eventbus.DataMessage
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage
 import org.greenrobot.eventbus.EventBus
 
@@ -54,8 +55,10 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      */
     internal fun swapData(lRaces: ArrayList<Race>) {
         this.lRaces = lRaces
-        isEmpty = this.lRaces.size <= 0
+//        isEmpty = this.lRaces.isEmpty() //size <= 0
         notifyDataSetChanged()
+
+        EventBus.getDefault().post(DataMessage(isEmpty()))
     }
 
     /**
@@ -218,7 +221,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
     private var lRaces = ArrayList<Race>(0)   // backing data.
-    private var isEmpty: Boolean = true
+//    private var isEmpty: Boolean = true
 
     private lateinit var raceViewHolder: RaceViewHolder    //
     private lateinit var itemTouchHelper: ItemTouchHelper  //
