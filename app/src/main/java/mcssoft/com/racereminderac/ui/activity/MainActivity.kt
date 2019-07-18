@@ -12,16 +12,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IRace
-import mcssoft.com.racereminderac.ui.dialog.DeleteAllDialog
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
-import mcssoft.com.racereminderac.utility.eventbus.DeleteAllMessage
 import mcssoft.com.racereminderac.utility.eventbus.ManualRefreshMessage
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 
-class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSelect,
+class MainActivity : AppCompatActivity(), IRace.IRaceSelect, /*IRace.IRaceLongSelect,*/
         BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,15 +70,15 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
 
-    /**
-     * From interface IRace.IRaceLongSelect
-     */
-    override fun onRaceLongSelect(id: Long) {
-        val bundle = Bundle()
-        bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_COPY)
-        bundle.putLong(getString(R.string.key_edit_copy), id)
-        navController.navigate(R.id.id_edit_fragment, bundle)
-    }
+//    /**
+//     * From interface IRace.IRaceLongSelect
+//     */
+//    override fun onRaceLongSelect(id: Long) {
+//        val bundle = Bundle()
+//        bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_COPY)
+//        bundle.putLong(getString(R.string.key_edit_copy), id)
+//        navController.navigate(R.id.id_edit_fragment, bundle)
+//    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Bottom navigation listener">
@@ -133,13 +129,13 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
 
-    /**
-     * Bottom nav menu Delete.
-     */
-    private fun doDelete() {
-        val dialog = DeleteAllDialog(this)
-        dialog.show(supportFragmentManager, "delete_all_dialog")
-    }
+//    /**
+//     * Bottom nav menu Delete.
+//     */
+//    private fun doDelete() {
+//        val dialog = DeleteAllDialog(this)
+//        dialog.show(supportFragmentManager, "delete_all_dialog")
+//    }
     //</editor-fold>
 
 //    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)

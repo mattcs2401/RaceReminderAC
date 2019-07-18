@@ -11,7 +11,7 @@ import mcssoft.com.racereminderac.utility.eventbus.SelectMessage
 import mcssoft.com.racereminderac.utility.eventbus.UpdateMessage
 import org.greenrobot.eventbus.EventBus
 
-class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
+class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener { //}, View.OnLongClickListener {
 
     // Set the components of the View.
     var tvCityCode: TextView = view.findViewById(R.id.id_tv_city_code)    // city code.
@@ -30,7 +30,7 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickLi
     init {
         // Set the listeners for the View.
         view.setOnClickListener(this)
-        view.setOnLongClickListener(this)
+//        view.setOnLongClickListener(this)
         cbBetPlaced.setOnClickListener(this)
     }
 
@@ -51,9 +51,9 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickLi
         }
     }
 
-    override fun onLongClick(view: View): Boolean {
-        EventBus.getDefault().post(SelectMessage(Constants.ITEM_LONG_SELECT, adapterPosition))//, false))
-        return true
-    }
+//    override fun onLongClick(view: View): Boolean {
+//        EventBus.getDefault().post(SelectMessage(Constants.ITEM_LONG_SELECT, adapterPosition))//, false))
+//        return true
+//    }
 
 }

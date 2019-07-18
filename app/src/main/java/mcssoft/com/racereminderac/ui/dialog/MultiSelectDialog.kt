@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.multisel_fragment.view.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
@@ -196,8 +197,8 @@ class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
         npRaceSel.maxValue = rsVals.size - 1
         npRaceSel.displayedValues = rsVals
         npRaceSel.wrapSelectorWheel = true
-//        npRaceSel.setOnClickListener(this)
 
+//        npRaceSel.setOnClickListener(this)
     }
     //</editor-fold>
 
@@ -214,7 +215,6 @@ class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
     private lateinit var npRaceSel: NumberPicker // the number picker for selections.
 
     private lateinit var rsVals: Array<String>   // number picker data.
-//    private var count: Int = 0                   // count of how many selected.
 
     private var listMultiSel = arrayOf<String>("","","","")    // backing data (user selections).
     //</editor-fold>

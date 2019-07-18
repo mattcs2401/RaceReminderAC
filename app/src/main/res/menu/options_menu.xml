@@ -10,7 +10,7 @@
         app:showAsAction="ifRoom"/>
 
     <!-- Show a refresh interval indicator. -->
-    <item android:id="@+id/id_mnu_refresh"
+    <item android:id="@+id/id_mnu_refresh_interval"
         android:title="@string/lbl_refresh"
         app:actionLayout="@layout/refresh"
         app:showAsAction="ifRoom" />

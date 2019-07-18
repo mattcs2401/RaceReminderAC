@@ -82,12 +82,13 @@ class MainFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        // Set alarm if set in Preferences.
-        // TODO: This needs work WRT colours that display.
         // Bottom refresh menu item.
         val menuItem = activity?.id_bottom_nav_view?.menu?.findItem(R.id.id_mnu_bnv_refresh)
-        if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
-            // alarm is set in preferences.
+        // Refresh interval Preference set, or not.
+        val doRefresh = RacePreferences.getInstance()!!.getRefreshInterval(activity!!)
+
+        if(doRefresh) {
+            // Set alarm.
             val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!).toLong()
             RaceAlarm.getInstance()?.setAlarm(activity!!, interval)
             menuItem?.isVisible = false
@@ -203,9 +204,9 @@ class MainFragment : Fragment() {
             Constants.ITEM_SELECT -> {
                 (activity as IRace.IRaceSelect).onRaceSelect(race.id!!, selects)
             }
-            Constants.ITEM_LONG_SELECT -> {
-                (activity as IRace.IRaceLongSelect).onRaceLongSelect(race.id!!, selects)
-            }
+//            Constants.ITEM_LONG_SELECT -> {
+//                (activity as IRace.IRaceLongSelect).onRaceLongSelect(race.id!!, selects)
+//            }
         }
     }
 
@@ -237,7 +238,7 @@ class MainFragment : Fragment() {
     //<editor-fold defaultstate="collapsed" desc="Region: Utility.">
     private fun setToolbarMenuItems(menu: Menu) {
         setDeleteMenuItem(menu)
-        setRefreshMenuItem(menu)
+        setRefreshIntervalMenuItem(menu)
     }
 
     /**
@@ -252,19 +253,22 @@ class MainFragment : Fragment() {
     /**
      * ToolBar: Refresh interval indicator.
      */
-    private fun setRefreshMenuItem(menu: Menu) {
-        // TODO - link this to the number of races in the list, i.e. if no Races to display,
-        //        do we need the menu item to show ?
-        val rootView: FrameLayout
-        val menuItem= menu.findItem(R.id.id_mnu_refresh)
-        val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
+    private fun setRefreshIntervalMenuItem(menu: Menu) {
+        val menuItem = menu.findItem(R.id.id_mnu_refresh_interval)
+        if(!raceAdapter.isEmpty()) {
+            val rootView: FrameLayout
+            val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
 
-        if(RacePreferences.getInstance()!!.getRefreshInterval(activity!!) && (interval > 0)) {
-            rootView = menuItem.actionView as FrameLayout
-            val redCircle = rootView.findViewById<FrameLayout>(R.id.id_view_refresh_red_circle)
-            val intervalTextView = rootView.findViewById<TextView>(R.id.id_tv_refresh_period)
-            intervalTextView.text = interval.toString()
-            redCircle.visibility = VISIBLE
+            if (RacePreferences.getInstance()!!.getRefreshInterval(activity!!) && (interval > 0)) {
+                menuItem.isVisible = true
+                rootView = menuItem.actionView as FrameLayout
+                val redCircle = rootView.findViewById<FrameLayout>(R.id.id_view_refresh_red_circle)
+                val intervalTextView = rootView.findViewById<TextView>(R.id.id_tv_refresh_period)
+                intervalTextView.text = interval.toString()
+                redCircle.visibility = VISIBLE
+            } else {
+                menuItem.isVisible = false
+            }
         } else {
             menuItem.isVisible = false
         }

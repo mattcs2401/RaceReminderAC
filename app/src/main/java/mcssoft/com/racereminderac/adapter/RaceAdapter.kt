@@ -85,7 +85,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      */
     internal fun getContext(): Context = context
 
-    internal fun isEmpty() : Boolean = lRaces.size < 1
+    internal fun isEmpty() : Boolean = lRaces.isEmpty()
 
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - ISwipe">
     /**
