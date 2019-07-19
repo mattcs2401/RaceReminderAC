@@ -84,12 +84,6 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, /*IRace.IRaceLongSe
     //<editor-fold defaultstate="collapsed" desc="Region: Bottom navigation listener">
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when(menuItem.itemId) {
-//            R.id.id_delete -> {
-//                doDelete()
-//            }
-            R.id.id_mnu_bnv_refresh -> {
-                EventBus.getDefault().post(ManualRefreshMessage())
-            }
             R.id.id_mnu_bnv_settings -> {
                 navController.navigate(R.id.preferencesFragment)
             }

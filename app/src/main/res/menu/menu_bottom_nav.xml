@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ui.MainFragment">
 
-    <item android:id="@+id/id_mnu_bnv_refresh"
-        android:enabled="true"
-        android:icon="@drawable/ic_refresh_24px"
-        android:title="@string/lbl_refresh"/>
-
     <item android:id="@+id/id_mnu_bnv_settings"
         android:enabled="true"
         android:icon="@drawable/ic_settings_24px"

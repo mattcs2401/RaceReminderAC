@@ -55,9 +55,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      */
     internal fun swapData(lRaces: ArrayList<Race>) {
         this.lRaces = lRaces
-//        isEmpty = this.lRaces.isEmpty() //size <= 0
         notifyDataSetChanged()
-
         EventBus.getDefault().post(DataMessage(isEmpty()))
     }
 

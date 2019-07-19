@@ -82,19 +82,22 @@ class MainFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        // Refresh interval Preference (set or not).
-        val doRefresh = RacePreferences.getInstance()!!.getRefreshInterval(activity!!)
+        // Check whether refresh interval is set.
+        doRefresh = RacePreferences.getInstance()!!.getRefreshInterval(activity!!)
 
-        if(doRefresh) {
-            // Set alarm, remove manual refresh menu item.
-            val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!).toLong()
-            RaceAlarm.getInstance()?.setAlarm(activity!!, interval)
-            setManualRefresh(false)
-        } else {
-            // Cancel alarm, enable/disable manual refresh menu item based on adapter content.
-            RaceAlarm.getInstance()?.cancelAlarm()
-            setManualRefresh(raceAdapter.itemCount > 0)
-        }
+//        // Refresh interval Preference (set or not).
+//        val doRefresh = RacePreferences.getInstance()!!.getRefreshInterval(activity!!)
+//
+//        if(doRefresh) {
+//            if(raceAdapter.itemCount > 0) {
+//                // Set alarm, remove manual refresh menu item.
+//                val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!).toLong()
+//                RaceAlarm.getInstance()?.setAlarm(activity!!, interval)
+//            }
+//        } else {
+//            // Cancel alarm, enable/disable manual refresh menu item based on adapter content.
+//            RaceAlarm.getInstance()?.cancelAlarm()
+//        }
 
         // EventBus registration.
         EventBus.getDefault().register(this)
@@ -134,8 +137,11 @@ class MainFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.options_menu, menu)
+//        toolbarMenu = menu
+        refreshMenuItem = menu.findItem(R.id.id_mnu_refresh_interval)
+        deleteMenuItem = menu.findItem(R.id.id_mnu_delete_all)
 
-        setToolbarMenuItems(menu)
+        setToolbarMenuItems()
 
         Log.d("tag","MainFragment.onCreateOptionsMenu")
     }
@@ -167,11 +173,6 @@ class MainFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(delete: DeleteMessage) {
         raceViewModel.delete(delete.theRace)
-        if(raceAdapter.isEmpty()) {
-            setManualRefresh(false)
-        } else {
-            setManualRefresh(true)
-        }
     }
 
     /**
@@ -221,7 +222,6 @@ class MainFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(delete: DeleteAllMessage) {
         raceViewModel.deleteAll()
-        setManualRefresh(false)
     }
 
     /**
@@ -242,9 +242,10 @@ class MainFragment : Fragment() {
     // Message from the adapter whether data exists.
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(data: DataMessage) = if(data.getIsEmpty) {
-        setManualRefresh(false)
+        // No items in the adapter.
+        refreshMenuItem.isVisible = false
     } else {
-        setManualRefresh(true)
+        setRefreshIntervalMenuItem()
     }
     //</editor-fold>
 
@@ -254,60 +255,43 @@ class MainFragment : Fragment() {
      * @param menu: The menu object from onCreateOptionsMenu().
      * @Comment: Called from onCreateOptionsMenu()
      */
-    private fun setToolbarMenuItems(menu: Menu) {
-        setDeleteMenuItem(menu)             // set the bulk delete menu option.
-        setRefreshIntervalMenuItem(menu)    // set the refresh interval notification (shows on right).
+    private fun setToolbarMenuItems() {
+        setDeleteMenuItem()             // set the bulk delete menu option.
+//        setRefreshIntervalMenuItem(false)    // set the refresh interval notification (shows on right).
     }
 
     /**
      * ToolBar: Delete (all) option.
      */
-    private fun setDeleteMenuItem(menu: Menu) {
-        val menuItem= menu.findItem(R.id.id_mnu_delete_all)
-        menuItem.isVisible = RacePreferences.getInstance()!!.getRaceBulkDelete(activity!!)
+    private fun setDeleteMenuItem() {
+        deleteMenuItem.isVisible = RacePreferences.getInstance()!!.getRaceBulkDelete(activity!!)
         // TODO - this needs a rethink when there are no Races to display.
     }
 
     /**
      * ToolBar: Refresh interval indicator.
      */
-    private fun setRefreshIntervalMenuItem(menu: Menu) {
-        // TODO - this needs work when used with manual refresh bottom nav option.
-        val menuItem = menu.findItem(R.id.id_mnu_refresh_interval)
-        if(raceAdapter.itemCount > 0) {
-            val rootView: FrameLayout
+    private fun setRefreshIntervalMenuItem() {
+        if (RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
+            refreshMenuItem.isVisible = true
             val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
-
-            if (RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
-                menuItem.isVisible = true
-                rootView = menuItem.actionView as FrameLayout
-                val redCircle = rootView.findViewById<FrameLayout>(R.id.id_view_refresh_red_circle)
-                val intervalTextView = rootView.findViewById<TextView>(R.id.id_tv_refresh_period)
-                intervalTextView.text = interval.toString()
-                redCircle.visibility = VISIBLE
-
-                setManualRefresh(false)
-            } else {
-                menuItem.isVisible = false
-            }
+            val rootView = refreshMenuItem.actionView as FrameLayout
+            val redCircle = rootView.findViewById<FrameLayout>(R.id.id_view_refresh_red_circle)
+            val intervalTextView = rootView.findViewById<TextView>(R.id.id_tv_refresh_period)
+            intervalTextView.text = interval.toString()
+            redCircle.visibility = VISIBLE
         } else {
-            menuItem.isVisible = false
-
-            setManualRefresh(false)
+            // Preference is not set.
+            refreshMenuItem.isVisible = false
         }
-    }
-
-    /**
-     * Set the manual refresh bottom nav menu option.
-     * @param setRefresh: True - set menu item visible, else false.
-     */
-    private fun setManualRefresh(setRefresh: Boolean) {
-        val menuItem = activity?.id_bottom_nav_view?.menu?.findItem(R.id.id_mnu_bnv_refresh)
-        menuItem?.isVisible = setRefresh
     }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars.">
+    private var doRefresh: Boolean = false
+//    private lateinit var toolbarMenu: Menu
+    private lateinit var refreshMenuItem: MenuItem
+    private lateinit var deleteMenuItem: MenuItem
     private lateinit var raceAdapter: RaceAdapter
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var recyclerView: RecyclerView
