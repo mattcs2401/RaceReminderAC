@@ -42,7 +42,7 @@ class RaceAlarm {
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmIntent = PendingIntent.getBroadcast(context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), millis, alarmIntent)
-        // set cancelled flag.
+        // Set cancelled flag.
         alarmCancelled = false
     }
 
@@ -55,11 +55,6 @@ class RaceAlarm {
             alarmCancelled = true
         }
     }
-
-    /**
-     * Quick and dirty check alarm is cancelled.
-     */
-    internal fun isCancelled(): Boolean = alarmCancelled
 
     private var alarmCancelled = true
     private lateinit var alarmIntent: PendingIntent

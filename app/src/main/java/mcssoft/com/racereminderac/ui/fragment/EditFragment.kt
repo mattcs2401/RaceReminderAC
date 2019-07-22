@@ -180,7 +180,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      */
     private fun collateValues(action: Int): Race {
         val race: Race
-        // TODO - if multi select and the message payload contains data.
         if(isMultiSel || allowMultiSel) {
             // Two or more entries already exist in the backing data, or multi select is set in the
             // Preferences.

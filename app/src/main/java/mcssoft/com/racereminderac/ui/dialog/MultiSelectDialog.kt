@@ -47,7 +47,7 @@ class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
                 doRemove()
             }
             R.id.id_btn_multi_sel_ok -> {
-                // check something selected.
+                // Check something selected.
                 if(!isSelectsEmpty()) {
                     EventBus.getDefault().post(MultiSelMessage(listMultiSel))
                 } else {
@@ -56,7 +56,7 @@ class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
                 this.dismiss()
             }
             R.id.id_btn_multi_sel_cancel -> {
-                // basically do nothing.
+                // Basically do nothing.
                 this.dismiss()
             }
         }
