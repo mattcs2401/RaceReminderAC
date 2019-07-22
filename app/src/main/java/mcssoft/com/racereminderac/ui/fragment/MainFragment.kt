@@ -252,7 +252,6 @@ class MainFragment : Fragment() {
     //<editor-fold defaultstate="collapsed" desc="Region: Utility.">
     /**
      * Setup toolbar menu/notification items.
-     * @param menu: The menu object from onCreateOptionsMenu().
      * @Comment: Called from onCreateOptionsMenu()
      */
     private fun setToolbarMenuItems() {

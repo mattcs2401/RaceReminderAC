@@ -32,8 +32,8 @@ class AsyncLD(private var type: Int, private var dao: RaceDAO) : AsyncTask<Race,
         return value
     }
 
-    override fun onPostExecute(result: Int) {
-        super.onPostExecute(result)
-        // TBA
-    }
+//    override fun onPostExecute(result: Int) {
+//        super.onPostExecute(result)
+//        // TBA
+//    }
 }

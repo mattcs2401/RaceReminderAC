@@ -3,7 +3,6 @@ package mcssoft.com.racereminderac.adapter
 import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants

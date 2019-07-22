@@ -1,6 +1,5 @@
 package mcssoft.com.racereminderac.ui.dialog
 
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.multisel_fragment.view.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
@@ -108,11 +106,16 @@ class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
     private fun doRemove() {
         if(!isSelectsEmpty()) {
             // get last non-null.
-            val index = getLast()
+            var index = getLast()
             if (index != -1) {
                 // update view and backing array.
                 updateViewRemove(index)
                 listMultiSel[index] = ""
+
+                index = getLast() + 1
+                if(index < Constants.SELECTS_MAX && !btnAdd.isEnabled) {
+                    btnAdd.isEnabled = true
+                }
             }
         }
     }
@@ -121,7 +124,7 @@ class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
      * Utility method, quick and dirty check that the backing array's 1st element is not an empty
      * string, i.e. the backing array has at least some data.
      */
-    private fun isSelectsEmpty() : Boolean = listMultiSel[0].equals("")
+    private fun isSelectsEmpty() : Boolean = listMultiSel[0] == ""
 
     /**
      * Utility method, get the last element in the backing array that is not an empty string.
@@ -216,6 +219,6 @@ class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
 
     private lateinit var rsVals: Array<String>   // number picker data.
 
-    private var listMultiSel = arrayOf<String>("","","","")    // backing data (user selections).
+    private var listMultiSel = arrayOf("","","","")    // backing data (user selections).
     //</editor-fold>
 }

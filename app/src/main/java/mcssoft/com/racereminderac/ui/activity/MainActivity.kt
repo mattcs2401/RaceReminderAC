@@ -14,8 +14,6 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
-import mcssoft.com.racereminderac.utility.eventbus.ManualRefreshMessage
-import org.greenrobot.eventbus.EventBus
 
 class MainActivity : AppCompatActivity(), IRace.IRaceSelect, /*IRace.IRaceLongSelect,*/
         BottomNavigationView.OnNavigationItemSelectedListener {

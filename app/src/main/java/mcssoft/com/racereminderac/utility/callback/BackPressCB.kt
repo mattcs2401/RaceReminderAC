@@ -1,6 +1,5 @@
 package mcssoft.com.racereminderac.utility.callback
 
-import android.util.Log
 import androidx.activity.OnBackPressedCallback
 
 class BackPressCB(enabled: Boolean) : OnBackPressedCallback(enabled) {

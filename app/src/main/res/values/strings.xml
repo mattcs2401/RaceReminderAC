@@ -29,7 +29,7 @@
 
     <!-- Checkbox labels. -->
     <string name="lbl_bet_placed">Bet placed.</string>
-    <string name="lbl_multi_select">Multi Select</string>
+    <string name="lbl_multi_select">Multi</string>
 
     <!-- TextView labels. -->
     <string name="lbl_selections">Selections</string>

@@ -4,10 +4,7 @@ import android.content.Context
 import android.graphics.*
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.ColorDrawable
-import androidx.core.content.ContextCompat
-import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.ISwipe
 
 /**
@@ -19,15 +16,9 @@ class TouchHelper(private val context: Context, private val swipeAction: ISwipe)
     private val background: ColorDrawable = ColorDrawable()
     private val backgroundColour: Int = Color.parseColor(Constants.DELETE_COLOUR)
     private val clearPaint: Paint = Paint()
-//    private val deleteDrawable: Drawable
-//    private val intrinsicWidth: Int
-//    private val intrinsicHeight: Int
 
     init {
         clearPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-//        deleteDrawable = ContextCompat.getDrawable(context, R.drawable.ic_delete)!!
-//        intrinsicWidth = deleteDrawable.intrinsicWidth
-//        intrinsicHeight = deleteDrawable.intrinsicHeight
     }
 
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
@@ -63,16 +54,6 @@ class TouchHelper(private val context: Context, private val swipeAction: ISwipe)
         background.color = backgroundColour
         background.setBounds((itemView.right  + dX).toInt(), itemView.top, itemView.right, itemView.bottom)
         background.draw(canvas)
-
-//        val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
-//        val deleteIconMargin = (itemHeight - intrinsicHeight) / 2
-//        val deleteIconLeft = itemView.right - deleteIconMargin - intrinsicWidth
-//        val deleteIconRight = itemView.right - deleteIconMargin
-//        val deleteIconBottom = deleteIconTop + intrinsicHeight
-
-
-//        deleteDrawable.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
-//        deleteDrawable.draw(canvas)
 
         super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
