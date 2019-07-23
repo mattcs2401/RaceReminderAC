@@ -348,13 +348,16 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         tvMultiSel1 = id_tv_multi_sel1
         tvMultiSel2 = id_tv_multi_sel2
         tvMultiSel3 = id_tv_multi_sel3
+        tvMultiSelSelects = id_tv_selects_label
 
         if (isMultiSel || allowMultiSel) {
             setMultiSelVisible(true)
+            setMultiSelViews(true)
             btnMultiSel.visibility = View.VISIBLE
             btnMultiSel.isEnabled = true
             btnMultiSel.setOnClickListener(this)
         } else {
+            setMultiSelViews(false)
             setMultiSelVisible(false)
             btnMultiSel.visibility = View.GONE
         }
@@ -419,7 +422,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     /**
      * Set the visibility of the multi select text fields.
      * @param visible: True - set visible, else, not visible.
-     * Note: Called in - setupForEditType()
      */
     private fun setMultiSelVisible(visible: Boolean) {
         when(visible) {
@@ -428,12 +430,14 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 tvMultiSel1.visibility = View.VISIBLE
                 tvMultiSel2.visibility = View.VISIBLE
                 tvMultiSel3.visibility = View.VISIBLE
+                tvMultiSelSelects.visibility = View.VISIBLE
             }
             false -> {
-                tvMultiSel0.visibility = View.GONE
+//                tvMultiSel0.visibility = View.GONE
                 tvMultiSel1.visibility = View.GONE
                 tvMultiSel2.visibility = View.GONE
                 tvMultiSel3.visibility = View.GONE
+                tvMultiSelSelects.visibility = View.GONE
             }
         }
     }
@@ -508,6 +512,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private lateinit var tvMultiSel1: TextView        // multi select - selection two.
     private lateinit var tvMultiSel2: TextView        // multi select - selection three.
     private lateinit var tvMultiSel3: TextView        // multi select - selection four.
+    private lateinit var tvMultiSelSelects: TextView  // multi select selections label.
 
     private var listMultiSel: Array<String> = arrayOf("","","","")   // multi select backing data.
     //</editor-fold>
