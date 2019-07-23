@@ -407,12 +407,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 npCityCode.value = ccVals.indexOf(RacePreferences.getInstance()?.getCityCode(activity!!))
                 npRaceCode.value = rcVals.indexOf(RacePreferences.getInstance()?.getRaceCode(activity!!))
             }
-//            Constants.EDIT_RACE_COPY -> {
-//                toolBar.title = getString(R.string.copy_race)
-//                btnSave.text = getString(R.string.lbl_copy)
-//                // save local copy of Race date.
-//                getRaceDate(raceId!!)
-//            }
+            Constants.EDIT_RACE_COPY -> {
+                toolBar.title = getString(R.string.copy_race)
+                btnSave.text = getString(R.string.lbl_copy)
+                // Save local copy of Race date.
+                getRaceDate(raceId!!)
+            }
         }
     }
 
