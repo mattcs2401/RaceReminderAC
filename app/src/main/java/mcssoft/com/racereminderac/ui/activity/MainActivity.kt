@@ -15,7 +15,7 @@ import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
 
-class MainActivity : AppCompatActivity(), IRace.IRaceSelect, /*IRace.IRaceLongSelect,*/
+class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSelect,
         BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,15 +68,15 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, /*IRace.IRaceLongSe
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
 
-//    /**
-//     * From interface IRace.IRaceLongSelect
-//     */
-//    override fun onRaceLongSelect(id: Long) {
-//        val bundle = Bundle()
-//        bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_COPY)
-//        bundle.putLong(getString(R.string.key_edit_copy), id)
-//        navController.navigate(R.id.id_edit_fragment, bundle)
-//    }
+    /**
+     * From interface IRace.IRaceLongSelect
+     */
+    override fun onRaceLongSelect(id: Long) {
+        val bundle = Bundle()
+        bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_COPY)
+        bundle.putLong(getString(R.string.key_edit_copy), id)
+        navController.navigate(R.id.id_edit_fragment, bundle)
+    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Bottom navigation listener">

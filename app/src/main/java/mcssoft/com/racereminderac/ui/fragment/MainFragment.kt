@@ -165,8 +165,7 @@ class MainFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(refresh: ManualRefreshMessage) {
         /*
-         Note:
-         The down side to this is the observer will react twice.
+         Note: The down side to this is that the observer will react twice.
         */
         if(raceAdapter.itemCount > 0) {
            // Get arbitary 1st Race from backing data.
@@ -192,9 +191,9 @@ class MainFragment : Fragment() {
             Constants.ITEM_SELECT -> {
                 (activity as IRace.IRaceSelect).onRaceSelect(race.id!!, selects)
             }
-//            Constants.ITEM_LONG_SELECT -> {
-//                (activity as IRace.IRaceLongSelect).onRaceLongSelect(race.id!!, selects)
-//            }
+            Constants.ITEM_LONG_SELECT -> {
+                (activity as IRace.IRaceLongSelect).onRaceLongSelect(race.id!!)
+            }
         }
     }
 

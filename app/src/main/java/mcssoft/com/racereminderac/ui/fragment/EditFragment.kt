@@ -128,10 +128,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                             race = collateValues(Constants.EDIT_RACE_NEW)
                             raceViewModel.insert(race)
                         }
-//                        Constants.EDIT_RACE_COPY -> {
-//                            race = collateValues(Constants.EDIT_RACE_COPY)
-//                            raceViewModel.insert(race)
-//                        }
+                        Constants.EDIT_RACE_COPY -> {
+                            race = collateValues(Constants.EDIT_RACE_COPY)
+                            raceViewModel.insert(race)
+                        }
                     }
                     Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
                             .navigate(R.id.id_main_fragment)
@@ -199,10 +199,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             Constants.EDIT_RACE_NEW -> {
                 race.raceDate = RaceTime.getInstance()?.getFormattedDateTime(Constants.DATE)!!
             }
-//            // Insert as Copy.
-//            Constants.EDIT_RACE_COPY -> {
-//                race.raceDate = raceDate
-//            }
+            // Insert as Copy.
+            Constants.EDIT_RACE_COPY -> {
+                race.raceDate = raceDate
+            }
         }
         return race
     }
@@ -372,9 +372,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             Constants.EDIT_RACE_UPDATE -> {
                 raceId = arguments?.getLong(getString(R.string.key_edit_existing))
             }
-//            Constants.EDIT_RACE_COPY -> {
-//                raceId = arguments?.getLong(getString(R.string.key_edit_copy))
-//            }
+            Constants.EDIT_RACE_COPY -> {
+                raceId = arguments?.getLong(getString(R.string.key_edit_copy))
+            }
         }
 
         // Set the view model.
