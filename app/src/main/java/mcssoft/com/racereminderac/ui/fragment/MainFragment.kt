@@ -82,23 +82,6 @@ class MainFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        // Check whether refresh interval is set.
-        doRefresh = RacePreferences.getInstance()!!.getRefreshInterval(activity!!)
-
-//        // Refresh interval Preference (set or not).
-//        val doRefresh = RacePreferences.getInstance()!!.getRefreshInterval(activity!!)
-//
-//        if(doRefresh) {
-//            if(raceAdapter.itemCount > 0) {
-//                // Set alarm, remove manual refresh menu item.
-//                val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!).toLong()
-//                RaceAlarm.getInstance()?.setAlarm(activity!!, interval)
-//            }
-//        } else {
-//            // Cancel alarm, enable/disable manual refresh menu item based on adapter content.
-//            RaceAlarm.getInstance()?.cancelAlarm()
-//        }
-
         // EventBus registration.
         EventBus.getDefault().register(this)
 
@@ -137,11 +120,11 @@ class MainFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.options_menu, menu)
-//        toolbarMenu = menu
+
         refreshMenuItem = menu.findItem(R.id.id_mnu_refresh_interval)
         deleteMenuItem = menu.findItem(R.id.id_mnu_delete_all)
 
-        setToolbarMenuItems()
+//        setDeleteMenuItem()
 
         Log.d("tag","MainFragment.onCreateOptionsMenu")
     }
@@ -221,6 +204,10 @@ class MainFragment : Fragment() {
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(delete: DeleteAllMessage) {
+        // Hide toolbar icons.
+        refreshMenuItem.isVisible = false
+        deleteMenuItem.isVisible = false
+        // Remove all items from adapter.
         raceViewModel.deleteAll()
     }
 
@@ -244,34 +231,31 @@ class MainFragment : Fragment() {
     fun onMessageEvent(data: DataMessage) = if(data.getIsEmpty) {
         // No items in the adapter.
         refreshMenuItem.isVisible = false
+        deleteMenuItem.isVisible = false
     } else {
         setRefreshIntervalMenuItem()
+        setDeleteMenuItem()
     }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility.">
     /**
-     * Setup toolbar menu/notification items.
-     * @Comment: Called from onCreateOptionsMenu()
-     */
-    private fun setToolbarMenuItems() {
-        setDeleteMenuItem()             // set the bulk delete menu option.
-//        setRefreshIntervalMenuItem(false)    // set the refresh interval notification (shows on right).
-    }
-
-    /**
      * ToolBar: Delete (all) option.
      */
     private fun setDeleteMenuItem() {
-        deleteMenuItem.isVisible = RacePreferences.getInstance()!!.getRaceBulkDelete(activity!!)
-        // TODO - this needs a rethink when there are no Races to display.
+        if(RacePreferences.getInstance()!!.getRaceBulkDelete(activity!!)) {
+            // the delete all preference is enabled.
+            deleteMenuItem.isVisible = true
+        }
     }
 
     /**
      * ToolBar: Refresh interval indicator.
+     * @Note: Set by the DataMessage EventBus type (from RaceAdapter swapData() method).
      */
     private fun setRefreshIntervalMenuItem() {
         if (RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
+            // Preference is set.
             refreshMenuItem.isVisible = true
             val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
             val rootView = refreshMenuItem.actionView as FrameLayout
@@ -279,16 +263,19 @@ class MainFragment : Fragment() {
             val intervalTextView = rootView.findViewById<TextView>(R.id.id_tv_refresh_period)
             intervalTextView.text = interval.toString()
             redCircle.visibility = VISIBLE
+
+            // Set alarm.
+            RaceAlarm.getInstance()?.setAlarm(activity!!, interval.toLong())
         } else {
             // Preference is not set.
             refreshMenuItem.isVisible = false
+            // Cancel alarm.
+            RaceAlarm.getInstance()?.cancelAlarm()
         }
     }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars.">
-    private var doRefresh: Boolean = false
-//    private lateinit var toolbarMenu: Menu
     private lateinit var refreshMenuItem: MenuItem
     private lateinit var deleteMenuItem: MenuItem
     private lateinit var raceAdapter: RaceAdapter

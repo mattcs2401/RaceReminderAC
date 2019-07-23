@@ -37,14 +37,14 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
 
     override fun onBindViewHolder(holder : RaceViewHolder, position : Int) {
         val race = lRaces[position]
-
-        setBaseDisplayValues(holder, race)       // set base race values to display.
-
-        setDisplayColourValues(holder, race)     // set display colours.
-
-        setMultiSelect(holder, race)             // set for multi select if applicable.
-
-        holder.tvRaceCount.text = (position + 1).toString()     // 1st entry is 1.
+        // city, code, time, selections ect.
+        setBaseDisplayValues(holder, race)
+        // set display colours based on the Race object's metaColour value.
+        setDisplayColourValues(holder, race)
+        //  setup for multi select if applicable.
+        setMultiSelect(holder, race)
+        // set the adapter item count value (1st entry is 1).
+        holder.tvRaceCount.text = (position + 1).toString()
     }
     
     override fun getItemCount() : Int = lRaces.size
@@ -56,6 +56,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     internal fun swapData(lRaces: ArrayList<Race>) {
         this.lRaces = lRaces
         notifyDataSetChanged()
+        // Post message to MainFragment as to whether adapter has items (used for refresh if enabled).
         EventBus.getDefault().post(DataMessage(isEmpty()))
     }
 

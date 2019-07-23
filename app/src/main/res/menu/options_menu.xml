@@ -4,9 +4,9 @@
 
     <!-- Note: This is the only one actually selectable. -->
     <item android:id="@+id/id_mnu_delete_all"
-        android:enabled="true"
-        android:icon="@drawable/ic_delete_24px"
         android:title="@string/lbl_delete_all"
+        android:visible="false"
+        android:icon="@drawable/ic_delete_24px"
         app:showAsAction="ifRoom"/>
 
     <!-- Show a refresh interval indicator. -->
