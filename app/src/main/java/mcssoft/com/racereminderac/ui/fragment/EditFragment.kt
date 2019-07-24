@@ -208,6 +208,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     }
 
     private fun collateMultiSelect() : Race {
+        if(listMultiSel[0] == "") {
+            // Nothing was selected so use a default.
+            listMultiSel[0] = rsVals[npRaceSel.value]
+        }
         val race = Race(ccVals[npCityCode.value],
                 rcVals[npRaceCode.value],
                 rnVals[npRaceNo.value],
@@ -356,10 +360,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             btnMultiSel.visibility = View.VISIBLE
             btnMultiSel.isEnabled = true
             btnMultiSel.setOnClickListener(this)
+            npRaceSel.isEnabled = false          // force use of the multi select dialog.
         } else {
             setMultiSelViews(false)
             setMultiSelVisible(false)
             btnMultiSel.visibility = View.GONE
+            npRaceSel.isEnabled = true
         }
     }
 
