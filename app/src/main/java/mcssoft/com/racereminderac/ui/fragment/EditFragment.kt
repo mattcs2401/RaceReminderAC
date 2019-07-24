@@ -433,7 +433,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 tvMultiSelSelects.visibility = View.VISIBLE
             }
             false -> {
-//                tvMultiSel0.visibility = View.GONE
+                tvMultiSel0.visibility = View.GONE
                 tvMultiSel1.visibility = View.GONE
                 tvMultiSel2.visibility = View.GONE
                 tvMultiSel3.visibility = View.GONE
