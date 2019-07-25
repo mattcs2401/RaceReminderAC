@@ -360,12 +360,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             btnMultiSel.visibility = View.VISIBLE
             btnMultiSel.isEnabled = true
             btnMultiSel.setOnClickListener(this)
-            npRaceSel.isEnabled = false          // force use of the multi select dialog.
+//            npRaceSel.isEnabled = false          // force use of the multi select dialog.
         } else {
             setMultiSelViews(false)
             setMultiSelVisible(false)
             btnMultiSel.visibility = View.GONE
-            npRaceSel.isEnabled = true
+//            npRaceSel.isEnabled = true
         }
     }
 

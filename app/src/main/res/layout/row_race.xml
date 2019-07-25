@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/id_cv_row_race"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -90,7 +91,7 @@
             android:id="@+id/id_tv_race_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:gravity="center_vertical|center_horizontal"
@@ -118,12 +119,12 @@
             android:id="@+id/id_tv_race_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text=""
             android:textAppearance="@android:style/TextAppearance.Material.Small"
+            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="@+id/id_cb_bet_placed"
-            card_view:layout_constraintStart_toStartOf="@+id/id_cb_bet_placed"
-            card_view:layout_constraintTop_toBottomOf="@+id/id_cb_bet_placed" />
+            card_view:layout_constraintStart_toStartOf="@+id/id_cb_bet_placed" />
 
         <TextView
             android:id="@+id/id_tv_race_sel1"
@@ -166,10 +167,12 @@
 
         <TextView
             android:id="@+id/id_tv_multi"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:background="@drawable/border"
             android:text="@string/multi_selects"
+            android:gravity="center"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
             android:visibility="gone"
             card_view:layout_constraintBottom_toBottomOf="parent"
