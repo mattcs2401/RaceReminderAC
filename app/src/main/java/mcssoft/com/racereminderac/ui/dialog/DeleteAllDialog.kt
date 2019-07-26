@@ -1,7 +1,6 @@
 package mcssoft.com.racereminderac.ui.dialog
 
 import android.app.Dialog
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -10,7 +9,7 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.eventbus.DeleteAllMessage
 import org.greenrobot.eventbus.EventBus
 
-class DeleteAllDialog() : DialogFragment(), DialogInterface.OnClickListener {
+class DeleteAllDialog : DialogFragment(), DialogInterface.OnClickListener {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val alertDialogBuilder = AlertDialog.Builder(context!!)

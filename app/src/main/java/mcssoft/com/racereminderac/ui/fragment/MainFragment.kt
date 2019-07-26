@@ -53,7 +53,7 @@ class MainFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = raceAdapter
 
-        val touchHelper = TouchHelper(context!!, raceAdapter)
+        val touchHelper = TouchHelper(raceAdapter)
         val itemTouchHelper = ItemTouchHelper(touchHelper)
 
         raceAdapter.setTouchHelper(itemTouchHelper)
@@ -121,9 +121,9 @@ class MainFragment : Fragment() {
         notifyMenuItem = menu.findItem(R.id.id_mnu_notifications)
 
         if(!raceAdapter.isEmpty()) {
-            setRefreshIntervalMenuItem()
-            setDeleteMenuItem()
-            setNotifyMenuItem()
+            setToolbarIcons(true)
+        } else {
+            setToolbarIcons(false)
         }
 
         Log.d("tag","MainFragment.onCreateOptionsMenu")
@@ -154,6 +154,12 @@ class MainFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(delete: DeleteMessage) {
         raceViewModel.delete(delete.theRace)
+
+        if(!raceAdapter.isEmpty()) {
+            setToolbarIcons(true)
+        } else {
+            setToolbarIcons(false)
+        }
     }
 
     /**
@@ -202,9 +208,7 @@ class MainFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(delete: DeleteAllMessage) {
         // Hide toolbar icons.
-        refreshMenuItem.isVisible = false
-        deleteMenuItem.isVisible = false
-        notifyMenuItem.isVisible = false
+        setToolbarIcons(false)
         // Remove all items from adapter.
         raceViewModel.deleteAll()
     }
@@ -228,31 +232,44 @@ class MainFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(data: DataMessage) = if(data.getIsEmpty) {
         // No items in the adapter.
-        refreshMenuItem.isVisible = false
-        deleteMenuItem.isVisible = false
-        notifyMenuItem.isVisible = false
+        setToolbarIcons(false)
     } else {
-        setRefreshIntervalMenuItem()
-        setDeleteMenuItem()
-        setNotifyMenuItem()
+        setToolbarIcons(true)
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Utility.">
+    //<editor-fold defaultstate="collapsed" desc="Region: Utility - Toolbar.">
+    private fun setToolbarIcons(setIcon: Boolean) {
+        setRefreshIntervalMenuItem(setIcon)
+        setDeleteMenuItem(setIcon)
+        setNotifyMenuItem(setIcon)
+    }
+
     /**
      * ToolBar: Delete (all) option.
      */
-    private fun setDeleteMenuItem() {
-        if(RacePreferences.getInstance()!!.getRaceBulkDelete(activity!!)) {
-            // The Delete all preference is enabled.
-            deleteMenuItem.isVisible = true
+    private fun setDeleteMenuItem(doSetDelete: Boolean) {
+        if(doSetDelete) {
+            if (RacePreferences.getInstance()!!.getRaceBulkDelete(activity!!)) {
+                // The Delete all preference is enabled.
+                deleteMenuItem.isVisible = true
+            }
+        } else {
+            deleteMenuItem.isVisible = false
         }
     }
 
-    private fun setNotifyMenuItem() {
-        if(RacePreferences.getInstance()!!.getRaceNotifPost(activity!!)) {
-            // The notifications preference is enabled.
-            notifyMenuItem.isVisible = true
+    /**
+     * Toolbar: Notifications being sent indicator.
+     */
+    private fun setNotifyMenuItem(doSetNotify: Boolean) {
+        if(doSetNotify) {
+            if (RacePreferences.getInstance()!!.getRaceNotifPost(activity!!)) {
+                // The notifications preference is enabled.
+                notifyMenuItem.isVisible = true
+            }
+        } else {
+            notifyMenuItem.isVisible = false
         }
     }
 
@@ -260,21 +277,22 @@ class MainFragment : Fragment() {
      * ToolBar: Refresh interval indicator.
      * @Note: Set by the DataMessage EventBus type (from RaceAdapter swapData() method).
      */
-    private fun setRefreshIntervalMenuItem() {
-        if (RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
-            // Preference is set.
-            refreshMenuItem.isVisible = true
-            val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
-            val rootView = refreshMenuItem.actionView as FrameLayout
-            val redCircle = rootView.findViewById<FrameLayout>(R.id.id_view_refresh_red_circle)
-            val intervalTextView = rootView.findViewById<TextView>(R.id.id_tv_refresh_period)
-            intervalTextView.text = interval.toString()
-            redCircle.visibility = VISIBLE
+    private fun setRefreshIntervalMenuItem(doSetRefresh: Boolean) {
+        if(doSetRefresh) {
+            if (RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
+                // Preference is set.
+                refreshMenuItem.isVisible = true
+                val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
+                val rootView = refreshMenuItem.actionView as FrameLayout
+                val redCircle = rootView.findViewById<FrameLayout>(R.id.id_view_refresh_red_circle)
+                val intervalTextView = rootView.findViewById<TextView>(R.id.id_tv_refresh_period)
+                intervalTextView.text = interval.toString()
+                redCircle.visibility = VISIBLE
 
-            // Set alarm.
-            RaceAlarm.getInstance()?.setAlarm(activity!!, interval.toLong())
+                // Set alarm.
+                RaceAlarm.getInstance()?.setAlarm(activity!!, interval.toLong())
+            }
         } else {
-            // Preference is not set.
             refreshMenuItem.isVisible = false
             // Cancel alarm.
             RaceAlarm.getInstance()?.cancelAlarm()

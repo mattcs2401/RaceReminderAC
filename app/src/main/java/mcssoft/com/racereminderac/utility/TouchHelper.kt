@@ -11,7 +11,7 @@ import mcssoft.com.racereminderac.interfaces.ISwipe
  *  https://www.journaldev.com/23164/android-recyclerview-swipe-to-delete-undo
   * https://therubberduckdev.wordpress.com/2017/10/24/android-recyclerview-drag-and-drop-and-swipe-to-dismiss/
  **/
-class TouchHelper(private val context: Context, private val swipeAction: ISwipe) : ItemTouchHelper.Callback() {
+class TouchHelper(private val swipeAction: ISwipe) : ItemTouchHelper.Callback() {
 
     private val background: ColorDrawable = ColorDrawable()
     private val backgroundColour: Int = Color.parseColor(Constants.DELETE_COLOUR)
@@ -34,7 +34,6 @@ class TouchHelper(private val context: Context, private val swipeAction: ISwipe)
      * ItemTouchHelper.Callback()
      */
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        /** Note: Can't seem to get EventBus to work here. Likely something with the callback. **/
         swipeAction.onViewSwiped(viewHolder.adapterPosition)
     }
 
