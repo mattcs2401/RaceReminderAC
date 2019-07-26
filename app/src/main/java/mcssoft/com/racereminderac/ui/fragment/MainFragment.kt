@@ -111,11 +111,6 @@ class MainFragment : Fragment() {
         Log.d("tag","MainFragment.onStop")
     }
 
-//    override fun onPrepareOptionsMenu(menu: Menu) {
-//        super.onPrepareOptionsMenu(menu)
-//        Log.d("tag","MainFragment.onPrepareOptionsMenu")
-//    }
-
     /* Example: https://stablekernel.com/using-custom-views-as-menu-items/  ??*/
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -123,20 +118,23 @@ class MainFragment : Fragment() {
 
         refreshMenuItem = menu.findItem(R.id.id_mnu_refresh_interval)
         deleteMenuItem = menu.findItem(R.id.id_mnu_delete_all)
+        notifyMenuItem = menu.findItem(R.id.id_mnu_notifications)
 
-//        setDeleteMenuItem()
+        if(!raceAdapter.isEmpty()) {
+            setRefreshIntervalMenuItem()
+            setDeleteMenuItem()
+            setNotifyMenuItem()
+        }
 
         Log.d("tag","MainFragment.onCreateOptionsMenu")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        /* Note:
-           Delete all is Preference controlled (icon may not be displayed).
-         */
+        /* Note: Delete all is Preference controlled (icon may not be displayed). */
         when(item.itemId) {
             R.id.id_mnu_delete_all -> {
                 if (!raceAdapter.isEmpty()) {
-                    val dialog = DeleteAllDialog(activity!!)
+                    val dialog = DeleteAllDialog()
                     dialog.show(activity!!.supportFragmentManager, getString(R.string.tag_delete_all_dialog))
                 } else {
                     Toast.makeText(activity!!, getString(R.string.toast_nothing_to_delete), Toast.LENGTH_SHORT).show()
@@ -206,6 +204,7 @@ class MainFragment : Fragment() {
         // Hide toolbar icons.
         refreshMenuItem.isVisible = false
         deleteMenuItem.isVisible = false
+        notifyMenuItem.isVisible = false
         // Remove all items from adapter.
         raceViewModel.deleteAll()
     }
@@ -231,9 +230,11 @@ class MainFragment : Fragment() {
         // No items in the adapter.
         refreshMenuItem.isVisible = false
         deleteMenuItem.isVisible = false
+        notifyMenuItem.isVisible = false
     } else {
         setRefreshIntervalMenuItem()
         setDeleteMenuItem()
+        setNotifyMenuItem()
     }
     //</editor-fold>
 
@@ -243,8 +244,15 @@ class MainFragment : Fragment() {
      */
     private fun setDeleteMenuItem() {
         if(RacePreferences.getInstance()!!.getRaceBulkDelete(activity!!)) {
-            // the delete all preference is enabled.
+            // The Delete all preference is enabled.
             deleteMenuItem.isVisible = true
+        }
+    }
+
+    private fun setNotifyMenuItem() {
+        if(RacePreferences.getInstance()!!.getRaceNotifPost(activity!!)) {
+            // The notifications preference is enabled.
+            notifyMenuItem.isVisible = true
         }
     }
 
@@ -277,6 +285,8 @@ class MainFragment : Fragment() {
     //<editor-fold defaultstate="collapsed" desc="Region: Private vars.">
     private lateinit var refreshMenuItem: MenuItem
     private lateinit var deleteMenuItem: MenuItem
+    private lateinit var notifyMenuItem: MenuItem
+
     private lateinit var raceAdapter: RaceAdapter
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var recyclerView: RecyclerView

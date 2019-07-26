@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- https://materialdesignicons.com/ -->
+<FrameLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="32dp"
+    android:layout_height="32dp">
+
+    <ImageView
+        android:layout_width="@dimen/menu_item_icon_size"
+        android:layout_height="@dimen/menu_item_icon_size"
+        android:layout_gravity="center"
+        android:src="@drawable/icon_n_24px"
+        tools:ignore="ContentDescription"/>
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/id_view_refresh_red_circle"-->
+        <!--android:layout_width="16dp"-->
+        <!--android:layout_height="16dp"-->
+        <!--android:layout_gravity="start|top"-->
+        <!--android:background="@drawable/circle_red"-->
+        <!--android:visibility="gone"-->
+        <!--tools:visibility="visible">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/id_tv_refresh_period"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="12sp"-->
+            <!--tools:text="3" />-->
+    <!--</FrameLayout>-->
+</FrameLayout>
