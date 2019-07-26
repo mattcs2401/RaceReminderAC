@@ -38,7 +38,7 @@ class RaceAlarm {
         // Set the interval equivalent in mSec.
         val millis = interval * 60 * 1000
         // Set the alarm manager and intent.
-        val intent = Intent(context, RaceReceiver::class.java)
+        val intent = Intent(context, RaceAlarmReceiver::class.java)
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmIntent = PendingIntent.getBroadcast(context, Constants.REQ_CODE, intent, Constants.NO_FLAGS)
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), millis, alarmIntent)

@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".utility.RaceReceiver"
+        <receiver android:name=".utility.RaceAlarmReceiver"
             android:enabled="true" />
     </application>
 

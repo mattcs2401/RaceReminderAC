@@ -39,7 +39,7 @@ object Constants {
 
     const val CITY_CODE_DUMMY = "ZZ"        // Dummy city code value.
 
-    const val MINUS_ONE = -1                // General initialiser value (Int or Long).
+    const val MINUS_ONE = -1                // General initialise value (Int or Long).
 
     const val NO_FLAGS = 0                  // PendingIntent related (RaceAlarm).
     const val REQ_CODE = 0                  // "             "       "
