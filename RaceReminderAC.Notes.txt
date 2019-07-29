@@ -25,13 +25,6 @@ Issues:
 ------
 TO DO:
 ------
--> The whole multi select needs a re-think.
-
--> Update/Refresh UI accordingly, at preference controlled interval.
-
--> Toolbar indicator to show:
-   - Notifications are set (maybe letter N ?).
-
 -> Make the number picker values bigger.
    - Addd/Edit screen design ?
 

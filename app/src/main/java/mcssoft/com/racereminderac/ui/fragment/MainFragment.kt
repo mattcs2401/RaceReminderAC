@@ -196,7 +196,7 @@ class MainFragment : Fragment() {
                 (activity as IRace.IRaceSelect).onRaceSelect(race.id!!, selects)
             }
             Constants.ITEM_LONG_SELECT -> {
-                (activity as IRace.IRaceLongSelect).onRaceLongSelect(race.id!!)
+                (activity as IRace.IRaceLongSelect).onRaceLongSelect(race.id!!, selects)
             }
         }
     }

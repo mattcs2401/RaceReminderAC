@@ -179,6 +179,11 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
             holder.tvRaceSel1.text = race.raceSel2
             holder.tvRaceSel2.text = race.raceSel3    // these may or not be actually set.
             holder.tvRaceSel3.text = race.raceSel4    // " " "
+        } else {
+            holder.tvMultiSelsNotify.visibility = View.GONE
+            holder.tvRaceSel1.text = ""
+            holder.tvRaceSel2.text = ""
+            holder.tvRaceSel3.text = ""
         }
     }
     //</editor-fold>
