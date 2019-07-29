@@ -2,7 +2,9 @@ package mcssoft.com.racereminderac.adapter
 
 import android.view.View
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
@@ -25,16 +27,22 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickLi
     var cbBetPlaced: CheckBox = view.findViewById(R.id.id_cb_bet_placed)  // bet placed indicator.
     var tvMultiSelsNotify: TextView = view.findViewById(R.id.id_tv_multi) // multi sel indicator.
     var tvRaceCount: TextView = view.findViewById(R.id.id_tv_race_count)  // items count indicator.
+    var ivExpand: ImageView = view.findViewById(R.id.id_iv_expand)        // expand image view.
 
     init {
-        // Set the listeners for the View.
+        // Set the listeners for the View as a whole.
         view.setOnClickListener(this)
         view.setOnLongClickListener(this)
+        // Listeners for specific view elements.
         cbBetPlaced.setOnClickListener(this)
+        ivExpand.setOnClickListener(this)
     }
 
     override fun onClick(view : View) {
         when(view.id) {
+            R.id.id_iv_expand -> {
+                Toast.makeText(view.context, "Expand not implemented yet.", Toast.LENGTH_SHORT).show()
+            }
             R.id.id_cb_bet_placed -> {
                 EventBus.getDefault().post(UpdateMessage(adapterPosition, R.id.id_cb_bet_placed, cbBetPlaced.isChecked))
             }

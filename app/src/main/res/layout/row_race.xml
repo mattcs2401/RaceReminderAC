@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/id_cv_row_race"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -116,14 +117,14 @@
 
         <TextView
             android:id="@+id/id_tv_race_count"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:text=""
             android:textAppearance="@android:style/TextAppearance.Material.Small"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="@+id/id_cb_bet_placed"
-            card_view:layout_constraintStart_toStartOf="@+id/id_cb_bet_placed" />
+            card_view:layout_constraintEnd_toEndOf="@+id/id_tv_city_code"
+            card_view:layout_constraintStart_toStartOf="@+id/id_tv_city_code"
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/id_tv_race_sel1"
@@ -169,14 +170,25 @@
             android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/border"
-            android:text="@string/multi_selects"
             android:gravity="center"
+            android:text="@string/multi_selects"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
             android:visibility="gone"
-            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="@+id/id_guideline2"
-            card_view:layout_constraintTop_toBottomOf="@+id/id_tv_race_sel0" />
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/id_iv_expand"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/icon_expand_more_24px"
+            tools:ignore="ContentDescription"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
