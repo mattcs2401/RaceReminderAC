@@ -14,7 +14,7 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "_id") var id: Long? = null    // value inserted by Room.
 
-    // Arbitrary default values.
+    // Non-mandatory or default values.
     @ColumnInfo(name = "RaceDate") var raceDate: String = "01/01/1970"    // race date.
     @ColumnInfo(name = "RaceTimeL") var raceTimeL: Long = 0               // race time as Long val.
     @ColumnInfo(name = "ArchvRace") var archvRace: String = "N"           // record's archive flag TBA.
@@ -23,6 +23,11 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
     @ColumnInfo(name = "RaceSel2") var raceSel2: String = ""              // 2nd race sel (multi sel).
     @ColumnInfo(name = "RaceSel3") var raceSel3: String = ""              // 3rd "    "    "
     @ColumnInfo(name = "RaceSel4") var raceSel4: String = ""              // 4th "    "    "
+
+    // Additional (horse, jokey and trainer names).
+    @ColumnInfo(name = "RaceHorse") var raceHorse: String = ""
+    @ColumnInfo(name = "RaceJockey") var raceJockey: String = ""
+    @ColumnInfo(name = "RaceTrainer") var raceTrainer: String = ""
 
     /**
      * Simple compare on RaceTime. Used in, e.g.,  Collections.sort(List<Race>)

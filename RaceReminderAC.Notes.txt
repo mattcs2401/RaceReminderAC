@@ -25,6 +25,12 @@ Issues:
 ------
 TO DO:
 ------
+-> Expandable recyclerview:
+   Example - https://thoughtbot.com/blog/introducing-expandablerecyclerview
+   For horse, jockey trainer names.
+   -> Will need to upgrade the Race entity (done).
+   -> Will need to upgrade the Edit functionality (TBA).
+
 -> Make the number picker values bigger.
    - Addd/Edit screen design ?
 
