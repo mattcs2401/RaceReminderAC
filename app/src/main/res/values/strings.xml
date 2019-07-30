@@ -47,6 +47,11 @@
     <string name="lbl_race_count">Count</string>
     <string name="lbl_notifications">Notifications</string>
 
+    <!-- Race related labels. -->
+    <string name="lbl_trainer">Trainer</string>
+    <string name="lbl_horse">Horse</string>
+    <string name="lbl_jockey">Jockey</string>
+
     <!-- Tags. -->
     <string name="tag_delete_all_dialog">tag_delete_all_dialog</string>
 

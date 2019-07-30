@@ -13,7 +13,7 @@ import mcssoft.com.racereminderac.utility.eventbus.SelectMessage
 import mcssoft.com.racereminderac.utility.eventbus.UpdateMessage
 import org.greenrobot.eventbus.EventBus
 
-class RaceViewHolder(view: View) : ParentViewHolder(view) {
+class RaceExpViewHolder(view: View) : ParentViewHolder(view) {
 
     // Set the components of the View.
     var tvCityCode: TextView = view.findViewById(R.id.id_tv_city_code)    // city code.

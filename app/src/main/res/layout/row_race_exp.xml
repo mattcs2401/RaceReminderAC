@@ -31,10 +31,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/abbrv_city_code"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintBottom_toTopOf="@+id/id_gl_horiz_row_exp"
             card_view:layout_constraintEnd_toStartOf="@+id/id_tv_race_code"
             card_view:layout_constraintStart_toEndOf="@+id/id_cb_bet_placed"
             card_view:layout_constraintTop_toTopOf="parent" />
@@ -45,10 +45,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/abbrv_race_code"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintBottom_toTopOf="@+id/id_gl_horiz_row_exp"
             card_view:layout_constraintEnd_toStartOf="@+id/id_gl_race_no"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -57,10 +57,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/abbrv_race_no"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintBottom_toTopOf="@+id/id_gl_horiz_row_exp"
             card_view:layout_constraintStart_toStartOf="@+id/id_gl_race_no"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -69,10 +69,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/abbrv_race_sel"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintBottom_toTopOf="@+id/id_gl_horiz_row_exp"
             card_view:layout_constraintStart_toStartOf="@+id/id_gl_race_sel"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -93,11 +93,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:gravity="center_vertical|center_horizontal"
             android:text="@string/abbrv_date"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
-            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/id_tv_race_time" />
 
@@ -120,7 +118,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text=""
+            android:text="9"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
             card_view:layout_constraintEnd_toEndOf="@+id/id_tv_city_code"
             card_view:layout_constraintStart_toStartOf="@+id/id_tv_city_code"
@@ -132,10 +130,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/abbrv_race_sel"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintBottom_toTopOf="@+id/id_gl_horiz_row_exp"
             card_view:layout_constraintStart_toEndOf="@+id/id_tv_race_sel0"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -145,10 +143,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/abbrv_race_sel"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintBottom_toTopOf="@+id/id_gl_horiz_row_exp"
             card_view:layout_constraintStart_toEndOf="@+id/id_tv_race_sel1"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -158,10 +156,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/abbrv_race_sel"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
-            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintBottom_toTopOf="@+id/id_gl_horiz_row_exp"
             card_view:layout_constraintStart_toEndOf="@+id/id_tv_race_sel2"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -184,11 +182,78 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"
             android:src="@drawable/icon_expand_more_24px"
-            tools:ignore="ContentDescription"/>
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/id_cb_bet_placed"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/id_tv_exp_trainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/lbl_trainer"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            card_view:layout_constraintBottom_toTopOf="@+id/id_tv_exp_trainer_name"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="@+id/id_gl_horiz_row_exp" />
+
+        <TextView
+            android:id="@+id/id_tv_exp_trainer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="T. Gollan"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toStartOf="@+id/id_tv_exp_trainer" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/id_gl_horiz_row_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            card_view:layout_constraintGuide_begin="96dp" />
+
+        <TextView
+            android:id="@+id/id_tv_exp_horse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/lbl_horse"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            card_view:layout_constraintStart_toEndOf="@+id/id_tv_exp_trainer"
+            card_view:layout_constraintTop_toTopOf="@+id/id_gl_horiz_row_exp" />
+
+        <TextView
+            android:id="@+id/id_tv_exp_horse_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mr Somebody"
+            card_view:layout_constraintStart_toStartOf="@+id/id_tv_exp_horse"
+            card_view:layout_constraintTop_toBottomOf="@+id/id_tv_exp_horse" />
+
+        <TextView
+            android:id="@+id/id_tv_exp_jockey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/lbl_jockey"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            card_view:layout_constraintStart_toEndOf="@+id/id_tv_exp_horse"
+            card_view:layout_constraintTop_toTopOf="@+id/id_gl_horiz_row_exp" />
+
+        <TextView
+            android:id="@+id/id_tv_exp_jockey_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="J.Byrne"
+            card_view:layout_constraintStart_toStartOf="@+id/id_tv_exp_jockey"
+            card_view:layout_constraintTop_toBottomOf="@+id/id_tv_exp_jockey" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
