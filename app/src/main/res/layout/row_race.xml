@@ -190,5 +190,14 @@
             android:src="@drawable/icon_expand_more_24px"
             tools:ignore="ContentDescription"/>
 
+        <TextView
+            android:id="@+id/id_tv_horseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toStartOf="@+id/id_tv_city_code" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

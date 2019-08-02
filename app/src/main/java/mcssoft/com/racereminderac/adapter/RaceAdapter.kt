@@ -184,6 +184,8 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
             holder.tvRaceSel1.text = ""
             holder.tvRaceSel2.text = ""
             holder.tvRaceSel3.text = ""
+
+            holder.tvHorseName.text = race.raceHorse
         }
     }
     //</editor-fold>

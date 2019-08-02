@@ -26,6 +26,7 @@
     <string name="lbl_copy">Copy</string>
     <string name="lbl_update">Update</string>
     <string name="lbl_edit">Edit</string>
+    <string name="lbl_additional">Additional</string>
 
     <!-- Checkbox labels. -->
     <string name="lbl_bet_placed">Bet placed.</string>
@@ -51,6 +52,9 @@
     <string name="lbl_trainer">Trainer</string>
     <string name="lbl_horse">Horse</string>
     <string name="lbl_jockey">Jockey</string>
+    <string name="lbl_trainer_name">T Gollan</string>
+    <string name="lbl_horse_name">Something Special</string>
+    <string name="lbl_jockey_name">J Byrne</string>
 
     <!-- Tags. -->
     <string name="tag_delete_all_dialog">tag_delete_all_dialog</string>
@@ -65,6 +69,7 @@
     <string name="key_edit_existing_multi_vals">edit_existing_multi_vals</string>
     <string name="key_edit_copy">edit_copy</string>
     <string name="key_multi_select_dialog_vals">key_multi_select_dialog</string>
+    <string name="key_extras_dialog_vals">key_extras_dialog</string>
 
     <!-- Preferences keys and title/summary values. -->
     <string name="key_defaults">key_defaults</string>
@@ -246,5 +251,25 @@
     <string name="abbrv_race_no">8</string>
     <string name="abbrv_race_sel">8</string>
     <string name="abbrv_race_code">R</string>
+
+    <string-array name="trainers_array">
+        <item>T. Gollan</item>
+        <item>N. McCall</item>
+        <item>M. Smith</item>
+        <item>Other T1</item>
+        <item>Other T2</item>
+    </string-array>
+
+    <string-array name="jockeys_array">
+        <item>Jockey 1</item>
+        <item>Jockey 2</item>
+        <item>Jockey 3</item>
+        <item>Jockey 4</item>
+        <item>Jockey 5</item>
+        <item>Jockey 6</item>
+        <item>Jockey 7</item>
+        <item>Jockey 8</item>
+        <item>Jockey 9</item>
+    </string-array>
 
 </resources>

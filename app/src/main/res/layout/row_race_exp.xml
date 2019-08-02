@@ -204,11 +204,10 @@
             android:id="@+id/id_tv_exp_trainer_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="T. Gollan"
+            android:text="@string/lbl_trainer_name"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toStartOf="@+id/id_tv_exp_trainer" />
+            card_view:layout_constraintStart_toStartOf="@+id/id_tv_exp_trainer"
+            card_view:layout_constraintTop_toBottomOf="@id/id_tv_exp_trainer" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/id_gl_horiz_row_exp"
@@ -232,7 +231,7 @@
             android:id="@+id/id_tv_exp_horse_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mr Somebody"
+            android:text="@string/lbl_horse_name"
             card_view:layout_constraintStart_toStartOf="@+id/id_tv_exp_horse"
             card_view:layout_constraintTop_toBottomOf="@+id/id_tv_exp_horse" />
 
@@ -240,7 +239,7 @@
             android:id="@+id/id_tv_exp_jockey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
+            android:layout_marginStart="96dp"
             android:layout_marginTop="8dp"
             android:text="@string/lbl_jockey"
             android:textAppearance="@android:style/TextAppearance.Material.Small"
@@ -251,7 +250,7 @@
             android:id="@+id/id_tv_exp_jockey_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="J.Byrne"
+            android:text="@string/lbl_jockey_name"
             card_view:layout_constraintStart_toStartOf="@+id/id_tv_exp_jockey"
             card_view:layout_constraintTop_toBottomOf="@+id/id_tv_exp_jockey" />
 

@@ -29,6 +29,7 @@ class RaceViewHolder(view: View) : ParentViewHolder(view) {
     var tvMultiSelsNotify: TextView = view.findViewById(R.id.id_tv_multi) // multi sel indicator.
     var tvRaceCount: TextView = view.findViewById(R.id.id_tv_race_count)  // items count indicator.
     var ivExpand: ImageView = view.findViewById(R.id.id_iv_expand)        // expand image view.
+    var tvHorseName: TextView = view.findViewById(R.id.id_tv_horseName)   // horse name.
 
     init {
         // Set the listeners for the View as a whole.
