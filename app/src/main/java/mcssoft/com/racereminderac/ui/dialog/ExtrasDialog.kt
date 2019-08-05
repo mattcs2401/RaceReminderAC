@@ -68,20 +68,24 @@ class ExtrasDialog : DialogFragment(), DialogInterface.OnDismissListener, Adapte
         spnTrainer = view.findViewById(R.id.id_spn_trainer)
         spnTrainer.onItemSelectedListener = this
 
-        ArrayAdapter.createFromResource(this.context!!, R.array.trainers_array, android.R.layout.simple_spinner_dropdown_item)
+        adapterTrainer = ArrayAdapter.createFromResource(this.context!!, R.array.trainers_array, android.R.layout.simple_spinner_dropdown_item)
                 .also{adapter -> adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     spnTrainer.adapter = adapter}
 
+        spnTrainer.setSelection(findTrainer())
 
         spnJockey = view.findViewById(R.id.id_spn_jockey)
         spnJockey.onItemSelectedListener = this
 
-        ArrayAdapter.createFromResource(this.context!!, R.array.jockeys_array, android.R.layout.simple_spinner_dropdown_item)
+        adapterJockey = ArrayAdapter.createFromResource(this.context!!, R.array.jockeys_array, android.R.layout.simple_spinner_dropdown_item)
                 .also{adapter -> adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     spnJockey.adapter = adapter}
 
+        spnJockey.setSelection(findJockey())
+
         etHorseName = id_et_horse_name
         etHorseName.setOnClickListener(this)
+        etHorseName.setText(listExtras[2])
 
         btnCancel = id_btn_extras_cancel
         btnCancel.setOnClickListener(this)
@@ -90,11 +94,28 @@ class ExtrasDialog : DialogFragment(), DialogInterface.OnDismissListener, Adapte
         btnOk.setOnClickListener(this)
     }
 
+    private fun findTrainer(): Int {
+        if(listExtras[0] == "") {
+            return 0
+        } else {
+            return adapterTrainer.getPosition(listExtras[0])
+        }
+    }
+
+    private fun findJockey(): Int {
+        if(listExtras[1] == "") {
+            return 0
+        } else {
+            return adapterJockey.getPosition(listExtras[1])
+        }
+    }
     private lateinit var btnCancel: Button
     private lateinit var btnOk: Button
     private lateinit var spnTrainer: Spinner
     private lateinit var spnJockey: Spinner
     private lateinit var etHorseName: EditText
     private var listExtras = arrayOf("","","")    // backing data (user selections).
+    private lateinit var adapterTrainer: ArrayAdapter<CharSequence>
+    private lateinit var adapterJockey: ArrayAdapter<CharSequence>
 
 }

@@ -104,7 +104,7 @@
         android:layout_marginTop="96dp"
         android:text="@string/lbl_save"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintEnd_toEndOf="@+id/id_btn_additional"
+        app:layout_constraintEnd_toEndOf="@+id/id_btn_time"
         app:layout_constraintStart_toStartOf="@+id/id_btn_time"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 

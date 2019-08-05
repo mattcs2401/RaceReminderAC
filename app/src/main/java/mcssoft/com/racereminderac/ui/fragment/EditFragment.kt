@@ -388,9 +388,12 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     }
 
     private fun setupAdditional() {
-        tvTrainer = id_tv_trainer_name
-        tvJockey  = id_tv_jockey_name
-        tvHorse  = id_tv_horse_name
+        tvTrainer = id_tv_trainer
+        tvTrainerName = id_tv_trainer_name
+        tvJockey  = id_tv_jockey
+        tvJockeyName  = id_tv_jockey_name
+        tvHorse  = id_tv_horse
+        tvHorseName  = id_tv_horse_name
 
         if(isMultiSel || allowMultiSel) {
             setExtrasVisible(false)
@@ -507,18 +510,24 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             tvTrainer.visibility = View.GONE
             tvJockey.visibility = View.GONE
             tvHorse.visibility = View.GONE
+            tvTrainerName.visibility = View.GONE
+            tvJockeyName.visibility = View.GONE
+            tvHorseName.visibility = View.GONE
         } else {
             btnExtras.isEnabled = true
             tvTrainer.visibility = View.VISIBLE
             tvJockey.visibility = View.VISIBLE
             tvHorse.visibility = View.VISIBLE
+            tvTrainerName.visibility = View.VISIBLE
+            tvJockeyName.visibility = View.VISIBLE
+            tvHorseName.visibility = View.VISIBLE
         }
     }
 
     private fun setExtrasViews() {
-        tvTrainer.text = listExtras[0]
-        tvJockey.text = listExtras[1]
-        tvHorse.text = listExtras[2]
+        tvTrainerName.text = listExtras[0]
+        tvJockeyName.text = listExtras[1]
+        tvHorseName.text = listExtras[2]
     }
 
     private fun launchMultiSelDialog() {
@@ -544,9 +553,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     private fun setExtrasDialogArgs() : Bundle {
         val bundle = Bundle()
-        listExtras[0] = tvTrainer.text.toString()
-        listExtras[1] = tvJockey.text.toString()
-        listExtras[2] = tvHorse.text.toString()
+        listExtras[0] = tvTrainerName.text.toString()
+        listExtras[1] = tvJockeyName.text.toString()
+        listExtras[2] = tvHorseName.text.toString()
         bundle.putStringArray(getString(R.string.key_extras_dialog_vals), listExtras)
         return bundle
     }
@@ -590,7 +599,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private lateinit var btnExtras: Button
     private var listExtras: Array<String> = arrayOf("","","")
     private lateinit var tvTrainer: TextView
+    private lateinit var tvTrainerName: TextView
     private lateinit var tvJockey: TextView
+    private lateinit var tvJockeyName: TextView
     private lateinit var tvHorse: TextView
+    private lateinit var tvHorseName: TextView
     //</editor-fold>
 }
