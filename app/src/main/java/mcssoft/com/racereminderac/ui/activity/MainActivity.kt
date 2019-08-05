@@ -59,24 +59,24 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
     /**
      * From interface IRace.IRaceSelect
      */
-    override fun onRaceSelect(id: Long, selects: Array<String>) {
+    override fun onRaceSelect(id: Long, values: Array<String>) {
         val bundle = Bundle()
         bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_UPDATE)
         bundle.putLong(getString(R.string.key_edit_existing), id)
         bundle.putBoolean(getString(R.string.key_edit_existing_multi), true)
-        bundle.putStringArray(getString(R.string.key_edit_existing_multi_vals), selects)
+        bundle.putStringArray(getString(R.string.key_edit_existing_vals), values)
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
 
     /**
      * From interface IRace.IRaceLongSelect
      */
-    override fun onRaceLongSelect(id: Long, selects: Array<String>) {
+    override fun onRaceLongSelect(id: Long, values: Array<String>) {
         val bundle = Bundle()
         bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_COPY)
         bundle.putLong(getString(R.string.key_edit_copy), id)
         bundle.putBoolean(getString(R.string.key_edit_existing_multi), true)
-        bundle.putStringArray(getString(R.string.key_edit_existing_multi_vals), selects)
+        bundle.putStringArray(getString(R.string.key_edit_existing_vals), values)
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
     //</editor-fold>

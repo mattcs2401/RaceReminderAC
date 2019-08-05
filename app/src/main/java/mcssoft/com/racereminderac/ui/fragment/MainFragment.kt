@@ -189,14 +189,15 @@ class MainFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(select: SelectMessage) {
         val race = raceAdapter.getRace(select.getPos)
-        val selects = arrayOf(race.raceSel, race.raceSel2, race.raceSel3, race.raceSel4)
+        val values = arrayOf(race.raceSel, race.raceSel2, race.raceSel3, race.raceSel4,
+                race.raceTrainer, race.raceJockey, race.raceHorse)
 
         when(select.getSelType) {
             Constants.ITEM_SELECT -> {
-                (activity as IRace.IRaceSelect).onRaceSelect(race.id!!, selects)
+                (activity as IRace.IRaceSelect).onRaceSelect(race.id!!, values)
             }
             Constants.ITEM_LONG_SELECT -> {
-                (activity as IRace.IRaceLongSelect).onRaceLongSelect(race.id!!, selects)
+                (activity as IRace.IRaceLongSelect).onRaceLongSelect(race.id!!, values)
             }
         }
     }

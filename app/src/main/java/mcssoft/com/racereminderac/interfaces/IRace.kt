@@ -11,18 +11,20 @@ interface IRace {
 
         /**
          * @param id: The id of the Race object selected from the adapter listing.
-         * @param selects: The selections for a Race (multi select enabled or allowed).
+         * @param values: 0 - 3: The selections for a Race (multi select enabled or allowed).
+         *                4 - 6: Extras info, trainer name, jockey name, horse name.
          */
-        fun onRaceSelect(id: Long, selects: Array<String>)
+        fun onRaceSelect(id: Long, values: Array<String>)
     }
 
     interface IRaceLongSelect {
         /**
          * Get the database (row) id of the adapter selection.
          * @param id: The id of the Race object selected from the adapter listing.
-         * @param selects: The selections for a Race (multi select enabled or allowed).
+         * @param values: 0 - 3: The selections for a Race (multi select enabled or allowed).
+         *                4 - 6: Extras info, trainer name, jockey name, horse name.
          */
-        fun onRaceLongSelect(id: Long, selects: Array<String>)
+        fun onRaceLongSelect(id: Long, values: Array<String>)
     }
 
 }

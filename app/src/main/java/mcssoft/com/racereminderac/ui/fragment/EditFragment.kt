@@ -364,7 +364,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         allowMultiSel = RacePreferences.getInstance()!!.getRaceMultiSelect(activity!!)
         // Get any multi select values from the arguments.
         if (arguments!!.getBoolean(getString(R.string.key_edit_existing_multi))) {
-            listMultiSel = arguments?.getStringArray(getString(R.string.key_edit_existing_multi_vals)) as Array<String>
+            listMultiSel = arguments?.getStringArray(getString(R.string.key_edit_existing_vals)) as Array<String>
+            listExtras = listMultiSel.copyOfRange(4,7)
         }
         // Quick and dirty check to see if more than one multi select value exists in the arguments ?
         isMultiSel = listMultiSel[1] != ""
