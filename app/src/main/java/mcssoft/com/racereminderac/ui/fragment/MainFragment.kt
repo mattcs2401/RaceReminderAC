@@ -119,6 +119,7 @@ class MainFragment : Fragment() {
         refreshMenuItem = menu.findItem(R.id.id_mnu_refresh_interval)
         deleteMenuItem = menu.findItem(R.id.id_mnu_delete_all)
         notifyMenuItem = menu.findItem(R.id.id_mnu_notifications)
+        multiSelMenuItem = menu.findItem(R.id.id_mnu_multi_select)
 
         if(!raceAdapter.isEmpty()) {
             setToolbarIcons(true)
@@ -244,6 +245,7 @@ class MainFragment : Fragment() {
         setRefreshIntervalMenuItem(setIcon)
         setDeleteMenuItem(setIcon)
         setNotifyMenuItem(setIcon)
+        setMultiSelMenuItem(setIcon)
     }
 
     /**
@@ -271,6 +273,19 @@ class MainFragment : Fragment() {
             }
         } else {
             notifyMenuItem.isVisible = false
+        }
+    }
+
+    /**
+     * Toolbar. Multi Select is set indicator.
+     */
+    private fun setMultiSelMenuItem(doSetMulti: Boolean) {
+        if(doSetMulti) {
+            if(RacePreferences.getInstance()!!.getRaceMultiSelect(activity!!)) {
+                multiSelMenuItem.isVisible = true
+            }
+        } else {
+            multiSelMenuItem.isVisible = false
         }
     }
 
@@ -305,6 +320,7 @@ class MainFragment : Fragment() {
     private lateinit var refreshMenuItem: MenuItem
     private lateinit var deleteMenuItem: MenuItem
     private lateinit var notifyMenuItem: MenuItem
+    private lateinit var multiSelMenuItem: MenuItem
 
     private lateinit var raceAdapter: RaceAdapter
     private lateinit var raceViewModel: RaceViewModel

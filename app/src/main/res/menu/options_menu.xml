@@ -9,10 +9,18 @@
         android:icon="@drawable/ic_delete_24px"
         app:showAsAction="ifRoom"/>
 
+    <!-- Show an indicator that Notification is set. -->
     <item android:id="@+id/id_mnu_notifications"
         android:title="@string/lbl_notifications"
         android:visible="false"
         app:actionLayout="@layout/notifications"
+        app:showAsAction="ifRoom"/>
+
+    <!-- Show an indicator that Multi Select is set. -->
+    <item android:id="@+id/id_mnu_multi_select"
+        android:title="@string/lbl_multi_select"
+        android:visible="false"
+        app:actionLayout="@layout/multi_select"
         app:showAsAction="ifRoom"/>
 
     <!-- Show a refresh interval indicator. -->
