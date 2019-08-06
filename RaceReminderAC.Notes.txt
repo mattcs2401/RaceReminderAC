@@ -25,6 +25,10 @@ Issues:
 ------
 TO DO:
 ------
+-> If race time is in the past:
+   -> Don't send reminder notifications.
+   -> Don't refresh the race (UI colour).
+
 -> Expandable recyclerview:
    Example - https://thoughtbot.com/blog/introducing-expandablerecyclerview
    For horse, jockey trainer names.
