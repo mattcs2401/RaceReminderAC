@@ -12,7 +12,7 @@ import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.RaceTime
 
-class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter: RaceAdapter) : Observer<MutableList<Race>> {
+class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<Race>> {
 
     /**
      * The observer's onChange method.

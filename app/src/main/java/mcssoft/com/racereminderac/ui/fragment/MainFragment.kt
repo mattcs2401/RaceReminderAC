@@ -75,7 +75,7 @@ class MainFragment : Fragment() {
         raceViewModel = ViewModelProviders.of(this).get(RaceViewModel::class.java)
 
         val lRaces = raceViewModel.getAllRaces()
-        lRaces.observe(viewLifecycleOwner, RaceListObserver(lRaces, raceAdapter))
+        lRaces.observe(viewLifecycleOwner, RaceListObserver(raceAdapter))
 
         Log.d("tag","MainFragment.onActivityCreated")
     }
