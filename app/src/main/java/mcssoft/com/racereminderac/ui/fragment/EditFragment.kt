@@ -222,6 +222,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     }
 
     private fun collateMultiSelect() : Race {
+
         if(listMultiSel[0] == "") {
             // Nothing was selected so use a default.
             listMultiSel[0] = rsVals[npRaceSel.value]
@@ -400,6 +401,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             setExtrasVisible(false)
         } else {
             setExtrasVisible(true)
+            setExtrasViews()
         }
     }
 

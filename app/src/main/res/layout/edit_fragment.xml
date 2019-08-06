@@ -231,11 +231,11 @@
         android:id="@+id/id_tv_horse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:text="@string/lbl_horse"
         android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/id_tv_jockey_name"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
     <TextView
@@ -243,7 +243,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="8dp"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/id_tv_horse"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
