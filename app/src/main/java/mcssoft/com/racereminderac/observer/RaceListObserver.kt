@@ -74,6 +74,8 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
                         race.metaColour = Constants.META_COLOUR_3
                     }
                 }
+            } else {
+                race.metaColour = Constants.META_COLOUR_4
             }
         }
     }
@@ -83,25 +85,19 @@ class RaceListObserver(lRaces: LiveData<MutableList<Race>>, private var adapter:
      * @param race: Used to derive notification values.
      */
     private fun postNotification(race: Race) {
-        // Notes: add the object id to a list, so we don't process again.
-        val id = race.id
-//        if(!lIds.contains(id)) {
-
-//            lIds.add(id!!)
-
-            val data = Data.Builder()
-                    .putAll(mapOf("key_id" to id,
-                            "key_cc" to race.cityCode,
-                            "key_rc" to race.raceCode,
-                            "key_rn" to race.raceNum,
-                            "key_rs" to race.raceSel,
-                            "key_rt" to race.raceTimeS)).build()
+        // TODO: Need to update to cater for Multi Select.
+        val data = Data.Builder()
+            .putAll(mapOf("key_id" to race.id,
+                          "key_cc" to race.cityCode,
+                          "key_rc" to race.raceCode,
+                          "key_rn" to race.raceNum,
+                          "key_rs" to race.raceSel,
+                          "key_rt" to race.raceTimeS))
+            .build()
         val notifyWork = OneTimeWorkRequestBuilder<NotifyWorker>()
                 .setInputData(data)
                 .build()
         WorkManager.getInstance().enqueue(notifyWork)
-
-//        }
     }
 
     private fun preferenceCheck() : Boolean {

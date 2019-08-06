@@ -33,6 +33,7 @@ object Constants {
     const val META_COLOUR_1 = "1"           // The current time is before the Race time.
     const val META_COLOUR_2 = "2"           // The current time is nearing the Race time.
     const val META_COLOUR_3 = "3"           // The current time is after the Race time.
+    const val META_COLOUR_4 = "4"           // The race time is not today (old info).
 
     const val DAY_PRIOR = 0                 // The given day is before today.
     const val DAY_CURRENT = 1               // The given day is the same as today.

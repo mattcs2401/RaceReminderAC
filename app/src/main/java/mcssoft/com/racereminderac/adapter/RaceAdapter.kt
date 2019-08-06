@@ -167,6 +167,10 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
                 holder.tvRaceTime.setTextColor(getColor(context, R.color.colorAccent))
                 holder.tvRaceDate.setTextColor(getColor(context, R.color.colorAccent))
             }
+            Constants.META_COLOUR_4 -> {
+                holder.tvRaceTime.setTextColor(getColor(context, R.color.colourRed))
+                holder.tvRaceDate.setTextColor(getColor(context, R.color.colourRed))
+            }
         }
     }
 
