@@ -49,13 +49,13 @@ class RaceViewHolder(view: View) : ParentViewHolder(view) {
                 EventBus.getDefault().post(UpdateMessage(adapterPosition, R.id.id_cb_bet_placed, cbBetPlaced.isChecked))
             }
             else -> {
-                EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, adapterPosition))
+                EventBus.getDefault().post(SelectMessage(Constants.ITEM_SELECT, adapterPosition, null))
             }
         }
     }
 
     override fun onLongClick(view: View): Boolean {
-        EventBus.getDefault().post(SelectMessage(Constants.ITEM_LONG_SELECT, adapterPosition))
+        EventBus.getDefault().post(SelectMessage(Constants.ITEM_LONG_SELECT, adapterPosition, view))
         return true
     }
 

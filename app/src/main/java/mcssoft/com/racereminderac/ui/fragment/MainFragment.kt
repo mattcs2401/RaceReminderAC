@@ -195,9 +195,11 @@ class MainFragment : Fragment() {
 
         when(select.getSelType) {
             Constants.ITEM_SELECT -> {
+                // Used for Edit function.
                 (activity as IRace.IRaceSelect).onRaceSelect(race.id!!, values)
             }
             Constants.ITEM_LONG_SELECT -> {
+                // User for Copy function.
                 (activity as IRace.IRaceLongSelect).onRaceLongSelect(race.id!!, values)
             }
         }

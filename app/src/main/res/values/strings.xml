@@ -253,14 +253,14 @@
     <string name="abbrv_race_code">R</string>
 
     <string-array name="trainers_array">
+        <item>Other</item>
         <item>T. Gollan</item>
         <item>N. McCall</item>
         <item>M. Smith</item>
-        <item>Other T1</item>
-        <item>Other T2</item>
     </string-array>
 
     <string-array name="jockeys_array">
+        <item> - </item>
         <item>Jockey 1</item>
         <item>Jockey 2</item>
         <item>Jockey 3</item>

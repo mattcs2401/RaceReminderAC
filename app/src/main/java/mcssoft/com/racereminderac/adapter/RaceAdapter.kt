@@ -175,7 +175,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     }
 
     /**
-     * Utility method to setup when there are multiple selctions.
+     * Utility method to setup when there are multiple selections.
      */
     private fun setMultiSelect(holder: RaceViewHolder, race: Race) {
         if(race.raceSel2 != "") {
