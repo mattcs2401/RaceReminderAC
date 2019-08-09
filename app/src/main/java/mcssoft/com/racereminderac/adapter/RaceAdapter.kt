@@ -37,13 +37,13 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
 
     override fun onBindViewHolder(holder : RaceViewHolder, position : Int) {
         val race = lRaces[position]
-        // city, code, time, selections ect.
+        // City, code, time, selections etc.
         setBaseDisplayValues(holder, race)
-        // set display colours based on the Race object's metaColour value.
+        // Set display colours based on the Race object's metaColour value.
         setDisplayColourValues(holder, race)
-        //  setup for multi select if applicable.
+        //  Setup for multi select if applicable.
         setMultiSelect(holder, race)
-        // set the adapter item count value (1st entry is 1).
+        // Set the adapter item count value (1st entry is 1).
         holder.tvRaceCount.text = (position + 1).toString()
     }
     
@@ -179,17 +179,20 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      */
     private fun setMultiSelect(holder: RaceViewHolder, race: Race) {
         if(race.raceSel2 != "") {
+            // There are at least two selections.
             holder.tvMultiSelsNotify.visibility = View.VISIBLE
             holder.tvRaceSel1.text = race.raceSel2
             holder.tvRaceSel2.text = race.raceSel3    // these may or not be actually set.
             holder.tvRaceSel3.text = race.raceSel4    // " " "
+            holder.ivExpand.visibility = View.GONE    // hide the expand chevron.
         } else {
+            // Not multi sel
             holder.tvMultiSelsNotify.visibility = View.GONE
             holder.tvRaceSel1.text = ""
             holder.tvRaceSel2.text = ""
             holder.tvRaceSel3.text = ""
-
-            holder.tvHorseName.text = race.raceHorse
+            holder.tvHorseName.text = race.raceHorse  // set selection name.
+            holder.ivExpand.visibility = View.VISIBLE // show the expand chevron.
         }
     }
     //</editor-fold>
