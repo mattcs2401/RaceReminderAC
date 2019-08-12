@@ -200,8 +200,7 @@ class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
         npRaceSel.maxValue = rsVals.size - 1
         npRaceSel.displayedValues = rsVals
         npRaceSel.wrapSelectorWheel = true
-
-//        npRaceSel.setOnClickListener(this)
+        npRaceSel.value = rsVals.indexOf(listMultiSel[0])
     }
     //</editor-fold>
 

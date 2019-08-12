@@ -92,7 +92,7 @@
         android:drawableStart="@drawable/ic_clock_outline"
         android:padding="8dp"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintStart_toEndOf="@+id/id_btn_multi_sel"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
         <!--TODO android:contentDescription="" />-->
 
@@ -172,5 +172,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="384dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="192dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,7 @@ package mcssoft.com.racereminderac.background.async
 import android.os.AsyncTask
 import mcssoft.com.racereminderac.dao.RaceDAO
 import mcssoft.com.racereminderac.entity.Race
-import mcssoft.com.racereminderac.utility.eventbus.RaceMessage
+import mcssoft.com.racereminderac.utility.eventbus.DateTimeMessage
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -20,6 +20,6 @@ class AsyncNoLD(private var dao: RaceDAO) : AsyncTask<Long, Void, Race>() {
     }
 
     override fun onPostExecute(result: Race?) {
-        EventBus.getDefault().post(RaceMessage(result!!))
+        EventBus.getDefault().post(DateTimeMessage(result!!))
     }
 }

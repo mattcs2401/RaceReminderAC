@@ -29,7 +29,7 @@ import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.RaceTime
 import mcssoft.com.racereminderac.utility.eventbus.MultiSelMessage
-import mcssoft.com.racereminderac.utility.eventbus.RaceMessage
+import mcssoft.com.racereminderac.utility.eventbus.DateTimeMessage
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -82,7 +82,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * @param raceDT: The Race date/time fields.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(raceDT: RaceMessage) {
+    fun onMessageEvent(raceDT: DateTimeMessage) {
         // The Race date.
         this.raceDate = raceDT.theRace.raceDate
         // Additional, get the Race time in mSec (for copy function).
@@ -165,12 +165,20 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onValueChange">
     override fun onValueChange(picker: NumberPicker, oldVal: Int, newVal: Int) {
-        if(picker.id == R.id.id_np_race_code) {
-            // greyhound race only has 8 runners.
-            if (picker.displayedValues[newVal] == "G") {
-                npRaceSel.maxValue = rsVals.size - 17
-            } else {
-                npRaceSel.maxValue = rsVals.size - 1
+        when(picker.id) {
+            R.id.id_np_race_code -> {
+                if (picker.displayedValues[newVal] == "G") {
+                    npRaceSel.maxValue = rsVals.size - 17
+                } else {
+                    npRaceSel.maxValue = rsVals.size - 1
+                }
+            }
+            R.id.id_np_race_sel -> {
+                if(isMultiSel || allowMultiSel) {
+                    listMultiSel[0] = picker.displayedValues[newVal]
+                    tvMultiSel0.text = listMultiSel[0]
+                }
+
             }
         }
     }
@@ -181,8 +189,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Get the UI values into a Race object ready for Update or Insert.
      */
     private fun collateValues(action: Int): Race {
-        val race: Race
-        race = if(isMultiSel || allowMultiSel) {
+        val race = if(isMultiSel || allowMultiSel) {
             // Two or more entries already exist in the backing data, or multi select is set in the
             // Preferences.
             collateMultiSelect()
@@ -319,7 +326,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         npRaceSel.maxValue = rsVals.size - 1
         npRaceSel.displayedValues = rsVals
         npRaceSel.wrapSelectorWheel = true
-//        npRaceSel.setOnClickListener(this)
+        npRaceSel.setOnValueChangedListener(this)
     }
 
     /**
@@ -347,6 +354,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         if (arguments!!.getBoolean(getString(R.string.key_edit_existing_multi))) {
             listMultiSel = arguments?.getStringArray(getString(R.string.key_edit_existing_vals)) as Array<String>
         }
+        //else if (arguments!!.getBoolean(getString(R.string.key_edit_existing))) {
+//            // Might only be a single value from previous, but now multi select is active.
+//            val bp = ""
+//        }
         // Quick and dirty check to see if more than one multi select value exists in the arguments ?
         isMultiSel = listMultiSel[1] != ""
 
