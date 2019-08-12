@@ -29,20 +29,21 @@ TO DO:
    -> Don't send reminder notifications.
    -> Don't refresh the race (UI colour).
 
--> Expandable recyclerview:
-   Example - https://thoughtbot.com/blog/introducing-expandablerecyclerview
-   For horse, jockey trainer names.
-   -> Will need to upgrade the Race entity (done).
-   -> Will need to upgrade the Edit functionality (TBA).
+-> Consider a network connection for:
+   "https://tatts.com/pagedata/racing" and associated pages, e.g.;
+    - https://tatts.com/pagedata/racing/2019/8/12/NR.xml
+    - https://tatts.com/pagedata/racing/2019/8/12/NR1.xml
+
+    Android training: https://developer.android.com/training/volley/index.html
 
 -> Make the number picker values bigger.
-   - Addd/Edit screen design ?
+   - Add/Edit screen design ?
 
 -> Consider using the Anko library
    https://github.com/Kotlin/anko/wiki
 
 ->  XX minutes after race time, record auto removes from view ?
-    - Prferences controlled ?
+    - Preferences controlled ?
     - What if the race is late starting ?
     - What about a screen that shows those removed ?
 
