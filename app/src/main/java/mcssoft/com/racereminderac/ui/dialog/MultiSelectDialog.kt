@@ -159,7 +159,7 @@ class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
      */
     private fun valExists(value: String) : Boolean {
         for(ndx in 0..3) {
-            if((listMultiSel[ndx].equals(value))) {
+            if((listMultiSel[ndx] == value)) {
                 return true
             }
         }

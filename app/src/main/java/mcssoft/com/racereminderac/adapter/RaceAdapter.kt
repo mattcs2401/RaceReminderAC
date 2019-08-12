@@ -184,15 +184,12 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
             holder.tvRaceSel1.text = race.raceSel2
             holder.tvRaceSel2.text = race.raceSel3    // these may or not be actually set.
             holder.tvRaceSel3.text = race.raceSel4    // " " "
-            holder.ivExpand.visibility = View.GONE    // hide the expand chevron.
         } else {
             // Not multi sel
             holder.tvMultiSelsNotify.visibility = View.GONE
             holder.tvRaceSel1.text = ""
             holder.tvRaceSel2.text = ""
             holder.tvRaceSel3.text = ""
-            holder.tvHorseName.text = race.raceHorse  // set selection name.
-            holder.ivExpand.visibility = View.VISIBLE // show the expand chevron.
         }
     }
     //</editor-fold>

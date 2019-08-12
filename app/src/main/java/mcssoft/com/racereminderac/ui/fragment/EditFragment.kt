@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.NumberPicker
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -19,15 +21,13 @@ import kotlinx.android.synthetic.main.edit_fragment.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.Race
-import mcssoft.com.racereminderac.observer.RaceObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
-import mcssoft.com.racereminderac.ui.dialog.ExtrasDialog
+import mcssoft.com.racereminderac.observer.RaceObserver
 import mcssoft.com.racereminderac.ui.dialog.MultiSelectDialog
 import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.RaceTime
-import mcssoft.com.racereminderac.utility.eventbus.ExtrasMessage
 import mcssoft.com.racereminderac.utility.eventbus.MultiSelMessage
 import mcssoft.com.racereminderac.utility.eventbus.RaceMessage
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
@@ -111,15 +111,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             setMultiSelViews(true)
         }
     }
-
-    /** EventBus return from the ExtrasDialog. **/
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    fun onMessageEvent(extras: ExtrasMessage) {
-        // Note: If the OK or Cancel button was not clicked on the ExtrasDialog, this onMessageEvent
-        //       won't happen.
-        listExtras = extras.values     // this will contain something ("defaults").
-        setExtrasViews()
-    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onClick">
@@ -154,9 +145,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 } else {
                     setMultiSelVisible(false)
                 }
-            }
-            R.id.id_btn_additional -> {
-                launchExtrasDialog()
             }
         }
     }
@@ -194,13 +182,13 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      */
     private fun collateValues(action: Int): Race {
         val race: Race
-        if(isMultiSel || allowMultiSel) {
+        race = if(isMultiSel || allowMultiSel) {
             // Two or more entries already exist in the backing data, or multi select is set in the
             // Preferences.
-            race = collateMultiSelect()
+            collateMultiSelect()
         } else {
             // Get the base values.
-            race = collate()
+            collate()
         }
 
         when(action) {
@@ -246,9 +234,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 rsVals[npRaceSel.value],
                 btnTime.text.toString())
         race.raceTimeL = raceTimeL
-        race.raceTrainer = listExtras[0]
-        race.raceJockey = listExtras[1]
-        race.raceHorse = listExtras[2]
         return race
     }
 
@@ -299,8 +284,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         setupButtons()
         // Set for multi select.
         setupForMultiSelect()
-        // Extras (additional).
-        setupAdditional()
     }
 
     /**
@@ -352,9 +335,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         // Set the Save button and listener.
         btnSave = id_btn_save
         btnSave.setOnClickListener(this)
-        // Set the Additional button.
-        btnExtras = id_btn_additional
-        btnExtras.setOnClickListener(this)
     }
 
     /**
@@ -366,7 +346,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         // Get any multi select values from the arguments.
         if (arguments!!.getBoolean(getString(R.string.key_edit_existing_multi))) {
             listMultiSel = arguments?.getStringArray(getString(R.string.key_edit_existing_vals)) as Array<String>
-            listExtras = listMultiSel.copyOfRange(4,7)
         }
         // Quick and dirty check to see if more than one multi select value exists in the arguments ?
         isMultiSel = listMultiSel[1] != ""
@@ -386,22 +365,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             setMultiSelViews(false)
             setMultiSelVisible(false)
             btnMultiSel.isEnabled = false
-        }
-    }
-
-    private fun setupAdditional() {
-        tvTrainer = id_tv_trainer
-        tvTrainerName = id_tv_trainer_name
-        tvJockey  = id_tv_jockey
-        tvJockeyName  = id_tv_jockey_name
-        tvHorse  = id_tv_horse
-        tvHorseName  = id_tv_horse_name
-
-        if(isMultiSel || allowMultiSel) {
-            setExtrasVisible(false)
-        } else {
-            setExtrasVisible(true)
-            setExtrasViews()
         }
     }
 
@@ -507,42 +470,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         }
     }
 
-    private fun setExtrasVisible(visible: Boolean) {
-        if(!visible) {
-            btnExtras.isEnabled = false
-            tvTrainer.visibility = View.GONE
-            tvJockey.visibility = View.GONE
-            tvHorse.visibility = View.GONE
-            tvTrainerName.visibility = View.GONE
-            tvJockeyName.visibility = View.GONE
-            tvHorseName.visibility = View.GONE
-        } else {
-            btnExtras.isEnabled = true
-            tvTrainer.visibility = View.VISIBLE
-            tvJockey.visibility = View.VISIBLE
-            tvHorse.visibility = View.VISIBLE
-            tvTrainerName.visibility = View.VISIBLE
-            tvJockeyName.visibility = View.VISIBLE
-            tvHorseName.visibility = View.VISIBLE
-        }
-    }
-
-    private fun setExtrasViews() {
-        tvTrainerName.text = listExtras[0]
-        tvJockeyName.text = listExtras[1]
-        tvHorseName.text = listExtras[2]
-    }
-
     private fun launchMultiSelDialog() {
         val dialog = MultiSelectDialog()
         dialog.arguments = setMultiSelDialogArgs()
         dialog.show(activity!!.supportFragmentManager, "multi_select_dialog")
-    }
-
-    private fun launchExtrasDialog() {
-        val dialog = ExtrasDialog()
-        dialog.arguments = setExtrasDialogArgs()
-        dialog.show(activity!!.supportFragmentManager, "extras_dialog")
     }
 
     private fun setMultiSelDialogArgs() : Bundle {
@@ -551,15 +482,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             listMultiSel[0] = rsVals[npRaceSel.value]
         }
         bundle.putStringArray(getString(R.string.key_multi_select_dialog_vals), listMultiSel)
-        return bundle
-    }
-
-    private fun setExtrasDialogArgs() : Bundle {
-        val bundle = Bundle()
-        listExtras[0] = tvTrainerName.text.toString()
-        listExtras[1] = tvJockeyName.text.toString()
-        listExtras[2] = tvHorseName.text.toString()
-        bundle.putStringArray(getString(R.string.key_extras_dialog_vals), listExtras)
         return bundle
     }
     //</editor-fold>
@@ -599,13 +521,5 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     private var listMultiSel: Array<String> = arrayOf("","","","")   // multi select backing data.
 
-    private lateinit var btnExtras: Button
-    private var listExtras: Array<String> = arrayOf("","","")
-    private lateinit var tvTrainer: TextView
-    private lateinit var tvTrainerName: TextView
-    private lateinit var tvJockey: TextView
-    private lateinit var tvJockeyName: TextView
-    private lateinit var tvHorse: TextView
-    private lateinit var tvHorseName: TextView
     //</editor-fold>
 }

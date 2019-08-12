@@ -1,10 +1,9 @@
 package mcssoft.com.racereminderac.utility
 
-import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.ColorDrawable
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import android.graphics.drawable.ColorDrawable
 import mcssoft.com.racereminderac.interfaces.ISwipe
 
 /**

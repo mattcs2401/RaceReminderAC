@@ -97,10 +97,10 @@ class RaceTime {
         val today = calendarToday.get(Calendar.DAY_OF_YEAR)
 
         // Compare the day of the given day with today.
-        if(givenDay < today) {
-            return Constants.DAY_PRIOR
+        return if(givenDay < today) {
+            Constants.DAY_PRIOR
         } else {
-            return Constants.DAY_CURRENT
+            Constants.DAY_CURRENT
         }
     }
 

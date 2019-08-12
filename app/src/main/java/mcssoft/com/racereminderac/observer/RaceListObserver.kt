@@ -1,6 +1,5 @@
 package mcssoft.com.racereminderac.observer
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequestBuilder
@@ -51,9 +50,8 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
             // If the Race day is today, then process, else ignore.
             if (raceTime.compareToDay(raceTimeMillis) == Constants.DAY_CURRENT) {
                 // The value of the comparison.
-                val compare = raceTime.compareToTime(raceTimeMillis)
 
-                when (compare) {
+                when (raceTime.compareToTime(raceTimeMillis)) {
                     Constants.CURRENT_TIME_BEFORE -> {
                         // 5 minutes prior time window.
                         val comp = raceTime.compareToTime(raceTimeMillis - Constants.FIVE_MINUTES)
