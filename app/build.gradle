@@ -54,7 +54,7 @@ dependencies {
     implementation "android.arch.work:work-runtime-ktx:$workVer"
 
     implementation 'org.greenrobot:eventbus:3.1.1'
-
+    implementation 'org.simpleframework:simple-xml:2.7.1'
 //    implementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-2'
 
 }
