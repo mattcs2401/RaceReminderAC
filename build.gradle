@@ -7,7 +7,7 @@ buildscript {
         navVer = '1.0.0'
         roomVer = "2.1.0-alpha02"
         workVer = "1.0.1"
-        xCycleVer = '2.2.0-alpha02'
+        xCycleVer = '2.2.0-alpha03'
         xAnnotVer = '1.1.0'
         xAppComVer = "1.1.0-rc01"
         xConstLayVer = '2.0.0-beta2'
