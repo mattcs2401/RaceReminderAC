@@ -14,16 +14,16 @@ class RacePreferences {
      * @Note: Can't use Context here, so context passed into the respective methods as required.
      */
     companion object {
-        @Volatile private var instance: RacePreferences? = null
+        @Volatile
+        private var INSTANCE: RacePreferences? = null
 
-        fun getInstance(): RacePreferences? {
-            if (instance == null) {
-                synchronized(RacePreferences::class) {
-                    instance = RacePreferences()
+        fun getInstance() =
+                INSTANCE ?: synchronized(this) {
+                    INSTANCE ?: RacePreferences().also {
+                        INSTANCE = it
+                    }
+
                 }
-            }
-            return instance
-        }
     }
 
     /**
@@ -76,7 +76,7 @@ class RacePreferences {
     }
 
     /**
-     * Get the Refresh interval Switch preference.
+     * Get the Refresh interval switch preference.
      * @param context: Activity context.
      * @return True if preference is enabled, else false.
      */
@@ -96,7 +96,7 @@ class RacePreferences {
     }
 
     /**
-     * Get the Multi select Switch preference.
+     * Get the Multi Select switch preference.
      * @param context: Activity context.
      * @return True if preference is enabled, else false.
      */
@@ -106,12 +106,22 @@ class RacePreferences {
     }
 
     /**
-     * Get the bulk delete Switch preference.
+     * Get the Bulk Delete switch preference.
      * @param context: Activity context.
      * @return True if preference is enabled, else false.
      */
     fun getRaceBulkDelete(context: Context) : Boolean {
         val key = context.resources.getString(R.string.key_bulk_delete_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+    }
+
+    /**
+     * Get the Network switch preference.
+     * @param context: Activity context.
+     * @return True if preference is enabled, else false.
+     */
+    fun getNetwork(context: Context) : Boolean {
+        val key = context.resources.getString(R.string.key_network_pref)
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
     }
 
@@ -129,6 +139,7 @@ class RacePreferences {
         val keyRefreshInterval = context.resources.getString(R.string.key_refresh_interval_pref)
         val keyMultiSelect = context.resources.getString(R.string.key_multi_select_pref)
         val keyBulkDelete = context.resources.getString(R.string.key_bulk_delete_pref)
+        val keyNetworkPref = context.resources.getString(R.string.key_network_pref)
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
@@ -164,6 +175,10 @@ class RacePreferences {
 
         if(!map.contains(keyBulkDelete)) {
             sharedPrefs.edit().putBoolean(keyBulkDelete, false).apply()
+        }
+
+        if(!map.contains(keyNetworkPref)) {
+            sharedPrefs.edit().putBoolean(keyNetworkPref, false).apply()
         }
 
         Log.d("tag","RacePreferences.preferenceCheck")

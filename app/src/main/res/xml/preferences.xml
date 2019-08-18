@@ -87,6 +87,15 @@
             app:summary="@string/delete_summary"/>
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="@string/key_network"
+        app:title="@string/network_title">
+        <SwitchPreferenceCompat
+            app:key="@string/key_network_pref"
+            app:defaultValue="false"
+            app:summary="@string/network_summary" />
+    </PreferenceCategory>
+
     <!--<PreferenceCategory-->
         <!--app:key="@string/key_maint"-->
         <!--app:title="@string/maint_title">-->

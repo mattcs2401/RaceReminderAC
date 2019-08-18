@@ -1,6 +1,6 @@
 package mcssoft.com.racereminderac.utility.pojo
 
-class Meeting() {
+class Meeting {
 
     lateinit var meetingCode: String   // e.g. "NR"
     lateinit var mtgId: String         // e.g. "2032403456"
@@ -10,4 +10,8 @@ class Meeting() {
     lateinit var trackRating: String   // e.g. "4"
     lateinit var weatherDesc: String   // e.g. "Fine"
     lateinit var mtgAbandoned: String  // e.g. "N"
+
+    fun getMeetingDetails() : List<String> {
+        return listOf(meetingCode, mtgId, venueName, mtgType, trackDesc, trackRating, weatherDesc, mtgAbandoned)
+    }
 }

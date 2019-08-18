@@ -1,5 +1,6 @@
 package mcssoft.com.racereminderac.utility
 
+import android.content.Context
 import android.util.Log
 import android.util.Xml
 import mcssoft.com.racereminderac.utility.pojo.Meeting
@@ -10,9 +11,11 @@ import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
 import java.io.InputStream
+import kotlin.coroutines.coroutineContext
 
+// https://tatts.com/pagedata/racing/2019/8/19/NR1.xml
 // https://developer.android.com/training/basics/network-ops/xml
-class RaceMeetingParser {
+class RaceMeetingParser constructor(val context: Context) {
 
     @Throws(XmlPullParserException::class, IOException::class)
     fun parse(inputStream: InputStream) {
@@ -21,29 +24,22 @@ class RaceMeetingParser {
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
             parser.setInput(inputStream, null)
             readFeed(parser)
+            collateRaceDetails()
         }
     }
-//    fun parse(inputStream: InputStream): List<*> {
-//        inputStream.use { inputStream ->
-//            val parser: XmlPullParser = Xml.newPullParser()
-//            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
-//            parser.setInput(inputStream, null)
-//            return readFeed(parser)
-//        }
+
+//    fun getRace(): Race? {
+//        return race
 //    }
 
-    fun getRace(): Race? {
-        return race
-    }
+//    fun getRunner(num: Int): Runner? {
+//        val ndx = num - 1
+//        return runnersList.get(ndx)
+//    }
 
-    fun getRunner(num: Int): Runner? {
-        val ndx = num - 1
-        return runnersList[ndx]
-    }
-
-    fun getRunners(): ArrayList<Runner>? {
-        return runnersList
-    }
+//    fun getRunners(): ArrayList<Runner>? {
+//        return runnersList
+//    }
 
     private fun readFeed(parser: XmlPullParser) {
         var tag: String = ""
@@ -64,12 +60,16 @@ class RaceMeetingParser {
                     "Race" -> {
                         Log.i("", "Race")
                         race = readRace(parser)
+                        race!!.mtgId = meeting!!.mtgId
+                        race!!.meetingCode = meeting!!.meetingCode
                         runnersList = arrayListOf<Runner>()
                     }
                     "Runner" -> {
                         Log.i("", "Runner")
                         runner = readRunner(parser)
-                        runnersList.add(runner)
+                        runner!!.raceNo = race!!.raceNo
+                        runner!!.meetingCode = race!!.meetingCode
+                        runnersList!!.add(runner!!)
                     }
                 }
             }
@@ -125,15 +125,37 @@ class RaceMeetingParser {
         runner.weight = parser.getAttributeValue(nameSpace, "Weight")
         runner.lastResult = parser.getAttributeValue(nameSpace, "LastResult")
         runner.rtng = parser.getAttributeValue(nameSpace, "Rtng")
-
         return runner
+    }
+
+    /*
+      Collate the parsed details into a "management" class.
+     */
+    private fun collateRaceDetails() {
+        RaceDetails.getInstance(context).addRaceDay(raceDay!!.getRaceDayDetails())
+        RaceDetails.getInstance(context).addMeeting(meeting!!.getMeetingDetails())
+        RaceDetails.getInstance(context).addRace(race!!.getRaceDetails())
+
+        val listing: MutableList<List<String>> = arrayListOf()
+            for(runner in runnersList) {
+                listing.add(runner.getRunnerDetails())
+            }
+
+        RaceDetails.getInstance(context).addRunners(listing)
+
+        // Tidy up.
+        raceDay = null
+        meeting = null
+        race = null
+        runner = null
+        runnersList.clear()
     }
 
     // We don't use namespaces
     private val nameSpace: String? = null
-    private lateinit var meeting: Meeting
-    private lateinit var raceDay: RaceDay
-    private lateinit var race: Race
-    private lateinit var runner: Runner
-    private lateinit var runnersList: ArrayList<Runner>
+    private var meeting: Meeting? = null
+    private var raceDay: RaceDay? = null
+    private var race: Race? = null
+    private var runner: Runner? = null                     // single runner details.
+    private lateinit var runnersList: ArrayList<Runner>//? = null     // multiple runners per race.
 }

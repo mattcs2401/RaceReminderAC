@@ -129,10 +129,15 @@
     <string name="key_bulk_delete_pref">key_bulk_delete_pref</string>
     <string name="delete_summary">Enable bulk delete of all Races.</string>
 
-    <!-- Preferences Toast messages. -->
-    <string name="race_code_msg">Default Race Code changed to</string>
-    <string name="city_code_msg">Default City Code changed to</string>
-    <string name="arch_removal_msg">Archived records removed.</string>
+    <!-- Tatts network preference. -->
+    <string name="key_network">key_network</string>
+    <string name="network_title">Network</string>
+    <string name="key_network_pref">key_network_pref</string>
+    <string name="network_summary">Update Race details from the Tatts network.</string>
+    <!--&lt;!&ndash; Preferences Toast messages. &ndash;&gt;-->
+    <!--<string name="race_code_msg">Default Race Code changed to</string>-->
+    <!--<string name="city_code_msg">Default City Code changed to</string>-->
+    <!--<string name="arch_removal_msg">Archived records removed.</string>-->
 
     <!-- Notification. -->
     <string name="nearing_race_time">Nearing race time</string>

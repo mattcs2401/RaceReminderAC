@@ -1,6 +1,6 @@
 package mcssoft.com.racereminderac.utility.pojo
 
-class RaceDay() {
+class RaceDay {
 
     lateinit var raceDayDate: String        // e.g. "2019-08-13T00:00:00"
     lateinit var raceYear: String           // e.g. "2019"
@@ -9,4 +9,7 @@ class RaceDay() {
     lateinit var raceDay: String            // e.g. "13"
     lateinit var raceDayOfTheWeek: String   // e.g. "Tuesday"
 
+    fun getRaceDayDetails() : List<String> {
+        return listOf(raceDayDate, raceYear, raceMonth, raceMonthLong, raceDay, raceDayOfTheWeek)
+    }
 }

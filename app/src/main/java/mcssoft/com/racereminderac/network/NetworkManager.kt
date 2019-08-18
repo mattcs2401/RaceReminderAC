@@ -21,10 +21,12 @@ class NetworkManager constructor(context: Context) : Response.ErrorListener, Res
                 }
     }
 
+    // Volley error response listener.
     override fun onErrorResponse(error: VolleyError?) {
         // TBA
     }
 
+    // Volley response listener.
     override fun onResponse(response: String?) {
         // TBA
     }

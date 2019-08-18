@@ -2,6 +2,11 @@ package mcssoft.com.racereminderac.utility.pojo
 
 class Runner {
 
+    // Race details.
+    lateinit var meetingCode: String   // e.g. "NR"
+    lateinit var raceNo: String        // e.g. "1"
+
+    // Runner details.
     lateinit var runnerNo: String      // e.g. "1"
     lateinit var runnerName: String    // e.g. "BADGE OF HONOUR"
     lateinit var scratched: String     // e.g. "N"
@@ -16,5 +21,10 @@ class Runner {
 
     override fun toString(): String {
         return """$runnerNo $runnerName $rider"""
+    }
+
+    fun getRunnerDetails() : List<String> {
+        return listOf(meetingCode, raceNo, runnerNo, runnerName, scratched, riderChanged, barrier,
+                handicap, weight, rider!!, lastResult!!)
     }
 }
