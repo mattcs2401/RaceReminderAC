@@ -22,6 +22,7 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
+import mcssoft.com.racereminderac.network.NetworkManager
 import mcssoft.com.racereminderac.ui.dialog.DeleteAllDialog
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceAlarm
@@ -327,6 +328,7 @@ class MainFragment : Fragment() {
     private lateinit var raceAdapter: RaceAdapter
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var recyclerView: RecyclerView
+    private lateinit var networkMgr: NetworkManager
 
     private var backPressCallback = BackPressCB(true)
     //</editor-fold>

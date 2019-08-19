@@ -17,6 +17,8 @@ import kotlin.coroutines.coroutineContext
 // https://developer.android.com/training/basics/network-ops/xml
 class RaceMeetingParser constructor(val context: Context) {
 
+    // TODO - What about parser exceptions ? This class needs to be more robust.
+
     @Throws(XmlPullParserException::class, IOException::class)
     fun parse(inputStream: InputStream) {
         inputStream.use { inputStream ->

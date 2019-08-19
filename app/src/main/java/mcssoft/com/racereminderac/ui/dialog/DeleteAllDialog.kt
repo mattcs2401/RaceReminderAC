@@ -12,12 +12,12 @@ import org.greenrobot.eventbus.EventBus
 class DeleteAllDialog : DialogFragment(), DialogInterface.OnClickListener {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val alertDialogBuilder = AlertDialog.Builder(context!!)
-        alertDialogBuilder.setTitle(getString(R.string.title_delete_all))
-        alertDialogBuilder.setMessage(getString(R.string.message_delete_all))
-        alertDialogBuilder.setPositiveButton(getString(R.string.lbl_ok), this)
-        alertDialogBuilder.setNegativeButton(getString(R.string.lbl_cancel), this)
-        return alertDialogBuilder.create()
+        val dialog = AlertDialog.Builder(context!!)
+        dialog.setTitle(getString(R.string.title_delete_all))
+        dialog.setMessage(getString(R.string.message_delete_all))
+        dialog.setPositiveButton(getString(R.string.lbl_ok), this)
+        dialog.setNegativeButton(getString(R.string.lbl_cancel), this)
+        return dialog.create()
     }
 
     override fun onClick(dialog: DialogInterface?, which: Int) {
