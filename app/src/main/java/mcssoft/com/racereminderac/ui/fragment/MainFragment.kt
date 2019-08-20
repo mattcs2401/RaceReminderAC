@@ -22,7 +22,7 @@ import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
-import mcssoft.com.racereminderac.network.NetworkManager
+import mcssoft.com.racereminderac.utility.NetworkManager
 import mcssoft.com.racereminderac.ui.dialog.DeleteAllDialog
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceAlarm

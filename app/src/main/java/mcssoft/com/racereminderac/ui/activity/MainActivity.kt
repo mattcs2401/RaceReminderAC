@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        RacePreferences.getInstance()?.preferencesCheck(this)
+        RacePreferences.getInstance().preferencesCheck(this)
 
         initialise()
 
@@ -31,13 +31,11 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
 
     override fun onStart() {
         super.onStart()
-//        EventBus.getDefault().register(this)
         Log.d("tag","MainActivity.onStart()")
     }
 
     override fun onStop() {
         super.onStop()
-//        EventBus.getDefault().unregister(this)
         Log.d("tag","MainActivity.onStop()")
     }
 
@@ -122,21 +120,7 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_NEW)
         navController.navigate(R.id.id_edit_fragment, bundle)
     }
-
-//    /**
-//     * Bottom nav menu Delete.
-//     */
-//    private fun doDelete() {
-//        val dialog = DeleteAllDialog(this)
-//        dialog.show(supportFragmentManager, "delete_all_dialog")
-//    }
     //</editor-fold>
-
-//    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-//    fun onMessageEvent(select: DeleteAllMessage) {
-//        val bp = ""
-//        //raceViewModel.deleteAll()
-//    }
 
     private lateinit var navController: NavController
     private lateinit var bottomNavView: BottomNavigationView

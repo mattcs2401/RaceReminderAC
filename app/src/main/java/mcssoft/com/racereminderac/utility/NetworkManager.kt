@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.network
+package mcssoft.com.racereminderac.utility
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -30,14 +30,15 @@ class NetworkManager (val context: Context) : IDownload, Response.ErrorListener,
 
     //<editor-fold default state="collapsed" desc="Region: Volley response">
     // Error response listener.
-    override fun onErrorResponse(error: VolleyError?) {
+    override fun onErrorResponse(error: VolleyError) {
         // TODO - maybe some sort of Volley error message dialog ?
-        volleyError = error?.message
-        Toast.makeText(context, error?.message, Toast.LENGTH_SHORT).show()
+        volleyError = error.message
+        Toast.makeText(context, error.message, Toast.LENGTH_SHORT).show()
     }
 
     // Volley response listener.
-    override fun onResponse(response: String?) {
+    override fun onResponse(response: String) {
+        volleyError = null        // we'll assume because there is a response then there's no error.
         volleyRespnse = response
         Toast.makeText(context, "Volley download success.", Toast.LENGTH_SHORT).show()
     }
