@@ -78,6 +78,9 @@ class MainFragment : Fragment() {
         val lRaces = raceViewModel.getAllRaces()
         lRaces.observe(viewLifecycleOwner, RaceListObserver(raceAdapter))
 
+//        val networkManager: NetworkManager = NetworkManager(activity!!)
+//        networkManager.
+
         Log.d("tag","MainFragment.onActivityCreated")
     }
 

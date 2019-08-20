@@ -2,13 +2,14 @@ package mcssoft.com.racereminderac.utility
 
 import android.content.Context
 import android.util.Log
+import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import mcssoft.com.racereminderac.R
 
 /**
  * Utility wrapper class for the SharedPreferences.
  */
-class RacePreferences {
+class RacePreferences() : Preference.OnPreferenceChangeListener {
     /**
      * For Singleton instance.
      * @Note: Can't use Context here, so context passed into the respective methods as required.
@@ -24,6 +25,18 @@ class RacePreferences {
                     }
 
                 }
+    }
+
+    /**
+     * Preference.OnPreferenceChangeListener.
+     * @param preference: The changed Preference.
+     * @param newValue: The new value of the Preference.
+     * @return: True means the preference is updated with the new value, else false.
+     */
+    override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
+        // Usage TBA.
+
+        return true
     }
 
     /**
