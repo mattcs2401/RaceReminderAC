@@ -4,10 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.VolleyError
+import com.android.volley.*
 import com.android.volley.toolbox.Volley
 import mcssoft.com.racereminderac.interfaces.IDownload
 
@@ -25,6 +22,11 @@ class NetworkManager (val context: Context) : IDownload, Response.ErrorListener,
         get() = connMgr.activeNetworkInfo
 
     fun <T> addToRequestQueue(request: Request<T>) = requestQueue.add(request)
+
+    fun queueRequest(url: String) {
+        val request = DownloadRequest(url, this)
+        addToRequestQueue(request)
+    }
 
     //<editor-fold default state="collapsed" desc="Region: Volley response">
     // Error response listener.
@@ -46,6 +48,18 @@ class NetworkManager (val context: Context) : IDownload, Response.ErrorListener,
 
     override fun onDownloadError(): String = volleyError!!
     //</editor-fold>
+
+    class DownloadRequest(url: String, listener: Response.ErrorListener) : Request<String>(url, listener) {
+        override fun parseNetworkResponse(response: NetworkResponse?): Response<String> {
+            // TBA
+            return Response.success(response?.data.toString(), null)
+        }
+
+        override fun deliverResponse(response: String?) {
+            // TBA
+            val bp = ""
+        }
+    }
 
     private var volleyRespnse: String? = null
     private var volleyError: String? = null
