@@ -83,10 +83,14 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when(menuItem.itemId) {
             R.id.id_mnu_bnv_settings -> {
+                // Bottom navigation menu Settings.
                 navController.navigate(R.id.preferencesFragment)
             }
             R.id.id_mnu_bnv_add -> {
-                doAdd()
+                // Bottom navigation menu Add.
+                val bundle = Bundle()
+                bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_NEW)
+                navController.navigate(R.id.id_edit_fragment, bundle)
             }
         }
         return false
@@ -110,15 +114,6 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
 
         // Back Navigation.
         setupActionBarWithNavController(this, navController)
-    }
-
-    /**
-     * Bottom nav menu New (Add).
-     */
-    private fun doAdd() {
-        val bundle = Bundle()
-        bundle.putInt(getString(R.string.key_edit_type), Constants.EDIT_RACE_NEW)
-        navController.navigate(R.id.id_edit_fragment, bundle)
     }
     //</editor-fold>
 

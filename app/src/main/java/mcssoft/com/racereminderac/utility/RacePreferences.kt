@@ -139,6 +139,16 @@ class RacePreferences() : Preference.OnPreferenceChangeListener {
     }
 
     /**
+     * Get the Network switch preference.
+     * @param context: Activity context.
+     * @return True if preference is enabled, else false.
+     */
+    fun getNetworkVal(context: Context) : Int {
+        val key = context.resources.getString(R.string.key_network_pref_type)
+        return PreferenceManager.getDefaultSharedPreferences(context).getInt(key, -1)
+    }
+
+    /**
      * Check that default preference values exist, and if not, then set them.
      * @param context: Activity context.
      */
@@ -153,6 +163,7 @@ class RacePreferences() : Preference.OnPreferenceChangeListener {
         val keyMultiSelect = context.resources.getString(R.string.key_multi_select_pref)
         val keyBulkDelete = context.resources.getString(R.string.key_bulk_delete_pref)
         val keyNetworkPref = context.resources.getString(R.string.key_network_pref)
+        val keyNetworkPrefType = context.resources.getString(R.string.key_network_pref_type)
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
@@ -192,6 +203,11 @@ class RacePreferences() : Preference.OnPreferenceChangeListener {
 
         if(!map.contains(keyNetworkPref)) {
             sharedPrefs.edit().putBoolean(keyNetworkPref, false).apply()
+        }
+
+        if(!map.contains(keyNetworkPrefType)) {
+            // Default network type is both.
+            sharedPrefs.edit().putInt(keyNetworkPrefType, Constants.NETWORK_WIFI_MOB).apply()
         }
 
         Log.d("tag","RacePreferences.preferenceCheck")

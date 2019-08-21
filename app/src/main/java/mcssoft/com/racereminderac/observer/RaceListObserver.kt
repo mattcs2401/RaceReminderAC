@@ -99,7 +99,7 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
     }
 
     private fun preferenceCheck() : Boolean {
-        if(RacePreferences.getInstance()?.getRaceNotifPost(adapter.getContext())!!) {
+        if(RacePreferences.getInstance().getRaceNotifPost(adapter.getContext())) {
             return true
         }
         return false

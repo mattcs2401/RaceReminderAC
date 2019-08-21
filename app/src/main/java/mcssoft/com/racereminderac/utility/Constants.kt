@@ -56,4 +56,8 @@ object Constants {
     const val CB_BET_PLACED = 1             // BetPlaced UI component (on adapter row).
 
     const val SELECTS_MAX = 4               // The max number of multi selects for a race.
+
+    const val NETWORK_WIFI = 1              // Network only by WiFi.
+    const val NETWORK_MOB = 2               // Network only by mobile data.
+    const val NETWORK_WIFI_MOB = 3          // Network by either WiFi or mobile data.
 }

@@ -147,4 +147,36 @@ class RaceTime {
     private fun isEqual(calendar: Calendar): Boolean {
         return Calendar.getInstance(Locale.getDefault()) == calendar
     }
+
+
+    /**
+     * Generate the YYYY, MM, DD elements of a meeting date based on the current date.
+     * @return The date as: [0]-YYYY, [1]-M(M), [2]-D(D)
+     */
+    fun getCurrentDateComponents(): Array<String> {
+        val date = arrayOf<String>("","","")
+        val calendar = Calendar.getInstance(Locale.getDefault())
+        calendar.time = Date(getTimeInMillis())
+        date[0] = calendar.get(Calendar.YEAR).toString()
+        date[1] = (calendar.get(Calendar.MONTH) + 1).toString() // month starts at 0.
+        date[2] = calendar.get(Calendar.DAY_OF_MONTH).toString()
+        return date
+    }
+
+    /**
+     * Extract the time from the Xml time value.
+     * @param time formatted as "YYYY-MM-DDTHH:MM:SS" (from Xml).
+     * @return time as HH:MM format.
+     */
+    fun getTimeComponent(time: String): String {
+        val array = time.split("T".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+                .split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        return array[0] + ":" + array[1]
+    }
+
+    private fun getTimeInMillis(): Long {
+        return Calendar.getInstance(Locale.getDefault()).timeInMillis
+    }
+
+
 }

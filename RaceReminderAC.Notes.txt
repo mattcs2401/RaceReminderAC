@@ -31,10 +31,19 @@ TO DO:
 
 -> Consider a network connection for:
    "https://tatts.com/pagedata/racing" and associated pages, e.g.;
-    - https://tatts.com/pagedata/racing/2019/8/12/NR.xml
-    - https://tatts.com/pagedata/racing/2019/8/12/NR1.xml
+    - https://tatts.com/pagedata/racing/YYYY/M(M)/D(D)/NR1.xml
 
     Android training: https://developer.android.com/training/volley/index.html
+
+-> 1) Preference controls use of the network connection (WiFi or Mobile data (or both ?)).
+   2) If preference enabled:
+      2.1) When a new Race is entered, use Volley to get the xml data from tatts.com
+           -> use today's date, meeting code and race number.
+      2.2) When Volley returns, use a background worker to parse the xml.
+
+      What do we do with the parsed xml ?
+      - have in memory pojos, or write to database table/s ?
+      - what information are we really interested in ?
 
 -> Make the number picker values bigger.
    - Add/Edit screen design ?
