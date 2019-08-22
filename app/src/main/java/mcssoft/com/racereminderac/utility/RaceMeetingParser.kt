@@ -45,8 +45,8 @@ class RaceMeetingParser constructor(val context: Context) {
                         Log.i("", "Meeting")
                         meeting = readMeeting(parser)
                     }
-                    "RaceXml" -> {
-                        Log.i("", "RaceXml")
+                    "Race" -> {
+                        Log.i("", "Race")
                         raceXml = readRace(parser)
 //                        raceXml!!.mtgId = meeting!!.mtgId
 //                        raceXml!!.meetingCode = meeting!!.meetingCode
@@ -112,7 +112,7 @@ class RaceMeetingParser constructor(val context: Context) {
         lRace[2] = parser.getAttributeValue(nameSpace, "RaceName")
         lRace[3] = parser.getAttributeValue(nameSpace, "Distance")
 
-//        val race = RaceXml(meeting!!.meetingCode, meeting!!.mtgId, lRace[0], lRace[1])
+//        val race = Race(meeting!!.meetingCode, meeting!!.mtgId, lRace[0], lRace[1])
 //        race.raceName = lRace[2]
 //        race.distance = lRace[3]
         return lRace

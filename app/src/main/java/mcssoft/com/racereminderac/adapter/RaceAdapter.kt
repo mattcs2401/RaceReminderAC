@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import mcssoft.com.racereminderac.R
-import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
@@ -39,7 +39,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
         val race = lRaces[position]
         // City, code, time, selections etc.
         setBaseDisplayValues(holder, race)
-        // Set display colours based on the RaceXml object's metaColour value.
+        // Set display colours based on the Race object's metaColour value.
         setDisplayColourValues(holder, race)
         //  Setup for multi select if applicable.
         setMultiSelect(holder, race)
@@ -51,9 +51,9 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
 
     /**
      * Refresh the backing data.
-     * @param lRaces: The list of RaceXml objects that comprise the data.
+     * @param lRaces: The list of Race objects that comprise the data.
      */
-    internal fun swapData(lRaces: ArrayList<Race>) {
+    internal fun swapData(lRaces: ArrayList<RaceDetails>) {
         this.lRaces = lRaces
         notifyDataSetChanged()
         // Post message to MainFragment as to whether adapter has items (used for refresh if enabled).
@@ -69,11 +69,11 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     }
 
     /**
-     * Return the RaceXml object at the adapter position.
+     * Return the Race object at the adapter position.
      * @param lPos: The adapter position (0 based).
-     * @return The RaceXml object.
+     * @return The Race object.
      */
-    internal fun getRace(lPos : Int) : Race = lRaces[lPos]
+    internal fun getRace(lPos : Int) : RaceDetails = lRaces[lPos]
 
     /**
      * Set the TouchHelper associated with the adapter.
@@ -115,7 +115,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     /**
-     * Remove a RaceXml from the listing.
+     * Remove a Race from the listing.
      * @param lPos: The position in the listing.
      */
     private fun deleteRace(lPos: Int) {
@@ -137,7 +137,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     /**
      * Utility method to set base display values.
      */
-    private fun setBaseDisplayValues(holder: RaceViewHolder, race: Race) {
+    private fun setBaseDisplayValues(holder: RaceViewHolder, race: RaceDetails) {
         holder.tvCityCode.text = race.cityCode
         holder.tvRaceCode.text = race.raceCode
         holder.tvRaceNo.text = race.raceNum
@@ -153,7 +153,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     /**
      * Utility method to set display colours.
      */
-    private fun setDisplayColourValues(holder: RaceViewHolder, race: Race) {
+    private fun setDisplayColourValues(holder: RaceViewHolder, race: RaceDetails) {
         when(race.metaColour) {
             Constants.META_COLOUR_1 -> {
                 holder.tvRaceTime.setTextColor(getColor(context, R.color.colorPrimary))
@@ -177,7 +177,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     /**
      * Utility method to setup when there are multiple selections.
      */
-    private fun setMultiSelect(holder: RaceViewHolder, race: Race) {
+    private fun setMultiSelect(holder: RaceViewHolder, race: RaceDetails) {
         if(race.raceSel2 != "") {
             // There are at least two selections.
             holder.tvMultiSelsNotify.visibility = View.VISIBLE
@@ -202,18 +202,18 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
         when (view.id) {
             R.id.snackbar_action -> {  // this is a system default id.
                 reinstateRace(raceUndo!!, posUndo)
-                Toast.makeText(context, "RaceXml re-instated.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Race re-instated.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
      /**
-     * Re-instate a previously removed RaceXml.
-     * @param race: The RaceXml object at time of last UNDO.
+     * Re-instate a previously removed Race.
+     * @param race: The Race object at time of last UNDO.
      * @param lPos: The position in the list at time of last UNDO.
      */
-    private fun reinstateRace(race: Race, lPos: Int) {
-        // Put RaceXml back into the list.
+    private fun reinstateRace(race: RaceDetails, lPos: Int) {
+        // Put Race back into the list.
         lRaces.add(lPos, race)
         // Notify the adapter.
         notifyItemInserted(lPos)
@@ -230,13 +230,13 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Private Vars">
-    private var lRaces = ArrayList<Race>(0)   // backing data.
+    private var lRaces = ArrayList<RaceDetails>(0)   // backing data.
 //    private var isEmpty: Boolean = true
 
     private lateinit var raceViewHolder: RaceViewHolder    //
     private lateinit var itemTouchHelper: ItemTouchHelper  //
 
-    private var raceUndo: Race? = null                // local copy for any UNDO action.
+    private var raceUndo: RaceDetails? = null                // local copy for any UNDO action.
     private var posUndo: Int = Constants.MINUS_ONE    // "     "    "   "   "    "
     //</editor-fold>
 }

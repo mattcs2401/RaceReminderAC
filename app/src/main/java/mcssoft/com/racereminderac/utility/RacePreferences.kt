@@ -40,9 +40,9 @@ class RacePreferences() : Preference.OnPreferenceChangeListener {
     }
 
     /**
-     * Get the (default) RaceXml Code from the preferences.
+     * Get the (default) Race Code from the preferences.
      * @param context: Activity context.
-     * @return The RaceXml Code value which is the default value for any RaceXml entry.
+     * @return The Race Code value which is the default value for any Race entry.
      */
     fun getRaceCode(context: Context): String? {
         val key = context.resources.getString(R.string.key_race_code_pref)
@@ -52,7 +52,7 @@ class RacePreferences() : Preference.OnPreferenceChangeListener {
     /**
      * Get the (default) City Code from the preferences.
      * @param context: Activity context.
-     * @return The City Code value which is the default value for any RaceXml entry.
+     * @return The City Code value which is the default value for any Race entry.
      */
     fun getCityCode(context: Context): String? {
         val key = context.resources.getString(R.string.key_city_code_pref)
@@ -70,7 +70,7 @@ class RacePreferences() : Preference.OnPreferenceChangeListener {
     }
 
     /**
-     * Get the (allowed to) post multiple notifications for the same RaceXml from the preferences.
+     * Get the (allowed to) post multiple notifications for the same Race from the preferences.
      * @param context: Activity context.
      */
     fun getRaceNotifMulti(context: Context) : Boolean {

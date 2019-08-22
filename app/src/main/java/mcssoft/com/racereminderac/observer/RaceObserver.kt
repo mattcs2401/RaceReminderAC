@@ -4,12 +4,12 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.edit_fragment.view.*
-import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.entity.RaceDetails
 
-class RaceObserver(race: LiveData<Race>, var view: View) : Observer<Race> {
+class RaceObserver(race: LiveData<RaceDetails>, var view: View) : Observer<RaceDetails> {
 
-    /* Note: Parameter == null if we're entering details for a new RaceXml. */
-    override fun onChanged(race: Race?) {
+    /* Note: Parameter == null if we're entering details for a new Race. */
+    override fun onChanged(race: RaceDetails?) {
         if(race != null) {
             view.id_np_city_code.value = findInArray(view.id_np_city_code.displayedValues,race.cityCode)
             view.id_np_race_code.value = findInArray(view.id_np_race_code.displayedValues,race.raceCode)

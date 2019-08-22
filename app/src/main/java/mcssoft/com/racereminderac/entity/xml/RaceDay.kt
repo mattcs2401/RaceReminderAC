@@ -5,9 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "race_day")
-class RaceDay(@ColumnInfo(name = "RaceYear") var raceYear: String,
-              @ColumnInfo(name = "RaceMonth") var raceMonth: String,
-              @ColumnInfo(name = "RaceDay")  var raceDay: String) {
+data class RaceDay(@ColumnInfo(name = "RaceYear") var raceYear: String,
+                   @ColumnInfo(name = "RaceMonth") var raceMonth: String,
+                   @ColumnInfo(name = "RaceDay")  var raceDay: String) {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "_id") var id: Long? = null    // value inserted by Room.

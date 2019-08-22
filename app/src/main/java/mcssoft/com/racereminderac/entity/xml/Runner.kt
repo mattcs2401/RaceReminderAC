@@ -5,7 +5,7 @@ import androidx.room.ForeignKey.CASCADE
 
 @Entity(tableName = "runner",
         indices = [Index(value = ["RaceNo", "RaceTime"], unique = true)],
-        foreignKeys = [ForeignKey(entity = RaceXml::class,
+        foreignKeys = [ForeignKey(entity = Race::class,
                 parentColumns = ["RaceNo", "RaceTime"],
                 childColumns = ["RaceNo", "RaceTime"],
                 onDelete = CASCADE)])
@@ -27,7 +27,7 @@ class Runner(@ColumnInfo(name = "RaceNo") var raceNo: String,
     @ColumnInfo(name = "rider") var rider: String = ""
     @ColumnInfo(name = "lastResult") var lastResult: String = ""
 
-//    // RaceXml details.
+//    // Race details.
 //    lateinit var meetingCode: String   // e.g. "NR"
 //    lateinit var raceNo: String        // e.g. "1"
 

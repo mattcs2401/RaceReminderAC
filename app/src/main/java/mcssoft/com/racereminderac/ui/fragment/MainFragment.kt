@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.main_fragment.view.id_recyclerView
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.adapter.RaceAdapter
-import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
@@ -154,7 +154,7 @@ class MainFragment : Fragment() {
     //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
     /**
      * The delete message.
-     * @param delete: The delete message object. Contains the RaceXml to delete.
+     * @param delete: The delete message object. Contains the Race to delete.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(delete: DeleteMessage) {
@@ -177,11 +177,11 @@ class MainFragment : Fragment() {
          Note: The down side to this is that the observer will react twice.
         */
         if(raceAdapter.itemCount > 0) {
-           // Get arbitary 1st RaceXml from backing data.
+           // Get arbitary 1st Race from backing data.
             val race = raceAdapter.getRace(0)
             val oldCC = race.cityCode
 
-            // Set new temporary city code and update RaceXml.
+            // Set new temporary city code and update Race.
             race.cityCode = Constants.CITY_CODE_DUMMY
             raceViewModel.update(race)
 
@@ -227,7 +227,7 @@ class MainFragment : Fragment() {
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(update: UpdateMessage) {
-        val race: Race = raceAdapter.getRace(update.pos)
+        val race: RaceDetails = raceAdapter.getRace(update.pos)
         when(update.update) {
             R.id.id_cb_bet_placed -> {
                 race.betPlaced = update.value as Boolean

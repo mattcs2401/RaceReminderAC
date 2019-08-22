@@ -2,18 +2,18 @@ package mcssoft.com.racereminderac.background.async
 
 import android.os.AsyncTask
 import mcssoft.com.racereminderac.dao.RaceDAO
-import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.utility.Constants
 
 /**
  * Utility class for database operations. An AsyncTask will take an object as a parameter,
- * e.g. a RaceXml object, while Workers (by design) only take primitives and their array variants.
+ * e.g. a Race object, while Workers (by design) only take primitives and their array variants.
  *
  * The Insert/Update etc statements in the DAO will take an object.
  */
-class AsyncLD(private var type: Int, private var dao: RaceDAO) : AsyncTask<Race, Void, Int>() {
+class AsyncLD(private var type: Int, private var dao: RaceDAO) : AsyncTask<RaceDetails, Void, Int>() {
 
-    override fun doInBackground(vararg params: Race) : Int? {
+    override fun doInBackground(vararg params: RaceDetails) : Int? {
         var value: Int = Constants.NO_VALUE
         when(type) {
             Constants.INSERT -> {

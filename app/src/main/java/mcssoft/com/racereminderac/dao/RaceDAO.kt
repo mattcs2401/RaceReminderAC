@@ -7,19 +7,19 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Update
 import androidx.room.Delete
 import androidx.room.Query
-import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.entity.RaceDetails
 
 @Dao
 interface RaceDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRace(race: Race): Long
+    fun insertRace(race: RaceDetails): Long
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
-    fun updateRace(race: Race): Int
+    fun updateRace(race: RaceDetails): Int
 
     @Delete
-    fun deleteRace(race: Race)
+    fun deleteRace(race: RaceDetails)
 
     @Query("delete from race_details where _id = :id")
     fun deleteRace(id: Long): Int
@@ -28,13 +28,13 @@ interface RaceDAO {
     fun getCountRaces(): Int
 
     @Query("select * from race_details where _id = :id")
-    fun getRaceLD(id: Long): LiveData<Race>
+    fun getRaceLD(id: Long): LiveData<RaceDetails>
 
     @Query("select * from race_details where _id = :id")
-    fun getRaceNoLD(id: Long): Race
+    fun getRaceNoLD(id: Long): RaceDetails
 
     @Query("select * from race_details where archvRace = 'N'")
-    fun getAllRaces(): LiveData<MutableList<Race>> // Room doesn't know how to construct an ArrayList
+    fun getAllRaces(): LiveData<MutableList<RaceDetails>> // Room doesn't know how to construct an ArrayList
 
     @Query("delete from race_details")
     fun deleteAll()

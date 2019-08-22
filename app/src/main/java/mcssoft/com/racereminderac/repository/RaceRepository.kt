@@ -6,30 +6,30 @@ import mcssoft.com.racereminderac.background.async.AsyncLD
 import mcssoft.com.racereminderac.background.async.AsyncNoLD
 import mcssoft.com.racereminderac.dao.RaceDAO
 import mcssoft.com.racereminderac.database.RaceDatabase
-import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.entity.RaceDetails
 
 class RaceRepository(application: Application) {
 
     private var raceDao: RaceDAO = RaceDatabase.getInstance(application)!!.raceDao()
-    private var allRaces: LiveData<MutableList<Race>>
+    private var allRaces: LiveData<MutableList<RaceDetails>>
 
     init {
         allRaces = raceDao.getAllRaces()
     }
 
     /**
-     * Get a list of all the RaceXml objects from the database.
+     * Get a list of all the Race objects from the database.
      */
-    internal fun getAllRaces(): LiveData<MutableList<Race>> {
+    internal fun getAllRaces(): LiveData<MutableList<RaceDetails>> {
         allRaces = raceDao.getAllRaces()
         return allRaces
     }
 
     /**
-     * Get a RaceXml by it's database row id.
+     * Get a Race by it's database row id.
      * @param id: The id.
      */
-    internal fun getRaceLD(id: Long): LiveData<Race> = raceDao.getRaceLD(id)
+    internal fun getRaceLD(id: Long): LiveData<RaceDetails> = raceDao.getRaceLD(id)
 
     internal fun getRaceNoLD(id: Long) {
         val taskAsync = AsyncNoLD(raceDao)
@@ -39,9 +39,9 @@ class RaceRepository(application: Application) {
     /**
      * Do a database operation.
      * @param type: The operation type, one of AsyncLD.UPDATE / DELETE / INSERT.
-     * @param race: The RaceXml object.
+     * @param race: The Race object.
      */
-    internal fun doDatabaseOperation(type: Int, race: Race?) {
+    internal fun doDatabaseOperation(type: Int, race: RaceDetails?) {
         val taskAsync = AsyncLD(type, raceDao)
         taskAsync.execute(race)
     }

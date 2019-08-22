@@ -5,11 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "race_details")
-data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
-                @ColumnInfo(name = "RaceCode") var raceCode: String,
-                @ColumnInfo(name = "RaceNum")  var raceNum: String,
-                @ColumnInfo(name = "RaceSel")  var raceSel: String,
-                @ColumnInfo(name = "RaceTimeS") var raceTimeS: String) : Comparable<Race> {
+data class RaceDetails(@ColumnInfo(name = "CityCode") var cityCode: String,
+                       @ColumnInfo(name = "RaceCode") var raceCode: String,
+                       @ColumnInfo(name = "RaceNum")  var raceNum: String,
+                       @ColumnInfo(name = "RaceSel")  var raceSel: String,
+                       @ColumnInfo(name = "RaceTimeS") var raceTimeS: String) : Comparable<RaceDetails> {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "_id") var id: Long? = null    // value inserted by Room.
@@ -30,10 +30,10 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
     @ColumnInfo(name = "RaceTrainer") var raceTrainer: String = ""
 
     /**
-     * Simple compare on RaceTime. Used in, e.g.,  Collections.sort(List<RaceXml>)
+     * Simple compare on RaceTime. Used in, e.g.,  Collections.sort(List<Race>)
      * @param other: The object to compare (this) against.
      */
-    override fun compareTo(other: Race): Int {
+    override fun compareTo(other: RaceDetails): Int {
         var result = raceDate.compareTo(other.raceDate)
         if(result == 0) {
             // dates are equal, so compare time.

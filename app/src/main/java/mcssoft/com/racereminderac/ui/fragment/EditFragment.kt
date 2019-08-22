@@ -20,7 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.edit_fragment.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
-import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.observer.RaceObserver
 import mcssoft.com.racereminderac.ui.dialog.MultiSelectDialog
@@ -69,7 +69,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
     /**
      * EventBus return for TimePickDialog.
-     * @param time: The RaceXml time (as Long).
+     * @param time: The Race time (as Long).
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(time: TimeMessage) {
@@ -78,14 +78,14 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     }
 
     /**
-     * EventBus return from getting the RaceXml date (from AsyncNoLD).
-     * @param raceDT: The RaceXml date/time fields.
+     * EventBus return from getting the Race date (from AsyncNoLD).
+     * @param raceDT: The Race date/time fields.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(raceDT: DateTimeMessage) {
-        // The RaceXml date.
+        // The Race date.
         this.raceDate = raceDT.theRace.raceDate
-        // Additional, get the RaceXml time in mSec (for copy function).
+        // Additional, get the Race time in mSec (for copy function).
         this.raceTimeL = raceDT.theRace.raceTimeL
     }
 
@@ -120,7 +120,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 launchTimePickDialog()
             }
             R.id.id_btn_save -> {
-                    val race: Race
+                    val race: RaceDetails
                     when (editType) {
                         Constants.EDIT_RACE_UPDATE -> {
                             race = collateValues(Constants.EDIT_RACE_UPDATE)
@@ -186,9 +186,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     /**
-     * Get the UI values into a RaceXml object ready for Update or Insert.
+     * Get the UI values into a Race object ready for Update or Insert.
      */
-    private fun collateValues(action: Int): Race {
+    private fun collateValues(action: Int): RaceDetails {
         val race = if(isMultiSel || allowMultiSel) {
             // Two or more entries already exist in the backing data, or multi select is set in the
             // Preferences.
@@ -216,13 +216,13 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         return race
     }
 
-    private fun collateMultiSelect() : Race {
+    private fun collateMultiSelect() : RaceDetails {
 
         if(listMultiSel[0] == "") {
             // Nothing was selected so use a default.
             listMultiSel[0] = rsVals[npRaceSel.value]
         }
-        val race = Race(ccVals[npCityCode.value],
+        val race = RaceDetails(ccVals[npCityCode.value],
                 rcVals[npRaceCode.value],
                 rnVals[npRaceNo.value],
                 listMultiSel[0],
@@ -234,8 +234,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         return race
     }
 
-    private fun collate() : Race {
-        val race = Race(ccVals[npCityCode.value],
+    private fun collate() : RaceDetails {
+        val race = RaceDetails(ccVals[npCityCode.value],
                 rcVals[npRaceCode.value],
                 rnVals[npRaceNo.value],
                 rsVals[npRaceSel.value],
@@ -271,7 +271,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     private fun initialiseUI(view: View) {
         // Setup number pickers, buttons etc.
         setupDisplayElements()
-        // Set the view model and get the id of the RaceXml object.
+        // Set the view model and get the id of the Race object.
         setupViewModel(view)
         // Update labels etc depending on edit type, e.g. new, or copy etc.
         setupForEditType()
@@ -330,13 +330,13 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     }
 
     /**
-     * Set the RaceXml Time, Edit and Save buttons, and listeners (default values).
+     * Set the Race Time, Edit and Save buttons, and listeners (default values).
      */
     private fun setupButtons() {
         // Multi select button.
         btnMultiSel = id_btn_multi_sel
         btnMultiSel.setOnClickListener(this)
-        // Set the RaceXml Time button and listener.
+        // Set the Race Time button and listener.
         btnTime = id_btn_time
         btnTime.setOnClickListener(this)
         // Set the Save button and listener.
@@ -380,13 +380,13 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     }
 
      /**
-     * Get the RaceXml object id and setup ViewModel details.
+     * Get the Race object id and setup ViewModel details.
      */
     private fun setupViewModel(view: View) {
         // Get the edit type (new, copy or update).
         editType = arguments?.getInt(getString(R.string.key_edit_type))
 
-        // Get RaceXml id if update or copy.
+        // Get Race id if update or copy.
         when(editType) {
             Constants.EDIT_RACE_UPDATE -> {
                 raceId = arguments?.getLong(getString(R.string.key_edit_existing))
@@ -399,7 +399,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         // Set the view model.
         raceViewModel = ViewModelProviders.of(activity!!).get(RaceViewModel::class.java)
 
-        // If not a new RaceXml object (it's id wouldn't exist yet), observe changes.
+        // If not a new Race object (it's id wouldn't exist yet), observe changes.
         if(editType != Constants.EDIT_RACE_NEW) {
             val race = raceViewModel.getRace(raceId!!)
             race.observe(viewLifecycleOwner, RaceObserver(race, view))
@@ -407,8 +407,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     }
 
     /**
-     * Update UI elements depending on whether editing an existing RaceXml, entering a new RaceXml, or
-     * copying a previous RaceXml.
+     * Update UI elements depending on whether editing an existing Race, entering a new Race, or
+     * copying a previous Race.
      * @Note: This must be called after setupViewModel().
      */
     private fun setupForEditType() {
@@ -416,7 +416,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             Constants.EDIT_RACE_UPDATE -> {
                 toolBar.title = getString(R.string.edit_race)
                 btnSave.text = getString(R.string.lbl_update)
-                // Save local copy of RaceXml date.
+                // Save local copy of Race date.
                 getRaceDate(raceId!!)
             }
             Constants.EDIT_RACE_NEW -> {
@@ -429,7 +429,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
             Constants.EDIT_RACE_COPY -> {
                 toolBar.title = getString(R.string.copy_race)
                 btnSave.text = getString(R.string.lbl_copy)
-                // Save local copy of RaceXml date.
+                // Save local copy of Race date.
                 getRaceDate(raceId!!)
             }
         }

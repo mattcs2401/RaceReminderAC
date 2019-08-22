@@ -6,18 +6,18 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.background.worker.NotifyWorker
-import mcssoft.com.racereminderac.entity.Race
+import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.RaceTime
 
-class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<Race>> {
+class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<RaceDetails>> {
 
     /**
      * The observer's onChange method.
-     * @param lRaces: The list of mutable RaceXml objects.
+     * @param lRaces: The list of mutable Race objects.
      */
-    override fun onChanged(lRaces: MutableList<Race>?) {
+    override fun onChanged(lRaces: MutableList<RaceDetails>?) {
         if((lRaces != null) && (lRaces.isNotEmpty())) {
             if (lRaces.size > 1) {
                 lRaces.sort()
@@ -25,7 +25,7 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
             // time check, even if only one race entry exists.
             timeCheck(lRaces)
             // set adapter backing data.
-            adapter.swapData(lRaces as ArrayList<Race>)
+            adapter.swapData(lRaces as ArrayList<RaceDetails>)
         } else {
             adapter.clear()
         }
@@ -37,17 +37,17 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
     1: the current time is after that given - i.e. the race time is in the past.
  */
     /**
-     * Check RaceXml date/time and set colours accordingly.
+     * Check Race date/time and set colours accordingly.
      * @param lRaces: The list of current Races.
      */
-    private fun timeCheck(lRaces: MutableList<Race>) {
+    private fun timeCheck(lRaces: MutableList<RaceDetails>) {
         val raceTime = RaceTime.getInstance()!!
         // Check the race time against the current time.
         for(race in lRaces) {
-            // The time as per the RaceXml object.
+            // The time as per the Race object.
             val raceTimeMillis = race.raceTimeL
 
-            // If the RaceXml day is today, then process, else ignore.
+            // If the Race day is today, then process, else ignore.
             if (raceTime.compareToDay(raceTimeMillis) == Constants.DAY_CURRENT) {
                 // The value of the comparison.
 
@@ -79,10 +79,10 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
     }
 
     /**
-     * Post a notification that the RaceXml is nearing race time.
+     * Post a notification that the Race is nearing race time.
      * @param race: Used to derive notification values.
      */
-    private fun postNotification(race: Race) {
+    private fun postNotification(race: RaceDetails) {
         // TODO: Need to update to cater for Multi Select.
         val data = Data.Builder()
             .putAll(mapOf("key_id" to race.id,

@@ -5,15 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-import mcssoft.com.racereminderac.entity.Race
 import mcssoft.com.racereminderac.dao.RaceDAO
 import mcssoft.com.racereminderac.dao.RaceDayDAO
-import mcssoft.com.racereminderac.entity.xml.Meeting
+import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.entity.xml.RaceDay
-import mcssoft.com.racereminderac.entity.xml.RaceXml
-import mcssoft.com.racereminderac.entity.xml.Runner
 
-@Database(entities = [Race::class, RaceDay::class/*, RaceXml::class, Meeting::class, Runner::class*/],
+@Database(entities = [RaceDetails::class, RaceDay::class/*, Race::class, Meeting::class, Runner::class*/],
         version = 1, exportSchema = false)
 abstract class RaceDatabase : RoomDatabase() {
 
