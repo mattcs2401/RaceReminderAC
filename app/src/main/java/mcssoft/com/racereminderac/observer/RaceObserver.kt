@@ -8,7 +8,7 @@ import mcssoft.com.racereminderac.entity.Race
 
 class RaceObserver(race: LiveData<Race>, var view: View) : Observer<Race> {
 
-    /* Note: Parameter == null if we're entering details for a new Race. */
+    /* Note: Parameter == null if we're entering details for a new RaceXml. */
     override fun onChanged(race: Race?) {
         if(race != null) {
             view.id_np_city_code.value = findInArray(view.id_np_city_code.displayedValues,race.cityCode)

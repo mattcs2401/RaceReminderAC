@@ -154,7 +154,7 @@ class MainFragment : Fragment() {
     //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
     /**
      * The delete message.
-     * @param delete: The delete message object. Contains the Race to delete.
+     * @param delete: The delete message object. Contains the RaceXml to delete.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(delete: DeleteMessage) {
@@ -177,11 +177,11 @@ class MainFragment : Fragment() {
          Note: The down side to this is that the observer will react twice.
         */
         if(raceAdapter.itemCount > 0) {
-           // Get arbitary 1st Race from backing data.
+           // Get arbitary 1st RaceXml from backing data.
             val race = raceAdapter.getRace(0)
             val oldCC = race.cityCode
 
-            // Set new temporary city code and update Race.
+            // Set new temporary city code and update RaceXml.
             race.cityCode = Constants.CITY_CODE_DUMMY
             raceViewModel.update(race)
 

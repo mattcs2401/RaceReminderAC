@@ -7,7 +7,7 @@ import mcssoft.com.racereminderac.utility.Constants
 
 /**
  * Utility class for database operations. An AsyncTask will take an object as a parameter,
- * e.g. a Race object, while Workers (by design) only take primitives and their array variants.
+ * e.g. a RaceXml object, while Workers (by design) only take primitives and their array variants.
  *
  * The Insert/Update etc statements in the DAO will take an object.
  */

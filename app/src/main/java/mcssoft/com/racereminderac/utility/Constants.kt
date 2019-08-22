@@ -4,13 +4,13 @@ package mcssoft.com.racereminderac.utility
  * Utility object to define a set of app constants.
  */
 object Constants {
-    const val CURRENT_TIME_BEFORE = -1      // Current time is before the Race time.
-    const val CURRENT_TIME_SAME = 0         // Current time is the same as the Race time.
-    const val CURRENT_TIME_AFTER = 1        //  Current time is after the Race time.
+    const val CURRENT_TIME_BEFORE = -1      // Current time is before the RaceXml time.
+    const val CURRENT_TIME_SAME = 0         // Current time is the same as the RaceXml time.
+    const val CURRENT_TIME_AFTER = 1        //  Current time is after the RaceXml time.
 
-    const val EDIT_RACE_NEW: Int = 0        // Edit action is for a new Race.
-    const val EDIT_RACE_UPDATE: Int = 1     // Edit action is to update/amend a Race.
-    const val EDIT_RACE_COPY: Int = 2       // Edit action is to copy a Race.
+    const val EDIT_RACE_NEW: Int = 0        // Edit action is for a new RaceXml.
+    const val EDIT_RACE_UPDATE: Int = 1     // Edit action is to update/amend a RaceXml.
+    const val EDIT_RACE_COPY: Int = 2       // Edit action is to copy a RaceXml.
 
     const val ONE_MINUTE: Long = 60000       // Alarm 1 minute interval.
     const val THREE_MINUTES: Long = 180000   // Alarm 3 minute interval.
@@ -22,17 +22,17 @@ object Constants {
     const val TIME_FORMAT_24 = "kk:mm"      // Time value is displayed in 24 hour format.
     const val DATE_FORMAT = "dd/MM/yyyy"    // Date value display format.
 
-    const val INSERT = 1                    // Signifies a Race insert.
-    const val UPDATE = 2                    // Signifies a Race update.
-    const val DELETE = 3                    // Signifies a Race delete.
-    const val DELETE_ALL = 4                // Signifies delete all Race entries.
-    const val COUNT = 5                     // Signifies count all Race entries.
+    const val INSERT = 1                    // Signifies a RaceXml insert.
+    const val UPDATE = 2                    // Signifies a RaceXml update.
+    const val DELETE = 3                    // Signifies a RaceXml delete.
+    const val DELETE_ALL = 4                // Signifies delete all RaceXml entries.
+    const val COUNT = 5                     // Signifies count all RaceXml entries.
 
     const val NO_VALUE = -1                 // Generic signify no value returned.
 
-    const val META_COLOUR_1 = "1"           // The current time is before the Race time.
-    const val META_COLOUR_2 = "2"           // The current time is nearing the Race time.
-    const val META_COLOUR_3 = "3"           // The current time is after the Race time.
+    const val META_COLOUR_1 = "1"           // The current time is before the RaceXml time.
+    const val META_COLOUR_2 = "2"           // The current time is nearing the RaceXml time.
+    const val META_COLOUR_3 = "3"           // The current time is after the RaceXml time.
     const val META_COLOUR_4 = "4"           // The race time is not today (old info).
 
     const val DAY_PRIOR = 0                 // The given day is before today.

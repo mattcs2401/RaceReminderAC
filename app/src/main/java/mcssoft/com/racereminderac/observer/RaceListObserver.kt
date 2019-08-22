@@ -15,7 +15,7 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
 
     /**
      * The observer's onChange method.
-     * @param lRaces: The list of mutable Race objects.
+     * @param lRaces: The list of mutable RaceXml objects.
      */
     override fun onChanged(lRaces: MutableList<Race>?) {
         if((lRaces != null) && (lRaces.isNotEmpty())) {
@@ -37,17 +37,17 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
     1: the current time is after that given - i.e. the race time is in the past.
  */
     /**
-     * Check Race date/time and set colours accordingly.
+     * Check RaceXml date/time and set colours accordingly.
      * @param lRaces: The list of current Races.
      */
     private fun timeCheck(lRaces: MutableList<Race>) {
         val raceTime = RaceTime.getInstance()!!
         // Check the race time against the current time.
         for(race in lRaces) {
-            // The time as per the Race object.
+            // The time as per the RaceXml object.
             val raceTimeMillis = race.raceTimeL
 
-            // If the Race day is today, then process, else ignore.
+            // If the RaceXml day is today, then process, else ignore.
             if (raceTime.compareToDay(raceTimeMillis) == Constants.DAY_CURRENT) {
                 // The value of the comparison.
 
@@ -79,7 +79,7 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
     }
 
     /**
-     * Post a notification that the Race is nearing race time.
+     * Post a notification that the RaceXml is nearing race time.
      * @param race: Used to derive notification values.
      */
     private fun postNotification(race: Race) {

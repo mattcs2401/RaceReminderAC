@@ -14,7 +14,7 @@ import mcssoft.com.racereminderac.utility.eventbus.MultiSelMessage
 import org.greenrobot.eventbus.EventBus
 
 /**
- * Utility class to display a dialog from which the user can make more than one selection for a Race
+ * Utility class to display a dialog from which the user can make more than one selection for a RaceXml
  * (max of 4).
  */
 class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
@@ -191,7 +191,7 @@ class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
         btnCancel = view.id_btn_multi_sel_cancel
         btnCancel.setOnClickListener(this)
 
-        // Race selections number picker data.
+        // RaceXml selections number picker data.
         rsVals = resources.getStringArray(R.array.raceSel)
 
         // Number picker.

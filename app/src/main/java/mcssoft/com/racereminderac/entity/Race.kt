@@ -30,7 +30,7 @@ data class Race(@ColumnInfo(name = "CityCode") var cityCode: String,
     @ColumnInfo(name = "RaceTrainer") var raceTrainer: String = ""
 
     /**
-     * Simple compare on RaceTime. Used in, e.g.,  Collections.sort(List<Race>)
+     * Simple compare on RaceTime. Used in, e.g.,  Collections.sort(List<RaceXml>)
      * @param other: The object to compare (this) against.
      */
     override fun compareTo(other: Race): Int {

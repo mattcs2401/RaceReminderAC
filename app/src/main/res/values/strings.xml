@@ -48,7 +48,7 @@
     <string name="lbl_race_count">Count</string>
     <string name="lbl_notifications">Notifications</string>
 
-    <!-- Race related labels. -->
+    <!-- RaceXml related labels. -->
     <string name="lbl_trainer">Trainer</string>
     <string name="lbl_horse">Horse</string>
     <string name="lbl_jockey">Jockey</string>
@@ -97,7 +97,7 @@
 
     <!--<string name="key_maint_del_archv_pref">key_maint_del_archv_pref</string>-->
     <!--<string name="maint_del_archv_title">Delete Archived</string>-->
-    <!--<string name="maint_del_archv_summary">Delete archived Race records.</string>-->
+    <!--<string name="maint_del_archv_summary">Delete archived RaceXml records.</string>-->
 
     <!-- Undo. -->
     <string name="key_recovery">key_recovery</string>
@@ -137,7 +137,7 @@
     <string name="network_summary">Update Race details from the Tatts network.</string>
 
     <!--&lt;!&ndash; Preferences Toast messages. &ndash;&gt;-->
-    <!--<string name="race_code_msg">Default Race Code changed to</string>-->
+    <!--<string name="race_code_msg">Default RaceXml Code changed to</string>-->
     <!--<string name="city_code_msg">Default City Code changed to</string>-->
     <!--<string name="arch_removal_msg">Archived records removed.</string>-->
 

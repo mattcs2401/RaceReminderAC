@@ -39,7 +39,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
         val race = lRaces[position]
         // City, code, time, selections etc.
         setBaseDisplayValues(holder, race)
-        // Set display colours based on the Race object's metaColour value.
+        // Set display colours based on the RaceXml object's metaColour value.
         setDisplayColourValues(holder, race)
         //  Setup for multi select if applicable.
         setMultiSelect(holder, race)
@@ -51,7 +51,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
 
     /**
      * Refresh the backing data.
-     * @param lRaces: The list of Race objects that comprise the data.
+     * @param lRaces: The list of RaceXml objects that comprise the data.
      */
     internal fun swapData(lRaces: ArrayList<Race>) {
         this.lRaces = lRaces
@@ -69,9 +69,9 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     }
 
     /**
-     * Return the Race object at the adapter position.
+     * Return the RaceXml object at the adapter position.
      * @param lPos: The adapter position (0 based).
-     * @return The Race object.
+     * @return The RaceXml object.
      */
     internal fun getRace(lPos : Int) : Race = lRaces[lPos]
 
@@ -115,7 +115,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility">
     /**
-     * Remove a Race from the listing.
+     * Remove a RaceXml from the listing.
      * @param lPos: The position in the listing.
      */
     private fun deleteRace(lPos: Int) {
@@ -202,18 +202,18 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
         when (view.id) {
             R.id.snackbar_action -> {  // this is a system default id.
                 reinstateRace(raceUndo!!, posUndo)
-                Toast.makeText(context, "Race re-instated.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "RaceXml re-instated.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
      /**
-     * Re-instate a previously removed Race.
-     * @param race: The Race object at time of last UNDO.
+     * Re-instate a previously removed RaceXml.
+     * @param race: The RaceXml object at time of last UNDO.
      * @param lPos: The position in the list at time of last UNDO.
      */
     private fun reinstateRace(race: Race, lPos: Int) {
-        // Put Race back into the list.
+        // Put RaceXml back into the list.
         lRaces.add(lPos, race)
         // Notify the adapter.
         notifyItemInserted(lPos)
