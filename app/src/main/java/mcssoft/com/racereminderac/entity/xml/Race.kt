@@ -11,13 +11,11 @@ import androidx.room.ForeignKey.CASCADE
                 parentColumns = ["MtgId"],
                 childColumns = ["MtgId"],
                 onDelete = CASCADE)])
-data class Race(@ColumnInfo(name = "RaceNo") var raceNo: String) {
+data class Race(@ColumnInfo(name = "MtgId") var mtgId: String,
+                @ColumnInfo(name = "RaceNo") var raceNo: String) {
 
     @PrimaryKey
     @ColumnInfo(name = "_id") var id: Long? = raceNo.toLong()
-
-    // Meeting foreign keys.
-    @ColumnInfo(name = "MtgId") var mtgId: String = ""    // e.g. "2032403456"
 
     // Other columns
     @ColumnInfo(name = "RaceTime") var raceTime: String = ""

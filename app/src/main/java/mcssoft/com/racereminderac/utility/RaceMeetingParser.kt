@@ -50,12 +50,12 @@ class RaceMeetingParser constructor(val context: Context) {
                     }
                     "Race" -> {
                         Log.i("", "Race")
-                        race = readRace(parser)
+                        race = readRace(parser, meeting!!.mtgId)
                         lRunners = arrayListOf<Runner>()
                     }
                     "Runner" -> {
                         Log.i("", "Runner")
-//                        runner = readRunner(parser)
+                        runner = readRunner(parser, race!!.raceNo)
 //                        runner!!.raceNo = raceXml!!.raceNo
 ////                        runner!!.meetingCode = raceXml!!.meetingCode
 //                        runnersList.add(runner!!)
@@ -95,38 +95,28 @@ class RaceMeetingParser constructor(val context: Context) {
         return meeting
     }
 
-    private fun readRace(parser: XmlPullParser): Race {
+    private fun readRace(parser: XmlPullParser, mtgId: String): Race {
         val rNo = parser.getAttributeValue(nameSpace, "RaceNo")
-        val race = Race(rNo)
+        val race = Race(mtgId, rNo)
         race.raceTime = parser.getAttributeValue(nameSpace, "RaceTime")
         race.raceName = parser.getAttributeValue(nameSpace, "RaceName")
         race.distance = parser.getAttributeValue(nameSpace, "Distance")
         return race
     }
 
-    private fun readRunner(parser: XmlPullParser): Array<String> {
-        val lRunner = arrayOf("","","","","","","","","","")
-        lRunner[0] = parser.getAttributeValue(nameSpace, "RunnerNo")
-        lRunner[1] = parser.getAttributeValue(nameSpace, "RunnerName")
-        lRunner[2] = parser.getAttributeValue(nameSpace, "Scratched")
-        lRunner[3] = parser.getAttributeValue(nameSpace, "Rider")
-        lRunner[4] = parser.getAttributeValue(nameSpace, "RiderChanged")
-        lRunner[5] = parser.getAttributeValue(nameSpace, "Barrier")
-        lRunner[6] = parser.getAttributeValue(nameSpace, "Handicap")
-        lRunner[7] = parser.getAttributeValue(nameSpace, "Weight")
-        lRunner[8] = parser.getAttributeValue(nameSpace, "LastResult")
-        lRunner[9] = parser.getAttributeValue(nameSpace, "Rtng")
-
-//        val runner = Runner(raceXml!!.raceNo, raceXml!!.raceTime, lRunner[0], lRunner[1])
-//        runner.scratched = lRunner[2]
-//        runner.rider = lRunner[3]
-//        runner.riderChanged = lRunner[4]
-//        runner.barrier = lRunner[5]
-//        runner.handicap = lRunner[6]
-//        runner.weight = lRunner[7]
-//        runner.lastResult = lRunner[8]
-//        runner.rtng = lRunner[9]
-        return lRunner
+    private fun readRunner(parser: XmlPullParser, raceNo: String): Runner {
+        val runnerNo =  parser.getAttributeValue(nameSpace, "RunnerNo")
+        val runner = Runner(raceNo, runnerNo)
+        runner.runnerName = parser.getAttributeValue(nameSpace, "RunnerName")
+        runner.scratched = parser.getAttributeValue(nameSpace, "Scratched")
+        runner.rider = parser.getAttributeValue(nameSpace, "Rider")
+        runner.riderChanged = parser.getAttributeValue(nameSpace, "RiderChanged")
+        runner.barrier = parser.getAttributeValue(nameSpace, "Barrier")
+        runner.handicap = parser.getAttributeValue(nameSpace, "Handicap")
+        runner.weight = parser.getAttributeValue(nameSpace, "Weight")
+        runner.lastResult = parser.getAttributeValue(nameSpace, "LastResult")
+        runner.rtng = parser.getAttributeValue(nameSpace, "Rtng")
+        return runner
     }
 
     /*

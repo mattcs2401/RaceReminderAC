@@ -11,13 +11,11 @@ import androidx.room.ForeignKey.CASCADE
                 parentColumns = ["RaceNo"],
                 childColumns = ["RaceNo"],
                 onDelete = CASCADE)])
-data class Runner(@ColumnInfo(name = "RunnerNo") var runnerNo: String) {
+data class Runner( @ColumnInfo(name = "RaceNo") var raceNo: String,
+                   @ColumnInfo(name = "RunnerNo") var runnerNo: String) {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "_id") var id: Long? = runnerNo.toLong()
-
-    // Race foreign key.
-    @ColumnInfo(name = "RaceNo") var raceNo: String = ""
 
     // Other columns.
     @ColumnInfo(name = "RunnerName") var runnerName: String = ""
