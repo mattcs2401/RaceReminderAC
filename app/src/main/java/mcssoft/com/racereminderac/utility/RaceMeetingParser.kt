@@ -3,10 +3,7 @@ package mcssoft.com.racereminderac.utility
 import android.content.Context
 import android.util.Log
 import android.util.Xml
-import mcssoft.com.racereminderac.entity.xml.Meeting
-import mcssoft.com.racereminderac.entity.xml.RaceXml
 import mcssoft.com.racereminderac.entity.xml.RaceDay
-import mcssoft.com.racereminderac.entity.xml.Runner
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
@@ -14,6 +11,9 @@ import java.io.InputStream
 
 // https://tatts.com/pagedata/racing/2019/8/19/NR1.xml
 // https://developer.android.com/training/basics/network-ops/xml
+/**
+ * Utility class to parse the race day xml into various lists.
+ */
 class RaceMeetingParser constructor(val context: Context) {
 
     // TODO - What about parser exceptions ? This class needs to be more robust.
@@ -29,22 +29,9 @@ class RaceMeetingParser constructor(val context: Context) {
         }
     }
 
-//    fun getRace(): RaceXml? {
-//        return raceXml
-//    }
-
-//    fun getRunner(num: Int): Runner? {
-//        val ndx = num - 1
-//        return runnersList.get(ndx)
-//    }
-
-//    fun getRunners(): ArrayList<Runner>? {
-//        return runnersList
-//    }
-
     private fun readFeed(parser: XmlPullParser) {
         var tag: String = ""
-
+// TODO - the logic for lists of things, e.g. runners, goes in here.
         var eventType: Int = parser.eventType
         while (eventType != XmlPullParser.END_DOCUMENT) {
             if (eventType == XmlPullParser.START_TAG) {
@@ -61,15 +48,15 @@ class RaceMeetingParser constructor(val context: Context) {
                     "RaceXml" -> {
                         Log.i("", "RaceXml")
                         raceXml = readRace(parser)
-                        raceXml!!.mtgId = meeting!!.mtgId
-                        raceXml!!.meetingCode = meeting!!.meetingCode
-                        runnersList = arrayListOf<Runner>()
+//                        raceXml!!.mtgId = meeting!!.mtgId
+//                        raceXml!!.meetingCode = meeting!!.meetingCode
+                        runnersList = arrayListOf<Array<String>>()
                     }
                     "Runner" -> {
                         Log.i("", "Runner")
                         runner = readRunner(parser)
-                        runner!!.raceNo = raceXml!!.raceNo
-//                        runner!!.meetingCode = raceXml!!.meetingCode
+//                        runner!!.raceNo = raceXml!!.raceNo
+////                        runner!!.meetingCode = raceXml!!.meetingCode
                         runnersList.add(runner!!)
                     }
                 }
@@ -91,13 +78,13 @@ class RaceMeetingParser constructor(val context: Context) {
         lRaceDay[5] = parser.getAttributeValue(nameSpace,"MonthLong")
 
         val raceDay = RaceDay(lRaceDay[1], lRaceDay[2], lRaceDay[3])
-        raceDay.raceDayDate = lRaceDay[1]
+        raceDay.raceDayDate = lRaceDay[0]
         raceDay.raceDayOfTheWeek = lRaceDay[4]
         raceDay.raceMonthLong = lRaceDay[5]
         return raceDay
     }
 
-    private fun readMeeting(parser: XmlPullParser): Meeting {
+    private fun readMeeting(parser: XmlPullParser): Array<String> {
         val lMeeting = arrayOf("","","","","","","","")
         lMeeting[0] = parser.getAttributeValue(nameSpace, "MeetingCode")
         lMeeting[1] = parser.getAttributeValue(nameSpace, "MtgId")
@@ -108,30 +95,30 @@ class RaceMeetingParser constructor(val context: Context) {
         lMeeting[6] = parser.getAttributeValue(nameSpace, "WeatherDesc")
         lMeeting[7] = parser.getAttributeValue(nameSpace, "MtgAbandoned")
 
-        val meeting = Meeting(lMeeting[0], lMeeting[1])
-        meeting.venueName = lMeeting[2]
-        meeting.mtgType = lMeeting[3]
-        meeting.trackDesc = lMeeting[4]
-        meeting.trackRating = lMeeting[5]
-        meeting.weatherDesc = lMeeting[6]
-        meeting.mtgAbandoned = lMeeting[7]
-        return meeting
+//        val meeting = Meeting(lMeeting[0], lMeeting[1])
+//        meeting.venueName = lMeeting[2]
+//        meeting.mtgType = lMeeting[3]
+//        meeting.trackDesc = lMeeting[4]
+//        meeting.trackRating = lMeeting[5]
+//        meeting.weatherDesc = lMeeting[6]
+//        meeting.mtgAbandoned = lMeeting[7]
+        return lMeeting
     }
 
-    private fun readRace(parser: XmlPullParser): RaceXml {
+    private fun readRace(parser: XmlPullParser): Array<String> {
         val lRace = arrayOf("","","","")
         lRace[0] = parser.getAttributeValue(nameSpace, "RaceNo")
         lRace[1] = parser.getAttributeValue(nameSpace, "RaceTime")
         lRace[2] = parser.getAttributeValue(nameSpace, "RaceName")
         lRace[3] = parser.getAttributeValue(nameSpace, "Distance")
 
-        val race = RaceXml(meeting!!.meetingCode, meeting!!.mtgId, lRace[0], lRace[1])
-        race.raceName = lRace[2]
-        race.distance = lRace[3]
-        return race
+//        val race = RaceXml(meeting!!.meetingCode, meeting!!.mtgId, lRace[0], lRace[1])
+//        race.raceName = lRace[2]
+//        race.distance = lRace[3]
+        return lRace
     }
 
-    private fun readRunner(parser: XmlPullParser): Runner {
+    private fun readRunner(parser: XmlPullParser): Array<String> {
         val lRunner = arrayOf("","","","","","","","","","")
         lRunner[0] = parser.getAttributeValue(nameSpace, "RunnerNo")
         lRunner[1] = parser.getAttributeValue(nameSpace, "RunnerName")
@@ -144,46 +131,36 @@ class RaceMeetingParser constructor(val context: Context) {
         lRunner[8] = parser.getAttributeValue(nameSpace, "LastResult")
         lRunner[9] = parser.getAttributeValue(nameSpace, "Rtng")
 
-        val runner = Runner(raceXml!!.raceNo, raceXml!!.raceTime, lRunner[0], lRunner[1])
-        runner.scratched = lRunner[2]
-        runner.rider = lRunner[3]
-        runner.riderChanged = lRunner[4]
-        runner.barrier = lRunner[5]
-        runner.handicap = lRunner[6]
-        runner.weight = lRunner[7]
-        runner.lastResult = lRunner[8]
-        runner.rtng = lRunner[9]
-        return runner
+//        val runner = Runner(raceXml!!.raceNo, raceXml!!.raceTime, lRunner[0], lRunner[1])
+//        runner.scratched = lRunner[2]
+//        runner.rider = lRunner[3]
+//        runner.riderChanged = lRunner[4]
+//        runner.barrier = lRunner[5]
+//        runner.handicap = lRunner[6]
+//        runner.weight = lRunner[7]
+//        runner.lastResult = lRunner[8]
+//        runner.rtng = lRunner[9]
+        return lRunner
     }
 
     /*
       Collate the parsed details into a "management" class.
      */
     private fun collateRaceDetails() {
-//        RaceDetails.getInstance(context).addRaceDay(raceDay!!.getRaceDayDetails())
-//        RaceDetails.getInstance(context).addMeeting(meeting!!.getMeetingDetails())
-//        RaceDetails.getInstance(context).addRace(raceXml!!.getRaceDetails())
-//
-//        val listing: MutableList<List<String>> = arrayListOf()
-//            for(runner in runnersList) {
-//                listing.add(runner.getRunnerDetails())
-//            }
-//
-//        RaceDetails.getInstance(context).addRunners(listing)
 
         // Tidy up.
         raceDay = null
         meeting = null
         raceXml = null
         runner = null
-        runnersList.clear()
+//        runnersList.clear()
     }
 
     // We don't use namespaces
     private val nameSpace: String? = null
-    private var meeting: Meeting? = null
+    private var meeting: Array<String>? = null
     private var raceDay: RaceDay? = null
-    private var raceXml: RaceXml? = null
-    private var runner: Runner? = null                     // single runner details.
-    private lateinit var runnersList: ArrayList<Runner>//? = null     // multiple runners per raceXml.
+    private var raceXml: Array<String>? = null
+    private var runner: Array<String>? = null                     // single runner details.
+    private lateinit var runnersList: ArrayList<Array<String>>    // multiple runners per raceXml.
 }

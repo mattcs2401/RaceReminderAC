@@ -13,7 +13,7 @@ import mcssoft.com.racereminderac.entity.xml.RaceDay
 import mcssoft.com.racereminderac.entity.xml.RaceXml
 import mcssoft.com.racereminderac.entity.xml.Runner
 
-@Database(entities = [Race::class, RaceDay::class, RaceXml::class, Meeting::class, Runner::class],
+@Database(entities = [Race::class, RaceDay::class/*, RaceXml::class, Meeting::class, Runner::class*/],
         version = 1, exportSchema = false)
 abstract class RaceDatabase : RoomDatabase() {
 
