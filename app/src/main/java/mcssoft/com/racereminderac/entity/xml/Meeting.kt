@@ -5,15 +5,18 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
+/**
+ * Data class to model the <Meeting></Meeting> tag of the Tatts xml page data.
+ */
 @Entity(tableName = "race_meeting",
-        indices = [Index(value = ["MtgId", "MeetingCode"], unique = true)])
-class Meeting(@ColumnInfo(name = "MtgId") var mtgId: String,
-              @ColumnInfo(name = "MeetingCode") var meetingCode: String) {
+        indices = [Index(value = ["MeetingCode"], unique = true)])
+class Meeting(@ColumnInfo(name = "MtgId") var mtgId: String) {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "_id") var id: Long? = null    // value inserted by Room.
+    @PrimaryKey
+    @ColumnInfo(name = "_id") var id: Long = mtgId.toLong()
 
     // Other columns.
+    @ColumnInfo(name = "MeetingCode") var meetingCode: String = ""
     @ColumnInfo(name = "VenueName") var venueName: String = ""
     @ColumnInfo(name = "MtgType") var mtgType: String = ""
     @ColumnInfo(name = "TrackDesc") var trackDesc: String = ""
@@ -29,8 +32,4 @@ class Meeting(@ColumnInfo(name = "MtgId") var mtgId: String,
 //    lateinit var trackRating: String   // e.g. "4"
 //    lateinit var weatherDesc: String   // e.g. "Fine"
 //    lateinit var mtgAbandoned: String  // e.g. "N"
-//
-//    fun getMeetingDetails() : List<String> {
-//        return listOf(meetingCode, mtgId, venueName, mtgType, trackDesc, trackRating, weatherDesc, mtgAbandoned)
-//    }
 }

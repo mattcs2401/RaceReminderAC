@@ -3,6 +3,7 @@ package mcssoft.com.racereminderac.utility
 import android.content.Context
 import android.util.Log
 import android.util.Xml
+import mcssoft.com.racereminderac.entity.xml.Meeting
 import mcssoft.com.racereminderac.entity.xml.RaceDay
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
@@ -69,39 +70,28 @@ class RaceMeetingParser constructor(val context: Context) {
     }
 
     private fun readRaceDay(parser: XmlPullParser): RaceDay {
-        val lRaceDay = arrayOf("","","","","","")
-        lRaceDay[0] = parser.getAttributeValue(nameSpace,"RaceDayDate")
-        lRaceDay[1] = parser.getAttributeValue(nameSpace,"Year")
-        lRaceDay[2] = parser.getAttributeValue(nameSpace,"Month")
-        lRaceDay[3] = parser.getAttributeValue(nameSpace,"Day")
-        lRaceDay[4] = parser.getAttributeValue(nameSpace,"DayOfTheWeek")
-        lRaceDay[5] = parser.getAttributeValue(nameSpace,"MonthLong")
-
-        val raceDay = RaceDay(lRaceDay[1], lRaceDay[2], lRaceDay[3])
-        raceDay.raceDayDate = lRaceDay[0]
-        raceDay.raceDayOfTheWeek = lRaceDay[4]
-        raceDay.raceMonthLong = lRaceDay[5]
+        val date = parser.getAttributeValue(nameSpace,"RaceDayDate")
+        val raceDay = RaceDay(date)
+        raceDay.raceYear = parser.getAttributeValue(nameSpace,"Year")
+        raceDay.raceMonth = parser.getAttributeValue(nameSpace,"Month")
+        raceDay.raceDay = parser.getAttributeValue(nameSpace,"Day")
+        raceDay.raceDayOfTheWeek = parser.getAttributeValue(nameSpace,"DayOfTheWeek")
+        raceDay.raceMonthLong = parser.getAttributeValue(nameSpace,"MonthLong")
         return raceDay
     }
 
     private fun readMeeting(parser: XmlPullParser): Array<String> {
-        val lMeeting = arrayOf("","","","","","","","")
+        val lMeeting = arrayOf("","")
         lMeeting[0] = parser.getAttributeValue(nameSpace, "MeetingCode")
         lMeeting[1] = parser.getAttributeValue(nameSpace, "MtgId")
-        lMeeting[2] = parser.getAttributeValue(nameSpace, "VenueName")
-        lMeeting[3] = parser.getAttributeValue(nameSpace, "MtgType")
-        lMeeting[4] = parser.getAttributeValue(nameSpace, "TrackDesc")
-        lMeeting[5] = parser.getAttributeValue(nameSpace, "TrackRating")
-        lMeeting[6] = parser.getAttributeValue(nameSpace, "WeatherDesc")
-        lMeeting[7] = parser.getAttributeValue(nameSpace, "MtgAbandoned")
-
-//        val meeting = Meeting(lMeeting[0], lMeeting[1])
-//        meeting.venueName = lMeeting[2]
-//        meeting.mtgType = lMeeting[3]
-//        meeting.trackDesc = lMeeting[4]
-//        meeting.trackRating = lMeeting[5]
-//        meeting.weatherDesc = lMeeting[6]
-//        meeting.mtgAbandoned = lMeeting[7]
+        val meeting = Meeting(lMeeting[1])
+        meeting.meetingCode = lMeeting[0]
+        meeting.venueName = parser.getAttributeValue(nameSpace, "VenueName")
+        meeting.mtgType = parser.getAttributeValue(nameSpace, "MtgType")
+        meeting.trackDesc = parser.getAttributeValue(nameSpace, "TrackDesc")
+        meeting.trackRating = parser.getAttributeValue(nameSpace, "TrackRating")
+        meeting.weatherDesc = parser.getAttributeValue(nameSpace, "WeatherDesc")
+        meeting.mtgAbandoned = parser.getAttributeValue(nameSpace, "MtgAbandoned")
         return lMeeting
     }
 
