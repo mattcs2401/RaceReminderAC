@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "meeting",
         indices = [Index(value = ["MtgId"], unique = true)])
-class Meeting(@ColumnInfo(name = "MtgId") var mtgId: String) {
+data class Meeting(@ColumnInfo(name = "MtgId") var mtgId: String) {
 
     @PrimaryKey
     @ColumnInfo(name = "_id") var id: Long = mtgId.toLong()

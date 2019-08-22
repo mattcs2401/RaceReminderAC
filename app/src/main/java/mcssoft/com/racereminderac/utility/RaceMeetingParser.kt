@@ -51,9 +51,7 @@ class RaceMeetingParser constructor(val context: Context) {
                     "Race" -> {
                         Log.i("", "Race")
                         race = readRace(parser)
-//                        raceXml!!.mtgId = meeting!!.mtgId
-//                        raceXml!!.meetingCode = meeting!!.meetingCode
-                        runnersList = arrayListOf<Array<String>>()
+                        lRunners = arrayListOf<Runner>()
                     }
                     "Runner" -> {
                         Log.i("", "Runner")
@@ -84,11 +82,10 @@ class RaceMeetingParser constructor(val context: Context) {
     }
 
     private fun readMeeting(parser: XmlPullParser): Meeting {
-        val lMeeting = arrayOf("","")
-        lMeeting[0] = parser.getAttributeValue(nameSpace, "MeetingCode")
-        lMeeting[1] = parser.getAttributeValue(nameSpace, "MtgId")
-        val meeting = Meeting(lMeeting[1])
-        meeting.meetingCode = lMeeting[0]
+        val code = parser.getAttributeValue(nameSpace, "MeetingCode")
+        val id = parser.getAttributeValue(nameSpace, "MtgId")
+        val meeting = Meeting(id)
+        meeting.meetingCode = code
         meeting.venueName = parser.getAttributeValue(nameSpace, "VenueName")
         meeting.mtgType = parser.getAttributeValue(nameSpace, "MtgType")
         meeting.trackDesc = parser.getAttributeValue(nameSpace, "TrackDesc")
@@ -99,8 +96,8 @@ class RaceMeetingParser constructor(val context: Context) {
     }
 
     private fun readRace(parser: XmlPullParser): Race {
-        val num = parser.getAttributeValue(nameSpace, "RaceNo")
-        val race = Race(num)
+        val rNo = parser.getAttributeValue(nameSpace, "RaceNo")
+        val race = Race(rNo)
         race.raceTime = parser.getAttributeValue(nameSpace, "RaceTime")
         race.raceName = parser.getAttributeValue(nameSpace, "RaceName")
         race.distance = parser.getAttributeValue(nameSpace, "Distance")
@@ -142,7 +139,7 @@ class RaceMeetingParser constructor(val context: Context) {
         meeting = null
         race = null
         runner = null
-//        runnersList.clear()
+        lRunners.clear()
     }
 
     // We don't use namespaces
@@ -150,6 +147,6 @@ class RaceMeetingParser constructor(val context: Context) {
     private var meeting: Meeting? = null
     private var raceDay: RaceDay? = null
     private var race: Race? = null
-    private var runner: Array<Runner>? = null                     // single runner details.
-    private lateinit var runnersList: ArrayList<Array<String>>    // multiple runners per raceXml.
+    private var runner: Runner? = null                  // single runner details.
+    private lateinit var lRunners: ArrayList<Runner>    // multiple runners.
 }
