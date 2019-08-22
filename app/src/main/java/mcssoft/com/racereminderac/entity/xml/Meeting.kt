@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
 /**
  * Data class to model the <Meeting></Meeting> tag of the Tatts xml page data.
  */
-@Entity(tableName = "race_meeting",
-        indices = [Index(value = ["MeetingCode"], unique = true)])
+@Entity(tableName = "meeting",
+        indices = [Index(value = ["MtgId"], unique = true)])
 class Meeting(@ColumnInfo(name = "MtgId") var mtgId: String) {
 
     @PrimaryKey
