@@ -1,18 +1,20 @@
 package mcssoft.com.racereminderac.entity.xml
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 /**
  * Data class to model the <Meeting></Meeting> tag of the Tatts xml page data.
  */
-@Entity
-data class Meeting(var mId: Long) {
+@Entity(indices = [Index(name = "idxRdId", value = ["RdId"], unique = true)],
+        foreignKeys = [ForeignKey(entity = RaceDay::class,
+                parentColumns = ["RdId"], childColumns = ["RdId"], onDelete = ForeignKey.CASCADE)])
+data class Meeting(var rId: Long, var mId: Long) {
 
     @PrimaryKey
     @ColumnInfo(name = "MtgId") var mtgId = mId
+
+    // Foreign key.
+    @ColumnInfo(name = "RdId") var rdId = rId
 
     // Other columns.
     @ColumnInfo(name = "MeetingCode") var meetingCode: String = ""

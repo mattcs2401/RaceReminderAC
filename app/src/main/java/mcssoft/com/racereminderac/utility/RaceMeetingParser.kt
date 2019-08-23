@@ -45,7 +45,7 @@ class RaceMeetingParser constructor(val context: Context) {
                     }
                     "Meeting" -> {
                         Log.i("", "Meeting")
-                        meeting = readMeeting(parser)
+                        meeting = readMeeting(parser, raceDay!!.rdId)
                     }
                     "Race" -> {
                         Log.i("", "Race")
@@ -89,10 +89,10 @@ class RaceMeetingParser constructor(val context: Context) {
      * @param parser: The XmlPullParser to use.
      * @return A Meeting object.
      */
-    private fun readMeeting(parser: XmlPullParser): Meeting {
+    private fun readMeeting(parser: XmlPullParser, rdId: Long?): Meeting {
         val code = parser.getAttributeValue(nameSpace, "MeetingCode")
         val id = parser.getAttributeValue(nameSpace, "MtgId")
-        val meeting = Meeting(id.toLong())
+        val meeting = Meeting(rdId!!, id.toLong())
         meeting.meetingCode = code
         meeting.venueName = parser.getAttributeValue(nameSpace, "VenueName")
         meeting.mtgType = parser.getAttributeValue(nameSpace, "MtgType")

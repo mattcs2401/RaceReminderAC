@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
 data class RaceDay(@ColumnInfo(name = "RaceDayDate") var raceDayDate: String) {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "_id") var id: Long? = null    // value inserted by Room.
+    @ColumnInfo(name = "RdId") var rdId: Long? = null    // value inserted by Room.
 
     // Other columns.
     @ColumnInfo(name = "RaceYear") var raceYear: String = ""
