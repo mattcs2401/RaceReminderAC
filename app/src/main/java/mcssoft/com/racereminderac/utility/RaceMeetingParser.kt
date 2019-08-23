@@ -33,12 +33,11 @@ class RaceMeetingParser constructor(val context: Context) {
     }
 
     private fun readFeed(parser: XmlPullParser) {
-        var tag: String = ""
-// TODO - the logic for lists of things, e.g. runners, goes in here.
+        // TODO - the logic for lists of things, e.g. runners, goes in here.
         var eventType: Int = parser.eventType
         while (eventType != XmlPullParser.END_DOCUMENT) {
             if (eventType == XmlPullParser.START_TAG) {
-                tag = parser.name
+                val tag = parser.name
                 when(tag) {
                     "RaceDay" -> {
                         Log.i("", "RaceDay")
@@ -56,9 +55,7 @@ class RaceMeetingParser constructor(val context: Context) {
                     "Runner" -> {
                         Log.i("", "Runner")
                         runner = readRunner(parser, race!!.raceNo)
-//                        runner!!.raceNo = raceXml!!.raceNo
-////                        runner!!.meetingCode = raceXml!!.meetingCode
-//                        runnersList.add(runner!!)
+                        lRunners.add(runner!!)
                     }
                 }
             }
@@ -70,6 +67,12 @@ class RaceMeetingParser constructor(val context: Context) {
         }
     }
 
+    //<editor-fold default state="collapsed" desc="Region: Tags parsing.">
+    /**
+     * Parse the <RaceDay></RaceDay> tags.
+     * @param parser: The XmlPullParser to use.
+     * @return A RaceDay object.
+     */
     private fun readRaceDay(parser: XmlPullParser): RaceDay {
         val date = parser.getAttributeValue(nameSpace,"RaceDayDate")
         val raceDay = RaceDay(date)
@@ -81,10 +84,15 @@ class RaceMeetingParser constructor(val context: Context) {
         return raceDay
     }
 
+    /**
+     * Parse the <Meeting></Meeting> tags.
+     * @param parser: The XmlPullParser to use.
+     * @return A Meeting object.
+     */
     private fun readMeeting(parser: XmlPullParser): Meeting {
         val code = parser.getAttributeValue(nameSpace, "MeetingCode")
         val id = parser.getAttributeValue(nameSpace, "MtgId")
-        val meeting = Meeting(id)
+        val meeting = Meeting(id.toLong())
         meeting.meetingCode = code
         meeting.venueName = parser.getAttributeValue(nameSpace, "VenueName")
         meeting.mtgType = parser.getAttributeValue(nameSpace, "MtgType")
@@ -95,18 +103,30 @@ class RaceMeetingParser constructor(val context: Context) {
         return meeting
     }
 
-    private fun readRace(parser: XmlPullParser, mtgId: String): Race {
+    /**
+     * Parse the <Race></Race> tags.
+     * @param parser: The XmlPullParser to use.
+     * @param mtgId: The id of the Meeting.
+     * @return A Race object.
+     */
+    private fun readRace(parser: XmlPullParser, mtgId: Long): Race {
         val rNo = parser.getAttributeValue(nameSpace, "RaceNo")
-        val race = Race(mtgId, rNo)
+        val race = Race(mtgId, rNo.toLong())
         race.raceTime = parser.getAttributeValue(nameSpace, "RaceTime")
         race.raceName = parser.getAttributeValue(nameSpace, "RaceName")
         race.distance = parser.getAttributeValue(nameSpace, "Distance")
         return race
     }
 
-    private fun readRunner(parser: XmlPullParser, raceNo: String): Runner {
+    /**
+     * Parse the <Runner></Runner> tags.
+     * @param parser: The XmlPullParser to use.
+     * @param raceNo: The race number of the Race.
+     * @return A Runner object.
+     */
+    private fun readRunner(parser: XmlPullParser, raceNo: Long): Runner {
         val runnerNo =  parser.getAttributeValue(nameSpace, "RunnerNo")
-        val runner = Runner(raceNo, runnerNo)
+        val runner = Runner(raceNo, runnerNo.toLong())
         runner.runnerName = parser.getAttributeValue(nameSpace, "RunnerName")
         runner.scratched = parser.getAttributeValue(nameSpace, "Scratched")
         runner.rider = parser.getAttributeValue(nameSpace, "Rider")
@@ -118,11 +138,13 @@ class RaceMeetingParser constructor(val context: Context) {
         runner.rtng = parser.getAttributeValue(nameSpace, "Rtng")
         return runner
     }
+    //</editor-fold>
 
     /*
       Collate the parsed details into a "management" class.
      */
     private fun collateRaceDetails() {
+        // TBA
 
         // Tidy up.
         raceDay = null

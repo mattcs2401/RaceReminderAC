@@ -6,16 +6,16 @@ import androidx.room.ForeignKey.CASCADE
 /**
  * Data class to model the <Race></Race> tag of the Tatts xml page data.
  */
-@Entity(tableName = "race",
+@Entity(indices = [Index(name = "idxMtgId", value = ["MtgId"], unique = true)],
         foreignKeys = [ForeignKey(entity = Meeting::class,
-                parentColumns = ["MtgId"],
-                childColumns = ["MtgId"],
-                onDelete = CASCADE)])
-data class Race(@ColumnInfo(name = "MtgId") var mtgId: String,
-                @ColumnInfo(name = "RaceNo") var raceNo: String) {
+                parentColumns = ["MtgId"], childColumns = ["MtgId"], onDelete = CASCADE)])
+class Race(var mId: Long, var rNo: Long) {
 
     @PrimaryKey
-    @ColumnInfo(name = "_id") var id: Long? = raceNo.toLong()
+    @ColumnInfo(name = "RaceNo") var raceNo = rNo
+
+    // Foreign key.
+    @ColumnInfo(name = "MtgId") var mtgId = mId
 
     // Other columns
     @ColumnInfo(name = "RaceTime") var raceTime: String = ""
