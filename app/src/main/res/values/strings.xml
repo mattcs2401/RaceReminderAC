@@ -249,7 +249,7 @@
     </string-array>
 
     <!-- Time picker dialog tag. -->
-    <string name="tp_tag">time_pick_dialog</string>
+    <string name="tag_time_picker_dialog">time_pick_dialog</string>
 
     <!-- EditText layout default values. -->
     <string name="abbrv_city_code">B</string>

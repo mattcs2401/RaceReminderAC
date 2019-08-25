@@ -8,6 +8,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,7 @@ import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.utility.NetworkManager
 import mcssoft.com.racereminderac.ui.dialog.DeleteAllDialog
+import mcssoft.com.racereminderac.ui.dialog.DialogManager
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceAlarm
 import mcssoft.com.racereminderac.utility.RacePreferences
@@ -139,8 +141,9 @@ class MainFragment : Fragment() {
         when(item.itemId) {
             R.id.id_mnu_delete_all -> {
                 if (!raceAdapter.isEmpty()) {
-                    val dialog = DeleteAllDialog()
-                    dialog.show(activity!!.supportFragmentManager, getString(R.string.tag_delete_all_dialog))
+                    val args = Bundle()
+                    DialogManager.getInstance()?.showDialog(Constants.D_DELETE_ALL, args,
+                            activity?.supportFragmentManager!!.beginTransaction(), activity!!)
                 } else {
                     Toast.makeText(activity!!, getString(R.string.toast_nothing_to_delete), Toast.LENGTH_SHORT).show()
                 }

@@ -60,4 +60,10 @@ object Constants {
     const val NETWORK_WIFI = 1              // Network only by WiFi.
     const val NETWORK_MOB = 2               // Network only by mobile data.
     const val NETWORK_WIFI_MOB = 3          // Network by either WiFi or mobile data.
+
+    const val D_DELETE_ALL = "DELETE_ALL"   // "Tag" for Delete All dialog.
+    const val D_MULTI_SEL = "MULTI_SELECT"  // "Tag" for Multi Select dialog.
+    const val D_NETWORK = "NETWORK"         //  "Tag" for Network dialog.
+    const val D_TIMER_PICK = "TIME_PICKER"  //  "Tag" for Time Picker dialog.
+
 }

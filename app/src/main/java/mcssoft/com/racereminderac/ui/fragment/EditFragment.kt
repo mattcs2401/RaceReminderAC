@@ -23,8 +23,8 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.observer.RaceObserver
+import mcssoft.com.racereminderac.ui.dialog.DialogManager
 import mcssoft.com.racereminderac.ui.dialog.MultiSelectDialog
-import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.RaceTime
@@ -248,16 +248,10 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      * Show the TimePicker dialog.
      */
     private fun launchTimePickDialog() {
-        val fragTrans: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
-        fragTrans.addToBackStack(null)
-        timePickDialog = TimePickDialog()
         val args = Bundle()
-        val time = btnTime.text.toString()
-        if(!time.isBlank()) {
-            args.putString("key", time)
-        }
-        timePickDialog.arguments = args
-        timePickDialog.show(fragTrans, getString(R.string.tp_tag))
+        args.putString("key", btnTime.text.toString())
+        DialogManager.getInstance()?.showDialog(Constants.D_TIMER_PICK, args,
+                activity?.supportFragmentManager!!.beginTransaction(), activity!!)
     }
 
     private fun getRaceDate(id: Long) {
@@ -484,18 +478,13 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     }
 
     private fun launchMultiSelDialog() {
-        val dialog = MultiSelectDialog()
-        dialog.arguments = setMultiSelDialogArgs()
-        dialog.show(activity!!.supportFragmentManager, "multi_select_dialog")
-    }
-
-    private fun setMultiSelDialogArgs() : Bundle {
-        val bundle = Bundle()
+        val args = Bundle()
         if(listMultiSel[0] == "") {
             listMultiSel[0] = rsVals[npRaceSel.value]
         }
-        bundle.putStringArray(getString(R.string.key_multi_select_dialog_vals), listMultiSel)
-        return bundle
+        args.putStringArray(getString(R.string.key_multi_select_dialog_vals), listMultiSel)
+        DialogManager.getInstance()?.showDialog(Constants.D_MULTI_SEL, args,
+                activity!!.supportFragmentManager.beginTransaction(), activity!!)
     }
     //</editor-fold>
 
@@ -513,7 +502,6 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
 
     private lateinit var btnSave: Button              // save values and exit.
     private lateinit var btnTime: Button              // set time value (launches timePickDialog).
-    private lateinit var timePickDialog: DialogFragment
 
     private lateinit var raceViewModel: RaceViewModel // race view model (set in setupViewModel())
 
