@@ -8,7 +8,6 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,8 +23,7 @@ import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.utility.NetworkManager
-import mcssoft.com.racereminderac.ui.dialog.DeleteAllDialog
-import mcssoft.com.racereminderac.ui.dialog.DialogManager
+import mcssoft.com.racereminderac.utility.DialogManager
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceAlarm
 import mcssoft.com.racereminderac.utility.RacePreferences

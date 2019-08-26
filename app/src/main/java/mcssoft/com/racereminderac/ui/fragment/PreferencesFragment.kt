@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 import kotlinx.android.synthetic.main.main_activity.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.NetworkManager
 import mcssoft.com.racereminderac.utility.RaceAlarm
 
 class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
@@ -28,6 +29,7 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
     }
 
     override fun onPreferenceClick(preference: Preference?): Boolean {
+        // TBA.
         return true
     }
 
@@ -66,6 +68,22 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
                     RaceAlarm.getInstance()?.cancelAlarm()
                 }
             }
+            "key_network_pref" -> {
+                if(newValue == true) {
+                    val networkMgr = NetworkManager(activity!!)
+                    if (networkMgr.isNetworkConnected()) {
+                       when(networkMgr.getTransport()) {
+                           Constants.NETWORK_MOB -> {
+                               val bp="bp"
+                           }
+                           Constants.NETWORK_WIFI -> {
+                               val bp="bp"
+                           }
+                       }
+                    }
+                }
+
+            }
         }
         return true
     }
@@ -80,6 +98,7 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         notifyMulti = findPreference(activity!!.resources.getString(R.string.key_notif_send_multi_pref))
         refresh = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_pref))
         refreshSeek = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_seek_pref))
+        network = findPreference(activity!!.resources.getString(R.string.key_network_pref))
 
         if(refresh?.isChecked!!) {
             refreshSeek?.isEnabled = true
@@ -89,12 +108,14 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         notify?.onPreferenceChangeListener = this
         refresh?.onPreferenceChangeListener = this
         refreshSeek?.onPreferenceChangeListener = this
+        network?.onPreferenceChangeListener = this
     }
 
     private var notify: SwitchPreferenceCompat? = null          // post notifications.
     private var notifyMulti: SwitchPreferenceCompat? = null     // allow multi refresh same race.
     private var refresh: SwitchPreferenceCompat? = null         // refresh interval.
     private var refreshSeek: SeekBarPreference? = null          // refresh interval ammount.
+    private var network: SwitchPreferenceCompat? = null
 
     private var refreshVal: Int = Constants.REFRESH_MIN    // simply an initial value no lateinit.
 }

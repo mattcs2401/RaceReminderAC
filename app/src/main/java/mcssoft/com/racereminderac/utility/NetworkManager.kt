@@ -2,7 +2,9 @@ package mcssoft.com.racereminderac.utility
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
+import android.net.NetworkCapabilities
+import android.net.NetworkCapabilities.TRANSPORT_CELLULAR
+import android.net.NetworkCapabilities.TRANSPORT_WIFI
 import android.widget.Toast
 import com.android.volley.*
 import com.android.volley.toolbox.Volley
@@ -12,14 +14,44 @@ class NetworkManager (val context: Context) : IDownload, Response.ErrorListener,
 
     private val connMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    val isNetworkConnected : Boolean
-        get() = connMgr.activeNetworkInfo.isConnected
+    /**
+     * Get if a network connection exists.
+     * @return True if connection exists, else false.
+     */
+    fun isNetworkConnected(): Boolean {
+        return if(connMgr.activeNetworkInfo != null) {
+            connMgr.activeNetworkInfo.isConnected
+        } else {
+            false
+        }
+    }
 
-    val isNetworkActive : Boolean
-        get() = connMgr.isDefaultNetworkActive
+    /**
+     * Get the network transport type.
+     * @return Type as : NETWORK_MOB, NETWORK_WIFI or NETWORK_NONE.
+     */
+    fun getTransport() : Int {
+        if(isNetworkConnected()) {
+            if (networkCapabilities.hasTransport(TRANSPORT_CELLULAR)) {
+                return Constants.NETWORK_MOB
+            } else if (networkCapabilities.hasTransport(TRANSPORT_WIFI)) {
+                return Constants.NETWORK_WIFI
+            }
+        }
+        return Constants.NETWORK_NONE
+    }
 
-    val activeNetworkInfo: NetworkInfo
-        get() = connMgr.activeNetworkInfo
+//    val isNetworkActive : Boolean
+//        get() = connMgr.isDefaultNetworkActive
+
+//    val activeNetworkInfo: NetworkInfo?
+//        get() = connMgr.activeNetworkInfo
+
+//    val allNetworks: Array<out Network>?
+//        get() = connMgr.getAllNetworks()
+
+    private val networkCapabilities: NetworkCapabilities
+        get() = connMgr.getNetworkCapabilities(connMgr.activeNetwork)
 
     fun <T> addToRequestQueue(request: Request<T>) = requestQueue.add(request)
 

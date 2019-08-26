@@ -11,9 +11,7 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -23,8 +21,7 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.observer.RaceObserver
-import mcssoft.com.racereminderac.ui.dialog.DialogManager
-import mcssoft.com.racereminderac.ui.dialog.MultiSelectDialog
+import mcssoft.com.racereminderac.utility.DialogManager
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RacePreferences
 import mcssoft.com.racereminderac.utility.RaceTime

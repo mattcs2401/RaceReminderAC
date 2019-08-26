@@ -1,10 +1,13 @@
-package mcssoft.com.racereminderac.ui.dialog
+package mcssoft.com.racereminderac.utility
 
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
-import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.ui.dialog.DeleteAllDialog
+import mcssoft.com.racereminderac.ui.dialog.MultiSelectDialog
+import mcssoft.com.racereminderac.ui.dialog.NetworkDialog
+import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 
 class DialogManager {
     /**
