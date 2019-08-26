@@ -11,8 +11,8 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 import kotlinx.android.synthetic.main.main_activity.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
-import mcssoft.com.racereminderac.utility.NetworkManager
-import mcssoft.com.racereminderac.utility.RaceAlarm
+import mcssoft.com.racereminderac.utility.singleton.NetworkManager
+import mcssoft.com.racereminderac.utility.singleton.RaceAlarm
 
 class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
@@ -70,16 +70,14 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
             }
             "key_network_pref" -> {
                 if(newValue == true) {
-                    val networkMgr = NetworkManager(activity!!)
-                    if (networkMgr.isNetworkConnected()) {
-                       when(networkMgr.getTransport()) {
+                    if(NetworkManager.getInstance(activity!!).isNetworkConnected()) {
+                        when(NetworkManager.getInstance(activity!!).getTransport()) {
                            Constants.NETWORK_MOB -> {
                                val bp="bp"
                            }
                            Constants.NETWORK_WIFI -> {
                                val bp="bp"
-                           }
-                       }
+                           }                        }
                     }
                 }
 

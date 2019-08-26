@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.utility
+package mcssoft.com.racereminderac.utility.singleton
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -9,10 +9,19 @@ import android.widget.Toast
 import com.android.volley.*
 import com.android.volley.toolbox.Volley
 import mcssoft.com.racereminderac.interfaces.IDownload
+import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
 
-class NetworkManager (val context: Context) : IDownload, Response.ErrorListener, Response.Listener<String> {
+class NetworkManager private constructor (private val context: Context) : IDownload, Response.ErrorListener, Response.Listener<String> {
 
-    private val connMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    //private val context: Context = context
+    private val connMgr: ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+//    init{
+//        connMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+//    }
+
+    companion object : SingletonBase<NetworkManager, Context>(::NetworkManager)
 
     /**
      * Get if a network connection exists.
@@ -82,7 +91,7 @@ class NetworkManager (val context: Context) : IDownload, Response.ErrorListener,
     override fun onDownloadError(): String = volleyError!!
     //</editor-fold>
 
-    class DownloadRequest(url: String, listener: Response.ErrorListener) : Request<String>(url, listener) {
+    private class DownloadRequest(url: String, listener: Response.ErrorListener) : Request<String>(url, listener) {
         override fun parseNetworkResponse(response: NetworkResponse?): Response<String> {
             // TBA
             return Response.success(response?.data.toString(), null)

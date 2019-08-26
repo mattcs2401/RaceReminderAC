@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.utility
+package mcssoft.com.racereminderac.utility.singleton
 
 import android.content.Context
 import android.os.Bundle
@@ -8,6 +8,7 @@ import mcssoft.com.racereminderac.ui.dialog.DeleteAllDialog
 import mcssoft.com.racereminderac.ui.dialog.MultiSelectDialog
 import mcssoft.com.racereminderac.ui.dialog.NetworkDialog
 import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
+import mcssoft.com.racereminderac.utility.Constants
 
 class DialogManager {
     /**

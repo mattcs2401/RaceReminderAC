@@ -8,8 +8,8 @@ import mcssoft.com.racereminderac.adapter.RaceAdapter
 import mcssoft.com.racereminderac.background.worker.NotifyWorker
 import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.utility.Constants
-import mcssoft.com.racereminderac.utility.RacePreferences
-import mcssoft.com.racereminderac.utility.RaceTime
+import mcssoft.com.racereminderac.utility.singleton.RacePreferences
+import mcssoft.com.racereminderac.utility.singleton.RaceTime
 
 class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<RaceDetails>> {
 

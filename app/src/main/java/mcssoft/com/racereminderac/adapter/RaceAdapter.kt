@@ -14,7 +14,7 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.Constants
-import mcssoft.com.racereminderac.utility.RacePreferences
+import mcssoft.com.racereminderac.utility.singleton.RacePreferences
 import mcssoft.com.racereminderac.utility.callback.SnackBarCB
 import mcssoft.com.racereminderac.utility.eventbus.DataMessage
 import mcssoft.com.racereminderac.utility.eventbus.DeleteMessage

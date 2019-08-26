@@ -1,9 +1,11 @@
-package mcssoft.com.racereminderac.utility
+package mcssoft.com.racereminderac.utility.singleton
 
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.RaceAlarmReceiver
 
 /**
  * Utility class as wrapper for AlarmManager.

@@ -1,6 +1,7 @@
-package mcssoft.com.racereminderac.utility
+package mcssoft.com.racereminderac.utility.singleton
 
 import androidx.annotation.NonNull
+import mcssoft.com.racereminderac.utility.Constants
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.Calendar

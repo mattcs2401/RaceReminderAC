@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.utility.Constants
-import mcssoft.com.racereminderac.utility.RacePreferences
+import mcssoft.com.racereminderac.utility.singleton.RacePreferences
 
 class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSelect,
         BottomNavigationView.OnNavigationItemSelectedListener {

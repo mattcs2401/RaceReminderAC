@@ -22,11 +22,11 @@ import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
-import mcssoft.com.racereminderac.utility.NetworkManager
-import mcssoft.com.racereminderac.utility.DialogManager
+import mcssoft.com.racereminderac.utility.singleton.NetworkManager
+import mcssoft.com.racereminderac.utility.singleton.DialogManager
 import mcssoft.com.racereminderac.utility.Constants
-import mcssoft.com.racereminderac.utility.RaceAlarm
-import mcssoft.com.racereminderac.utility.RacePreferences
+import mcssoft.com.racereminderac.utility.singleton.RaceAlarm
+import mcssoft.com.racereminderac.utility.singleton.RacePreferences
 import mcssoft.com.racereminderac.utility.TouchHelper
 import mcssoft.com.racereminderac.utility.callback.BackPressCB
 import mcssoft.com.racereminderac.utility.eventbus.*

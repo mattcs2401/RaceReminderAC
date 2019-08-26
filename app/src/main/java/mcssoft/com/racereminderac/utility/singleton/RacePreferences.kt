@@ -1,9 +1,10 @@
-package mcssoft.com.racereminderac.utility
+package mcssoft.com.racereminderac.utility.singleton
 
 import android.content.Context
 import android.util.Log
 import androidx.preference.PreferenceManager
 import mcssoft.com.racereminderac.R
+import mcssoft.com.racereminderac.utility.Constants
 
 /**
  * Utility wrapper class for the SharedPreferences.
@@ -19,7 +20,8 @@ class RacePreferences {
 
         fun getInstance() =
                 INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: RacePreferences().also {
+                    INSTANCE
+                            ?: RacePreferences().also {
                         INSTANCE = it
                     }
 
