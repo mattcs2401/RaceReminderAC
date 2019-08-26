@@ -1,7 +1,6 @@
 package mcssoft.com.racereminderac.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -24,68 +23,34 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         super.onViewCreated(view, savedInstanceState)
 
         initialise()
-
-        Log.d("tag","PreferenceFragment.onViewCreated")
+//        Log.d("tag","PreferenceFragment.onViewCreated")
     }
 
-    override fun onPreferenceClick(preference: Preference?): Boolean {
-        // TBA.
-        return true
-    }
+    //<editor-fold default state="collapsed" desc="Region: Listeners">
+    // TBA
+    override fun onPreferenceClick(preference: Preference?): Boolean = true
 
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         /** Note: This fires before onPreferenceClick(). **/
         when(preference.key) {
             activity?.resources?.getString(R.string.key_race_notif_send_pref) -> {
-                if(newValue == false) {
-                    notifyMulti?.isChecked = false
-                    notifyMulti?.isEnabled = false
-                } else {
-                    notifyMulti?.isEnabled = true
-                }
+                doNotifySendPref(newValue)
             }
             activity?.resources?.getString(R.string.key_refresh_interval_pref) -> {
-                if(newValue == false) {
-                    refreshSeek?.isEnabled = false
-                    RaceAlarm.getInstance(activity!!).cancelAlarm()
-                } else {
-                    refreshSeek?.isEnabled = true
-                    if(refreshSeek?.value == 0) {
-                        refreshSeek?.value = Constants.REFRESH_DEFAULT
-                    }
-                    RaceAlarm.getInstance(activity!!).setAlarm(refreshSeek?.value!!.toLong())
-                }
+                doRefreshIntPref(newValue)
             }
             activity?.resources?.getString(R.string.key_refresh_interval_seek_pref) -> {
-                refreshVal = newValue as Int
-                if(refreshVal > 0) {
-                    refreshSeek?.value = refreshVal
-                    RaceAlarm.getInstance(activity!!).cancelAlarm()
-                    RaceAlarm.getInstance(activity!!).setAlarm(refreshVal.toLong())
-                } else {
-                    refresh?.isChecked = false
-                    refreshSeek?.isEnabled = false
-                    RaceAlarm.getInstance(activity!!).cancelAlarm()
-                }
+                doRefreshIntSeekPref(newValue)
             }
-            "key_network_pref" -> {
-                if(newValue == true) {
-                    if(NetworkManager.getInstance(activity!!).isNetworkConnected()) {
-                        when(NetworkManager.getInstance(activity!!).getTransport()) {
-                           Constants.NETWORK_MOB -> {
-                               val bp="bp"
-                           }
-                           Constants.NETWORK_WIFI -> {
-                               val bp="bp"
-                           }                        }
-                    }
-                }
-
+            activity?.resources?.getString(R.string.key_network_pref) -> {
+                doNetworkPref(newValue)
             }
         }
         return true
     }
+    //</editor-fold>
 
+    //<editor-fold default state="collapsed" desc="Region: Utility">
     private fun initialise() {
         // Hide the bottom nav view and set the screen title.
         activity?.id_bottom_nav_view?.visibility = View.GONE
@@ -109,11 +74,61 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         network?.onPreferenceChangeListener = this
     }
 
+    private fun doNotifySendPref(newValue: Any) {
+        if(newValue == false) {
+            notifyMulti?.isChecked = false
+            notifyMulti?.isEnabled = false
+        } else {
+            notifyMulti?.isEnabled = true
+        }
+    }
+
+    private fun doRefreshIntPref(newValue: Any) {
+        if(newValue == false) {
+            refreshSeek?.isEnabled = false
+            RaceAlarm.getInstance(activity!!).cancelAlarm()
+        } else {
+            refreshSeek?.isEnabled = true
+            if(refreshSeek?.value == 0) {
+                refreshSeek?.value = Constants.REFRESH_DEFAULT
+            }
+            RaceAlarm.getInstance(activity!!).setAlarm(refreshSeek?.value!!.toLong())
+        }
+    }
+
+    private fun doRefreshIntSeekPref(newValue: Any) {
+        refreshVal = newValue as Int
+        if(refreshVal > 0) {
+            refreshSeek?.value = refreshVal
+            RaceAlarm.getInstance(activity!!).cancelAlarm()
+            RaceAlarm.getInstance(activity!!).setAlarm(refreshVal.toLong())
+        } else {
+            refresh?.isChecked = false
+            refreshSeek?.isEnabled = false
+            RaceAlarm.getInstance(activity!!).cancelAlarm()
+        }
+    }
+
+    private fun doNetworkPref(newValue: Any) {
+        if(newValue == true) {
+            if(NetworkManager.getInstance(activity!!).isNetworkConnected()) {
+                when(NetworkManager.getInstance(activity!!).getTransport()) {
+                    Constants.NETWORK_MOB -> {
+                        val bp="bp"
+                    }
+                    Constants.NETWORK_WIFI -> {
+                        val bp="bp"
+                    }                        }
+            }
+        }
+    }
+    //</editor-fold>
+
     private var notify: SwitchPreferenceCompat? = null          // post notifications.
     private var notifyMulti: SwitchPreferenceCompat? = null     // allow multi refresh same race.
     private var refresh: SwitchPreferenceCompat? = null         // refresh interval.
     private var refreshSeek: SeekBarPreference? = null          // refresh interval ammount.
-    private var network: SwitchPreferenceCompat? = null
+    private var network: SwitchPreferenceCompat? = null         // network prefs.
 
-    private var refreshVal: Int = Constants.REFRESH_MIN    // simply an initial value no lateinit.
+    private var refreshVal: Int = Constants.REFRESH_MIN         // simply an initial value.
 }
