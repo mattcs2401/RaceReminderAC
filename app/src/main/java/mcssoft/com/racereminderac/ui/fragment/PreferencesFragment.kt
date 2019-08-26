@@ -47,25 +47,25 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
             activity?.resources?.getString(R.string.key_refresh_interval_pref) -> {
                 if(newValue == false) {
                     refreshSeek?.isEnabled = false
-                    RaceAlarm.getInstance()?.cancelAlarm()
+                    RaceAlarm.getInstance(activity!!).cancelAlarm()
                 } else {
                     refreshSeek?.isEnabled = true
                     if(refreshSeek?.value == 0) {
                         refreshSeek?.value = Constants.REFRESH_DEFAULT
                     }
-                    RaceAlarm.getInstance()?.setAlarm(activity!!, refreshSeek?.value!!.toLong())
+                    RaceAlarm.getInstance(activity!!).setAlarm(refreshSeek?.value!!.toLong())
                 }
             }
             activity?.resources?.getString(R.string.key_refresh_interval_seek_pref) -> {
                 refreshVal = newValue as Int
                 if(refreshVal > 0) {
                     refreshSeek?.value = refreshVal
-                    RaceAlarm.getInstance()?.cancelAlarm()
-                    RaceAlarm.getInstance()?.setAlarm(activity!!, refreshVal.toLong())
+                    RaceAlarm.getInstance(activity!!).cancelAlarm()
+                    RaceAlarm.getInstance(activity!!).setAlarm(refreshVal.toLong())
                 } else {
                     refresh?.isChecked = false
                     refreshSeek?.isEnabled = false
-                    RaceAlarm.getInstance()?.cancelAlarm()
+                    RaceAlarm.getInstance(activity!!).cancelAlarm()
                 }
             }
             "key_network_pref" -> {

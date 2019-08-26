@@ -11,10 +11,7 @@ import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import mcssoft.com.racereminderac.utility.Constants
 
 class DialogManager {
-    /**
-     * For Singleton instance.
-     * @Note: Can't use Context here, so context passed into the methods.
-     */
+
     companion object {
         @Volatile private var instance: DialogManager? = null
 
@@ -28,7 +25,7 @@ class DialogManager {
         }
     }
 
-    fun showDialog(name: String, args: Bundle, fragTrans: FragmentTransaction, context: Context) {
+    fun showDialog(name: String, args: Bundle, fragTrans: FragmentTransaction) {
         var dialog = DialogFragment()
         when(name) {
             Constants.D_DELETE_ALL -> {

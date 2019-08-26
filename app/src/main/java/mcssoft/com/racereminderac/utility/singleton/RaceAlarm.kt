@@ -6,35 +6,36 @@ import android.content.Context
 import android.content.Intent
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.RaceAlarmReceiver
+import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
 
 /**
  * Utility class as wrapper for AlarmManager.
  */
-class RaceAlarm {
+class RaceAlarm private constructor (private val context: Context) {
 
-    /**
-     * For Singleton instance.
-     * @Note: Can't use Context here, so context passed into the setAlarm() method.
-     */
-    companion object {
-        @Volatile private var instance: RaceAlarm? = null
-
-        fun getInstance(): RaceAlarm? {
-            if (instance == null) {
-                synchronized(RaceAlarm::class) {
-                    instance = RaceAlarm()
-                }
-            }
-            return instance
-        }
-    }
+    companion object : SingletonBase<RaceAlarm, Context>(::RaceAlarm)
+//    /**
+//     * For Singleton instance.
+//     * @Note: Can't use Context here, so context passed into the setAlarm() method.
+//     */
+//    companion object {
+//        @Volatile private var instance: RaceAlarm? = null
+//
+//        fun getInstance(): RaceAlarm? {
+//            if (instance == null) {
+//                synchronized(RaceAlarm::class) {
+//                    instance = RaceAlarm()
+//                }
+//            }
+//            return instance
+//        }
+//    }
 
     /**
      * Set the UI refresh alarm.
-     * @param context: The context being used.
      * @param interval: The alarm time in minutes.
      */
-    internal fun setAlarm(context: Context, interval: Long) {
+    internal fun setAlarm(interval: Long) {
         // Cancel any previously set alarm.
         cancelAlarm()
         // Set the interval equivalent in mSec.

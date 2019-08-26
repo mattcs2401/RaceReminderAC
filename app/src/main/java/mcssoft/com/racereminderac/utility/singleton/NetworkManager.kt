@@ -38,6 +38,8 @@ class NetworkManager private constructor (private val context: Context) : IDownl
     /**
      * Get the network transport type.
      * @return Type as : NETWORK_MOB, NETWORK_WIFI or NETWORK_NONE.
+     * Note: If WiFi and Mob are both selected, then WiFi seems to take preference on the system.
+     *       That's possibly ok ?
      */
     fun getTransport() : Int {
         if(isNetworkConnected()) {
@@ -62,7 +64,7 @@ class NetworkManager private constructor (private val context: Context) : IDownl
     private val networkCapabilities: NetworkCapabilities
         get() = connMgr.getNetworkCapabilities(connMgr.activeNetwork)
 
-    fun <T> addToRequestQueue(request: Request<T>) = requestQueue.add(request)
+    private fun <T> addToRequestQueue(request: Request<T>) = requestQueue.add(request)!!
 
     fun queueRequest(url: String) {
         val request = DownloadRequest(url, this)

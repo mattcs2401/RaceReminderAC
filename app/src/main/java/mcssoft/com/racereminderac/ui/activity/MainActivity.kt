@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        RacePreferences.getInstance().preferencesCheck(this)
+        RacePreferences.getInstance(this).preferencesCheck()
 
         initialise()
 

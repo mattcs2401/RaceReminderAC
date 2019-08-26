@@ -248,7 +248,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         val args = Bundle()
         args.putString("key", btnTime.text.toString())
         DialogManager.getInstance()?.showDialog(Constants.D_TIMER_PICK, args,
-                activity?.supportFragmentManager!!.beginTransaction(), activity!!)
+                activity?.supportFragmentManager!!.beginTransaction())
     }
 
     private fun getRaceDate(id: Long) {
@@ -340,7 +340,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
      */
     private fun setupForMultiSelect() {
         // Get current multi select Preference.
-        allowMultiSel = RacePreferences.getInstance()!!.getRaceMultiSelect(activity!!)
+        allowMultiSel = RacePreferences.getInstance(activity!!).getRaceMultiSelect()
         // Get any multi select values from the arguments.
         if (arguments!!.getBoolean(getString(R.string.key_edit_existing_multi))) {
             listMultiSel = arguments?.getStringArray(getString(R.string.key_edit_existing_vals)) as Array<String>
@@ -414,8 +414,8 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
                 toolBar.title = getString(R.string.new_race)
                 btnSave.text = getString(R.string.lbl_save)
                 btnTime.text = RaceTime.getInstance()?.getFormattedDateTime(Constants.TIME)
-                npCityCode.value = ccVals.indexOf(RacePreferences.getInstance()?.getCityCode(activity!!))
-                npRaceCode.value = rcVals.indexOf(RacePreferences.getInstance()?.getRaceCode(activity!!))
+                npCityCode.value = ccVals.indexOf(RacePreferences.getInstance(activity!!).getCityCode())
+                npRaceCode.value = rcVals.indexOf(RacePreferences.getInstance(activity!!).getRaceCode())
             }
             Constants.EDIT_RACE_COPY -> {
                 toolBar.title = getString(R.string.copy_race)
@@ -481,7 +481,7 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         }
         args.putStringArray(getString(R.string.key_multi_select_dialog_vals), listMultiSel)
         DialogManager.getInstance()?.showDialog(Constants.D_MULTI_SEL, args,
-                activity!!.supportFragmentManager.beginTransaction(), activity!!)
+                activity!!.supportFragmentManager.beginTransaction())
     }
     //</editor-fold>
 

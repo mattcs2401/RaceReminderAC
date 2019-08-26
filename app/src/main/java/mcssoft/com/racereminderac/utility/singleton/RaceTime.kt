@@ -155,7 +155,7 @@ class RaceTime {
      * @return The date as: [0]-YYYY, [1]-M(M), [2]-D(D)
      */
     fun getCurrentDateComponents(): Array<String> {
-        val date = arrayOf<String>("","","")
+        val date = arrayOf("","","")
         val calendar = Calendar.getInstance(Locale.getDefault())
         calendar.time = Date(getTimeInMillis())
         date[0] = calendar.get(Calendar.YEAR).toString()

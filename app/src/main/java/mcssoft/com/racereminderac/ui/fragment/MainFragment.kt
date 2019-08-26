@@ -106,7 +106,7 @@ class MainFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         // Cancel alarm (method checks if previously cancelled).
-        RaceAlarm.getInstance()?.cancelAlarm()
+        RaceAlarm.getInstance(activity!!).cancelAlarm()
         // EventBus unregister.
         EventBus.getDefault().unregister(this)
         // Remove back press handler callback.
@@ -141,7 +141,7 @@ class MainFragment : Fragment() {
                 if (!raceAdapter.isEmpty()) {
                     val args = Bundle()
                     DialogManager.getInstance()?.showDialog(Constants.D_DELETE_ALL, args,
-                            activity?.supportFragmentManager!!.beginTransaction(), activity!!)
+                            activity?.supportFragmentManager!!.beginTransaction())
                 } else {
                     Toast.makeText(activity!!, getString(R.string.toast_nothing_to_delete), Toast.LENGTH_SHORT).show()
                 }
@@ -260,7 +260,7 @@ class MainFragment : Fragment() {
      */
     private fun setDeleteMenuItem(doSetDelete: Boolean) {
         if(doSetDelete) {
-            if (RacePreferences.getInstance()!!.getRaceBulkDelete(activity!!)) {
+            if (RacePreferences.getInstance(activity!!).getRaceBulkDelete()) {
                 // The Delete all preference is enabled.
                 deleteMenuItem.isVisible = true
             }
@@ -274,7 +274,7 @@ class MainFragment : Fragment() {
      */
     private fun setNotifyMenuItem(doSetNotify: Boolean) {
         if(doSetNotify) {
-            if (RacePreferences.getInstance()!!.getRaceNotifPost(activity!!)) {
+            if (RacePreferences.getInstance(activity!!).getRaceNotifPost()) {
                 // The notifications preference is enabled.
                 notifyMenuItem.isVisible = true
             }
@@ -288,7 +288,7 @@ class MainFragment : Fragment() {
      */
     private fun setMultiSelMenuItem(doSetMulti: Boolean) {
         if(doSetMulti) {
-            if(RacePreferences.getInstance()!!.getRaceMultiSelect(activity!!)) {
+            if(RacePreferences.getInstance(activity!!).getRaceMultiSelect()) {
                 multiSelMenuItem.isVisible = true
             }
         } else {
@@ -302,10 +302,10 @@ class MainFragment : Fragment() {
      */
     private fun setRefreshIntervalMenuItem(doSetRefresh: Boolean) {
         if(doSetRefresh) {
-            if (RacePreferences.getInstance()!!.getRefreshInterval(activity!!)) {
+            if (RacePreferences.getInstance(activity!!).getRefreshInterval()) {
                 // Preference is set.
                 refreshMenuItem.isVisible = true
-                val interval = RacePreferences.getInstance()!!.getRefreshIntervalVal(activity!!)
+                val interval = RacePreferences.getInstance(activity!!).getRefreshIntervalVal()
                 val rootView = refreshMenuItem.actionView as FrameLayout
                 val redCircle = rootView.findViewById<FrameLayout>(R.id.id_view_refresh_red_circle)
                 val intervalTextView = rootView.findViewById<TextView>(R.id.id_tv_refresh_period)
@@ -313,12 +313,12 @@ class MainFragment : Fragment() {
                 redCircle.visibility = VISIBLE
 
                 // Set alarm.
-                RaceAlarm.getInstance()?.setAlarm(activity!!, interval.toLong())
+                RaceAlarm.getInstance(activity!!).setAlarm(interval.toLong())
             }
         } else {
             refreshMenuItem.isVisible = false
             // Cancel alarm.
-            RaceAlarm.getInstance()?.cancelAlarm()
+            RaceAlarm.getInstance(activity!!).cancelAlarm()
         }
     }
     //</editor-fold>

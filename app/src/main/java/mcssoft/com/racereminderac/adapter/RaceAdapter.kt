@@ -99,7 +99,7 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
         // backing data, and used in a Room delete statement.
         deleteRace(pos)
         // Do SnackBar (if Preference is set).
-        if(RacePreferences.getInstance()!!.getRecoveryUndoLast(context)) {
+        if(RacePreferences.getInstance(context).getRecoveryUndoLast()) {
             // Hide the bottom navigation view, as it hides the SnackBar.
             (anchorView.findViewById(R.id.id_bottom_nav_view) as BottomNavigationView).visibility = View.GONE
             // Show the SnackBar.
