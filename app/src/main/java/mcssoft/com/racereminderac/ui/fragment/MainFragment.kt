@@ -274,7 +274,7 @@ class MainFragment : Fragment() {
      */
     private fun setNotifyMenuItem(doSetNotify: Boolean) {
         if(doSetNotify) {
-            if (RacePreferences.getInstance(activity!!).getRaceNotifPost()) {
+            if (RacePreferences.getInstance(activity!!).getRaceNotifyPost()) {
                 // The notifications preference is enabled.
                 notifyMenuItem.isVisible = true
             }

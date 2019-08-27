@@ -1,10 +1,8 @@
 package mcssoft.com.racereminderac.utility.singleton
 
 import android.content.Context
-import android.util.Log
 import androidx.preference.PreferenceManager
 import mcssoft.com.racereminderac.R
-import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
 
 /**
@@ -36,16 +34,16 @@ class RacePreferences private constructor (private val context: Context) {
      * Get the (allowed to) post notifications from the preferences.
      * @return True if preference is enabled, else false
      */
-    fun getRaceNotifPost() : Boolean {
-        val keyNotif = context.resources.getString(R.string.key_race_notif_send_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(keyNotif, false)
+    fun getRaceNotifyPost() : Boolean {
+        val key = context.resources.getString(R.string.key_race_notif_send_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
     }
 
     /**
      * Get the (allowed to) post multiple notifications for the same Race from the preferences.
      * @return True if post multiple notifications enabled, else false.
      */
-    fun getRaceNotifMulti() : Boolean {
+    fun getRaceNotifyMulti() : Boolean {
         val key = context.resources.getString(R.string.key_notif_send_multi_pref)
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
     }

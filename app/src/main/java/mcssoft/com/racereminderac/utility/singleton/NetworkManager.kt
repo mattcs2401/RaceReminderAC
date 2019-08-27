@@ -82,13 +82,13 @@ class NetworkManager private constructor (private val context: Context) : IDownl
     // Volley response listener.
     override fun onResponse(response: String) {
         volleyError = null        // we'll assume because there is a response then there's no error.
-        volleyRespnse = response
+        volleyResponse = response
         Toast.makeText(context, "Volley download success.", Toast.LENGTH_SHORT).show()
     }
     //</editor-fold>
 
     //<editor-fold default state="collapsed" desc="Region: IDownload">
-    override fun onDownload(): String = volleyRespnse!!
+    override fun onDownload(): String = volleyResponse!!
 
     override fun onDownloadError(): String = volleyError!!
     //</editor-fold>
@@ -105,11 +105,11 @@ class NetworkManager private constructor (private val context: Context) : IDownl
         }
     }
 
-    private var volleyRespnse: String? = null
+    private var volleyResponse: String? = null
     private var volleyError: String? = null
 
     private val requestQueue: RequestQueue by lazy {
-        // From doco: applicationContext is key, it keeps you from leaking the Activity or
+        // From documentation: applicationContext is key, it keeps you from leaking the Activity or
         // BroadcastReceiver if one passed one in.
         Volley.newRequestQueue(context.applicationContext)
     }
