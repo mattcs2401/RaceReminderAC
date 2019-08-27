@@ -1,6 +1,5 @@
 package mcssoft.com.racereminderac.utility.singleton
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
