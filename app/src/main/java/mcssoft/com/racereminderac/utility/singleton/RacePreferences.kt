@@ -95,22 +95,13 @@ class RacePreferences private constructor (private val context: Context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
     }
 
-//    /**
-//     * Get the Network switch preference.
-//     * @return True if preference is enabled, else false.
-//     */
-//    fun getNetwork() : Boolean {
-//        val key = context.resources.getString(R.string.key_network_pref)
-//        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
-//    }
-
     /**
-     * Get the Network switch preference.
+     * Get the Network preference.
      * @return True if preference is enabled, else false.
      */
-    fun getNetworkVal() : Int {
-        val key = context.resources.getString(R.string.key_network_pref_type)
-        return PreferenceManager.getDefaultSharedPreferences(context).getInt(key, -1)
+    fun getNetworkPref() : String? {
+        val key = context.resources.getString(R.string.key_network_pref)
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, "2")
     }
 
     /**
@@ -127,7 +118,6 @@ class RacePreferences private constructor (private val context: Context) {
         val keyMultiSelect = context.resources.getString(R.string.key_multi_select_pref)
         val keyBulkDelete = context.resources.getString(R.string.key_bulk_delete_pref)
         val keyNetworkPref = context.resources.getString(R.string.key_network_pref)
-        val keyNetworkPrefType = context.resources.getString(R.string.key_network_pref_type)
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
@@ -165,16 +155,9 @@ class RacePreferences private constructor (private val context: Context) {
             sharedPrefs.edit().putBoolean(keyBulkDelete, false).apply()
         }
 
-//        if(!map.contains(keyNetworkPref)) {
-//            sharedPrefs.edit().putBoolean(keyNetworkPref, false).apply()
-//        }
-
-        if(!map.contains(keyNetworkPrefType)) {
-            // Default network type is both.
-            sharedPrefs.edit().putInt(keyNetworkPrefType, Constants.NETWORK_WIFI).apply()
+        if(!map.contains(keyNetworkPref)) {
+            sharedPrefs.edit().putString(keyNetworkPref, "2").apply()
         }
-
-        Log.d("tag","RacePreferences.preferenceCheck")
+//        Log.d("tag","RacePreferences.preferenceCheck")
     }
-
 }

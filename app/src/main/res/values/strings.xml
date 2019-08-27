@@ -265,4 +265,18 @@
     <string name="abbrv_race_sel">8</string>
     <string name="abbrv_race_code">R</string>
 
+    <string-array name="networkPref">
+        <item>None</item>
+        <item>WiFi</item>
+        <item>Mobile</item>
+        <item>Either</item>
+    </string-array>
+
+    <string-array name="networkPrefVals">
+        <item>1</item> <!-- Constants.NETWORK_NONE -->
+        <item>2</item> <!-- Constants.NETWORK_WIFI -->
+        <item>3</item> <!-- Constants.NETWORK_MOBILE -->
+        <item>4</item> <!-- Constants.NETWORK_EITHER -->
+    </string-array>
+
 </resources>

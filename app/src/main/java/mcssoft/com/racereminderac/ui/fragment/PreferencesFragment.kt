@@ -10,7 +10,8 @@ import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.singleton.NetworkManager
 import mcssoft.com.racereminderac.utility.singleton.RaceAlarm
 
-class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
+class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener {
+/*Preference.OnPreferenceClickListener,*/
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preferences)
@@ -24,12 +25,9 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
     }
 
     //<editor-fold default state="collapsed" desc="Region: Listeners">
-    // TBA
-    override fun onPreferenceClick(preference: Preference?): Boolean {
-
-        val bp="bp"
-        return  true
-    }
+//    override fun onPreferenceClick(preference: Preference?): Boolean {
+//        return  true
+//    }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         /** Note: This fires before onPreferenceClick(). **/
@@ -42,10 +40,6 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
             }
             activity?.resources?.getString(R.string.key_refresh_interval_seek_pref) -> {
                 doRefreshIntSeekPref(newValue)
-            }
-            activity?.resources?.getString(R.string.key_network_pref) -> {
-                val bp="bp"
-//                doNetworkPref(newValue)
             }
         }
         return true
@@ -63,7 +57,6 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         notifyMulti = findPreference(activity!!.resources.getString(R.string.key_notif_send_multi_pref))
         refresh = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_pref))
         refreshSeek = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_seek_pref))
-        network = findPreference(activity!!.resources.getString(R.string.key_network_pref))
 
         if(refresh?.isChecked!!) {
             refreshSeek?.isEnabled = true
@@ -73,8 +66,6 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         notify?.onPreferenceChangeListener = this
         refresh?.onPreferenceChangeListener = this
         refreshSeek?.onPreferenceChangeListener = this
-        network?.onPreferenceChangeListener = this
-        network?.onPreferenceClickListener = this
     }
 
     private fun doNotifySendPref(newValue: Any) {
@@ -111,27 +102,12 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
             RaceAlarm.getInstance(activity!!).cancelAlarm()
         }
     }
-
-//    private fun doNetworkPref(newValue: Any) {
-//        if(newValue == true) {
-//            if(NetworkManager.getInstance(activity!!).isNetworkConnected()) {
-//                when(NetworkManager.getInstance(activity!!).getTransport()) {
-//                    Constants.NETWORK_MOB -> {
-//                        val bp="bp"
-//                    }
-//                    Constants.NETWORK_WIFI -> {
-//                        val bp="bp"
-//                    }                        }
-//            }
-//        }
-//    }
     //</editor-fold>
 
     private var notify: SwitchPreferenceCompat? = null          // post notifications.
     private var notifyMulti: SwitchPreferenceCompat? = null     // allow multi refresh same race.
     private var refresh: SwitchPreferenceCompat? = null         // refresh interval.
     private var refreshSeek: SeekBarPreference? = null          // refresh interval ammount.
-    private var network: PreferenceCategory? = null         // network prefs.
 
     private var refreshVal: Int = Constants.REFRESH_MIN         // simply an initial value.
 }

@@ -57,10 +57,10 @@ object Constants {
 
     const val SELECTS_MAX = 4               // The max number of multi selects for a race.
 
-    const val NETWORK_WIFI = 1              // Network only by WiFi.
-    const val NETWORK_MOB = 2               // Network only by mobile data.
-    const val NETWORK_EITHER = 3          // Network by either WiFi or mobile data.
-    const val NETWORK_NONE = -1
+    const val NETWORK_NONE = 1
+    const val NETWORK_WIFI = 2              // Network only by WiFi.
+    const val NETWORK_MOB = 3               // Network only by mobile data.
+    const val NETWORK_EITHER = 4          // Network by either WiFi or mobile data.
 
     const val D_DELETE_ALL = "DELETE_ALL"   // "Tag" for Delete All dialog.
     const val D_MULTI_SEL = "MULTI_SELECT"  // "Tag" for Multi Select dialog.
