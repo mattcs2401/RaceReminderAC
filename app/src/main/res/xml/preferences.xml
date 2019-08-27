@@ -88,23 +88,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:key="@string/key_network"
-        app:title="@string/network_title">
-        <SwitchPreferenceCompat
-            app:key="@string/key_network_pref"
-            app:defaultValue="false"
-            app:summary="@string/network_summary" />
+        app:key="@string/key_network_pref"
+        app:title="@string/network_title"
+        app:summary="Set the default network download preference.">
     </PreferenceCategory>
-
-    <!--<PreferenceCategory-->
-        <!--app:key="@string/key_maint"-->
-        <!--app:title="@string/maint_title">-->
-
-        <!--&lt;!&ndash; TBA as to required ? &ndash;&gt;-->
-        <!--<Preference-->
-            <!--app:key="@string/key_maint_del_archv_pref"-->
-            <!--app:title="@string/maint_del_archv_title"-->
-            <!--app:summary="@string/maint_del_archv_summary"/>-->
-    <!--</PreferenceCategory>-->
 
 </androidx.preference.PreferenceScreen>

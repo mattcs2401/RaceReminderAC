@@ -13,23 +13,6 @@ import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
 class RacePreferences private constructor (private val context: Context) {
 
     companion object : SingletonBase<RacePreferences, Context>(::RacePreferences)
-//    /**
-//     * For Singleton instance.
-//     * @Note: Can't use Context here, so context passed into the respective methods as required.
-//     */
-//    companion object {
-//        @Volatile
-//        private var INSTANCE: RacePreferences? = null
-//
-//        fun getInstance() =
-//                INSTANCE ?: synchronized(this) {
-//                    INSTANCE
-//                            ?: RacePreferences().also {
-//                        INSTANCE = it
-//                    }
-//
-//                }
-//    }
 
     /**
      * Get the (default) Race Code from the preferences.
@@ -112,14 +95,14 @@ class RacePreferences private constructor (private val context: Context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
     }
 
-    /**
-     * Get the Network switch preference.
-     * @return True if preference is enabled, else false.
-     */
-    fun getNetwork() : Boolean {
-        val key = context.resources.getString(R.string.key_network_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
-    }
+//    /**
+//     * Get the Network switch preference.
+//     * @return True if preference is enabled, else false.
+//     */
+//    fun getNetwork() : Boolean {
+//        val key = context.resources.getString(R.string.key_network_pref)
+//        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+//    }
 
     /**
      * Get the Network switch preference.
@@ -182,13 +165,13 @@ class RacePreferences private constructor (private val context: Context) {
             sharedPrefs.edit().putBoolean(keyBulkDelete, false).apply()
         }
 
-        if(!map.contains(keyNetworkPref)) {
-            sharedPrefs.edit().putBoolean(keyNetworkPref, false).apply()
-        }
+//        if(!map.contains(keyNetworkPref)) {
+//            sharedPrefs.edit().putBoolean(keyNetworkPref, false).apply()
+//        }
 
         if(!map.contains(keyNetworkPrefType)) {
             // Default network type is both.
-            sharedPrefs.edit().putInt(keyNetworkPrefType, Constants.NETWORK_EITHER).apply()
+            sharedPrefs.edit().putInt(keyNetworkPrefType, Constants.NETWORK_WIFI).apply()
         }
 
         Log.d("tag","RacePreferences.preferenceCheck")

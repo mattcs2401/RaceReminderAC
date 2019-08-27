@@ -1,6 +1,5 @@
 package mcssoft.com.racereminderac.ui.dialog
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +16,7 @@ import org.greenrobot.eventbus.EventBus
  * Utility class to display a dialog from which the user can make more than one selection for a Race
  * (max of 4).
  */
-class MultiSelectDialog : DialogFragment(), DialogInterface.OnDismissListener,
-        View.OnClickListener {
+class MultiSelectDialog : DialogFragment(), View.OnClickListener {
 
     /* Notes:
        (1) Decided not to use the dialog builder as we are using a custom view and need to use

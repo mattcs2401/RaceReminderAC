@@ -62,6 +62,12 @@
     <!-- Toast. -->
     <string name="toast_nothing_to_delete">Nothing to delete.</string>
 
+    <!-- Network labels. -->
+    <string name="lbl_network_either">Either</string>
+    <string name="lbl_network_wifi">WiFi</string>
+    <string name="lbl_network_mobile">Mobile</string>
+    <string name="lbl_network_none">None</string>
+    <string name="lbl_network_pref_dialog_title">Network Preference</string>
     <!-- Keys. -->
     <string name="key_edit_type">edit_type</string>
     <string name="key_edit_existing">edit_existing</string>

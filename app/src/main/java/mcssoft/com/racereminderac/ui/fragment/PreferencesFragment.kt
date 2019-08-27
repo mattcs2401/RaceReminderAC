@@ -2,10 +2,7 @@ package mcssoft.com.racereminderac.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SeekBarPreference
-import androidx.preference.SwitchPreferenceCompat
+import androidx.preference.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import kotlinx.android.synthetic.main.main_activity.*
 import mcssoft.com.racereminderac.R
@@ -28,7 +25,11 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
 
     //<editor-fold default state="collapsed" desc="Region: Listeners">
     // TBA
-    override fun onPreferenceClick(preference: Preference?): Boolean = true
+    override fun onPreferenceClick(preference: Preference?): Boolean {
+
+        val bp="bp"
+        return  true
+    }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         /** Note: This fires before onPreferenceClick(). **/
@@ -43,7 +44,8 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
                 doRefreshIntSeekPref(newValue)
             }
             activity?.resources?.getString(R.string.key_network_pref) -> {
-                doNetworkPref(newValue)
+                val bp="bp"
+//                doNetworkPref(newValue)
             }
         }
         return true
@@ -72,6 +74,7 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         refresh?.onPreferenceChangeListener = this
         refreshSeek?.onPreferenceChangeListener = this
         network?.onPreferenceChangeListener = this
+        network?.onPreferenceClickListener = this
     }
 
     private fun doNotifySendPref(newValue: Any) {
@@ -109,26 +112,26 @@ class PreferencesFragment : PreferenceFragmentCompat(),Preference.OnPreferenceCl
         }
     }
 
-    private fun doNetworkPref(newValue: Any) {
-        if(newValue == true) {
-            if(NetworkManager.getInstance(activity!!).isNetworkConnected()) {
-                when(NetworkManager.getInstance(activity!!).getTransport()) {
-                    Constants.NETWORK_MOB -> {
-                        val bp="bp"
-                    }
-                    Constants.NETWORK_WIFI -> {
-                        val bp="bp"
-                    }                        }
-            }
-        }
-    }
+//    private fun doNetworkPref(newValue: Any) {
+//        if(newValue == true) {
+//            if(NetworkManager.getInstance(activity!!).isNetworkConnected()) {
+//                when(NetworkManager.getInstance(activity!!).getTransport()) {
+//                    Constants.NETWORK_MOB -> {
+//                        val bp="bp"
+//                    }
+//                    Constants.NETWORK_WIFI -> {
+//                        val bp="bp"
+//                    }                        }
+//            }
+//        }
+//    }
     //</editor-fold>
 
     private var notify: SwitchPreferenceCompat? = null          // post notifications.
     private var notifyMulti: SwitchPreferenceCompat? = null     // allow multi refresh same race.
     private var refresh: SwitchPreferenceCompat? = null         // refresh interval.
     private var refreshSeek: SeekBarPreference? = null          // refresh interval ammount.
-    private var network: SwitchPreferenceCompat? = null         // network prefs.
+    private var network: PreferenceCategory? = null         // network prefs.
 
     private var refreshVal: Int = Constants.REFRESH_MIN         // simply an initial value.
 }
