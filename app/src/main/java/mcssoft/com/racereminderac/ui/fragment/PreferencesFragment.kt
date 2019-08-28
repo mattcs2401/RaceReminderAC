@@ -7,7 +7,6 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 import kotlinx.android.synthetic.main.main_activity.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
-import mcssoft.com.racereminderac.utility.singleton.NetworkManager
 import mcssoft.com.racereminderac.utility.singleton.RaceAlarm
 
 class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener {
@@ -61,6 +60,7 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         refresh = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_pref))
         refreshSeek = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_seek_pref))
         network = findPreference(activity!!.resources.getString(R.string.key_network_enable))
+        networkType = findPreference(activity!!.resources.getString(R.string.key_network_type_pref))
 
         if(refresh?.isChecked!!) {
             refreshSeek?.isEnabled = true
@@ -109,8 +109,7 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
     }
 
     private fun doNetworkEnable(newValue: Any) {
-        // TBA.
-        val bp="bp"
+        networkType?.isEnabled = newValue == true
     }
     //</editor-fold>
 
@@ -119,6 +118,7 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
     private var refresh: SwitchPreferenceCompat? = null         // refresh interval.
     private var refreshSeek: SeekBarPreference? = null          // refresh interval ammount.
     private var network: SwitchPreferenceCompat? = null         // network enable download.
+    private var networkType: ListPreference? = null             // network type selection.
 
     private var refreshVal: Int = Constants.REFRESH_MIN         // simply an initial value.
 }
