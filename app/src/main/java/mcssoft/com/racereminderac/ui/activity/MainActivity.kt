@@ -25,18 +25,6 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
         RacePreferences.getInstance(this).preferencesCheck()
 
         initialise()
-
-        Log.d("tag","MainActivity.onCreate()")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("tag","MainActivity.onStart()")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("tag","MainActivity.onStop()")
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -46,6 +34,8 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
     //<editor-fold defaultstate="collapsed" desc="Region: Interface - IRace">
     /**
      * From interface IRace.IRaceSelect
+     * Navigate to the EditFragment to update Race details.
+     * @param id: The race details row id in the database.
      */
     override fun onRaceSelect(id: Long) {
         val bundle = Bundle()
@@ -56,6 +46,9 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
 
     /**
      * From interface IRace.IRaceSelect
+     * Navigate to the EditFragment to update Race details when multi select enabled.
+     * @param id: The race details row id in the database.
+     * @param values: Additional multi select values.
      */
     override fun onRaceSelect(id: Long, values: Array<String>) {
         val bundle = Bundle()
@@ -68,6 +61,9 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
 
     /**
      * From interface IRace.IRaceLongSelect
+     * Navigate to the EditFragment to create Race details as a copy from another set of details.
+     * @param id: The race details row id in the database.
+     * @param values: Additional multi select values.
      */
     override fun onRaceLongSelect(id: Long, values: Array<String>) {
         val bundle = Bundle()
@@ -79,7 +75,7 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Bottom navigation listener">
+    //<editor-fold default state="collapsed" desc="Region: Bottom navigation listener">
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when(menuItem.itemId) {
             R.id.id_mnu_bnv_settings -> {
@@ -97,9 +93,9 @@ class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSele
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Utility">
+    //<editor-fold default state="collapsed" desc="Region: Utility">
     /**
-     * Setup the UI components.
+     * Setup the action bar and navigation.
      */
     private fun initialise() {
         // Toolbar.

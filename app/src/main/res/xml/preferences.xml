@@ -7,18 +7,17 @@
         app:title="@string/defaults_title"
         app:key="@string/key_defaults">
         <ListPreference
-            app:key="@string/key_race_code_pref"
-            app:title="@string/race_code_pref_title"
-            app:summary="@string/race_code_pref_summary"
-            app:entries="@array/raceCodes"
-            app:entryValues="@array/raceCodesVals" />
-
-        <ListPreference
             app:key="@string/key_city_code_pref"
             app:title="@string/city_code_pref_title"
             app:summary="@string/city_code_pref_summary"
             app:entries="@array/cityCodes"
             app:entryValues="@array/cityCodesVals" />
+        <ListPreference
+            app:key="@string/key_race_code_pref"
+            app:title="@string/race_code_pref_title"
+            app:summary="@string/race_code_pref_summary"
+            app:entries="@array/raceCodes"
+            app:entryValues="@array/raceCodesVals" />
     </PreferenceCategory>
 
     <PreferenceCategory

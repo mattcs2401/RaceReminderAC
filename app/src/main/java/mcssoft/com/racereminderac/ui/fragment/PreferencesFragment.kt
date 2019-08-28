@@ -2,6 +2,7 @@ package mcssoft.com.racereminderac.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.preference.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import kotlinx.android.synthetic.main.main_activity.*
@@ -10,7 +11,7 @@ import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.singleton.RaceAlarm
 
 class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener {
-/*Preference.OnPreferenceClickListener,*/
+//Preference.OnPreferenceClickListener
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preferences)
@@ -18,9 +19,8 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // Set the preference values and listeners.
         initialise()
-//        Log.d("tag","PreferenceFragment.onViewCreated")
     }
 
     //<editor-fold default state="collapsed" desc="Region: Listeners">
@@ -31,16 +31,24 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         /** Note: This fires before onPreferenceClick(). **/
         when(preference.key) {
-            activity?.resources?.getString(R.string.key_race_notif_send_pref) -> {
+            getString(R.string.key_city_code_pref) -> {
+                Toast.makeText(activity,
+                        """${getString(R.string.default_city_code_msg)} $newValue""", Toast.LENGTH_SHORT).show()
+            }
+            getString(R.string.key_race_code_pref) -> {
+                Toast.makeText(activity,
+                        """${getString(R.string.default_race_code_msg)} $newValue""", Toast.LENGTH_SHORT).show()
+            }
+            getString(R.string.key_race_notif_send_pref) -> {
                 doNotifySendPref(newValue)
             }
-            activity?.resources?.getString(R.string.key_refresh_interval_pref) -> {
+            getString(R.string.key_refresh_interval_pref) -> {
                 doRefreshIntPref(newValue)
             }
-            activity?.resources?.getString(R.string.key_refresh_interval_seek_pref) -> {
+            getString(R.string.key_refresh_interval_seek_pref) -> {
                 doRefreshIntSeekPref(newValue)
             }
-            activity?.resources?.getString(R.string.key_network_enable) -> {
+            getString(R.string.key_network_enable) -> {
                 doNetworkEnable(newValue)
             }
         }
@@ -55,6 +63,8 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         activity?.id_toolbar?.title = getString(R.string.preferences)
 
         // Get preferences.
+        raceCode= findPreference(activity!!.resources.getString(R.string.key_race_code_pref))
+        cityCode= findPreference(activity!!.resources.getString(R.string.key_city_code_pref))
         notify = findPreference(activity!!.resources.getString(R.string.key_race_notif_send_pref))
         notifyMulti = findPreference(activity!!.resources.getString(R.string.key_notif_send_multi_pref))
         refresh = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_pref))
@@ -67,6 +77,8 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         }
 
         // Set listeners.
+        raceCode?.onPreferenceChangeListener = this
+        cityCode?.onPreferenceChangeListener = this
         notify?.onPreferenceChangeListener = this
         refresh?.onPreferenceChangeListener = this
         refreshSeek?.onPreferenceChangeListener = this
@@ -113,6 +125,8 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
     }
     //</editor-fold>
 
+    private var cityCode: ListPreference? = null                //
+    private var raceCode: ListPreference? = null                //
     private var notify: SwitchPreferenceCompat? = null          // post notifications.
     private var notifyMulti: SwitchPreferenceCompat? = null     // allow multi refresh same race.
     private var refresh: SwitchPreferenceCompat? = null         // refresh interval.

@@ -145,10 +145,11 @@
     <string name="network_type_pref_title">Default Download Type</string>
     <string name="network_type_pref_summary">Select the default download type.</string>
 
-    <!--&lt;!&ndash; Preferences Toast messages. &ndash;&gt;-->
-    <!--<string name="race_code_msg">Default Race Code changed to</string>-->
-    <!--<string name="city_code_msg">Default City Code changed to</string>-->
-    <!--<string name="arch_removal_msg">Archived records removed.</string>-->
+    <!-- Preferences Toast messages. -->
+    <string name="default_race_code_msg">Default Race Code changed to </string>
+    <string name="default_city_code_msg">Default City Code changed to </string>
+    <string name="default_network_msg">Default Network changed to </string>
+    <string name="arch_removal_msg">Archived records removed.</string>
 
     <!-- Notification. -->
     <string name="nearing_race_time">Nearing race time</string>

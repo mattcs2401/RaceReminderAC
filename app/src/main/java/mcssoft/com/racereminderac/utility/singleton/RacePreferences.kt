@@ -3,6 +3,7 @@ package mcssoft.com.racereminderac.utility.singleton
 import android.content.Context
 import androidx.preference.PreferenceManager
 import mcssoft.com.racereminderac.R
+import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
 
 /**
@@ -10,6 +11,8 @@ import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
  */
 class RacePreferences private constructor (private val context: Context) {
 
+    private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    
     companion object : SingletonBase<RacePreferences, Context>(::RacePreferences)
 
     /**
@@ -18,7 +21,7 @@ class RacePreferences private constructor (private val context: Context) {
      */
     fun getRaceCode(): String? {
         val key = context.resources.getString(R.string.key_race_code_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null)
+        return sharedPreferences.getString(key, null)
     }
 
     /**
@@ -27,7 +30,7 @@ class RacePreferences private constructor (private val context: Context) {
      */
     fun getCityCode(): String? {
         val key = context.resources.getString(R.string.key_city_code_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, null)
+        return sharedPreferences.getString(key, null)
     }
 
     /**
@@ -36,7 +39,7 @@ class RacePreferences private constructor (private val context: Context) {
      */
     fun getRaceNotifyPost() : Boolean {
         val key = context.resources.getString(R.string.key_race_notif_send_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+        return sharedPreferences.getBoolean(key, false)
     }
 
     /**
@@ -45,7 +48,7 @@ class RacePreferences private constructor (private val context: Context) {
      */
     fun getRaceNotifyMulti() : Boolean {
         val key = context.resources.getString(R.string.key_notif_send_multi_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+        return sharedPreferences.getBoolean(key, false)
     }
 
     /**
@@ -54,7 +57,7 @@ class RacePreferences private constructor (private val context: Context) {
      */
     fun getRecoveryUndoLast() : Boolean {
         val key = context.resources.getString(R.string.key_recovery_undo_last_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+        return sharedPreferences.getBoolean(key, false)
     }
 
     /**
@@ -63,7 +66,7 @@ class RacePreferences private constructor (private val context: Context) {
      */
     fun getRefreshInterval() : Boolean {
         val key = context.resources.getString(R.string.key_refresh_interval_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+        return sharedPreferences.getBoolean(key, false)
     }
 
     /**
@@ -72,7 +75,7 @@ class RacePreferences private constructor (private val context: Context) {
      */
     fun getRefreshIntervalVal() : Int {
         val key = context.resources.getString(R.string.key_refresh_interval_seek_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getInt(key, 0)
+        return sharedPreferences.getInt(key, 0)
     }
 
     /**
@@ -81,7 +84,7 @@ class RacePreferences private constructor (private val context: Context) {
      */
     fun getRaceMultiSelect() : Boolean {
         val key = context.resources.getString(R.string.key_multi_select_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+        return sharedPreferences.getBoolean(key, false)
     }
 
     /**
@@ -90,12 +93,12 @@ class RacePreferences private constructor (private val context: Context) {
      */
     fun getRaceBulkDelete() : Boolean {
         val key = context.resources.getString(R.string.key_bulk_delete_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+        return sharedPreferences.getBoolean(key, false)
     }
 
     fun getNetworkEnable() : Boolean {
         val key = context.resources.getString(R.string.key_network_enable)
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+        return sharedPreferences.getBoolean(key, false)
     }
 
     /**
@@ -104,18 +107,19 @@ class RacePreferences private constructor (private val context: Context) {
      */
     fun getNetworkTypePref() : String? {
         val key = context.resources.getString(R.string.key_network_type_pref)
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, "2")
+        return sharedPreferences.getString(key, "2")
     }
 
     /**
      * Check that default preference values exist, and if not, then set them.
+     * Note: This method called in the MainActivity.onCreate()
      */
     fun preferencesCheck() {
         // String values mainly just for readability.
         val keyRaceCode = context.resources.getString(R.string.key_race_code_pref)
         val keyCityCode = context.resources.getString(R.string.key_city_code_pref)
-        val keyRaceNotifSend = context.resources.getString(R.string.key_race_notif_send_pref)
-        val keyRaceNotifMulti = context.resources.getString(R.string.key_notif_send_multi_pref)
+        val keyRaceNotifySend = context.resources.getString(R.string.key_race_notif_send_pref)
+        val keyRaceNotifyMulti = context.resources.getString(R.string.key_notif_send_multi_pref)
         val keyRecoveryUndoLast = context.resources.getString(R.string.key_recovery_undo_last_pref)
         val keyRefreshInterval = context.resources.getString(R.string.key_refresh_interval_pref)
         val keyMultiSelect = context.resources.getString(R.string.key_multi_select_pref)
@@ -123,49 +127,48 @@ class RacePreferences private constructor (private val context: Context) {
         val keyNetworkPref= context.resources.getString(R.string.key_network_enable)
         val keyNetworkTypePref = context.resources.getString(R.string.key_network_type_pref)
 
-        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
-        val map = sharedPrefs.all
+        val map = sharedPreferences.all
 
-        // If SharedPreferences don't exist, then set them with their defaults.
+        /** If SharedPreferences don't exist, then set them with their defaults. **/
+
         if(!map.contains(keyCityCode)) {
-            sharedPrefs.edit().putString(keyCityCode, "B").apply()
+            sharedPreferences.edit().putString(keyCityCode, Constants.DEFAULT_CC).apply()
         }
 
         if(!map.contains(keyRaceCode)) {
-            sharedPrefs.edit().putString(keyRaceCode, "R").apply()
+            sharedPreferences.edit().putString(keyRaceCode, Constants.DEFAULT_RC).apply()
         }
 
-        if(!map.contains(keyRaceNotifSend)) {
-            sharedPrefs.edit().putBoolean(keyRaceNotifSend, false).apply()
+        if(!map.contains(keyRaceNotifySend)) {
+            sharedPreferences.edit().putBoolean(keyRaceNotifySend, false).apply()
         }
 
-        if(!map.contains(keyRaceNotifMulti)) {
-            sharedPrefs.edit().putBoolean(keyRaceNotifMulti, false).apply()
+        if(!map.contains(keyRaceNotifyMulti)) {
+            sharedPreferences.edit().putBoolean(keyRaceNotifyMulti, false).apply()
         }
 
         if(!map.contains(keyRecoveryUndoLast)) {
-            sharedPrefs.edit().putBoolean(keyRecoveryUndoLast, false).apply()
+            sharedPreferences.edit().putBoolean(keyRecoveryUndoLast, false).apply()
         }
 
         if(!map.contains(keyRefreshInterval)) {
-            sharedPrefs.edit().putBoolean(keyRefreshInterval, false).apply()
+            sharedPreferences.edit().putBoolean(keyRefreshInterval, false).apply()
         }
 
         if(!map.contains(keyMultiSelect)) {
-            sharedPrefs.edit().putBoolean(keyMultiSelect, false).apply()
+            sharedPreferences.edit().putBoolean(keyMultiSelect, false).apply()
         }
 
         if(!map.contains(keyBulkDelete)) {
-            sharedPrefs.edit().putBoolean(keyBulkDelete, false).apply()
+            sharedPreferences.edit().putBoolean(keyBulkDelete, false).apply()
         }
 
         if(!map.contains(keyNetworkPref)) {
-            sharedPrefs.edit().putBoolean(keyNetworkPref, false).apply()
+            sharedPreferences.edit().putBoolean(keyNetworkPref, false).apply()
         }
 
         if(!map.contains(keyNetworkTypePref)) {
-            sharedPrefs.edit().putString(keyNetworkTypePref, "2").apply()
+            sharedPreferences.edit().putString(keyNetworkTypePref, Constants.NETWORK_WIFI.toString()).apply()
         }
-//        Log.d("tag","RacePreferences.preferenceCheck")
     }
 }
