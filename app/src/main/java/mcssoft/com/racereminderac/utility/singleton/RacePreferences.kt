@@ -93,12 +93,17 @@ class RacePreferences private constructor (private val context: Context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
     }
 
+    fun getNetworkEnable() : Boolean {
+        val key = context.resources.getString(R.string.key_network_enable)
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
+    }
+
     /**
      * Get the Network preference.
-     * @return True if preference is enabled, else false.
+     * @return The current network type preference.
      */
-    fun getNetworkPref() : String? {
-        val key = context.resources.getString(R.string.key_network_pref)
+    fun getNetworkTypePref() : String? {
+        val key = context.resources.getString(R.string.key_network_type_pref)
         return PreferenceManager.getDefaultSharedPreferences(context).getString(key, "2")
     }
 
@@ -115,7 +120,8 @@ class RacePreferences private constructor (private val context: Context) {
         val keyRefreshInterval = context.resources.getString(R.string.key_refresh_interval_pref)
         val keyMultiSelect = context.resources.getString(R.string.key_multi_select_pref)
         val keyBulkDelete = context.resources.getString(R.string.key_bulk_delete_pref)
-        val keyNetworkPref = context.resources.getString(R.string.key_network_pref)
+        val keyNetworkPref= context.resources.getString(R.string.key_network_enable)
+        val keyNetworkTypePref = context.resources.getString(R.string.key_network_type_pref)
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
         val map = sharedPrefs.all
@@ -154,7 +160,11 @@ class RacePreferences private constructor (private val context: Context) {
         }
 
         if(!map.contains(keyNetworkPref)) {
-            sharedPrefs.edit().putString(keyNetworkPref, "2").apply()
+            sharedPrefs.edit().putBoolean(keyNetworkPref, false).apply()
+        }
+
+        if(!map.contains(keyNetworkTypePref)) {
+            sharedPrefs.edit().putString(keyNetworkTypePref, "2").apply()
         }
 //        Log.d("tag","RacePreferences.preferenceCheck")
     }

@@ -138,9 +138,12 @@
     <!-- Tatts network preference. -->
     <string name="key_network">key_network</string>
     <string name="network_title">Network</string>
-    <string name="key_network_pref">key_network_pref</string>
-    <string name="key_network_pref_type">key_network_pref_val</string>
-    <string name="network_summary">Update Race details from the Tatts network.</string>
+    <string name="key_network_enable">key_network_enable</string>
+    <string name="key_network_type_pref">key_network_pref</string>
+    <string name="network_enable_title">Enable Network Download</string>
+    <string name="network_enable_summary">Download Race details from the Tatts network.</string>
+    <string name="network_type_pref_title">Default Download Type</string>
+    <string name="network_type_pref_summary">Select the default download type.</string>
 
     <!--&lt;!&ndash; Preferences Toast messages. &ndash;&gt;-->
     <!--<string name="race_code_msg">Default Race Code changed to</string>-->
@@ -265,14 +268,14 @@
     <string name="abbrv_race_sel">8</string>
     <string name="abbrv_race_code">R</string>
 
-    <string-array name="networkPref">
+    <string-array name="networkTypePref">
         <item>None</item>
         <item>WiFi</item>
         <item>Mobile</item>
         <item>Either</item>
     </string-array>
 
-    <string-array name="networkPrefVals">
+    <string-array name="networkTypePrefVals">
         <item>1</item> <!-- Constants.NETWORK_NONE -->
         <item>2</item> <!-- Constants.NETWORK_WIFI -->
         <item>3</item> <!-- Constants.NETWORK_MOBILE -->

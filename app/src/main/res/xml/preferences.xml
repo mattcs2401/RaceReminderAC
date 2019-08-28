@@ -19,13 +19,6 @@
             app:summary="@string/city_code_pref_summary"
             app:entries="@array/cityCodes"
             app:entryValues="@array/cityCodesVals" />
-
-        <ListPreference
-            app:key="@string/key_network_pref"
-            app:title="Default Download Type"
-            app:summary="Select the default download type."
-            app:entries="@array/networkPref"
-            app:entryValues="@array/networkPrefVals"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -94,4 +87,20 @@
             app:summary="@string/delete_summary"/>
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="@string/key_network"
+        app:title="@string/network_title">
+        <SwitchPreferenceCompat
+            app:key="@string/key_network_enable"
+            app:title="@string/network_enable_title"
+            app:defaultValue="false"
+            app:summary="@string/network_enable_summary" />
+        <ListPreference
+            app:key="@string/key_network_type_pref"
+            app:title="@string/network_type_pref_title"
+            app:summary="@string/network_type_pref_summary"
+            app:entries="@array/networkTypePref"
+            app:entryValues="@array/networkTypePrefVals"
+            app:enabled="false"/>
+    </PreferenceCategory>
 </androidx.preference.PreferenceScreen>

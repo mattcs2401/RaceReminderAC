@@ -41,6 +41,9 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
             activity?.resources?.getString(R.string.key_refresh_interval_seek_pref) -> {
                 doRefreshIntSeekPref(newValue)
             }
+            activity?.resources?.getString(R.string.key_network_enable) -> {
+                doNetworkEnable(newValue)
+            }
         }
         return true
     }
@@ -57,6 +60,7 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         notifyMulti = findPreference(activity!!.resources.getString(R.string.key_notif_send_multi_pref))
         refresh = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_pref))
         refreshSeek = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_seek_pref))
+        network = findPreference(activity!!.resources.getString(R.string.key_network_enable))
 
         if(refresh?.isChecked!!) {
             refreshSeek?.isEnabled = true
@@ -66,6 +70,7 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         notify?.onPreferenceChangeListener = this
         refresh?.onPreferenceChangeListener = this
         refreshSeek?.onPreferenceChangeListener = this
+        network?.onPreferenceChangeListener = this
     }
 
     private fun doNotifySendPref(newValue: Any) {
@@ -102,12 +107,18 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
             RaceAlarm.getInstance(activity!!).cancelAlarm()
         }
     }
+
+    private fun doNetworkEnable(newValue: Any) {
+        // TBA.
+        val bp="bp"
+    }
     //</editor-fold>
 
     private var notify: SwitchPreferenceCompat? = null          // post notifications.
     private var notifyMulti: SwitchPreferenceCompat? = null     // allow multi refresh same race.
     private var refresh: SwitchPreferenceCompat? = null         // refresh interval.
     private var refreshSeek: SeekBarPreference? = null          // refresh interval ammount.
+    private var network: SwitchPreferenceCompat? = null         // network enable download.
 
     private var refreshVal: Int = Constants.REFRESH_MIN         // simply an initial value.
 }
