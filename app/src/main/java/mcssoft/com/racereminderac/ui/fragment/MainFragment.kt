@@ -245,6 +245,14 @@ class MainFragment : Fragment() {
     } else {
         setToolbarIcons(true)
     }
+
+    // Message from the Network preference.
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    fun onMessageEvent(network: NetworkMessage) {
+        // TBA
+        val bp = "bp"
+    }
+
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility - Toolbar.">
