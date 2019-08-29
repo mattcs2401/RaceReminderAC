@@ -40,16 +40,16 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
                         """${getString(R.string.default_race_code_msg)} $newValue""", Toast.LENGTH_SHORT).show()
             }
             getString(R.string.key_race_notif_send_pref) -> {
-                doNotifySendPref(newValue)
+                setNotifySendPref(newValue as Boolean)
             }
             getString(R.string.key_refresh_interval_pref) -> {
-                doRefreshIntPref(newValue)
+                setRefreshIntPref(newValue as Boolean)
             }
             getString(R.string.key_refresh_interval_seek_pref) -> {
-                doRefreshIntSeekPref(newValue)
+                setRefreshIntSeekPref(newValue as Int)
             }
             getString(R.string.key_network_enable) -> {
-                doNetworkEnable(newValue)
+                setNetworkTypeEnable(newValue as Boolean)
             }
         }
         return true
@@ -85,8 +85,8 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         network?.onPreferenceChangeListener = this
     }
 
-    private fun doNotifySendPref(newValue: Any) {
-        if(newValue == false) {
+    private fun setNotifySendPref(newValue: Boolean) {
+        if(!newValue) {
             notifyMulti?.isChecked = false
             notifyMulti?.isEnabled = false
         } else {
@@ -94,8 +94,8 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         }
     }
 
-    private fun doRefreshIntPref(newValue: Any) {
-        if(newValue == false) {
+    private fun setRefreshIntPref(newValue: Boolean) {
+        if(!newValue) {
             refreshSeek?.isEnabled = false
             RaceAlarm.getInstance(activity!!).cancelAlarm()
         } else {
@@ -107,8 +107,8 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         }
     }
 
-    private fun doRefreshIntSeekPref(newValue: Any) {
-        refreshVal = newValue as Int
+    private fun setRefreshIntSeekPref(newValue: Int) {
+        refreshVal = newValue
         if(refreshVal > 0) {
             refreshSeek?.value = refreshVal
             RaceAlarm.getInstance(activity!!).cancelAlarm()
@@ -120,8 +120,14 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         }
     }
 
-    private fun doNetworkEnable(newValue: Any) {
+    /**
+     * Enable/Disable the network selection preference list.
+     * @param newValue: (Boolean) True - network preference list is able to be selected, else false.
+     */
+    private fun setNetworkTypeEnable(newValue: Boolean) {
         networkType?.isEnabled = newValue == true
+
+        val bp = networkType!!.value
     }
     //</editor-fold>
 
