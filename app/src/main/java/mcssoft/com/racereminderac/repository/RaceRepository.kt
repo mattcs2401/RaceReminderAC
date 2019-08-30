@@ -41,9 +41,10 @@ class RaceRepository(application: Application) {
      * @param type: The operation type, one of AsyncLD.UPDATE / DELETE / INSERT.
      * @param race: The Race object.
      */
-    internal fun doDatabaseOperation(type: Int, race: RaceDetails?) {
+    internal fun doDatabaseOperation(type: Int, race: RaceDetails?): Long {
         val taskAsync = AsyncLD(type, raceDao)
         taskAsync.execute(race)
+        return taskAsync.get()
     }
 
 }

@@ -28,6 +28,7 @@ import mcssoft.com.racereminderac.utility.singleton.RaceTime
 import mcssoft.com.racereminderac.utility.eventbus.MultiSelMessage
 import mcssoft.com.racereminderac.utility.eventbus.DateTimeMessage
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
+import mcssoft.com.racereminderac.utility.eventbus.TransactionMessage
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -63,9 +64,9 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: EventBus">
+    //<editor-fold default state="collapsed" desc="Region: EventBus">
     /**
-     * EventBus return for TimePickDialog.
+     * EventBus return from the TimePickDialog.
      * @param time: The Race time (as Long).
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
@@ -95,46 +96,50 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         // Note: If the OK or Cancel button was not clicked on the MultiSelectDialog, this
         //       onMessageEvent won't happen.
         if(multiSel.values == null) {
-            // The message payload has no data, so just clear the multi select CB.
-//            btnMultiSel.isChecked = false
+            // The message payload has no data.
             listMultiSel = arrayOf("","","","")  // clear any previous values.
             setMultiSelViews(false)
         } else {
             // The message payload has 1 or more race selects.
             listMultiSel = multiSel.values!!
-            // set number picker to 1st value.
+            // Set number picker to 1st value.
             npRaceSel.value = rsVals.indexOf(listMultiSel[0])
-            // set views.
+            // Set views.
             setMultiSelViews(true)
         }
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onClick">
+    //<editor-fold default state="collapsed" desc="Region: Event handler - onClick">
     override fun onClick(view: View) {
         when(view.id) {
             R.id.id_btn_time -> {
                 launchTimePickDialog()
             }
             R.id.id_btn_save -> {
-                    val race: RaceDetails
-                    when (editType) {
-                        Constants.EDIT_RACE_UPDATE -> {
-                            race = collateValues(Constants.EDIT_RACE_UPDATE)
-                            raceViewModel.update(race)
-                        }
-                        Constants.EDIT_RACE_NEW -> {
-                            race = collateValues(Constants.EDIT_RACE_NEW)
-                            raceViewModel.insert(race)
-                        }
-                        Constants.EDIT_RACE_COPY -> {
-                            race = collateValues(Constants.EDIT_RACE_COPY)
-                            raceViewModel.insert(race)
-                        }
+                // Update or insert Race details, then navigate back to MainFragment.
+                var id: Long = 0
+                var type: Int = 0
+                var race: RaceDetails? = null
+                when (editType) {
+                    Constants.EDIT_RACE_UPDATE -> {
+                        race = collateValues(Constants.EDIT_RACE_UPDATE)
+                        raceViewModel.update(race)
+                        type = Constants.EDIT_RACE_UPDATE
                     }
-                    Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
-                            .navigate(R.id.id_main_fragment)
+                    Constants.EDIT_RACE_NEW -> {
+                        race = collateValues(Constants.EDIT_RACE_NEW)
+                        id = raceViewModel.insert(race)
+                        type = Constants.EDIT_RACE_NEW
+                    }
+                    Constants.EDIT_RACE_COPY -> {
+                        race = collateValues(Constants.EDIT_RACE_COPY)
+                        id = raceViewModel.insert(race)
+                        Constants.EDIT_RACE_COPY
+                    }
                 }
+                navigate(id, type, race!!)
+            }
             R.id.id_btn_multi_sel -> {
                 if(isMultiSel || allowMultiSel) {
                     setMultiSelVisible(true)
@@ -482,6 +487,30 @@ class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, Nu
         args.putStringArray(getString(R.string.key_multi_select_dialog_vals), listMultiSel)
         DialogManager.getInstance()?.showDialog(Constants.D_MULTI_SEL, args,
                 activity!!.supportFragmentManager.beginTransaction())
+    }
+
+    private fun navigate(id: Long, type: Int, race: RaceDetails?) {
+        when(type) {
+            Constants.EDIT_RACE_UPDATE -> {
+                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+                        .navigate(R.id.id_main_fragment)
+            }
+            Constants.EDIT_RACE_NEW -> {
+                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+                        .navigate(R.id.id_main_fragment, createNavBundle(id, race))
+            }
+            Constants.EDIT_RACE_COPY -> {
+                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+                        .navigate(R.id.id_main_fragment, createNavBundle(id, race))
+            }
+        }
+    }
+
+    private fun createNavBundle(id: Long, race: RaceDetails?): Bundle {
+        race?.id = id
+        val bundle = Bundle()
+        bundle.putSerializable("key", race.toString())
+        return bundle
     }
     //</editor-fold>
 

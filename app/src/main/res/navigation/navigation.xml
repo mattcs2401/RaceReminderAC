@@ -28,7 +28,11 @@
         tools:layout="@layout/edit_fragment">
         <action
             android:id="@+id/editFragment_to_mainFragment"
-            app:destination="@id/id_main_fragment" />
+            app:destination="@id/id_main_fragment">
+<!--            <argument-->
+<!--                android:name="raceDetailsArg"-->
+<!--                app:argType="mcssoft.com.racereminderac.entity.RaceDetails"/>-->
+        </action>
     </fragment>
     <fragment
         android:id="@+id/preferencesFragment"

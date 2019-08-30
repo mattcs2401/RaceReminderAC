@@ -22,24 +22,24 @@ import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
-import mcssoft.com.racereminderac.utility.singleton.NetworkManager
-import mcssoft.com.racereminderac.utility.singleton.DialogManager
 import mcssoft.com.racereminderac.utility.Constants
-import mcssoft.com.racereminderac.utility.singleton.RaceAlarm
-import mcssoft.com.racereminderac.utility.singleton.RacePreferences
 import mcssoft.com.racereminderac.utility.TouchHelper
 import mcssoft.com.racereminderac.utility.callback.BackPressCB
 import mcssoft.com.racereminderac.utility.eventbus.*
+import mcssoft.com.racereminderac.utility.singleton.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 class MainFragment : Fragment() {
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
+    //<editor-fold default state="collapsed" desc="Region: Lifecycle">
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         setHasOptionsMenu(true)
+
+        processForDownload()
+
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
@@ -192,11 +192,14 @@ class MainFragment : Fragment() {
         }
     }
 
+    /**
+     * Called from the RaceViewHolder.onClick method.
+     * @param select: Details of the selected Race. See SelectMessage notes.
+     */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(select: SelectMessage) {
         val race = raceAdapter.getRace(select.getPos)
-        val values = arrayOf(race.raceSel, race.raceSel2, race.raceSel3, race.raceSel4,
-                race.raceTrainer, race.raceJockey, race.raceHorse)
+        val values = arrayOf(race.raceSel, race.raceSel2, race.raceSel3, race.raceSel4)
 
         when(select.getSelType) {
             Constants.ITEM_SELECT -> {
@@ -223,8 +226,8 @@ class MainFragment : Fragment() {
     }
 
     /**
-     * The update message.
-     * @param update: The update message object. See the UpdateMessage notes.
+     * Called from the RaceViewHolder.onClick method.
+     * @param update: Details of the Race to be updated. See UpdateMessage notes.
      */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(update: UpdateMessage) {
@@ -237,7 +240,10 @@ class MainFragment : Fragment() {
         raceViewModel.update(race)
     }
 
-    // Message from the adapter whether data exists.
+    /**
+     * Called by the RaceAdapter.swapData method.
+     * @param data: Basically a boolean indicating whether the adapter has data or not.
+     */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(data: DataMessage) = if(data.getIsEmpty) {
         // No items in the adapter.
@@ -246,11 +252,28 @@ class MainFragment : Fragment() {
         setToolbarIcons(true)
     }
 
-    // Message from the Network preference.
+    /**
+     * Called by the PreferencesFragment.setNetworkTypeEnable method.
+     * @param network: An object signifying network availability and network type as set in the
+     *                 Preferences. Doesn't mean a network connection is actually available, just
+     *                 the Preferences indicating that a network connection can be used.
+     */
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     fun onMessageEvent(network: NetworkMessage) {
-        // TBA
-        val bp = "bp"
+
+        val type = network.type
+    }
+
+    /**
+     * Called by EditFragment.onClick method.
+     * @param transaction: An object signifying a database transaction. See TransactionMessage
+     *                     for details.
+     */
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    fun onMessageEvent(transaction: TransactionMessage) {
+
+        val opType = transaction.theOpType
+        val race = transaction.theRaceDetails
     }
 
     //</editor-fold>
@@ -331,7 +354,26 @@ class MainFragment : Fragment() {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Private vars.">
+    private fun processForDownload() {
+        val details = arguments?.getString("key")
+        if(details != null) {
+            // Basically only do for a new Race.
+            raceDetailsFromEdit = DeSerialiseRaceDetails.getInstance(activity!!).getRaceDetails(details)!!
+            // Preference check.
+            val isNetwork = RacePreferences.getInstance(activity!!).getNetworkEnable()
+            if(isNetwork) {
+                // Network download is allowed in the Preferences.
+                val isConnected = NetworkManager.getInstance(activity!!).isNetworkConnected()
+                if(isConnected) {
+                    // Network is actually available.
+
+                    val bp = "bp"
+                }
+            }
+        }
+    }
+
+    //<editor-fold default state="collapsed" desc="Region: Private vars.">
     private lateinit var refreshMenuItem: MenuItem
     private lateinit var deleteMenuItem: MenuItem
     private lateinit var notifyMenuItem: MenuItem
@@ -343,6 +385,8 @@ class MainFragment : Fragment() {
     private lateinit var networkMgr: NetworkManager
 
     private var backPressCallback = BackPressCB(true)
+
+    private lateinit var raceDetailsFromEdit: RaceDetails
     //</editor-fold>
 }
 

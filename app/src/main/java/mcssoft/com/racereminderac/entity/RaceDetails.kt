@@ -3,13 +3,14 @@ package mcssoft.com.racereminderac.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "race_details")
 data class RaceDetails(@ColumnInfo(name = "CityCode") var cityCode: String,
                        @ColumnInfo(name = "RaceCode") var raceCode: String,
                        @ColumnInfo(name = "RaceNum")  var raceNum: String,
                        @ColumnInfo(name = "RaceSel")  var raceSel: String,
-                       @ColumnInfo(name = "RaceTimeS") var raceTimeS: String) : Comparable<RaceDetails> {
+                       @ColumnInfo(name = "RaceTimeS") var raceTimeS: String) : Comparable<RaceDetails>, Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "_id") var id: Long? = null    // value inserted by Room.
@@ -24,11 +25,6 @@ data class RaceDetails(@ColumnInfo(name = "CityCode") var cityCode: String,
     @ColumnInfo(name = "RaceSel3") var raceSel3: String = ""              // 3rd "    "    "
     @ColumnInfo(name = "RaceSel4") var raceSel4: String = ""              // 4th "    "    "
 
-    // Additional (horse, jokey and trainer names).
-    @ColumnInfo(name = "RaceHorse") var raceHorse: String = ""
-    @ColumnInfo(name = "RaceJockey") var raceJockey: String = ""
-    @ColumnInfo(name = "RaceTrainer") var raceTrainer: String = ""
-
     /**
      * Simple compare on RaceTime. Used in, e.g.,  Collections.sort(List<Race>)
      * @param other: The object to compare (this) against.
@@ -41,4 +37,14 @@ data class RaceDetails(@ColumnInfo(name = "CityCode") var cityCode: String,
         }
         return result
     }
+
+    // From Serializable.
+    override fun toString(): String {
+        return "cityCode=$cityCode, raceCode=$raceCode, raceNum=$raceNum," +
+                " raceSel=$raceSel, raceTimeS=$raceTimeS, id=$id, raceDate=$raceDate," +
+                " raceTimeL=$raceTimeL, archvRace=$archvRace, metaColour=$metaColour," +
+                " betPlaced=$betPlaced, raceSel2=$raceSel2, raceSel3=$raceSel3," +
+                " raceSel4=$raceSel4"
+    }
+
 }
