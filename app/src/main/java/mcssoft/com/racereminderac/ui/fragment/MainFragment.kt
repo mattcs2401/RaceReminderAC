@@ -34,13 +34,6 @@ import org.greenrobot.eventbus.ThreadMode
 class MainFragment : Fragment(R.layout.main_fragment) {
 
     //<editor-fold default state="collapsed" desc="Region: Lifecycle">
-//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-//                              savedInstanceState: Bundle?): View {
-//        setHasOptionsMenu(true)
-//        processForDownload()
-//        return inflater.inflate(R.layout.main_fragment, container, false)
-//    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -79,9 +72,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
         val lRaces = raceViewModel.getAllRaces()
         lRaces.observe(viewLifecycleOwner, RaceListObserver(raceAdapter))
-
-//        val networkManager: NetworkManager = NetworkManager(activity!!)
-//        networkManager.
 
         Log.d("tag","MainFragment.onActivityCreated")
     }
@@ -174,7 +164,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * The refresh message.
      * @param refresh: Not actually used. Message is just a signal to refresh the display.
      */
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe()
     fun onMessageEvent(refresh: ManualRefreshMessage) {
         /*
          Note: The down side to this is that the observer will react twice.
@@ -198,7 +188,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * Called from the RaceViewHolder.onClick method.
      * @param select: Details of the selected Race. See SelectMessage notes.
      */
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe()
     fun onMessageEvent(select: SelectMessage) {
         val race = raceAdapter.getRace(select.getPos)
         val values = arrayOf(race.raceSel, race.raceSel2, race.raceSel3, race.raceSel4)
@@ -219,7 +209,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * The delete all message.
      * @param delete: Not actually used. Message is just a signal to delete all displayed.
      */
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe()
     fun onMessageEvent(delete: DeleteAllMessage) {
         // Hide toolbar icons.
         setToolbarIcons(false)
@@ -231,7 +221,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * Called from the RaceViewHolder.onClick method.
      * @param update: Details of the Race to be updated. See UpdateMessage notes.
      */
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe()
     fun onMessageEvent(update: UpdateMessage) {
         val race: RaceDetails = raceAdapter.getRace(update.pos)
         when(update.update) {
@@ -246,7 +236,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * Called by the RaceAdapter.swapData method.
      * @param data: Basically a boolean indicating whether the adapter has data or not.
      */
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe()
     fun onMessageEvent(data: DataMessage) = if(data.getIsEmpty) {
         // No items in the adapter.
         setToolbarIcons(false)
@@ -260,7 +250,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      *                 Preferences. Doesn't mean a network connection is actually available, just
      *                 the Preferences indicating that a network connection can be used.
      */
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe(threadMode = ThreadMode.ASYNC)
     fun onMessageEvent(network: NetworkMessage) {
 
         val type = network.type
@@ -271,13 +261,12 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * @param transaction: An object signifying a database transaction. See TransactionMessage
      *                     for details.
      */
-    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    @Subscribe()
     fun onMessageEvent(transaction: TransactionMessage) {
 
         val opType = transaction.theOpType
         val race = transaction.theRaceDetails
     }
-
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility - Toolbar.">
@@ -346,7 +335,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 redCircle.visibility = VISIBLE
 
                 // Set alarm.
-                RaceAlarm.getInstance(activity!!).setAlarm(interval.toLong())
+                RaceAlarm.getInstance(activity!!).setAlarm(interval!!.toLong())
             }
         } else {
             refreshMenuItem.isVisible = false

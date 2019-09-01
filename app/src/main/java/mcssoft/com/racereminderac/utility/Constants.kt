@@ -50,17 +50,17 @@ object Constants {
 
     const val DELETE_COLOUR = "#b80f0a"     // Swipe to delete background colour (red).
 
-    const val REFRESH_MIN = 1               // Refresh interval minimum value (equates to 1 minute).
-    const val REFRESH_DEFAULT = 3           // Refresh interval default value (equates to 3 minutes).
+    const val REFRESH_MIN = 1             // Refresh interval minimum value (equates to 1 minute).
+    const val REFRESH_DEFAULT = 3         // Refresh interval default value (equates to 3 minutes).
 
     const val CB_BET_PLACED = 1             // BetPlaced UI component (on adapter row).
 
     const val SELECTS_MAX = 4               // The max number of multi selects for a race.
 
-    const val NETWORK_NONE = 1
-    const val NETWORK_WIFI = 2              // Network only by WiFi.
-    const val NETWORK_MOB = 3               // Network only by mobile data.
-    const val NETWORK_EITHER = 4            // Network by either WiFi or mobile data.
+    const val NETWORK_NONE = 1            // Network none (don't use a network).
+    const val NETWORK_WIFI = 2            // Network only by WiFi.
+    const val NETWORK_MOB = 3             // Network only by mobile data.
+    const val NETWORK_EITHER = 4          // Network by either WiFi or mobile data.
 
     const val D_DELETE_ALL = "DELETE_ALL"   // "Tag" for Delete All dialog.
     const val D_MULTI_SEL = "MULTI_SELECT"  // "Tag" for Multi Select dialog.

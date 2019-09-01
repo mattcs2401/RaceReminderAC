@@ -69,7 +69,7 @@ class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , Vi
      * EventBus return from the TimePickDialog.
      * @param time: The Race time (as Long).
      */
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe()
     fun onMessageEvent(time: TimeMessage) {
         raceTimeL = time.time  // keep local copy.
         btnTime.text = RaceTime.getInstance()?.timeFromMillis(raceTimeL)
@@ -79,7 +79,7 @@ class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , Vi
      * EventBus return from getting the Race date (from AsyncNoLD).
      * @param raceDT: The Race date/time fields.
      */
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe()
     fun onMessageEvent(raceDT: DateTimeMessage) {
         // The Race date.
         this.raceDate = raceDT.theRace.raceDate
@@ -91,7 +91,7 @@ class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , Vi
      * EventBus return from the MultiSelect dialog.
      * @param multiSel: An Array<String> of the selected values.
      */
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe()
     fun onMessageEvent(multiSel: MultiSelMessage) {
         // Note: If the OK or Cancel button was not clicked on the MultiSelectDialog, this
         //       onMessageEvent won't happen.

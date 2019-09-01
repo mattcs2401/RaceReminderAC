@@ -14,12 +14,7 @@ import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
 
 class NetworkManager private constructor (private val context: Context) : IDownload, Response.ErrorListener, Response.Listener<String> {
 
-    //private val context: Context = context
     private val connMgr: ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-//    init{
-//        connMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-//    }
 
     companion object : SingletonBase<NetworkManager, Context>(::NetworkManager)
 
