@@ -15,13 +15,12 @@ import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.singleton.RacePreferences
 
-class MainActivity : AppCompatActivity(), IRace.IRaceSelect, IRace.IRaceLongSelect,
+class MainActivity : AppCompatActivity(R.layout.main_activity), IRace.IRaceSelect, IRace.IRaceLongSelect,
         BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-
+//        setContentView(R.layout.main_activity)
         RacePreferences.getInstance(this).preferencesCheck()
 
         initialise()

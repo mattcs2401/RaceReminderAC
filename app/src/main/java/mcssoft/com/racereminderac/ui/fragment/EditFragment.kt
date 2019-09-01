@@ -33,13 +33,13 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class EditFragment : Fragment(), View.OnClickListener , View.OnTouchListener, NumberPicker.OnValueChangeListener {
+class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , View.OnTouchListener, NumberPicker.OnValueChangeListener {
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Lifecycle">
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.edit_fragment, container, false)
-    }
+    //<editor-fold default state="collapsed" desc="Region: Lifecycle">
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+//                              savedInstanceState: Bundle?): View {
+//        return inflater.inflate(R.layout.edit_fragment, container, false)
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

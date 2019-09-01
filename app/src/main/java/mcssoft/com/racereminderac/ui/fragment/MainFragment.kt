@@ -31,22 +31,24 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(R.layout.main_fragment) {
 
     //<editor-fold default state="collapsed" desc="Region: Lifecycle">
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        setHasOptionsMenu(true)
-
-        processForDownload()
-
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+//                              savedInstanceState: Bundle?): View {
+//        setHasOptionsMenu(true)
+//        processForDownload()
+//        return inflater.inflate(R.layout.main_fragment, container, false)
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         (activity?.id_toolbar)?.title = getString(R.string.title_race_reminder)
+
+        setHasOptionsMenu(true)
+
+        processForDownload()
 
         raceAdapter = RaceAdapter(activity!!.id_container, activity!!)
         recyclerView = view.id_recyclerView
