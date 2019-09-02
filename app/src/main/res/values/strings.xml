@@ -283,4 +283,6 @@
         <item>4</item> <!-- Constants.NETWORK_EITHER -->
     </string-array>
 
+    <!-- Tatts.com URL info. -->
+    <string name="tatts_base_url_path">https://tatts.com/pagedata/racing</string>
 </resources>

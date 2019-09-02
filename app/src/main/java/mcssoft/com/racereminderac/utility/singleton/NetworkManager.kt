@@ -10,13 +10,20 @@ import com.android.volley.*
 import com.android.volley.toolbox.Volley
 import mcssoft.com.racereminderac.interfaces.IDownload
 import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.DownloadRequest
 import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
+import java.lang.Exception
 
-class NetworkManager private constructor (private val context: Context) : IDownload, Response.ErrorListener, Response.Listener<String> {
+class NetworkManager private constructor (private val context: Context) : IDownload, Response.ErrorListener, Response.Listener<List<*>> {
 
     private val connMgr: ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     companion object : SingletonBase<NetworkManager, Context>(::NetworkManager)
+
+    fun queueRequest(raceUrl: String) {
+        val downloadRequest = DownloadRequest(Request.Method.GET, raceUrl, this, this)
+        DownloadRequestQueue.getInstance(context).addToRequestQueue(downloadRequest)
+    }
 
     /**
      * Get if a network connection exists.
@@ -49,22 +56,12 @@ class NetworkManager private constructor (private val context: Context) : IDownl
 
 //    val isNetworkActive : Boolean
 //        get() = connMgr.isDefaultNetworkActive
-
+//
 //    val activeNetworkInfo: NetworkInfo?
 //        get() = connMgr.activeNetworkInfo
-
+//
 //    val allNetworks: Array<out Network>?
 //        get() = connMgr.getAllNetworks()
-
-    private val networkCapabilities: NetworkCapabilities
-        get() = connMgr.getNetworkCapabilities(connMgr.activeNetwork)
-
-    private fun <T> addToRequestQueue(request: Request<T>) = requestQueue.add(request)!!
-
-    fun queueRequest(url: String) {
-        val request = DownloadRequest(url, this)
-        addToRequestQueue(request)
-    }
 
     //<editor-fold default state="collapsed" desc="Region: Volley response">
     // Error response listener.
@@ -75,9 +72,9 @@ class NetworkManager private constructor (private val context: Context) : IDownl
     }
 
     // Volley response listener.
-    override fun onResponse(response: String) {
+    override fun onResponse(response: List<*>?) {
         volleyError = null        // we'll assume because there is a response then there's no error.
-        volleyResponse = response
+        volleyResponse = response.toString()
         Toast.makeText(context, "Volley download success.", Toast.LENGTH_SHORT).show()
     }
     //</editor-fold>
@@ -88,25 +85,10 @@ class NetworkManager private constructor (private val context: Context) : IDownl
     override fun onDownloadError(): String = volleyError!!
     //</editor-fold>
 
-    private class DownloadRequest(url: String, listener: Response.ErrorListener) : Request<String>(url, listener) {
-        override fun parseNetworkResponse(response: NetworkResponse?): Response<String> {
-            // TBA
-            return Response.success(response?.data.toString(), null)
-        }
-
-        override fun deliverResponse(response: String?) {
-            // TBA
-            val bp = ""
-        }
-    }
+    private val networkCapabilities: NetworkCapabilities
+        get() = connMgr.getNetworkCapabilities(connMgr.activeNetwork)
 
     private var volleyResponse: String? = null
     private var volleyError: String? = null
-
-    private val requestQueue: RequestQueue by lazy {
-        // From documentation: applicationContext is key, it keeps you from leaking the Activity or
-        // BroadcastReceiver if one passed one in.
-        Volley.newRequestQueue(context.applicationContext)
-    }
 
 }

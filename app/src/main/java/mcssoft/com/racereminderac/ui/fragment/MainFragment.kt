@@ -41,7 +41,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
         setHasOptionsMenu(true)
 
-        processForDownload()
+        processForDownload() // this should go off onto a separate thread.
 
         raceAdapter = RaceAdapter(activity!!.id_container, activity!!)
         recyclerView = view.id_recyclerView
@@ -345,22 +345,18 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     }
     //</editor-fold>
 
+    /**
+     * Utility method that kicks off the parsing of the RaceDetails info returned in the arguments
+     * from the EditFragment to the MainFragment.
+     * EditFragment has done the checks; (1) a network connection exists, (2) use of a network
+     * connection is enabled in the preferences, (3) only for New/Copy.
+     */
     private fun processForDownload() {
-        val details = arguments?.getString("key")
+        val details = arguments?.getString("edit_arguments_key")
         if(details != null) {
-            // Basically only do for a new Race.
-            raceDetailsFromEdit = DeSerialiseRaceDetails.getInstance(activity!!).getRaceDetails(details)!!
-            // Preference check.
-            val isNetwork = RacePreferences.getInstance(activity!!).getNetworkEnable()
-            if(isNetwork) {
-                // Network download is allowed in the Preferences.
-                val isConnected = NetworkManager.getInstance(activity!!).isNetworkConnected()
-                if(isConnected) {
-                    // Network is actually available.
-
-                    val bp = "bp"
-                }
-            }
+            val raceDetails = DeSerialiseRaceDetails.getInstance(activity!!).getRaceDetails(details)
+            val raceUrl = Url.getInstance(activity!!).constructRaceUrl(raceDetails!!)
+            NetworkManager.getInstance(activity!!).queueRequest(raceUrl)
         }
     }
 
@@ -373,11 +369,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private lateinit var raceAdapter: RaceAdapter
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var recyclerView: RecyclerView
-    private lateinit var networkMgr: NetworkManager
 
     private var backPressCallback = BackPressCB(true)
-
-    private lateinit var raceDetailsFromEdit: RaceDetails
     //</editor-fold>
 }
 

@@ -29,6 +29,7 @@ import mcssoft.com.racereminderac.utility.eventbus.MultiSelMessage
 import mcssoft.com.racereminderac.utility.eventbus.DateTimeMessage
 import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
 import mcssoft.com.racereminderac.utility.eventbus.TransactionMessage
+import mcssoft.com.racereminderac.utility.singleton.NetworkManager
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -490,26 +491,41 @@ class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , Vi
     }
 
     private fun navigate(id: Long, type: Int, race: RaceDetails?) {
+        var bundle = Bundle()
+        // TODO - transport type WRT what is set in the preferences.
+        if(NetworkManager.getInstance(activity!!).isNetworkConnected()) {
+            // A network connection exists.
+            if(RacePreferences.getInstance(activity!!).getNetworkEnable()) {
+                // Use of a network connection is enabled in the Preferences.
+                if(type == Constants.EDIT_RACE_NEW || type == Constants.EDIT_RACE_COPY) {
+                    // Only for Race New/Copy. Create the arguments that is sent to the MainFragment.
+                    bundle = createNavBundle(id, race)
+                }
+            }
+        }
         when(type) {
             Constants.EDIT_RACE_UPDATE -> {
                 Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
                         .navigate(R.id.id_main_fragment)
-            }
-            Constants.EDIT_RACE_NEW -> {
+            } else -> {
                 Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
-                        .navigate(R.id.id_main_fragment, createNavBundle(id, race))
+                        .navigate(R.id.id_main_fragment, bundle)
             }
-            Constants.EDIT_RACE_COPY -> {
-                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
-                        .navigate(R.id.id_main_fragment, createNavBundle(id, race))
-            }
+//            Constants.EDIT_RACE_NEW -> {
+//                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+//                        .navigate(R.id.id_main_fragment, createNavBundle(id, race))
+//            }
+//            Constants.EDIT_RACE_COPY -> {
+//                Navigation.findNavController(activity!!, R.id.id_nav_host_fragment)
+//                        .navigate(R.id.id_main_fragment, createNavBundle(id, race))
+//            }
         }
     }
 
     private fun createNavBundle(id: Long, race: RaceDetails?): Bundle {
         race?.id = id
         val bundle = Bundle()
-        bundle.putSerializable("key", race.toString())
+        bundle.putSerializable("edit_arguments_key", race.toString())
         return bundle
     }
     //</editor-fold>
