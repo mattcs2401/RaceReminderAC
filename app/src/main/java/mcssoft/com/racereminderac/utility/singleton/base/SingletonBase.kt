@@ -28,11 +28,10 @@ open class SingletonBase<out T: Any, in A>(creator: (A) -> T) {
 /*
 Usage:
 
-class Manager private constructor(context: Context) {
-    init {
-        // Init using context argument
-    }
-
+class Manager private constructor(private val context: Context) {
+//    init {
+//        // Init using context argument
+//    }
     companion object : SingletonHolder<Manager, Context>(::Manager)
 }
  */

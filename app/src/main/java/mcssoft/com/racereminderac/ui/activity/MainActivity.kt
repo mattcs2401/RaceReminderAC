@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(R.layout.main_activity), IRace.IRaceSelec
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.main_activity)
+
         RacePreferences.getInstance(this).preferencesCheck()
 
         initialise()

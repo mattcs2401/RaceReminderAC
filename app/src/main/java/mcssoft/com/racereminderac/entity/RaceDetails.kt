@@ -25,7 +25,17 @@ data class RaceDetails(@ColumnInfo(name = "CityCode") var cityCode: String,
     @ColumnInfo(name = "RaceSel3") var raceSel3: String = ""              // 3rd "    "    "
     @ColumnInfo(name = "RaceSel4") var raceSel4: String = ""              // 4th "    "    "
 
+    /**
+     * Get the qualified meeting identifier.
+     * @return The meeting identifier, e.g. "BR".
+     */
     fun meetingCode(): String =  """$cityCode$raceCode"""
+
+    /**
+     * Get the qualified meeting identifier and race number.
+     * @return The meeting identifier, e.g. "BR1".
+     */
+    fun meetingCodeNum(): String = """$cityCode$raceCode$raceNum"""
 
     /**
      * Simple compare on RaceTime. Used in, e.g.,  Collections.sort(List<Race>)

@@ -24,6 +24,7 @@ import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
+import mcssoft.com.racereminderac.receiver.RaceAlarmReceiver
 import mcssoft.com.racereminderac.receiver.RaceReceiver
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.TouchHelper
@@ -35,6 +36,15 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 class MainFragment : Fragment(R.layout.main_fragment) {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        raceReceiver = RaceReceiver()
+        raceFilter = IntentFilter()
+        raceFilter.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+        
+        // TODO - set and register RaceAlarmReceiver
+    }
 
     //<editor-fold default state="collapsed" desc="Region: Lifecycle">
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,7 +74,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             bottomNavView.visibility = VISIBLE
         }
 
-        Log.d("tag","MainFragment.onViewCreated")
+        Log.d("TAG","MainFragment.onViewCreated")
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -76,7 +86,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         val lRaces = raceViewModel.getAllRaces()
         lRaces.observe(viewLifecycleOwner, RaceListObserver(raceAdapter))
 
-        Log.d("tag","MainFragment.onActivityCreated")
+        Log.d("TAG","MainFragment.onActivityCreated")
     }
 
     override fun onStart() {
@@ -90,13 +100,13 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         // Add on back pressed handler.
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressCallback)
 
-//        activity?.registerReceiver(RaceReceiver(), IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
-        Log.d("tag","MainFragment.onStart")
+        activity?.registerReceiver(raceReceiver, raceFilter)
+        Log.d("TAG","MainFragment.onStart")
     }
 
 //    override fun onResume() {
 //        super.onResume()
-//        Log.d("tag","MainFragment.onResume")
+//        Log.d("TAG","MainFragment.onResume")
 //    }
 
     override fun onStop() {
@@ -108,8 +118,13 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         // Remove back press handler callback.
         backPressCallback.removeCallback()
 
-//        activity?.unregisterReceiver(RaceReceiver())
-        Log.d("tag","MainFragment.onStop")
+        Log.d("TAG","MainFragment.onStop")
+    }
+
+    override fun onDestroy() {
+        activity?.unregisterReceiver(raceReceiver)
+        super.onDestroy()
+        Log.d("TAG","MainFragment.onDestroy")
     }
 
     /* Example: https://stablekernel.com/using-custom-views-as-menu-items/  ??*/
@@ -128,7 +143,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             setToolbarIcons(false)
         }
 
-        Log.d("tag","MainFragment.onCreateOptionsMenu")
+        Log.d("TAG","MainFragment.onCreateOptionsMenu")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -374,6 +389,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private lateinit var raceAdapter: RaceAdapter
     private lateinit var raceViewModel: RaceViewModel
     private lateinit var recyclerView: RecyclerView
+
+    private lateinit var raceReceiver: RaceReceiver
+    private lateinit var raceFilter: IntentFilter
+    private lateinit var raceAlarmReceiver: RaceAlarmReceiver
+    private lateinit var raceAlarmFilter: IntentFilter
 
     private var backPressCallback = BackPressCB(true)
     //</editor-fold>
