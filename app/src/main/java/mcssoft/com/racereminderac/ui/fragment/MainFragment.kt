@@ -1,5 +1,7 @@
 package mcssoft.com.racereminderac.ui.fragment
 
+import android.app.DownloadManager
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -22,6 +24,7 @@ import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.interfaces.IRace
 import mcssoft.com.racereminderac.observer.RaceListObserver
 import mcssoft.com.racereminderac.model.RaceViewModel
+import mcssoft.com.racereminderac.receiver.RaceReceiver
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.TouchHelper
 import mcssoft.com.racereminderac.utility.callback.BackPressCB
@@ -87,6 +90,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         // Add on back pressed handler.
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressCallback)
 
+//        activity?.registerReceiver(RaceReceiver(), IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
         Log.d("tag","MainFragment.onStart")
     }
 
@@ -104,6 +108,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         // Remove back press handler callback.
         backPressCallback.removeCallback()
 
+//        activity?.unregisterReceiver(RaceReceiver())
         Log.d("tag","MainFragment.onStop")
     }
 
@@ -352,11 +357,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * connection is enabled in the preferences, (3) only for New/Copy.
      */
     private fun processForDownload() {
-        val details = arguments?.getString("edit_arguments_key")
-        if(details != null) {
-            val raceDetails = DeSerialiseRaceDetails.getInstance(activity!!).getRaceDetails(details)
+        if (arguments != null && arguments!!.containsKey("edit_arguments_key")) {
+            val details = arguments?.getString("edit_arguments_key")
+            val raceDetails = DeSerialiseRaceDetails.getInstance(activity!!).getRaceDetails(details!!)
             val raceUrl = Url.getInstance(activity!!).constructRaceUrl(raceDetails!!)
-            NetworkManager.getInstance(activity!!).queueRequest(raceUrl)
+            NetworkManager.getInstance(activity!!).queueRequest(raceUrl, raceDetails.meetingCode() + raceDetails.raceNum)
         }
     }
 

@@ -21,8 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".utility.RaceAlarmReceiver"
+        <receiver android:name=".receiver.RaceAlarmReceiver"
             android:enabled="true" />
+        <receiver android:name=".receiver.RaceReceiver"
+            android:exported="false"
+            android:enabled="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="ACTION_DOWNLOAD_COMPLETE" />-->
+<!--            </intent-filter>-->
+        </receiver>
     </application>
 
-</manifest> <!-- android.permission.VIBRATE -->
+</manifest>

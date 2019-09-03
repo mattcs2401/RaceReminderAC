@@ -3,6 +3,7 @@ package mcssoft.com.racereminderac.utility
 import android.content.Context
 import android.util.Log
 import android.util.Xml
+import android.widget.Toast
 import mcssoft.com.racereminderac.entity.xml.Meeting
 import mcssoft.com.racereminderac.entity.xml.Race
 import mcssoft.com.racereminderac.entity.xml.RaceDay
@@ -23,12 +24,12 @@ class RaceMeetingParser constructor(val context: Context) {
 
     @Throws(XmlPullParserException::class, IOException::class)
     fun parse(inputStream: InputStream) {
-        inputStream.use { inputStream ->
+        clearRaceDetails()
+        inputStream.use { inStream ->
             val parser: XmlPullParser = Xml.newPullParser()
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
-            parser.setInput(inputStream, null)
+            parser.setInput(inStream, null)
             readFeed(parser)
-            collateRaceDetails()
         }
     }
 
@@ -45,26 +46,27 @@ class RaceMeetingParser constructor(val context: Context) {
                     }
                     "Meeting" -> {
                         Log.i("", "Meeting")
-                        meeting = readMeeting(parser, raceDay!!.rdId)
+//                        meeting = readMeeting(parser, raceDay!!.rdId) // causes issues
+                        meeting = readMeeting(parser)
                     }
                     "Race" -> {
                         Log.i("", "Race")
                         race = readRace(parser, meeting!!.mtgId)
-                        lRunners = arrayListOf<Runner>()
+                        lRunners = arrayListOf()
                     }
                     "Runner" -> {
                         Log.i("", "Runner")
                         runner = readRunner(parser, race!!.raceNo)
-                        lRunners.add(runner!!)
+                        lRunners?.add(runner!!)
                     }
                 }
             }
             else if (eventType == XmlPullParser.END_TAG) {
-                // finnish up ?
-                val TBA = ""
+                val TBA = "finnish up ?"
             }
             eventType = parser.next()
         }
+       Toast.makeText(context, "Meeting " + meeting?.meetingCode + " parsed OK.", Toast.LENGTH_SHORT).show()
     }
 
     //<editor-fold default state="collapsed" desc="Region: Tags parsing.">
@@ -89,10 +91,10 @@ class RaceMeetingParser constructor(val context: Context) {
      * @param parser: The XmlPullParser to use.
      * @return A Meeting object.
      */
-    private fun readMeeting(parser: XmlPullParser, rdId: Long?): Meeting {
+    private fun readMeeting(parser: XmlPullParser): Meeting {
         val code = parser.getAttributeValue(nameSpace, "MeetingCode")
         val id = parser.getAttributeValue(nameSpace, "MtgId")
-        val meeting = Meeting(rdId!!, id.toLong())
+        val meeting = Meeting(raceDay?.rdId, id.toLong())
         meeting.meetingCode = code
         meeting.venueName = parser.getAttributeValue(nameSpace, "VenueName")
         meeting.mtgType = parser.getAttributeValue(nameSpace, "MtgType")
@@ -143,15 +145,12 @@ class RaceMeetingParser constructor(val context: Context) {
     /*
       Collate the parsed details into a "management" class.
      */
-    private fun collateRaceDetails() {
-        // TBA
-
-        // Tidy up.
+    private fun clearRaceDetails() {
         raceDay = null
         meeting = null
         race = null
         runner = null
-        lRunners.clear()
+        lRunners = null
     }
 
     // We don't use namespaces
@@ -159,6 +158,6 @@ class RaceMeetingParser constructor(val context: Context) {
     private var meeting: Meeting? = null
     private var raceDay: RaceDay? = null
     private var race: Race? = null
-    private var runner: Runner? = null                  // single runner details.
-    private lateinit var lRunners: ArrayList<Runner>    // multiple runners.
+    private var runner: Runner? = null                // single runner details.
+    private var lRunners: ArrayList<Runner>? = null   // multiple runners.
 }

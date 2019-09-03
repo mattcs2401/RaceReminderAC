@@ -13,7 +13,7 @@ import androidx.room.ForeignKey.CASCADE
 @Entity(indices = [Index(name = "idxRdId", value = ["RdId"], unique = true)],
         foreignKeys = [ForeignKey(entity = RaceDay::class,
                 parentColumns = ["RdId"], childColumns = ["RdId"], onDelete = CASCADE)])
-data class Meeting(var rId: Long, var mId: Long) {
+data class Meeting(var rId: Long?, var mId: Long) {
 
     @PrimaryKey
     @ColumnInfo(name = "MtgId") var mtgId = mId

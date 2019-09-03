@@ -1,4 +1,4 @@
-package mcssoft.com.racereminderac.utility
+package mcssoft.com.racereminderac.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context

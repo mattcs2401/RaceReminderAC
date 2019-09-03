@@ -24,12 +24,12 @@ class Runner(var rNo: Long, var runNo: Long) {
     // Other columns.
     @ColumnInfo(name = "RunnerName") var runnerName: String = ""
     @ColumnInfo(name = "scratched") var scratched: String = ""
-    @ColumnInfo(name = "rider") var rider: String = ""
+    @ColumnInfo(name = "rider") var rider: String? = ""
     @ColumnInfo(name = "riderChanged") var riderChanged: String = ""
     @ColumnInfo(name = "barrier") var barrier: String = ""
     @ColumnInfo(name = "handicap") var handicap: String = ""
     @ColumnInfo(name = "weight") var weight: String = ""
-    @ColumnInfo(name = "lastResult") var lastResult: String = ""
+    @ColumnInfo(name = "lastResult") var lastResult: String? = ""
     @ColumnInfo(name = "rtng") var rtng: String = ""
 
 //    lateinit var runnerNo: String      // e.g. "1"

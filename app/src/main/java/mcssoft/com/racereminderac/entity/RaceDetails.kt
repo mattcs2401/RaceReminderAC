@@ -25,6 +25,8 @@ data class RaceDetails(@ColumnInfo(name = "CityCode") var cityCode: String,
     @ColumnInfo(name = "RaceSel3") var raceSel3: String = ""              // 3rd "    "    "
     @ColumnInfo(name = "RaceSel4") var raceSel4: String = ""              // 4th "    "    "
 
+    fun meetingCode(): String =  """$cityCode$raceCode"""
+
     /**
      * Simple compare on RaceTime. Used in, e.g.,  Collections.sort(List<Race>)
      * @param other: The object to compare (this) against.
