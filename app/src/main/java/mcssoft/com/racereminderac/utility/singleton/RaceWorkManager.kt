@@ -20,6 +20,17 @@ class RaceWorkManager private constructor (private val context: Context) {
 
     companion object : SingletonBase<RaceWorkManager, Context>(::RaceWorkManager)
 
+    fun processRaceDetails(id: Long) {
+        val data = workDataOf("key" to id)
+        val xmlParseRequest = OneTimeWorkRequestBuilder<XmlParseWorker>()
+                .setInputData(data)
+                .build()
+//        val id = xmlParseRequest.id
+        workManager.apply {
+            enqueue(xmlParseRequest)
+        }
+    }
+
     fun processRaceDetails(details: String) {
         val data = workDataOf("key" to details)
         val xmlParseRequest = OneTimeWorkRequestBuilder<XmlParseWorker>()
