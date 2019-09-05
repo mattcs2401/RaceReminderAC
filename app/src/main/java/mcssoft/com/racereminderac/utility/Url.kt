@@ -1,19 +1,18 @@
-package mcssoft.com.racereminderac.utility.singleton
+package mcssoft.com.racereminderac.utility
 
 import android.content.Context
 import android.net.Uri
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.RaceDetails
-import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
 
 /**
  * Helper class to manipulate the Tatts racing Url;
  * E.g. base Url for a single Race:
  * https://tatts.com/pagedata/racing/YYYY/M(M)/D(D)/NR1.xml
  */
-class Url private constructor (private val context: Context) {
+class Url(val context: Context) {
 
-    companion object : SingletonBase<Url, Context>(::Url)
+//    companion object : SingletonBase<Url, Context>(::Url)
 
     fun constructRaceUrl(raceDetails: RaceDetails): String {
         val builder = Uri.Builder()

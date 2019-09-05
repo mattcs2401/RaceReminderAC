@@ -28,6 +28,7 @@ import mcssoft.com.racereminderac.receiver.RaceAlarmReceiver
 import mcssoft.com.racereminderac.receiver.RaceReceiver
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.TouchHelper
+import mcssoft.com.racereminderac.utility.Url
 import mcssoft.com.racereminderac.utility.callback.BackPressCB
 import mcssoft.com.racereminderac.utility.eventbus.*
 import mcssoft.com.racereminderac.utility.singleton.*
@@ -374,9 +375,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private fun processForDownload() {
         if (arguments != null && arguments!!.containsKey("edit_arguments_key")) {
             val details = arguments?.getString("edit_arguments_key")
-            val raceDetails = DeSerialiseRaceDetails.getInstance(activity!!).getRaceDetails(details!!)
-            val raceUrl = Url.getInstance(activity!!).constructRaceUrl(raceDetails!!)
-            NetworkManager.getInstance(activity!!).queueRequest(raceUrl, raceDetails.meetingCodeNum())
+            val raceDetails = DeSerialiseRaceDetails.getInstance(activity!!)
+                    .getRaceDetails(details!!)
+            val url = Url(activity!!)
+            NetworkManager.getInstance(activity!!).queueRequest(url.constructRaceUrl(raceDetails!!),
+                    raceDetails.meetingCodeNum())
         }
     }
 
