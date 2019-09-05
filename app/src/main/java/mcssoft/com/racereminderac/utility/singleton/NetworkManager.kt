@@ -5,32 +5,18 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkCapabilities.TRANSPORT_CELLULAR
 import android.net.NetworkCapabilities.TRANSPORT_WIFI
-import android.widget.Toast
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
-import com.android.volley.*
-import com.android.volley.toolbox.StringRequest
-import mcssoft.com.racereminderac.background.worker.XmlParseWorker
 import mcssoft.com.racereminderac.interfaces.IDownload
 import mcssoft.com.racereminderac.utility.Constants
-import mcssoft.com.racereminderac.utility.RaceMeetingParser
 import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
-import java.io.ByteArrayInputStream
 
-class NetworkManager private constructor (private val context: Context) : IDownload, Response.ErrorListener, Response.Listener<String> {
+class NetworkManager private constructor (private val context: Context) {
 
     private val connMgr: ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     companion object : SingletonBase<NetworkManager, Context>(::NetworkManager)
 
-    fun queueRequest(raceUrl: String, name: String) {
-        val raceDLMgr = RaceDownloadManager.getInstance(context).downLoad(raceUrl, name)
-
-        val bp = name
-//        val stringRequest = StringRequest(Request.Method.GET, raceUrl, this, this)
-//        DownloadRequestQueue.getInstance(context).addToRequestQueue(stringRequest)
-    }
+    fun queueRequest(raceUrl: String, name: String) =
+        RaceDownloadManager.getInstance(context).downLoad(raceUrl, name)
 
     /**
      * Get if a network connection exists.
@@ -70,46 +56,7 @@ class NetworkManager private constructor (private val context: Context) : IDownl
 //    val allNetworks: Array<out Network>?
 //        get() = connMgr.getAllNetworks()
 
-    //<editor-fold default state="collapsed" desc="Region: Volley response">
-    // Error error response listener.
-    override fun onErrorResponse(error: VolleyError) {
-        // TODO - maybe some sort of Volley error message dialog ?
-        volleyError = error.message
-        Toast.makeText(context, error.message, Toast.LENGTH_SHORT).show()
-    }
-
-    // Volley response listener.
-    /**
-     * Volley response listener.
-     * @param response: The result of the download.
-     * Note: Returns on main thread so need to off load the Xml parsing of the response.
-     */
-    override fun onResponse(response: String) {
-        // Note: Need to trim off the first few characters of the response. Throws an exception
-        // otherwise:
-        // Caused by: XmlPullParserException: Unexpected token (position:TEXT Ã¯Â»¿@1:6 in
-        // java.io.InputStreamReader
-        val response: String = response.substring(3)
-
-        RaceWorkManager.getInstance(context).processRaceDetails(response)
-
-        volleyError = null        // we'll assume because there is a response then there's no error.
-        volleyResponse = response
-
-        Toast.makeText(context, "Volley download success.", Toast.LENGTH_SHORT).show()
-    }
-    //</editor-fold>
-
-    //<editor-fold default state="collapsed" desc="Region: IDownload">
-    override fun onDownload(): String = volleyResponse!!
-
-    override fun onDownloadError(): String = volleyError!!
-    //</editor-fold>
-
     private val networkCapabilities: NetworkCapabilities
         get() = connMgr.getNetworkCapabilities(connMgr.activeNetwork)
-
-    private var volleyResponse: String? = null
-    private var volleyError: String? = null
 
 }

@@ -376,7 +376,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             val details = arguments?.getString("edit_arguments_key")
             val raceDetails = DeSerialiseRaceDetails.getInstance(activity!!).getRaceDetails(details!!)
             val raceUrl = Url.getInstance(activity!!).constructRaceUrl(raceDetails!!)
-            NetworkManager.getInstance(activity!!).queueRequest(raceUrl, raceDetails.meetingCode() + raceDetails.raceNum)
+            NetworkManager.getInstance(activity!!).queueRequest(raceUrl, raceDetails.meetingCodeNum())
         }
     }
 

@@ -10,6 +10,7 @@ import mcssoft.com.racereminderac.entity.xml.RaceDay
 import mcssoft.com.racereminderac.entity.xml.Runner
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
+import java.io.ByteArrayInputStream
 import java.io.IOException
 import java.io.InputStream
 
@@ -23,14 +24,12 @@ class RaceMeetingParser constructor(val context: Context) {
     // TODO - What about parser exceptions ? This class needs to be more robust.
 
     @Throws(XmlPullParserException::class, IOException::class)
-    fun parse(inputStream: InputStream) {
+    fun parse(inStream: InputStream) {
         clearRaceDetails()
-        inputStream.use { inStream ->
-            val parser: XmlPullParser = Xml.newPullParser()
-            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
-            parser.setInput(inStream, null)
-            readFeed(parser)
-        }
+        val parser: XmlPullParser = Xml.newPullParser()
+        parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
+        parser.setInput(inStream, null)
+        readFeed(parser)
     }
 
     private fun readFeed(parser: XmlPullParser) {
@@ -41,32 +40,31 @@ class RaceMeetingParser constructor(val context: Context) {
                 val tag = parser.name
                 when(tag) {
                     "RaceDay" -> {
-                        Log.i("", "RaceDay")
                         raceDay = readRaceDay(parser)
+                        Log.i("", "RaceDay")
                     }
                     "Meeting" -> {
-                        Log.i("", "Meeting")
 //                        meeting = readMeeting(parser, raceDay!!.rdId) // causes issues
                         meeting = readMeeting(parser)
+                        Log.i("", "Meeting")
                     }
                     "Race" -> {
-                        Log.i("", "Race")
                         race = readRace(parser, meeting!!.mtgId)
                         lRunners = arrayListOf()
+                        Log.i("", "Race")
                     }
                     "Runner" -> {
-                        Log.i("", "Runner")
                         runner = readRunner(parser, race!!.raceNo)
                         lRunners?.add(runner!!)
+                        Log.i("", "Runner")
                     }
                 }
             }
-            else if (eventType == XmlPullParser.END_TAG) {
-                val TBA = "finnish up ?"
-            }
+//            else if (eventType == XmlPullParser.END_TAG) {
+//                Log.i("","Parser END_TAG.")
+//            }
             eventType = parser.next()
         }
-       Toast.makeText(context, "Meeting " + meeting?.meetingCode + " parsed OK.", Toast.LENGTH_SHORT).show()
     }
 
     //<editor-fold default state="collapsed" desc="Region: Tags parsing.">
