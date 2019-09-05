@@ -6,13 +6,13 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.RaceDetails
 
 /**
- * Helper class to manipulate the Tatts racing Url;
- * E.g. base Url for a single Race:
+ * Helper class to manipulate the Tatts racing RaceUrl;
+ * E.g. base RaceUrl for a single Race:
  * https://tatts.com/pagedata/racing/YYYY/M(M)/D(D)/NR1.xml
  */
-class Url(val context: Context) {
+class RaceUrl(val context: Context) {
 
-//    companion object : SingletonBase<Url, Context>(::Url)
+//    companion object : SingletonBase<RaceUrl, Context>(::RaceUrl)
 
     fun constructRaceUrl(raceDetails: RaceDetails): String {
         val builder = Uri.Builder()
@@ -27,7 +27,7 @@ class Url(val context: Context) {
     }
 
     /**
-     * Utility to strip leading zero from day or month values. Tatts Url doesn't use them.
+     * Utility to strip leading zero from day or month values. Tatts RaceUrl doesn't use them.
      * @param value: E.g. "09" for a day or month value.
      */
     private fun checkForLeading(value: String): String {
