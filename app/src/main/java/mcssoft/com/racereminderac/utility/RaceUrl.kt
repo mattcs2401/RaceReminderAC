@@ -32,10 +32,10 @@ class RaceUrl(val context: Context) {
      */
     private fun checkForLeading(value: String): String {
         val str = value.split("0")
-        if(str[0] == "") {
-            return str[1]
+        return if(str[0] == "") {
+            str[1]
         } else {
-            return value
+            value
         }
     }
 

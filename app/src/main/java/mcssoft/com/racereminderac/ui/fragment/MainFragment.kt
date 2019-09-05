@@ -27,6 +27,7 @@ import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.receiver.RaceAlarmReceiver
 import mcssoft.com.racereminderac.receiver.RaceReceiver
 import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.DeSerialiseRace
 import mcssoft.com.racereminderac.utility.TouchHelper
 import mcssoft.com.racereminderac.utility.RaceUrl
 import mcssoft.com.racereminderac.utility.callback.BackPressCB
@@ -185,7 +186,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * The refresh message.
      * @param refresh: Not actually used. Message is just a signal to refresh the display.
      */
-    @Subscribe()
+    @Subscribe
     fun onMessageEvent(refresh: ManualRefreshMessage) {
         /*
          Note: The down side to this is that the observer will react twice.
@@ -209,7 +210,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * Called from the RaceViewHolder.onClick method.
      * @param select: Details of the selected Race. See SelectMessage notes.
      */
-    @Subscribe()
+    @Subscribe
     fun onMessageEvent(select: SelectMessage) {
         val race = raceAdapter.getRace(select.getPos)
         val values = arrayOf(race.raceSel, race.raceSel2, race.raceSel3, race.raceSel4)
@@ -230,7 +231,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * The delete all message.
      * @param delete: Not actually used. Message is just a signal to delete all displayed.
      */
-    @Subscribe()
+    @Subscribe
     fun onMessageEvent(delete: DeleteAllMessage) {
         // Hide toolbar icons.
         setToolbarIcons(false)
@@ -242,7 +243,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * Called from the RaceViewHolder.onClick method.
      * @param update: Details of the Race to be updated. See UpdateMessage notes.
      */
-    @Subscribe()
+    @Subscribe
     fun onMessageEvent(update: UpdateMessage) {
         val race: RaceDetails = raceAdapter.getRace(update.pos)
         when(update.update) {
@@ -257,7 +258,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * Called by the RaceAdapter.swapData method.
      * @param data: Basically a boolean indicating whether the adapter has data or not.
      */
-    @Subscribe()
+    @Subscribe
     fun onMessageEvent(data: DataMessage) = if(data.getIsEmpty) {
         // No items in the adapter.
         setToolbarIcons(false)
@@ -282,7 +283,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      * @param transaction: An object signifying a database transaction. See TransactionMessage
      *                     for details.
      */
-    @Subscribe()
+    @Subscribe
     fun onMessageEvent(transaction: TransactionMessage) {
 
         val opType = transaction.theOpType
@@ -356,7 +357,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                 redCircle.visibility = VISIBLE
 
                 // Set alarm.
-                RaceAlarm.getInstance(activity!!).setAlarm(interval!!.toLong())
+                RaceAlarm.getInstance(activity!!).setAlarm(interval.toLong())
             }
         } else {
             refreshMenuItem.isVisible = false
@@ -374,10 +375,14 @@ class MainFragment : Fragment(R.layout.main_fragment) {
      */
     private fun processForDownload() {
         if (arguments != null && arguments!!.containsKey("edit_arguments_key")) {
+            // RaceDetails values as a String (from EditFragment passed in Navigation args).
             val details = arguments?.getString("edit_arguments_key")
-            val raceDetails = DeSerialiseRaceDetails.getInstance(activity!!)
-                    .getRaceDetails(details!!)
+            // Convert values in RaceDetails object
+            val dsRace = DeSerialiseRace()
+            val raceDetails = dsRace.getRaceDetails(details!!)
+            // Create Race meeting Url.
             val raceUrl = RaceUrl(activity!!)
+            // Queue for download by RaceDownloadManager
             NetworkManager.getInstance(activity!!).queueRequest(raceUrl.constructRaceUrl(raceDetails!!),
                     raceDetails.meetingCodeNum())
         }
@@ -395,8 +400,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     private lateinit var raceReceiver: RaceReceiver
     private lateinit var raceFilter: IntentFilter
-    private lateinit var raceAlarmReceiver: RaceAlarmReceiver
-    private lateinit var raceAlarmFilter: IntentFilter
+    private lateinit var raceAlarmReceiver: RaceAlarmReceiver   // TBA
+    private lateinit var raceAlarmFilter: IntentFilter          // TBA
 
     private var backPressCallback = BackPressCB(true)
     //</editor-fold>

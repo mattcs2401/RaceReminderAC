@@ -5,7 +5,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkCapabilities.TRANSPORT_CELLULAR
 import android.net.NetworkCapabilities.TRANSPORT_WIFI
-import mcssoft.com.racereminderac.interfaces.IDownload
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
 

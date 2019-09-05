@@ -41,7 +41,7 @@ class TouchHelper(private val swipeAction: ISwipe) : ItemTouchHelper.Callback() 
         val itemView = viewHolder.itemView
         val itemHeight = itemView.height
 
-        val isCancelled = dX.equals(0) && !isCurrentlyActive
+        val isCancelled = dX.run { equals(0) } && !isCurrentlyActive
 
         if (isCancelled) {
             clearCanvas(canvas, itemView.right + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())

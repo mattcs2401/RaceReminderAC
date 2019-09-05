@@ -24,7 +24,7 @@ class RaceDownloadManager private constructor (private val context: Context) {
      * Note: The page is saved in local storage with the filename "name".xml
      */
     fun downLoad(url: String, name: String) {
-        val file: File = File(context.getExternalFilesDir(null), "$name.xml")
+        val file = File(context.getExternalFilesDir(null), "$name.xml")
         val dlRequest = DownloadManager.Request(Uri.parse(url))
                 .setTitle("$name Downloading")
                 .setDescription("Downloading details for $name")

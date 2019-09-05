@@ -4,6 +4,20 @@
 
 ** Project notes/comments/etc in no particular order. **
 
+----------
+Decisions:
+----------
+1. Made choice to stop using Volley and go with the framework's DownloadManager.
+   The main reason for this is that:
+   -> Volley holds everything in memory and some of the tatts.com pages can be large (comparatively)
+      approx 16K depending when tatts.com updates the pages. This had a flow on affect with
+      WorkManager.Worker objects where the input data had an approx 10K limit.
+   -> DownloadManager writes to storage and details can be read from there. This has the advantage
+      that the details associated with all of the initial pages that are downloaded when RaceDetails
+      are created, are available at any time (if files are retained), and any retained files can be
+      deleted at some time later. WorkManager.Worker objects now just carry the file id given by the
+      DownloadManager.
+
 -------
 Issues:
 -------

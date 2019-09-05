@@ -3,10 +3,8 @@ package mcssoft.com.racereminderac.ui.fragment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
@@ -21,18 +19,16 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.model.RaceViewModel
 import mcssoft.com.racereminderac.observer.RaceObserver
-import mcssoft.com.racereminderac.utility.singleton.DialogManager
 import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.eventbus.DateTimeMessage
+import mcssoft.com.racereminderac.utility.eventbus.MultiSelMessage
+import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
+import mcssoft.com.racereminderac.utility.singleton.DialogManager
+import mcssoft.com.racereminderac.utility.singleton.NetworkManager
 import mcssoft.com.racereminderac.utility.singleton.RacePreferences
 import mcssoft.com.racereminderac.utility.singleton.RaceTime
-import mcssoft.com.racereminderac.utility.eventbus.MultiSelMessage
-import mcssoft.com.racereminderac.utility.eventbus.DateTimeMessage
-import mcssoft.com.racereminderac.utility.eventbus.TimeMessage
-import mcssoft.com.racereminderac.utility.eventbus.TransactionMessage
-import mcssoft.com.racereminderac.utility.singleton.NetworkManager
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 
 class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , View.OnTouchListener, NumberPicker.OnValueChangeListener {
 
@@ -70,7 +66,7 @@ class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , Vi
      * EventBus return from the TimePickDialog.
      * @param time: The Race time (as Long).
      */
-    @Subscribe()
+    @Subscribe
     fun onMessageEvent(time: TimeMessage) {
         raceTimeL = time.time  // keep local copy.
         btnTime.text = RaceTime.getInstance()?.timeFromMillis(raceTimeL)
@@ -80,7 +76,7 @@ class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , Vi
      * EventBus return from getting the Race date (from AsyncNoLD).
      * @param raceDT: The Race date/time fields.
      */
-    @Subscribe()
+    @Subscribe
     fun onMessageEvent(raceDT: DateTimeMessage) {
         // The Race date.
         this.raceDate = raceDT.theRace.raceDate
@@ -92,7 +88,7 @@ class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , Vi
      * EventBus return from the MultiSelect dialog.
      * @param multiSel: An Array<String> of the selected values.
      */
-    @Subscribe()
+    @Subscribe
     fun onMessageEvent(multiSel: MultiSelMessage) {
         // Note: If the OK or Cancel button was not clicked on the MultiSelectDialog, this
         //       onMessageEvent won't happen.
@@ -120,7 +116,7 @@ class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , Vi
             R.id.id_btn_save -> {
                 // Update or insert Race details, then navigate back to MainFragment.
                 var id: Long = 0
-                var type: Int = 0
+                var type = 0
                 var race: RaceDetails? = null
                 when (editType) {
                     Constants.EDIT_RACE_UPDATE -> {
@@ -153,13 +149,13 @@ class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , Vi
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Region: Event handler - onTouch">
+    //<editor-fold default state="collapsed" desc="Region: Event handler - onTouch">
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View, event: MotionEvent): Boolean {
         if(event.action == MotionEvent.ACTION_DOWN) {
-            when(view.id) {
-                // TBA
-            }
+//            when(view.id) {
+//                // TBA
+//            }
             return true
         }
         return false

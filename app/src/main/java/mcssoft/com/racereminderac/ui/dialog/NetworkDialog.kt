@@ -1,14 +1,6 @@
 package mcssoft.com.racereminderac.ui.dialog
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.pref_dialog_fragment.*
-import mcssoft.com.racereminderac.R
 
 /**
  * TBA.

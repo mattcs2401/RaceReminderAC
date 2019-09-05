@@ -2,12 +2,10 @@ package mcssoft.com.racereminderac.background.worker
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import mcssoft.com.racereminderac.utility.RaceMeetingParser
 import mcssoft.com.racereminderac.utility.singleton.RaceDownloadManager
-import java.io.ByteArrayInputStream
 import java.io.InputStream
 
 /**

@@ -19,7 +19,7 @@ class Runner(var rNo: Long, var runNo: Long) {
     @ColumnInfo(name = "runnerNo") var runnerNo = runNo
 
     // Foreign key.
-    @ColumnInfo(name = "RaceNo") var RaceNo = rNo
+    @ColumnInfo(name = "RaceNo") var raceNo = rNo
 
     // Other columns.
     @ColumnInfo(name = "RunnerName") var runnerName: String = ""

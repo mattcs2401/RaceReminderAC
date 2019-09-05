@@ -1,12 +1,11 @@
 package mcssoft.com.racereminderac.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.preference.*
-import kotlinx.android.synthetic.main.toolbar_base.*
 import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.eventbus.NetworkMessage

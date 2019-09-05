@@ -3,14 +3,12 @@ package mcssoft.com.racereminderac.utility
 import android.content.Context
 import android.util.Log
 import android.util.Xml
-import android.widget.Toast
 import mcssoft.com.racereminderac.entity.xml.Meeting
 import mcssoft.com.racereminderac.entity.xml.Race
 import mcssoft.com.racereminderac.entity.xml.RaceDay
 import mcssoft.com.racereminderac.entity.xml.Runner
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
-import java.io.ByteArrayInputStream
 import java.io.IOException
 import java.io.InputStream
 
@@ -37,8 +35,7 @@ class RaceMeetingParser constructor(val context: Context) {
         var eventType: Int = parser.eventType
         while (eventType != XmlPullParser.END_DOCUMENT) {
             if (eventType == XmlPullParser.START_TAG) {
-                val tag = parser.name
-                when(tag) {
+                when(parser.name) {
                     "RaceDay" -> {
                         raceDay = readRaceDay(parser)
                         Log.i("", "RaceDay")

@@ -1,15 +1,14 @@
-package mcssoft.com.racereminderac.utility.singleton
+package mcssoft.com.racereminderac.utility
 
-import android.content.Context
 import mcssoft.com.racereminderac.entity.RaceDetails
-import mcssoft.com.racereminderac.utility.singleton.base.SingletonBase
 
 /**
- * Utility class to convert a 'serialized' RaceDetails object into an actual RaceDetails object.
+ * Utility class to convert a "serialized" RaceDetails object into an actual RaceDetails object.
  */
-class DeSerialiseRaceDetails private constructor (private val context: Context) {
+//class DeSerialiseRace private constructor (private val context: Context) {
+class DeSerialiseRace {
 
-    companion object : SingletonBase<DeSerialiseRaceDetails, Context>(::DeSerialiseRaceDetails)
+//    companion object : SingletonBase<DeSerialiseRace, Context>(::DeSerialiseRace)
 
     fun getRaceDetails(details: String) : RaceDetails? {
         val lRaceInfo = ArrayList<String>()
