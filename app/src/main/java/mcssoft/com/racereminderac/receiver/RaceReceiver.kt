@@ -12,7 +12,6 @@ import mcssoft.com.racereminderac.utility.singleton.RaceWorkManager
 class RaceReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-
         when(intent.action) {
             DownloadManager.ACTION_DOWNLOAD_COMPLETE -> {
                 val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)

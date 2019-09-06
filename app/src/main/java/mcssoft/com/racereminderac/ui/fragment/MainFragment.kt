@@ -45,7 +45,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         raceFilter = IntentFilter()
         raceFilter.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
         
-        // TODO - set and register RaceAlarmReceiver
+        raceAlarmReceiver = RaceAlarmReceiver()
+        raceAlarmFilter = IntentFilter()
     }
 
     //<editor-fold default state="collapsed" desc="Region: Lifecycle">
@@ -103,6 +104,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressCallback)
 
         activity?.registerReceiver(raceReceiver, raceFilter)
+        activity?.registerReceiver(raceAlarmReceiver, raceAlarmFilter)
         Log.d("TAG","MainFragment.onStart")
     }
 
@@ -120,6 +122,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     override fun onDestroy() {
         activity?.unregisterReceiver(raceReceiver)
+        activity?.unregisterReceiver(raceAlarmReceiver)
         super.onDestroy()
         Log.d("TAG","MainFragment.onDestroy")
     }
