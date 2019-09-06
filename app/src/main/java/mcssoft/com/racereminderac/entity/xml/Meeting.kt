@@ -9,6 +9,7 @@ import androidx.room.ForeignKey.CASCADE
 
 /**
  * Data class to model the <Meeting></Meeting> tag of the Tatts xml page data.
+ * Note: This format is derived from, e.g. /YYYY/M(M)/D(D)/<city-code><race-code><race-num>
  */
 @Entity(indices = [Index(name = "idxRdId", value = ["RdId"], unique = true)],
         foreignKeys = [ForeignKey(entity = RaceDay::class,

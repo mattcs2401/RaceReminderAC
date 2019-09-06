@@ -45,9 +45,9 @@ TO DO:
 
 -> Consider a network connection for:
    "https://tatts.com/pagedata/racing" and associated pages, e.g.;
-    - https://tatts.com/pagedata/racing/YYYY/M(M)/D(D)/NR1.xml
-
-    Android training: https://developer.android.com/training/volley/index.html
+    - https://tatts.com/pagedata/racing/2019/M(M)/D(D)/NR1.xml
+    or
+    - https://tatts.com/pagedata/racing/2019/M(M)/D(D)/RaceDay.xml
 
 -> 1) Preference controls use of the network connection (WiFi or Mobile data (or both ?)).
    2) If preference enabled:

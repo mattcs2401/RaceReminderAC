@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 
 /**
  * Data class to model the <RaceDay></RaceDay> tag of the Tatts xml page data.
+ * Note: This format is derived from, e.g. /YYYY/M(M)/D(D)/<city-code><race-code><race-num>
  */
 @Entity(tableName = "race_day")
 data class RaceDay(@ColumnInfo(name = "RaceDayDate") var raceDayDate: String) {

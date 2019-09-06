@@ -106,11 +106,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         Log.d("TAG","MainFragment.onStart")
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        Log.d("TAG","MainFragment.onResume")
-//    }
-
     override fun onStop() {
         super.onStop()
         // Cancel alarm (method checks if previously cancelled).
