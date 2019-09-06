@@ -249,7 +249,7 @@ class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , Vi
     private fun launchTimePickDialog() {
         val args = Bundle()
         args.putString("key", btnTime.text.toString())
-        DialogManager.getInstance()?.showDialog(Constants.D_TIMER_PICK, args,
+        DialogManager.getInstance()?.showDialog(Constants.DIALOG_TIMER_PICK, args,
                 activity?.supportFragmentManager!!.beginTransaction())
     }
 
@@ -482,7 +482,7 @@ class EditFragment : Fragment(R.layout.edit_fragment), View.OnClickListener , Vi
             listMultiSel[0] = rsVals[npRaceSel.value]
         }
         args.putStringArray(getString(R.string.key_multi_select_dialog_vals), listMultiSel)
-        DialogManager.getInstance()?.showDialog(Constants.D_MULTI_SEL, args,
+        DialogManager.getInstance()?.showDialog(Constants.DIALOG_MULTI_SEL, args,
                 activity!!.supportFragmentManager.beginTransaction())
     }
 

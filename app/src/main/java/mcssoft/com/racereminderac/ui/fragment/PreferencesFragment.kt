@@ -8,11 +8,9 @@ import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
-import mcssoft.com.racereminderac.utility.eventbus.NetworkMessage
 import mcssoft.com.racereminderac.utility.singleton.DialogManager
 import mcssoft.com.racereminderac.utility.singleton.NetworkManager
 import mcssoft.com.racereminderac.utility.singleton.RaceAlarm
-import org.greenrobot.eventbus.EventBus
 
 class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
 Preference.OnPreferenceClickListener {
@@ -35,7 +33,7 @@ Preference.OnPreferenceClickListener {
                     network?.isChecked = false
                     networkType?.isEnabled = false
                     DialogManager.getInstance()?.
-                            showDialog(Constants.D_NO_NETWORK, null, fragmentManager!!.beginTransaction())
+                            showDialog(Constants.DIALOG_NO_NETWORK, null, fragmentManager!!.beginTransaction())
                 }
             }
         }
@@ -145,16 +143,6 @@ Preference.OnPreferenceClickListener {
      */
     private fun setNetworkTypeEnable(newValue: Boolean) {
         networkType?.isEnabled = newValue
-
-
-    // Use EventBus to notify use network.
-    // Note: receiver will need to check that network actually available and of the requested type.
-//        if(newValue) {
-//            EventBus.getDefault().post(NetworkMessage(newValue, networkType!!.value))
-//        } else {
-//            // false
-//            EventBus.getDefault().post(NetworkMessage(newValue, null))
-//        }
     }
     //</editor-fold>
 

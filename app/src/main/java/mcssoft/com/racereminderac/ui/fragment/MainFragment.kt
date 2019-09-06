@@ -154,7 +154,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             R.id.id_mnu_delete_all -> {
                 if (!raceAdapter.isEmpty()) {
                     val args = Bundle()
-                    DialogManager.getInstance()?.showDialog(Constants.D_DELETE_ALL, args,
+                    DialogManager.getInstance()?.showDialog(Constants.DIALOG_DELETE_ALL, args,
                             activity?.supportFragmentManager!!.beginTransaction())
                 } else {
                     Toast.makeText(activity!!, getString(R.string.toast_nothing_to_delete), Toast.LENGTH_SHORT).show()

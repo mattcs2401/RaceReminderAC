@@ -9,6 +9,9 @@ import mcssoft.com.racereminderac.ui.dialog.NoNetworkDialog
 import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import mcssoft.com.racereminderac.utility.Constants
 
+/**
+ * Utility type class to show various dialogs.
+ */
 class DialogManager {
 
     companion object {
@@ -24,19 +27,25 @@ class DialogManager {
         }
     }
 
+    /**
+     * Show a dialog.
+     * @param name: The dialog tag (from Constants).
+     * @param args: Optional arguments to pass to the dialog.
+     * @param fragTrans: The transaction manager.
+     */
     fun showDialog(name: String, args: Bundle?, fragTrans: FragmentTransaction) {
         var dialog = DialogFragment()
         when(name) {
-            Constants.D_DELETE_ALL -> {
+            Constants.DIALOG_DELETE_ALL -> {
                 dialog = DeleteAllDialog()
             }
-            Constants.D_MULTI_SEL -> {
+            Constants.DIALOG_MULTI_SEL -> {
                 dialog = MultiSelectDialog()
             }
-            Constants.D_NO_NETWORK -> {
+            Constants.DIALOG_NO_NETWORK -> {
                 dialog = NoNetworkDialog()
             }
-            Constants.D_TIMER_PICK -> {
+            Constants.DIALOG_TIMER_PICK -> {
                 // Time Picker dialog.
                 dialog = TimePickDialog()
             }
