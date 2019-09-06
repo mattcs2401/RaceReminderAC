@@ -68,6 +68,10 @@
     <string name="lbl_network_mobile">Mobile</string>
     <string name="lbl_network_none">None</string>
     <string name="lbl_network_pref_dialog_title">Network Preference</string>
+
+    <string name="title_no_network">No Network</string>
+    <string name="message_no_network">No network connection exists. Check your device settings.</string>
+
     <!-- Keys. -->
     <string name="key_edit_type">edit_type</string>
     <string name="key_edit_existing">edit_existing</string>

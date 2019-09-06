@@ -64,7 +64,7 @@ object Constants {
 
     const val D_DELETE_ALL = "DELETE_ALL"   // "Tag" for Delete All dialog.
     const val D_MULTI_SEL = "MULTI_SELECT"  // "Tag" for Multi Select dialog.
-    const val D_NETWORK = "NETWORK"         // "Tag" for Network dialog.
+    const val D_NO_NETWORK = "NETWORK"         // "Tag" for Network dialog.
     const val D_TIMER_PICK = "TIME_PICKER"  // "Tag" for Time Picker dialog.
 
     const val DEFAULT_CC = "B"              // Default City Code.

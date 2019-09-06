@@ -9,11 +9,13 @@ import kotlinx.android.synthetic.main.toolbar_base.*
 import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.utility.Constants
 import mcssoft.com.racereminderac.utility.eventbus.NetworkMessage
+import mcssoft.com.racereminderac.utility.singleton.DialogManager
+import mcssoft.com.racereminderac.utility.singleton.NetworkManager
 import mcssoft.com.racereminderac.utility.singleton.RaceAlarm
 import org.greenrobot.eventbus.EventBus
 
-class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener {
-//Preference.OnPreferenceClickListener
+class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
+Preference.OnPreferenceClickListener {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preferences)
@@ -26,13 +28,23 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
     }
 
     //<editor-fold default state="collapsed" desc="Region: Listeners">
-//    override fun onPreferenceClick(preference: Preference?): Boolean {
-//        return  true
-//    }
+    override fun onPreferenceClick(preference: Preference): Boolean {
+        when (preference.key) {
+            getString(R.string.key_network_enable) -> {
+                if (!NetworkManager.getInstance(activity!!).isNetworkConnected()) {
+                    network?.isChecked = false
+                    networkType?.isEnabled = false
+                    DialogManager.getInstance()?.
+                            showDialog(Constants.D_NO_NETWORK, null, fragmentManager!!.beginTransaction())
+                }
+            }
+        }
+        return true
+    }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         /** Note: This fires before onPreferenceClick(). **/
-        when(preference.key) {
+        when (preference.key) {
             getString(R.string.key_city_code_pref) -> {
                 Toast.makeText(activity,
                         """${getString(R.string.default_city_code_msg)} $newValue""", Toast.LENGTH_SHORT).show()
@@ -68,8 +80,8 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         activity?.id_toolbar?.title = getString(R.string.preferences)
 
         // Get preferences.
-        raceCode= findPreference(activity!!.resources.getString(R.string.key_race_code_pref))
-        cityCode= findPreference(activity!!.resources.getString(R.string.key_city_code_pref))
+        raceCode = findPreference(activity!!.resources.getString(R.string.key_race_code_pref))
+        cityCode = findPreference(activity!!.resources.getString(R.string.key_city_code_pref))
         notify = findPreference(activity!!.resources.getString(R.string.key_race_notif_send_pref))
         notifyMulti = findPreference(activity!!.resources.getString(R.string.key_notif_send_multi_pref))
         refresh = findPreference(activity!!.resources.getString(R.string.key_refresh_interval_pref))
@@ -77,7 +89,7 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         network = findPreference(activity!!.resources.getString(R.string.key_network_enable))
         networkType = findPreference(activity!!.resources.getString(R.string.key_network_type_pref))
 
-        if(refresh?.isChecked!!) {
+        if (refresh?.isChecked!!) {
             refreshSeek?.isEnabled = true
         }
 
@@ -88,11 +100,12 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
         refresh?.onPreferenceChangeListener = this
         refreshSeek?.onPreferenceChangeListener = this
         network?.onPreferenceChangeListener = this
+        network?.onPreferenceClickListener = this
         networkType?.onPreferenceChangeListener = this
     }
 
     private fun setNotifySendPref(newValue: Boolean) {
-        if(!newValue) {
+        if (!newValue) {
             notifyMulti?.isChecked = false
             notifyMulti?.isEnabled = false
         } else {
@@ -101,12 +114,12 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
     }
 
     private fun setRefreshIntPref(newValue: Boolean) {
-        if(!newValue) {
+        if (!newValue) {
             refreshSeek?.isEnabled = false
             RaceAlarm.getInstance(activity!!).cancelAlarm()
         } else {
             refreshSeek?.isEnabled = true
-            if(refreshSeek?.value == 0) {
+            if (refreshSeek?.value == 0) {
                 refreshSeek?.value = Constants.REFRESH_DEFAULT
             }
             RaceAlarm.getInstance(activity!!).setAlarm(refreshSeek?.value!!.toLong())
@@ -115,7 +128,7 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
 
     private fun setRefreshIntSeekPref(newValue: Int) {
         refreshVal = newValue
-        if(refreshVal > 0) {
+        if (refreshVal > 0) {
             refreshSeek?.value = refreshVal
             RaceAlarm.getInstance(activity!!).cancelAlarm()
             RaceAlarm.getInstance(activity!!).setAlarm(refreshVal.toLong())
@@ -133,14 +146,15 @@ class PreferencesFragment : PreferenceFragmentCompat(), Preference.OnPreferenceC
     private fun setNetworkTypeEnable(newValue: Boolean) {
         networkType?.isEnabled = newValue
 
-        // Use EventBus to notify use network.
-        // Note: receiver will need to check that network actually available and of the requested type.
-        if(newValue) {
-            EventBus.getDefault().post(NetworkMessage(newValue, networkType!!.value))
-        } else {
-            // false
-            EventBus.getDefault().post(NetworkMessage(newValue, null))
-        }
+
+    // Use EventBus to notify use network.
+    // Note: receiver will need to check that network actually available and of the requested type.
+//        if(newValue) {
+//            EventBus.getDefault().post(NetworkMessage(newValue, networkType!!.value))
+//        } else {
+//            // false
+//            EventBus.getDefault().post(NetworkMessage(newValue, null))
+//        }
     }
     //</editor-fold>
 

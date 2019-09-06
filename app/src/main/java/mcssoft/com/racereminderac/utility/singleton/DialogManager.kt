@@ -5,7 +5,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import mcssoft.com.racereminderac.ui.dialog.DeleteAllDialog
 import mcssoft.com.racereminderac.ui.dialog.MultiSelectDialog
-import mcssoft.com.racereminderac.ui.dialog.NetworkDialog
+import mcssoft.com.racereminderac.ui.dialog.NoNetworkDialog
 import mcssoft.com.racereminderac.ui.dialog.TimePickDialog
 import mcssoft.com.racereminderac.utility.Constants
 
@@ -24,7 +24,7 @@ class DialogManager {
         }
     }
 
-    fun showDialog(name: String, args: Bundle, fragTrans: FragmentTransaction) {
+    fun showDialog(name: String, args: Bundle?, fragTrans: FragmentTransaction) {
         var dialog = DialogFragment()
         when(name) {
             Constants.D_DELETE_ALL -> {
@@ -33,8 +33,8 @@ class DialogManager {
             Constants.D_MULTI_SEL -> {
                 dialog = MultiSelectDialog()
             }
-            Constants.D_NETWORK -> {
-                dialog = NetworkDialog()
+            Constants.D_NO_NETWORK -> {
+                dialog = NoNetworkDialog()
             }
             Constants.D_TIMER_PICK -> {
                 // Time Picker dialog.
