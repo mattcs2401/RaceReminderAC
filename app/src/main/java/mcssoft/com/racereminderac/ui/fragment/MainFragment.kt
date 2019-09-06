@@ -265,30 +265,6 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     } else {
         setToolbarIcons(true)
     }
-
-    /**
-     * Called by the PreferencesFragment.setNetworkTypeEnable method.
-     * @param network: An object signifying network availability and network type as set in the
-     *                 Preferences. Doesn't mean a network connection is actually available, just
-     *                 the Preferences indicating that a network connection can be used.
-     */
-    @Subscribe(threadMode = ThreadMode.ASYNC)
-    fun onMessageEvent(network: NetworkMessage) {
-
-        val type = network.type
-    }
-
-    /**
-     * Called by EditFragment.onClick method.
-     * @param transaction: An object signifying a database transaction. See TransactionMessage
-     *                     for details.
-     */
-    @Subscribe
-    fun onMessageEvent(transaction: TransactionMessage) {
-
-        val opType = transaction.theOpType
-        val race = transaction.theRaceDetails
-    }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Region: Utility - Toolbar.">
