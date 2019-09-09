@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,6 +15,7 @@ import mcssoft.com.racereminderac.R
 import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.interfaces.ISwipe
 import mcssoft.com.racereminderac.utility.Constants
+import mcssoft.com.racereminderac.utility.RaceDiffUtil
 import mcssoft.com.racereminderac.utility.singleton.RacePreferences
 import mcssoft.com.racereminderac.utility.callback.SnackBarCB
 import mcssoft.com.racereminderac.utility.eventbus.DataMessage
@@ -54,18 +56,15 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
      * @param lRaces: The list of Race objects that comprise the data.
      */
     internal fun swapData(lRaces: ArrayList<RaceDetails>) {
-        this.lRaces = lRaces
-        notifyDataSetChanged()
+        val raceDiff = RaceDiffUtil(this.lRaces, lRaces)
+        val diffResult = DiffUtil.calculateDiff(raceDiff)
+        this.lRaces.clear()
+        this.lRaces.addAll(lRaces)
+        diffResult.dispatchUpdatesTo(this)
+//        this.lRaces = lRaces
+//        notifyDataSetChanged()
         // Post message to MainFragment as to whether adapter has items (used for refresh if enabled).
         EventBus.getDefault().post(DataMessage(isEmpty()))
-    }
-
-    /**
-     * Clear out the backing data (primarily used when delete all).
-     */
-    internal fun clear() {
-        lRaces.clear()
-        notifyDataSetChanged()
     }
 
     /**

@@ -22,12 +22,10 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
             if (lRaces.size > 1) {
                 lRaces.sort()
             }
-            // time check, even if only one race entry exists.
+            // Time check, even if only one race entry exists.
             timeCheck(lRaces)
-            // set adapter backing data.
+            // Set adapter backing data.
             adapter.swapData(lRaces as ArrayList<RaceDetails>)
-        } else {
-            adapter.clear()
         }
     }
 
@@ -49,7 +47,8 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
 
             // If the Race day is today, then process, else ignore.
             if (raceTime.compareToDay(raceTimeMillis) == Constants.DAY_CURRENT) {
-                // The value of the comparison.
+                // Check if notify preference is set.
+                val prefCheck = RacePreferences.getInstance(adapter.getContext()).getRaceNotifyPost()
 
                 when (raceTime.compareToTime(raceTimeMillis)) {
                     Constants.CURRENT_TIME_BEFORE -> {
@@ -58,7 +57,7 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
                         if (comp == Constants.CURRENT_TIME_SAME ||
                                 comp == Constants.CURRENT_TIME_AFTER) {
                             race.metaColour = Constants.META_COLOUR_2
-                            if (preferenceCheck()) {
+                            if (prefCheck) {
                                 postNotification(race)
                             }
                         } else {
@@ -98,10 +97,4 @@ class RaceListObserver(private var adapter: RaceAdapter) : Observer<MutableList<
         WorkManager.getInstance().enqueue(notifyWork)
     }
 
-    private fun preferenceCheck() : Boolean {
-        if(RacePreferences.getInstance(adapter.getContext()).getRaceNotifyPost()) {
-            return true
-        }
-        return false
-    }
 }
