@@ -10,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -60,6 +61,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         processForDownload() // this should go off onto a separate thread.
 
         raceAdapter = RaceAdapter(activity!!.id_container, activity!!)
+
         recyclerView = view.id_recyclerView
 
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -84,10 +86,9 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         super.onActivityCreated(savedInstanceState)
 
         // Set the view model and observe.
-        raceViewModel = ViewModelProviders.of(this).get(RaceViewModel::class.java)
+        raceViewModel = ViewModelProvider(this).get(RaceViewModel::class.java)
 
-        val lRaces = raceViewModel.getAllRaces()
-        lRaces.observe(viewLifecycleOwner, RaceListObserver(raceAdapter))
+        raceViewModel.getAllRaces().observe(viewLifecycleOwner, RaceListObserver(raceAdapter))
 
         Log.d("TAG","MainFragment.onActivityCreated")
     }

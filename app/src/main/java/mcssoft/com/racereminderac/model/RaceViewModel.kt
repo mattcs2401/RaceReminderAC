@@ -13,11 +13,9 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
     private val raceRepository: RaceRepository = RaceRepository(application)
 
     private var allRaces: LiveData<MutableList<RaceDetails>>
-    private var allRacesPaged: LiveData<PagedList<RaceDetails>>
 
     init {
         allRaces = raceRepository.getAllRaces()
-        allRacesPaged = raceRepository.getAllRacesPaged()
     }
 
     fun getRace(id: Long): LiveData<RaceDetails> = raceRepository.getRaceLD(id)
@@ -25,8 +23,6 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
     fun getRaceNoLD(id: Long) = raceRepository.getRaceNoLD(id) // uses EventBus.
 
     fun getAllRaces(): LiveData<MutableList<RaceDetails>> = allRaces
-
-    fun getAllRacesPaged(): LiveData<PagedList<RaceDetails>> = allRacesPaged
 
     fun insert(race: RaceDetails): Long {
         return raceRepository.doDatabaseOperation(Constants.INSERT, race)

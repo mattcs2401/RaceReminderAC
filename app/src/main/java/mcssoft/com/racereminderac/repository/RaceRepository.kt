@@ -15,15 +15,9 @@ class RaceRepository(application: Application) {
 
     private var raceDao: RaceDAO = RaceDatabase.getInstance(application)!!.raceDao()
     private var allRaces: LiveData<MutableList<RaceDetails>>
-    private var allRacesPaged: LiveData<PagedList<RaceDetails>>
 
     init {
         allRaces = raceDao.getAllRaces()
-        allRacesPaged = raceDao.getAllRacesPaged().toLiveData(Config(
-                pageSize = 30,
-                enablePlaceholders = true,
-                maxSize = 200
-        ))
     }
 
     /**
@@ -34,10 +28,6 @@ class RaceRepository(application: Application) {
         return allRaces
     }
 
-    internal fun getAllRacesPaged(): LiveData<PagedList<RaceDetails>> {
-//        allRacesPaged = raceDao.getAllRacesPaged()
-        return allRacesPaged
-    }
     /**
      * Get a Race by it's database row id.
      * @param id: The id.
