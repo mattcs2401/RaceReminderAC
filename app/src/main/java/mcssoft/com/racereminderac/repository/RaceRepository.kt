@@ -2,9 +2,6 @@ package mcssoft.com.racereminderac.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.paging.Config
-import androidx.paging.PagedList
-import androidx.paging.toLiveData
 import mcssoft.com.racereminderac.background.async.AsyncLD
 import mcssoft.com.racereminderac.background.async.AsyncNoLD
 import mcssoft.com.racereminderac.dao.RaceDAO

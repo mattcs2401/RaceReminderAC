@@ -3,7 +3,6 @@ package mcssoft.com.racereminderac.model
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.paging.PagedList
 import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.repository.RaceRepository
 import mcssoft.com.racereminderac.utility.Constants
