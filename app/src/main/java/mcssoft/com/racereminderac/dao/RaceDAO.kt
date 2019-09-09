@@ -1,6 +1,7 @@
 package mcssoft.com.racereminderac.dao
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -35,6 +36,9 @@ interface RaceDAO {
 
     @Query("select * from race_details where archvRace = 'N'")
     fun getAllRaces(): LiveData<MutableList<RaceDetails>> // Room doesn't know how to construct an ArrayList
+
+    @Query("select * from race_details where archvRace = 'N'")
+    fun getAllRacesPaged(): DataSource.Factory<Int, RaceDetails>
 
     @Query("delete from race_details")
     fun deleteAll()
