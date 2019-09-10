@@ -15,9 +15,9 @@ interface RaceDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRace(race: RaceDetails): Long
 
+
     @Update(onConflict = OnConflictStrategy.IGNORE)
     fun updateRace(race: RaceDetails): Int
-
     @Delete
     fun deleteRace(race: RaceDetails)
 

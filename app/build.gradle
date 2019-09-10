@@ -56,4 +56,5 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.android.volley:volley:1.1.1'
 
+    implementation 'androidx.paging:paging-runtime:2.1.0'
 }
