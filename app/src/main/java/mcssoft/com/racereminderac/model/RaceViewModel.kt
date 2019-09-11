@@ -23,17 +23,11 @@ class RaceViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getAllRaces(): LiveData<MutableList<RaceDetails>> = allRaces
 
-    fun insert(race: RaceDetails): Long {
-        return raceRepository.doDatabaseOperation(Constants.INSERT, race)
-    }
+    fun insert(race: RaceDetails): Long = raceRepository.doDatabaseOperation(Constants.INSERT, race)
 
-    fun update(race: RaceDetails): Long {
-        return raceRepository.doDatabaseOperation(Constants.UPDATE, race)
-    }
+    fun update(race: RaceDetails): Long = raceRepository.doDatabaseOperation(Constants.UPDATE, race)
 
     fun delete(race: RaceDetails) = raceRepository.doDatabaseOperation(Constants.DELETE, race)
 
     fun deleteAll() = raceRepository.doDatabaseOperation(Constants.DELETE_ALL, null)
-
-//    fun getCount() = raceRepository.doDatabaseOperation(Constants.COUNT, null)
 }
