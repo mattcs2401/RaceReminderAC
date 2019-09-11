@@ -23,7 +23,12 @@ class RaceAdapter2 : PagedListAdapter<RaceDetails, RaceViewHolder2>(diffCallback
     }
 
     override fun onBindViewHolder(holder: RaceViewHolder2, position: Int) {
-        holder.bindTo(getItem(position), position)
+        val race = getItem(position)
+        if(race == null) {
+            return
+        } else {
+            holder.bindTo(race, position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RaceViewHolder2 =
