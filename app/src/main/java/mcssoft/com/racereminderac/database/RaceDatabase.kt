@@ -4,10 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 
 import mcssoft.com.racereminderac.dao.RaceDAO
-import mcssoft.com.racereminderac.dao.RaceDAO2
 import mcssoft.com.racereminderac.dao.RaceDayDAO
 import mcssoft.com.racereminderac.entity.RaceDetails
 import mcssoft.com.racereminderac.entity.xml.Meeting
@@ -20,7 +18,6 @@ import mcssoft.com.racereminderac.entity.xml.Runner
 abstract class RaceDatabase : RoomDatabase() {
 
     internal abstract fun raceDao(): RaceDAO
-    internal abstract fun raceDao2(): RaceDAO2
     internal abstract fun raceDayDao(): RaceDayDAO
 
     companion object {
@@ -32,6 +29,7 @@ abstract class RaceDatabase : RoomDatabase() {
                 synchronized(RaceDatabase::class) {
                     instance = Room.databaseBuilder(context.applicationContext,
                             RaceDatabase::class.java, "Races.db")
+                            .fallbackToDestructiveMigration()
                             .build()
                 }
             }
