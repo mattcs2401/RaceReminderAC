@@ -11,17 +11,16 @@ import mcssoft.com.racereminderac.entity.RaceDetails
 class RaceRepository(application: Application) {
 
     private var raceDao: RaceDAO = RaceDatabase.getInstance(application)!!.raceDao()
-    private var allRaces: LiveData<MutableList<RaceDetails>>
 
-    init {
-        allRaces = raceDao.getAllRaces()
-    }
+    // This is just an initialiser for the backing data.
+    private var allRaces: LiveData<MutableList<RaceDetails>> = raceDao.getAllRaces()
 
     /**
-     * Get a list of all the Race objects from the database.
+     * Get a list of all the RaceDetails objects from the database.
+     * Note: Uses the DAO's getAllRaces() as the database contents may have changed.
      */
     internal fun getAllRaces(): LiveData<MutableList<RaceDetails>> {
-//        allRaces = raceDao.getAllRaces()
+        allRaces = raceDao.getAllRaces()
         return allRaces
     }
 

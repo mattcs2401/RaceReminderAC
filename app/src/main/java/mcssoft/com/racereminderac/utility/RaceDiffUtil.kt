@@ -21,8 +21,8 @@ class RaceDiffUtil(private val oldList: ArrayList<RaceDetails>,
         return oldList[oldItemPosition] == newList[newItemPosition]
     }
 
-    override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
-        // Implement method if you're going to use ItemAnimator
-        return super.getChangePayload(oldItemPosition, newItemPosition)
-    }
+//    override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
+//        // Implement method if you're going to use ItemAnimator
+//        return super.getChangePayload(oldItemPosition, newItemPosition)
+//    }
 }
