@@ -75,13 +75,6 @@ class RaceAdapter(private var anchorView: View, private var context: Context) :
     internal fun getRace(lPos : Int) : RaceDetails = lRaces[lPos]
 
     /**
-     * Set the TouchHelper associated with the adapter.
-     */
-    internal fun setTouchHelper(itemTouchHelper: ItemTouchHelper) {
-        this.itemTouchHelper = itemTouchHelper
-    }
-
-    /**
      * Primarily for the list observer.
      */
     internal fun getContext(): Context = context

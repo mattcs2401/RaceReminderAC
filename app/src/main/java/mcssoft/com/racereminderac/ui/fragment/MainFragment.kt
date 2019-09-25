@@ -72,10 +72,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = raceAdapter
 
-        val touchHelper = TouchHelper(raceAdapter)
-        val itemTouchHelper = ItemTouchHelper(touchHelper)
-
-        raceAdapter.setTouchHelper(itemTouchHelper)
+        val itemTouchHelper = ItemTouchHelper(TouchHelper(raceAdapter))
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
         // If bottom nav view was previously hidden by a New or Edit etc, then show again.
